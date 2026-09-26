@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#edf3ed">
 <title>Habits.</title>
 
@@ -11,7 +11,6 @@
     --bg:#edf3ed;
     --surface:#ffffff;
     --surface-soft:#f6f8f4;
-    --surface-green:#e4eee4;
     --text:#172019;
     --muted:#7c867e;
     --border:#e1e8e1;
@@ -22,12 +21,9 @@
     --red:#d96c68;
     --red-soft:#f7e2e1;
     --orange:#d9954e;
-    --orange-soft:#f8ead9;
     --blue:#658bb1;
-    --blue-soft:#e1eaf3;
 
-    --shadow:0 12px 35px rgba(39,58,42,.07);
-    --radius:22px;
+    --shadow:0 10px 30px rgba(39,58,42,.06);
 }
 
 *{
@@ -38,12 +34,10 @@
 
 body{
     font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
-    background:
-        radial-gradient(circle at 10% 0%, rgba(173,205,177,.25), transparent 30%),
-        var(--bg);
+    background:var(--bg);
     color:var(--text);
     min-height:100vh;
-    transition:.3s ease;
+    transition:.3s;
 }
 
 button,input,select,textarea{
@@ -56,18 +50,20 @@ button{
 }
 
 .app{
-    width:min(1450px, calc(100% - 40px));
+    width:min(1400px,calc(100% - 40px));
     margin:auto;
     padding:28px 0 50px;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 .header{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin-bottom:30px;
+    margin-bottom:28px;
 }
 
 .brand{
@@ -86,7 +82,6 @@ button{
     color:white;
     font-size:22px;
     font-weight:800;
-    box-shadow:0 8px 20px rgba(23,32,25,.14);
 }
 
 .logo-text{
@@ -105,9 +100,9 @@ button{
     gap:12px;
 }
 
-.today-label{
-    font-size:13px;
+.header-date{
     color:var(--muted);
+    font-size:13px;
     font-weight:600;
 }
 
@@ -118,68 +113,36 @@ button{
     background:var(--surface);
     border:1px solid var(--border);
     color:var(--text);
-    transition:.2s;
 }
 
-.icon-btn:hover{
-    transform:translateY(-2px);
-    box-shadow:var(--shadow);
-}
-
-/* GREETING */
-
-.greeting{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    margin-bottom:22px;
-}
-
-.greeting h1{
-    font-size:34px;
-    letter-spacing:-1.5px;
-    margin-bottom:5px;
-}
-
-.greeting p{
-    color:var(--muted);
-    font-size:14px;
-}
-
-.greeting-badge{
-    padding:9px 13px;
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:999px;
-    font-size:12px;
-    font-weight:700;
-    color:var(--accent-dark);
-}
-
-/* TODAY */
+/* =========================
+   TODAY CARD
+========================= */
 
 .today-card{
     background:var(--text);
     color:white;
-    border-radius:26px;
-    padding:23px 25px;
+    border-radius:25px;
+    padding:22px 25px;
     margin-bottom:22px;
+
     display:flex;
     justify-content:space-between;
     align-items:center;
-    overflow:hidden;
+
     position:relative;
+    overflow:hidden;
 }
 
 .today-card:after{
     content:"";
     position:absolute;
-    width:220px;
-    height:220px;
+    width:230px;
+    height:230px;
     border-radius:50%;
     background:rgba(151,190,157,.12);
-    right:-80px;
-    top:-120px;
+    right:-90px;
+    top:-130px;
 }
 
 .today-info{
@@ -188,9 +151,11 @@ button{
 }
 
 .today-title{
-    font-size:13px;
-    opacity:.65;
+    font-size:11px;
+    letter-spacing:.8px;
+    opacity:.55;
     margin-bottom:6px;
+    font-weight:700;
 }
 
 .today-main{
@@ -199,9 +164,9 @@ button{
 }
 
 .today-progress{
+    min-width:160px;
     position:relative;
     z-index:1;
-    min-width:150px;
 }
 
 .progress-number{
@@ -213,7 +178,7 @@ button{
 
 .progress-track{
     height:7px;
-    background:rgba(255,255,255,.14);
+    background:rgba(255,255,255,.15);
     border-radius:20px;
     overflow:hidden;
 }
@@ -223,10 +188,12 @@ button{
     width:0%;
     background:#a9c9ad;
     border-radius:20px;
-    transition:.5s ease;
+    transition:.4s;
 }
 
-/* STATS */
+/* =========================
+   STATS
+========================= */
 
 .stats{
     display:grid;
@@ -240,22 +207,20 @@ button{
     border:1px solid var(--border);
     border-radius:20px;
     padding:18px;
-    box-shadow:0 5px 20px rgba(30,50,34,.025);
 }
 
 .stat-label{
     color:var(--muted);
-    font-size:11px;
+    font-size:10px;
     font-weight:800;
     letter-spacing:.6px;
     text-transform:uppercase;
-    margin-bottom:10px;
+    margin-bottom:8px;
 }
 
 .stat-value{
     font-size:27px;
     font-weight:800;
-    letter-spacing:-1px;
 }
 
 .stat-sub{
@@ -264,7 +229,9 @@ button{
     margin-top:4px;
 }
 
-/* LAYOUT */
+/* =========================
+   MAIN
+========================= */
 
 .layout{
     display:grid;
@@ -275,11 +242,13 @@ button{
 .card{
     background:var(--surface);
     border:1px solid var(--border);
-    border-radius:var(--radius);
+    border-radius:23px;
     box-shadow:var(--shadow);
 }
 
-/* CALENDAR */
+/* =========================
+   CALENDAR
+========================= */
 
 .calendar-card{
     padding:24px;
@@ -305,7 +274,7 @@ button{
 }
 
 .month-name{
-    min-width:145px;
+    min-width:150px;
     text-align:center;
     font-size:14px;
     font-weight:750;
@@ -315,14 +284,20 @@ button{
 .month-btn{
     width:35px;
     height:35px;
-    border-radius:11px;
+    border-radius:10px;
     background:var(--surface-soft);
     color:var(--text);
+    font-size:18px;
 }
 
 .month-btn:hover{
     background:var(--accent-soft);
 }
+
+/*
+   Calendrier volontairement plus simple,
+   comme dans la version précédente.
+*/
 
 .weekdays,
 .calendar-grid{
@@ -344,14 +319,13 @@ button{
 }
 
 .day{
-    min-height:82px;
+    min-height:88px;
     border-radius:15px;
     padding:9px;
     margin:2px;
     cursor:pointer;
-    position:relative;
-    transition:.2s;
     border:1px solid transparent;
+    transition:.18s;
 }
 
 .day:hover{
@@ -359,12 +333,12 @@ button{
 }
 
 .day.other{
-    opacity:.28;
+    opacity:.25;
 }
 
 .day.selected{
     background:var(--accent-soft);
-    border-color:#cbdcca;
+    border-color:#cadbc9;
 }
 
 .day.today .day-number{
@@ -373,21 +347,20 @@ button{
 }
 
 .day-number{
-    width:27px;
-    height:27px;
+    width:28px;
+    height:28px;
     display:grid;
     place-items:center;
     border-radius:9px;
     font-size:12px;
     font-weight:750;
-    margin-bottom:7px;
+    margin-bottom:8px;
 }
 
 .day-dots{
     display:flex;
     flex-wrap:wrap;
     gap:4px;
-    min-height:10px;
 }
 
 .dot{
@@ -402,9 +375,8 @@ button{
 }
 
 .more{
-    font-size:8px;
     color:var(--muted);
-    margin-left:2px;
+    font-size:8px;
 }
 
 .calendar-legend{
@@ -432,11 +404,12 @@ button{
     background:#aeb8ae;
 }
 
-/* TASKS */
+/* =========================
+   TASKS
+========================= */
 
 .tasks-card{
     padding:24px;
-    min-height:100%;
 }
 
 .selected-date{
@@ -461,6 +434,40 @@ button{
     border-color:#b5cbb7;
 }
 
+.search-results{
+    display:none;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:15px;
+    margin-bottom:10px;
+    padding:7px;
+}
+
+.search-results.open{
+    display:block;
+}
+
+.search-result{
+    padding:10px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.search-result:hover{
+    background:var(--surface-soft);
+}
+
+.search-result-name{
+    font-size:12px;
+    font-weight:700;
+}
+
+.search-result-meta{
+    color:var(--muted);
+    font-size:10px;
+    margin-top:3px;
+}
+
 .task-form{
     display:grid;
     grid-template-columns:1fr 85px 105px 45px;
@@ -481,9 +488,10 @@ button{
     font-size:12px;
 }
 
-.input:focus,
-.select:focus{
-    border-color:#b5cbb7;
+textarea.input{
+    height:90px;
+    padding-top:11px;
+    resize:none;
 }
 
 .add-btn{
@@ -491,11 +499,6 @@ button{
     background:var(--text);
     color:white;
     font-size:20px;
-    transition:.2s;
-}
-
-.add-btn:hover{
-    transform:translateY(-2px);
 }
 
 .task-list{
@@ -513,24 +516,23 @@ button{
     border:1px solid var(--border);
     border-radius:16px;
     background:var(--surface);
-    transition:.22s;
-    animation:appear .25s ease;
+    animation:appear .2s ease;
+    transition:.2s;
+}
+
+.task:hover{
+    box-shadow:0 6px 18px rgba(30,50,34,.06);
 }
 
 @keyframes appear{
     from{
         opacity:0;
-        transform:translateY(5px);
+        transform:translateY(4px);
     }
     to{
         opacity:1;
-        transform:translateY(0);
+        transform:none;
     }
-}
-
-.task:hover{
-    transform:translateY(-1px);
-    box-shadow:0 7px 20px rgba(30,50,34,.06);
 }
 
 .check{
@@ -539,12 +541,8 @@ button{
     border-radius:8px;
     border:1.5px solid #c8d0c9;
     background:transparent;
-    flex:none;
-    display:grid;
-    place-items:center;
     color:white;
-    font-size:13px;
-    transition:.2s;
+    flex:none;
 }
 
 .task.done .check{
@@ -552,14 +550,9 @@ button{
     border-color:var(--accent);
 }
 
-.task.done .task-name{
-    text-decoration:line-through;
-    color:#9ba39c;
-}
-
 .task-content{
-    min-width:0;
     flex:1;
+    min-width:0;
     cursor:pointer;
 }
 
@@ -569,6 +562,11 @@ button{
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
+}
+
+.task.done .task-name{
+    text-decoration:line-through;
+    color:#9ba39c;
 }
 
 .task-meta{
@@ -584,7 +582,31 @@ button{
     padding:3px 7px;
     border-radius:999px;
     font-weight:700;
-    background:var(--surface-soft);
+}
+
+.cat-sport{
+    color:#53789c;
+    background:#e1eaf3;
+}
+
+.cat-etudes{
+    color:#71679c;
+    background:#ebe7f5;
+}
+
+.cat-sante{
+    color:#a25f65;
+    background:#f7e2e1;
+}
+
+.cat-personnel{
+    color:#92733d;
+    background:#f6eddc;
+}
+
+.cat-travail{
+    color:#597a60;
+    background:#e2eee3;
 }
 
 .priority{
@@ -607,7 +629,6 @@ button{
 
 .task-actions{
     display:flex;
-    gap:4px;
 }
 
 .small-btn{
@@ -618,42 +639,13 @@ button{
     color:var(--muted);
 }
 
-.small-btn:hover{
-    color:var(--text);
-}
-
 .empty{
     height:80px;
 }
 
-/* CATEGORY COLORS */
-
-.cat-sport{
-    color:#53789c;
-    background:var(--blue-soft);
-}
-
-.cat-etudes{
-    color:#71679c;
-    background:#ebe7f5;
-}
-
-.cat-sante{
-    color:#a25f65;
-    background:var(--red-soft);
-}
-
-.cat-personnel{
-    color:#92733d;
-    background:#f6eddc;
-}
-
-.cat-travail{
-    color:#597a60;
-    background:#e2eee3;
-}
-
-/* BOTTOM */
+/* =========================
+   BOTTOM
+========================= */
 
 .bottom-grid{
     display:grid;
@@ -665,7 +657,7 @@ button{
 .bottom-card{
     background:var(--surface);
     border:1px solid var(--border);
-    border-radius:var(--radius);
+    border-radius:23px;
     padding:22px;
 }
 
@@ -694,7 +686,6 @@ button{
     height:100%;
     background:var(--accent);
     border-radius:20px;
-    transition:.4s;
 }
 
 .category-count{
@@ -704,7 +695,9 @@ button{
     font-weight:700;
 }
 
-/* MODAL */
+/* =========================
+   MODAL
+========================= */
 
 .modal-overlay{
     position:fixed;
@@ -725,21 +718,9 @@ button{
 .modal{
     width:min(480px,100%);
     background:var(--surface);
-    border-radius:25px;
+    border-radius:24px;
     padding:24px;
     box-shadow:0 25px 70px rgba(0,0,0,.18);
-    animation:modalIn .2s ease;
-}
-
-@keyframes modalIn{
-    from{
-        opacity:0;
-        transform:scale(.97) translateY(8px);
-    }
-    to{
-        opacity:1;
-        transform:scale(1) translateY(0);
-    }
 }
 
 .modal h2{
@@ -757,12 +738,6 @@ button{
     font-weight:750;
     color:var(--muted);
     margin-bottom:6px;
-}
-
-textarea.input{
-    height:90px;
-    padding-top:11px;
-    resize:none;
 }
 
 .modal-grid{
@@ -806,57 +781,18 @@ textarea.input{
     color:#a64f4b;
 }
 
-/* SEARCH RESULTS */
-
-.search-results{
-    display:none;
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:16px;
-    margin-bottom:10px;
-    padding:7px;
-    box-shadow:var(--shadow);
-    max-height:240px;
-    overflow:auto;
-}
-
-.search-results.open{
-    display:block;
-}
-
-.search-result{
-    padding:10px;
-    border-radius:11px;
-    cursor:pointer;
-}
-
-.search-result:hover{
-    background:var(--surface-soft);
-}
-
-.search-result-name{
-    font-size:12px;
-    font-weight:700;
-}
-
-.search-result-meta{
-    color:var(--muted);
-    font-size:10px;
-    margin-top:3px;
-}
-
-/* DARK */
+/* =========================
+   DARK MODE
+========================= */
 
 body.dark{
     --bg:#111612;
     --surface:#191f1a;
     --surface-soft:#202720;
-    --surface-green:#263128;
     --text:#edf2ed;
     --muted:#8f9990;
     --border:#2a342b;
     --accent:#91b495;
-    --accent-dark:#a8c4ab;
     --accent-soft:#293b2d;
     --shadow:0 15px 40px rgba(0,0,0,.18);
 }
@@ -884,9 +820,12 @@ body.dark .day.today .day-number{
     color:#172019;
 }
 
-/* MOBILE */
+/* =========================
+   RESPONSIVE
+========================= */
 
 @media(max-width:1000px){
+
     .layout{
         grid-template-columns:1fr;
     }
@@ -901,17 +840,17 @@ body.dark .day.today .day-number{
 }
 
 @media(max-width:650px){
+
     .app{
         width:calc(100% - 22px);
         padding-top:15px;
-        padding-bottom:35px;
     }
 
     .header{
-        margin-bottom:22px;
+        margin-bottom:20px;
     }
 
-    .today-label{
+    .header-date{
         display:none;
     }
 
@@ -924,29 +863,17 @@ body.dark .day.today .day-number{
         font-size:21px;
     }
 
-    .greeting{
-        align-items:flex-start;
-    }
-
-    .greeting h1{
-        font-size:28px;
-    }
-
-    .greeting-badge{
-        display:none;
-    }
-
     .today-card{
-        padding:19px;
-        border-radius:21px;
-    }
-
-    .today-progress{
-        min-width:110px;
+        padding:18px;
+        border-radius:20px;
     }
 
     .today-main{
         font-size:16px;
+    }
+
+    .today-progress{
+        min-width:105px;
     }
 
     .stats{
@@ -973,15 +900,8 @@ body.dark .day.today .day-number{
     }
 
     .day{
-        min-height:62px;
-        padding:5px;
-        border-radius:11px;
-    }
-
-    .day-number{
-        width:24px;
-        height:24px;
-        margin-bottom:4px;
+        min-height:70px;
+        padding:6px;
     }
 
     .task-form{
@@ -996,18 +916,12 @@ body.dark .day.today .day-number{
         width:43px;
     }
 
-    .bottom-card{
-        border-radius:20px;
-    }
-
-    .modal{
-        border-radius:22px;
-        padding:19px;
-    }
-
     .modal-grid{
         grid-template-columns:1fr;
-        gap:0;
+    }
+
+    .bottom-card{
+        border-radius:20px;
     }
 }
 </style>
@@ -1019,90 +933,196 @@ body.dark .day.today .day-number{
 
     <!-- HEADER -->
     <header class="header">
+
         <div class="brand">
             <div class="logo-mark">H</div>
-            <div class="logo-text">Habits<span>.</span></div>
+            <div class="logo-text">
+                Habits<span>.</span>
+            </div>
         </div>
 
         <div class="header-right">
-            <div class="today-label" id="headerDate"></div>
-            <button class="icon-btn" id="themeBtn" title="Changer de thème">◐</button>
+            <div class="header-date" id="headerDate"></div>
+
+            <button
+                class="icon-btn"
+                id="themeBtn"
+                title="Changer de thème"
+            >
+                ◐
+            </button>
         </div>
+
     </header>
 
-    <!-- GREETING -->
-    <section class="greeting">
-        <div>
-            <h1 id="greetingTitle">Bonjour.</h1>
-            <p id="greetingText">Organise ta journée simplement.</p>
-        </div>
-
-        <div class="greeting-badge" id="monthProgressBadge">
-            0% ce mois
-        </div>
-    </section>
 
     <!-- TODAY -->
     <section class="today-card">
+
         <div class="today-info">
-            <div class="today-title">AUJOURD'HUI</div>
-            <div class="today-main" id="todaySummary">Aucune tâche prévue</div>
+
+            <div class="today-title">
+                AUJOURD'HUI
+            </div>
+
+            <div
+                class="today-main"
+                id="todaySummary"
+            >
+                Aucune tâche prévue
+            </div>
+
         </div>
 
         <div class="today-progress">
-            <div class="progress-number" id="todayPercent">0%</div>
-            <div class="progress-track">
-                <div class="progress-fill" id="todayProgress"></div>
+
+            <div
+                class="progress-number"
+                id="todayPercent"
+            >
+                0%
             </div>
+
+            <div class="progress-track">
+
+                <div
+                    class="progress-fill"
+                    id="todayProgress"
+                ></div>
+
+            </div>
+
         </div>
+
     </section>
+
 
     <!-- STATS -->
     <section class="stats">
-        <div class="stat">
-            <div class="stat-label">Tâches</div>
-            <div class="stat-value" id="statTasks">0</div>
-            <div class="stat-sub">ce mois</div>
-        </div>
 
         <div class="stat">
-            <div class="stat-label">Réussite</div>
-            <div class="stat-value" id="statCompletion">0%</div>
-            <div class="stat-sub">tâches terminées</div>
+
+            <div class="stat-label">
+                Tâches
+            </div>
+
+            <div
+                class="stat-value"
+                id="statTasks"
+            >
+                0
+            </div>
+
+            <div class="stat-sub">
+                ce mois
+            </div>
+
         </div>
 
-        <div class="stat">
-            <div class="stat-label">Série</div>
-            <div class="stat-value" id="statStreak">0</div>
-            <div class="stat-sub">jours consécutifs</div>
-        </div>
 
         <div class="stat">
-            <div class="stat-label">Record</div>
-            <div class="stat-value" id="statRecord">0</div>
-            <div class="stat-sub">meilleure série</div>
+
+            <div class="stat-label">
+                Réussite
+            </div>
+
+            <div
+                class="stat-value"
+                id="statCompletion"
+            >
+                0%
+            </div>
+
+            <div class="stat-sub">
+                tâches terminées
+            </div>
+
         </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Série
+            </div>
+
+            <div
+                class="stat-value"
+                id="statStreak"
+            >
+                0
+            </div>
+
+            <div class="stat-sub">
+                jours consécutifs
+            </div>
+
+        </div>
+
+
+        <div class="stat">
+
+            <div class="stat-label">
+                Record
+            </div>
+
+            <div
+                class="stat-value"
+                id="statRecord"
+            >
+                0
+            </div>
+
+            <div class="stat-sub">
+                meilleure série
+            </div>
+
+        </div>
+
     </section>
+
 
     <!-- MAIN -->
     <main class="layout">
+
 
         <!-- CALENDAR -->
         <section class="card calendar-card">
 
             <div class="card-header">
-                <div>
-                    <div class="card-title">Calendrier</div>
+
+                <div class="card-title">
+                    Calendrier
                 </div>
 
                 <div class="month-controls">
-                    <button class="month-btn" id="prevMonth">‹</button>
-                    <div class="month-name" id="monthName"></div>
-                    <button class="month-btn" id="nextMonth">›</button>
+
+                    <button
+                        class="month-btn"
+                        id="prevMonth"
+                    >
+                        ‹
+                    </button>
+
+                    <div
+                        class="month-name"
+                        id="monthName"
+                    ></div>
+
+                    <button
+                        class="month-btn"
+                        id="nextMonth"
+                    >
+                        ›
+                    </button>
+
                 </div>
+
             </div>
 
+
             <div class="weekdays">
+
                 <div class="weekday">Lun</div>
                 <div class="weekday">Mar</div>
                 <div class="weekday">Mer</div>
@@ -1110,31 +1130,53 @@ body.dark .day.today .day-number{
                 <div class="weekday">Ven</div>
                 <div class="weekday">Sam</div>
                 <div class="weekday">Dim</div>
+
             </div>
 
-            <div class="calendar-grid" id="calendar"></div>
+
+            <div
+                class="calendar-grid"
+                id="calendar"
+            ></div>
+
 
             <div class="calendar-legend">
+
                 <div class="legend-item">
                     <div class="legend-dot"></div>
                     tâche
                 </div>
+
                 <div class="legend-item">
                     <div class="legend-dot done"></div>
                     terminée
                 </div>
+
             </div>
+
         </section>
+
 
         <!-- TASKS -->
         <section class="card tasks-card">
 
             <div class="card-header">
+
                 <div>
-                    <div class="card-title">Mes tâches</div>
-                    <div class="selected-date" id="selectedDate"></div>
+
+                    <div class="card-title">
+                        Mes tâches
+                    </div>
+
+                    <div
+                        class="selected-date"
+                        id="selectedDate"
+                    ></div>
+
                 </div>
+
             </div>
+
 
             <input
                 class="search"
@@ -1143,9 +1185,15 @@ body.dark .day.today .day-number{
                 placeholder="Rechercher une tâche..."
             >
 
-            <div class="search-results" id="searchResults"></div>
+
+            <div
+                class="search-results"
+                id="searchResults"
+            ></div>
+
 
             <div class="task-form">
+
                 <input
                     class="input"
                     id="taskInput"
@@ -1160,626 +1208,1102 @@ body.dark .day.today .day-number{
                     type="time"
                 >
 
-                <select class="select" id="categoryInput">
-                    <option value="Personnel">Personnel</option>
-                    <option value="Sport">Sport</option>
-                    <option value="Études">Études</option>
-                    <option value="Santé">Santé</option>
-                    <option value="Travail">Travail</option>
+                <select
+                    class="select"
+                    id="categoryInput"
+                >
+
+                    <option value="Personnel">
+                        Personnel
+                    </option>
+
+                    <option value="Sport">
+                        Sport
+                    </option>
+
+                    <option value="Études">
+                        Études
+                    </option>
+
+                    <option value="Santé">
+                        Santé
+                    </option>
+
+                    <option value="Travail">
+                        Travail
+                    </option>
+
                 </select>
 
-                <button class="add-btn" id="addBtn">+</button>
+                <button
+                    class="add-btn"
+                    id="addBtn"
+                >
+                    +
+                </button>
+
             </div>
 
-            <div class="task-list" id="taskList"></div>
+
+            <div
+                class="task-list"
+                id="taskList"
+            ></div>
+
         </section>
+
     </main>
 
-    <!-- BOTTOM INFORMATION -->
+
+    <!-- BOTTOM -->
     <section class="bottom-grid">
 
+
         <div class="bottom-card">
-            <div class="card-title">Catégories</div>
+
+            <div class="card-title">
+                Catégories
+            </div>
+
             <div id="categoryStats"></div>
+
         </div>
 
+
         <div class="bottom-card">
-            <div class="card-title">Progression du mois</div>
+
+            <div class="card-title">
+                Progression du mois
+            </div>
 
             <div style="margin-top:18px;">
-                <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:8px;">
-                    <span>Tâches terminées</span>
-                    <strong id="monthProgressText">0%</strong>
+
+                <div style="
+                    display:flex;
+                    justify-content:space-between;
+                    font-size:11px;
+                    color:var(--muted);
+                    margin-bottom:8px;
+                ">
+
+                    <span>
+                        Tâches terminées
+                    </span>
+
+                    <strong id="monthProgressText">
+                        0%
+                    </strong>
+
                 </div>
 
-                <div class="category-bar" style="height:10px;">
-                    <div class="category-fill" id="monthProgressBar"></div>
+
+                <div
+                    class="category-bar"
+                    style="height:10px;"
+                >
+
+                    <div
+                        class="category-fill"
+                        id="monthProgressBar"
+                    ></div>
+
                 </div>
+
             </div>
 
-            <div style="margin-top:22px;color:var(--muted);font-size:12px;line-height:1.6;">
+            <div style="
+                margin-top:22px;
+                color:var(--muted);
+                font-size:12px;
+                line-height:1.6;
+            ">
+
                 Continue à compléter tes tâches chaque jour pour construire une série régulière.
+
             </div>
+
         </div>
 
     </section>
 
 </div>
 
+
 <!-- MODAL -->
-<div class="modal-overlay" id="modalOverlay">
+
+<div
+    class="modal-overlay"
+    id="modalOverlay"
+>
 
     <div class="modal">
 
-        <h2>Modifier la tâche</h2>
+        <h2>
+            Modifier la tâche
+        </h2>
+
 
         <div class="field">
-            <label>TÂCHE</label>
-            <input class="input" id="editName">
+
+            <label>
+                TÂCHE
+            </label>
+
+            <input
+                class="input"
+                id="editName"
+            >
+
         </div>
+
 
         <div class="modal-grid">
 
             <div class="field">
-                <label>HEURE</label>
-                <input class="input" id="editTime" type="time">
+
+                <label>
+                    HEURE
+                </label>
+
+                <input
+                    class="input"
+                    id="editTime"
+                    type="time"
+                >
+
             </div>
 
+
             <div class="field">
-                <label>CATÉGORIE</label>
-                <select class="select" id="editCategory">
-                    <option value="Personnel">Personnel</option>
-                    <option value="Sport">Sport</option>
-                    <option value="Études">Études</option>
-                    <option value="Santé">Santé</option>
-                    <option value="Travail">Travail</option>
+
+                <label>
+                    CATÉGORIE
+                </label>
+
+                <select
+                    class="select"
+                    id="editCategory"
+                >
+
+                    <option value="Personnel">
+                        Personnel
+                    </option>
+
+                    <option value="Sport">
+                        Sport
+                    </option>
+
+                    <option value="Études">
+                        Études
+                    </option>
+
+                    <option value="Santé">
+                        Santé
+                    </option>
+
+                    <option value="Travail">
+                        Travail
+                    </option>
+
                 </select>
+
             </div>
 
         </div>
+
 
         <div class="modal-grid">
 
             <div class="field">
-                <label>PRIORITÉ</label>
-                <select class="select" id="editPriority">
-                    <option value="normal">Normale</option>
-                    <option value="important">Importante</option>
-                    <option value="urgent">Urgente</option>
+
+                <label>
+                    PRIORITÉ
+                </label>
+
+                <select
+                    class="select"
+                    id="editPriority"
+                >
+
+                    <option value="normal">
+                        Normale
+                    </option>
+
+                    <option value="important">
+                        Importante
+                    </option>
+
+                    <option value="urgent">
+                        Urgente
+                    </option>
+
                 </select>
+
             </div>
 
+
             <div class="field">
-                <label>RÉPÉTITION</label>
-                <select class="select" id="editRepeat">
-                    <option value="none">Aucune</option>
-                    <option value="daily">Tous les jours</option>
-                    <option value="weekly">Chaque semaine</option>
-                    <option value="monthly">Chaque mois</option>
+
+                <label>
+                    RÉPÉTITION
+                </label>
+
+                <select
+                    class="select"
+                    id="editRepeat"
+                >
+
+                    <option value="none">
+                        Aucune
+                    </option>
+
+                    <option value="daily">
+                        Tous les jours
+                    </option>
+
+                    <option value="weekly">
+                        Chaque semaine
+                    </option>
+
+                    <option value="monthly">
+                        Chaque mois
+                    </option>
+
                 </select>
+
             </div>
 
         </div>
 
+
         <div class="field">
-            <label>NOTE</label>
+
+            <label>
+                NOTE
+            </label>
+
             <textarea
                 class="input"
                 id="editNote"
                 placeholder="Ajouter une note..."
             ></textarea>
+
         </div>
+
 
         <div class="modal-actions">
 
-            <button class="modal-btn delete" id="deleteBtn">
+            <button
+                class="modal-btn delete"
+                id="deleteBtn"
+            >
                 Supprimer
             </button>
 
+
             <div class="modal-actions-right">
-                <button class="modal-btn cancel" id="cancelBtn">
+
+                <button
+                    class="modal-btn cancel"
+                    id="cancelBtn"
+                >
                     Annuler
                 </button>
 
-                <button class="modal-btn save" id="saveBtn">
+                <button
+                    class="modal-btn save"
+                    id="saveBtn"
+                >
                     Enregistrer
                 </button>
+
             </div>
 
         </div>
 
     </div>
+
 </div>
 
+
 <script>
-/* =========================================================
+
+/* =====================================================
    HABITS V4
-========================================================= */
+===================================================== */
 
 const STORAGE_KEY = "habitsV4Tasks";
 
 let tasks = [];
+
 let selectedDate = new Date();
+
 let currentMonth = new Date();
+
 let editingTaskId = null;
 
-/* =========================================================
-   DATE HELPERS
-========================================================= */
+
+/* =====================================================
+   DATE
+===================================================== */
 
 function pad(n){
     return String(n).padStart(2,"0");
 }
 
 function dateKey(date){
+
     return `${date.getFullYear()}-${pad(date.getMonth()+1)}-${pad(date.getDate())}`;
+
 }
 
 function parseDate(key){
-    const [y,m,d] = key.split("-").map(Number);
-    return new Date(y,m-1,d);
-}
 
-function formatDate(date){
-    return date.toLocaleDateString("fr-FR",{
-        weekday:"long",
-        day:"numeric",
-        month:"long"
-    });
+    const [y,m,d] = key.split("-").map(Number);
+
+    return new Date(y,m-1,d);
+
 }
 
 function sameDate(a,b){
+
     return dateKey(a) === dateKey(b);
+
+}
+
+function addDays(date,amount){
+
+    const result = new Date(date);
+
+    result.setDate(result.getDate()+amount);
+
+    return result;
+
+}
+
+function addMonths(date,amount){
+
+    const result = new Date(date);
+
+    result.setMonth(result.getMonth()+amount);
+
+    return result;
+
+}
+
+function formatDate(date){
+
+    return date.toLocaleDateString(
+        "fr-FR",
+        {
+            weekday:"long",
+            day:"numeric",
+            month:"long"
+        }
+    );
+
 }
 
 function todayKey(){
+
     return dateKey(new Date());
+
 }
 
-/* =========================================================
-   STORAGE + MIGRATION
-========================================================= */
+
+/* =====================================================
+   STORAGE
+===================================================== */
 
 function loadTasks(){
 
-    let saved = localStorage.getItem(STORAGE_KEY);
+    let saved =
+        localStorage.getItem(STORAGE_KEY);
 
-    /*
-       Migration des anciennes versions.
-    */
     if(!saved){
 
-        const v3 = localStorage.getItem("habitsV3Tasks");
-        const v2 = localStorage.getItem("habitsV2Tasks");
+        const v3 =
+            localStorage.getItem("habitsV3Tasks");
+
+        const v2 =
+            localStorage.getItem("habitsV2Tasks");
 
         if(v3){
             saved = v3;
-        }else if(v2){
+        }
+        else if(v2){
             saved = v2;
         }
+
     }
 
     try{
-        tasks = saved ? JSON.parse(saved) : [];
-    }catch{
+
+        tasks =
+            saved
+            ? JSON.parse(saved)
+            : [];
+
+    }
+    catch{
+
         tasks = [];
+
     }
 
-    /*
-       Normalisation des anciennes tâches.
-    */
+
     tasks = tasks.map(task => ({
-        id: task.id || crypto.randomUUID(),
-        date: task.date || todayKey(),
-        name: task.name || "Tâche",
-        time: task.time || "",
-        category: task.category || "Personnel",
-        completed: Boolean(task.completed),
-        repeat: task.repeat || "none",
-        note: task.note || "",
-        priority: task.priority || "normal",
-        generated: Boolean(task.generated),
-        sourceId: task.sourceId || null
+
+        id:task.id || crypto.randomUUID(),
+
+        date:task.date || todayKey(),
+
+        name:task.name || "Tâche",
+
+        time:task.time || "",
+
+        category:task.category || "Personnel",
+
+        completed:Boolean(task.completed),
+
+        repeat:task.repeat || "none",
+
+        note:task.note || "",
+
+        priority:task.priority || "normal",
+
+        generated:Boolean(task.generated),
+
+        sourceId:task.sourceId || null
+
     }));
+
 
     saveTasks();
 
     generateRecurringTasks();
+
 }
+
 
 function saveTasks(){
-    localStorage.setItem(STORAGE_KEY,JSON.stringify(tasks));
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(tasks)
+    );
+
 }
 
-/* =========================================================
-   REAL RECURRENCE
-========================================================= */
 
-function addDays(date, amount){
-    const result = new Date(date);
-    result.setDate(result.getDate()+amount);
-    return result;
-}
-
-function addMonths(date, amount){
-    const result = new Date(date);
-    result.setMonth(result.getMonth()+amount);
-    return result;
-}
+/* =====================================================
+   RECURRENCE
+===================================================== */
 
 function recurringExists(sourceId,date){
+
     return tasks.some(task =>
         task.sourceId === sourceId &&
         task.date === date
     );
+
 }
 
 function generateRecurringTasks(){
 
-    const sources = tasks.filter(
-        task => task.repeat !== "none" && !task.generated
-    );
+    const sources =
+        tasks.filter(task =>
+            task.repeat !== "none" &&
+            !task.generated
+        );
 
-    const horizon = addDays(new Date(),180);
+    const horizon =
+        addDays(new Date(),180);
+
 
     sources.forEach(source => {
 
-        let current = parseDate(source.date);
+        let current =
+            parseDate(source.date);
+
 
         while(current <= horizon){
 
             if(source.repeat === "daily"){
-                current = addDays(current,1);
+
+                current =
+                    addDays(current,1);
+
             }
             else if(source.repeat === "weekly"){
-                current = addDays(current,7);
+
+                current =
+                    addDays(current,7);
+
             }
             else if(source.repeat === "monthly"){
-                current = addMonths(current,1);
+
+                current =
+                    addMonths(current,1);
+
             }
             else{
+
+                break;
+
+            }
+
+
+            if(current > horizon){
                 break;
             }
 
-            if(current > horizon) break;
 
-            const key = dateKey(current);
+            const key =
+                dateKey(current);
+
 
             if(!recurringExists(source.id,key)){
 
                 tasks.push({
+
                     id:crypto.randomUUID(),
+
                     date:key,
+
                     name:source.name,
+
                     time:source.time,
+
                     category:source.category,
+
                     completed:false,
+
                     repeat:"none",
+
                     note:source.note,
+
                     priority:source.priority,
+
                     generated:true,
+
                     sourceId:source.id
+
                 });
+
             }
+
         }
+
     });
 
+
     saveTasks();
+
 }
 
-/* =========================================================
-   CATEGORY
-========================================================= */
 
-function categoryClass(category){
-
-    const map = {
-        "Sport":"cat-sport",
-        "Études":"cat-etudes",
-        "Santé":"cat-sante",
-        "Personnel":"cat-personnel",
-        "Travail":"cat-travail"
-    };
-
-    return map[category] || "";
-}
-
-/* =========================================================
+/* =====================================================
    CALENDAR
-========================================================= */
+===================================================== */
 
 function renderCalendar(){
 
-    const calendar = document.getElementById("calendar");
+    const calendar =
+        document.getElementById("calendar");
+
     calendar.innerHTML = "";
 
-    const year = currentMonth.getFullYear();
-    const month = currentMonth.getMonth();
 
-    document.getElementById("monthName").textContent =
-        currentMonth.toLocaleDateString("fr-FR",{
-            month:"long",
-            year:"numeric"
-        });
+    const year =
+        currentMonth.getFullYear();
 
-    let firstDay = new Date(year,month,1).getDay();
+    const month =
+        currentMonth.getMonth();
 
-    /*
-       JS : dimanche = 0
-       On veut lundi = 0
-    */
-    firstDay = (firstDay + 6) % 7;
 
-    const daysInMonth = new Date(year,month+1,0).getDate();
-    const previousDays = new Date(year,month,0).getDate();
+    document.getElementById("monthName")
+        .textContent =
+        currentMonth.toLocaleDateString(
+            "fr-FR",
+            {
+                month:"long",
+                year:"numeric"
+            }
+        );
+
+
+    let firstDay =
+        new Date(year,month,1).getDay();
+
+
+    firstDay =
+        (firstDay + 6) % 7;
+
+
+    const daysInMonth =
+        new Date(year,month+1,0).getDate();
+
+
+    const previousDays =
+        new Date(year,month,0).getDate();
+
 
     for(let i=firstDay-1;i>=0;i--){
 
-        const d = new Date(year,month-1,previousDays-i);
+        createDay(
+            new Date(
+                year,
+                month-1,
+                previousDays-i
+            ),
+            true
+        );
 
-        createDay(d,true);
     }
+
 
     for(let day=1;day<=daysInMonth;day++){
 
-        const d = new Date(year,month,day);
+        createDay(
+            new Date(year,month,day),
+            false
+        );
 
-        createDay(d,false);
     }
 
-    const totalCells = Math.ceil((firstDay + daysInMonth)/7)*7;
 
-    const used = firstDay + daysInMonth;
+    const totalCells =
+        Math.ceil(
+            (firstDay + daysInMonth) / 7
+        ) * 7;
+
+
+    const used =
+        firstDay + daysInMonth;
+
 
     for(let i=1;i<=totalCells-used;i++){
 
-        const d = new Date(year,month+1,i);
+        createDay(
+            new Date(year,month+1,i),
+            true
+        );
 
-        createDay(d,true);
     }
+
 }
+
 
 function createDay(date,otherMonth){
 
-    const el = document.createElement("div");
+    const el =
+        document.createElement("div");
+
     el.className = "day";
+
 
     if(otherMonth){
         el.classList.add("other");
     }
 
+
     if(sameDate(date,new Date())){
         el.classList.add("today");
     }
+
 
     if(sameDate(date,selectedDate)){
         el.classList.add("selected");
     }
 
-    const number = document.createElement("div");
+
+    const number =
+        document.createElement("div");
+
     number.className = "day-number";
-    number.textContent = date.getDate();
+
+    number.textContent =
+        date.getDate();
+
 
     el.appendChild(number);
 
-    const dots = document.createElement("div");
+
+    const dots =
+        document.createElement("div");
+
     dots.className = "day-dots";
 
-    const dayTasks = tasks.filter(
-        task => task.date === dateKey(date)
-    );
 
-    dayTasks.slice(0,4).forEach(task => {
+    const dayTasks =
+        tasks.filter(task =>
+            task.date === dateKey(date)
+        );
 
-        const dot = document.createElement("span");
 
-        dot.className = "dot";
+    dayTasks.slice(0,4)
+        .forEach(task => {
 
-        if(task.completed){
-            dot.classList.add("done");
-        }
+            const dot =
+                document.createElement("span");
 
-        dots.appendChild(dot);
-    });
+            dot.className = "dot";
+
+            if(task.completed){
+                dot.classList.add("done");
+            }
+
+            dots.appendChild(dot);
+
+        });
+
 
     if(dayTasks.length > 4){
 
-        const more = document.createElement("span");
+        const more =
+            document.createElement("span");
+
         more.className = "more";
-        more.textContent = `+${dayTasks.length-4}`;
+
+        more.textContent =
+            `+${dayTasks.length-4}`;
 
         dots.appendChild(more);
+
     }
+
 
     el.appendChild(dots);
 
+
     el.addEventListener("click",()=>{
 
-        selectedDate = new Date(date);
+        selectedDate =
+            new Date(date);
 
-        /*
-           Si on clique sur un jour d'un autre mois,
-           on bascule également le calendrier.
-        */
+
         if(otherMonth){
-            currentMonth = new Date(
-                date.getFullYear(),
-                date.getMonth(),
-                1
-            );
+
+            currentMonth =
+                new Date(
+                    date.getFullYear(),
+                    date.getMonth(),
+                    1
+                );
+
         }
 
+
         renderAll();
+
     });
 
-    document.getElementById("calendar").appendChild(el);
+
+    document
+        .getElementById("calendar")
+        .appendChild(el);
+
 }
 
-/* =========================================================
+
+/* =====================================================
    TASKS
-========================================================= */
+===================================================== */
+
+function categoryClass(category){
+
+    const map = {
+
+        "Sport":"cat-sport",
+
+        "Études":"cat-etudes",
+
+        "Santé":"cat-sante",
+
+        "Personnel":"cat-personnel",
+
+        "Travail":"cat-travail"
+
+    };
+
+    return map[category] || "";
+
+}
+
 
 function getSelectedTasks(){
 
     return tasks
-        .filter(task => task.date === dateKey(selectedDate))
+
+        .filter(task =>
+            task.date === dateKey(selectedDate)
+        )
+
         .sort((a,b)=>{
 
             if(a.completed !== b.completed){
+
                 return a.completed ? 1 : -1;
+
             }
+
 
             if(a.time && b.time){
+
                 return a.time.localeCompare(b.time);
+
             }
 
+
             if(a.time) return -1;
+
             if(b.time) return 1;
 
-            const priorityOrder = {
+
+            const order = {
+
                 urgent:0,
+
                 important:1,
+
                 normal:2
+
             };
 
-            return priorityOrder[a.priority] -
-                   priorityOrder[b.priority];
+
+            return order[a.priority] -
+                   order[b.priority];
+
         });
+
 }
+
 
 function renderTasks(){
 
-    const list = document.getElementById("taskList");
+    const list =
+        document.getElementById("taskList");
 
     list.innerHTML = "";
 
-    document.getElementById("selectedDate").textContent =
+
+    document.getElementById("selectedDate")
+        .textContent =
         formatDate(selectedDate);
 
-    const dayTasks = getSelectedTasks();
+
+    const dayTasks =
+        getSelectedTasks();
+
 
     /*
-       Important :
-       Pas de bloc "Journée libre".
-       L'espace reste simplement vide.
+       Pas de bloc Journée libre.
     */
+
     if(!dayTasks.length){
 
-        const empty = document.createElement("div");
+        const empty =
+            document.createElement("div");
+
         empty.className = "empty";
 
         list.appendChild(empty);
 
         return;
+
     }
+
 
     dayTasks.forEach(task => {
 
-        const el = document.createElement("div");
+        const el =
+            document.createElement("div");
 
         el.className = "task";
+
 
         if(task.completed){
             el.classList.add("done");
         }
 
-        const check = document.createElement("button");
+
+        const check =
+            document.createElement("button");
+
         check.className = "check";
-        check.textContent = task.completed ? "✓" : "";
+
+        check.textContent =
+            task.completed ? "✓" : "";
+
 
         check.addEventListener("click",(event)=>{
 
             event.stopPropagation();
 
-            task.completed = !task.completed;
+            task.completed =
+                !task.completed;
 
             saveTasks();
+
             renderAll();
+
         });
 
-        const content = document.createElement("div");
-        content.className = "task-content";
+
+        const content =
+            document.createElement("div");
+
+        content.className =
+            "task-content";
+
 
         content.addEventListener("click",()=>{
+
             openModal(task);
+
         });
 
-        const name = document.createElement("div");
-        name.className = "task-name";
-        name.textContent = task.name;
 
-        const meta = document.createElement("div");
-        meta.className = "task-meta";
+        const name =
+            document.createElement("div");
+
+        name.className =
+            "task-name";
+
+        name.textContent =
+            task.name;
+
+
+        const meta =
+            document.createElement("div");
+
+        meta.className =
+            "task-meta";
+
 
         if(task.time){
 
-            const time = document.createElement("span");
-            time.textContent = task.time;
+            const time =
+                document.createElement("span");
+
+            time.textContent =
+                task.time;
+
             meta.appendChild(time);
+
         }
 
-        const cat = document.createElement("span");
+
+        const cat =
+            document.createElement("span");
+
         cat.className =
-            "category " + categoryClass(task.category);
-        cat.textContent = task.category;
+            "category " +
+            categoryClass(task.category);
+
+        cat.textContent =
+            task.category;
 
         meta.appendChild(cat);
 
-        const priority = document.createElement("span");
+
+        const priority =
+            document.createElement("span");
+
         priority.className =
-            "priority priority-" + task.priority;
+            "priority priority-" +
+            task.priority;
 
         meta.appendChild(priority);
 
+
         if(task.repeat !== "none"){
 
-            const repeat = document.createElement("span");
+            const repeat =
+                document.createElement("span");
+
             repeat.textContent = "↻";
-            repeat.title = "Tâche récurrente";
 
             meta.appendChild(repeat);
+
         }
 
+
         content.appendChild(name);
+
         content.appendChild(meta);
 
-        const actions = document.createElement("div");
-        actions.className = "task-actions";
 
-        const edit = document.createElement("button");
-        edit.className = "small-btn";
-        edit.textContent = "⋯";
+        const actions =
+            document.createElement("div");
+
+        actions.className =
+            "task-actions";
+
+
+        const edit =
+            document.createElement("button");
+
+        edit.className =
+            "small-btn";
+
+        edit.textContent =
+            "⋯";
+
 
         edit.addEventListener("click",()=>{
+
             openModal(task);
+
         });
+
 
         actions.appendChild(edit);
 
+
         el.appendChild(check);
+
         el.appendChild(content);
+
         el.appendChild(actions);
 
+
         list.appendChild(el);
+
     });
+
 }
 
-/* =========================================================
-   ADD TASK
-========================================================= */
+
+/* =====================================================
+   ADD
+===================================================== */
 
 function addTask(){
 
-    const input = document.getElementById("taskInput");
-    const time = document.getElementById("timeInput");
-    const category = document.getElementById("categoryInput");
+    const input =
+        document.getElementById("taskInput");
 
-    const name = input.value.trim();
+    const time =
+        document.getElementById("timeInput");
+
+    const category =
+        document.getElementById("categoryInput");
+
+
+    const name =
+        input.value.trim();
+
 
     if(!name){
+
         input.focus();
+
         return;
+
     }
+
 
     tasks.push({
 
@@ -1804,347 +2328,531 @@ function addTask(){
         generated:false,
 
         sourceId:null
+
     });
+
 
     saveTasks();
 
+
     input.value = "";
+
     time.value = "";
+
 
     renderAll();
 
+
     input.focus();
+
 }
 
-document.getElementById("addBtn")
-    .addEventListener("click",addTask);
 
-document.getElementById("taskInput")
+document
+    .getElementById("addBtn")
+    .addEventListener(
+        "click",
+        addTask
+    );
+
+
+document
+    .getElementById("taskInput")
     .addEventListener("keydown",(event)=>{
 
         if(event.key === "Enter"){
+
             addTask();
+
         }
+
     });
 
-/* =========================================================
+
+/* =====================================================
    MODAL
-========================================================= */
+===================================================== */
 
 function openModal(task){
 
-    editingTaskId = task.id;
+    editingTaskId =
+        task.id;
 
-    document.getElementById("editName").value = task.name;
-    document.getElementById("editTime").value = task.time;
-    document.getElementById("editCategory").value = task.category;
-    document.getElementById("editPriority").value = task.priority;
-    document.getElementById("editRepeat").value = task.repeat;
-    document.getElementById("editNote").value = task.note;
 
-    document.getElementById("modalOverlay")
+    document.getElementById("editName")
+        .value =
+        task.name;
+
+
+    document.getElementById("editTime")
+        .value =
+        task.time;
+
+
+    document.getElementById("editCategory")
+        .value =
+        task.category;
+
+
+    document.getElementById("editPriority")
+        .value =
+        task.priority;
+
+
+    document.getElementById("editRepeat")
+        .value =
+        task.repeat;
+
+
+    document.getElementById("editNote")
+        .value =
+        task.note;
+
+
+    document
+        .getElementById("modalOverlay")
         .classList.add("open");
+
 }
+
 
 function closeModal(){
 
     editingTaskId = null;
 
-    document.getElementById("modalOverlay")
+    document
+        .getElementById("modalOverlay")
         .classList.remove("open");
+
 }
 
-document.getElementById("cancelBtn")
-    .addEventListener("click",closeModal);
 
-document.getElementById("modalOverlay")
+document
+    .getElementById("cancelBtn")
+    .addEventListener(
+        "click",
+        closeModal
+    );
+
+
+document
+    .getElementById("modalOverlay")
     .addEventListener("click",(event)=>{
 
-        if(event.target.id === "modalOverlay"){
+        if(
+            event.target.id ===
+            "modalOverlay"
+        ){
+
             closeModal();
+
         }
+
     });
 
-document.getElementById("saveBtn")
+
+document
+    .getElementById("saveBtn")
     .addEventListener("click",()=>{
 
-        const task = tasks.find(
-            t => t.id === editingTaskId
-        );
+        const task =
+            tasks.find(
+                t => t.id === editingTaskId
+            );
 
-        if(!task) return;
 
-        const oldRepeat = task.repeat;
+        if(!task){
+            return;
+        }
+
 
         task.name =
-            document.getElementById("editName").value.trim() ||
+            document.getElementById("editName")
+            .value.trim() ||
             "Tâche";
 
+
         task.time =
-            document.getElementById("editTime").value;
+            document.getElementById("editTime")
+            .value;
+
 
         task.category =
-            document.getElementById("editCategory").value;
+            document.getElementById("editCategory")
+            .value;
+
 
         task.priority =
-            document.getElementById("editPriority").value;
+            document.getElementById("editPriority")
+            .value;
+
 
         task.repeat =
-            document.getElementById("editRepeat").value;
+            document.getElementById("editRepeat")
+            .value;
+
 
         task.note =
-            document.getElementById("editNote").value.trim();
+            document.getElementById("editNote")
+            .value.trim();
 
-        /*
-           Si on transforme une tâche générée en tâche normale,
-           elle reste indépendante.
-        */
+
         if(task.generated){
+
             task.repeat = "none";
+
         }
+
 
         saveTasks();
 
-        /*
-           Si la répétition a été activée/modifiée,
-           on génère les prochaines occurrences.
-        */
+
         if(task.repeat !== "none"){
+
             generateRecurringTasks();
+
         }
+
 
         closeModal();
 
         renderAll();
+
     });
 
-document.getElementById("deleteBtn")
+
+document
+    .getElementById("deleteBtn")
     .addEventListener("click",()=>{
 
-        if(!editingTaskId) return;
+        if(!editingTaskId){
+            return;
+        }
 
-        const task = tasks.find(
-            t => t.id === editingTaskId
-        );
 
-        if(!task) return;
+        const task =
+            tasks.find(
+                t => t.id === editingTaskId
+            );
 
-        /*
-           Si on supprime une tâche source récurrente,
-           on supprime également ses occurrences futures.
-        */
+
+        if(!task){
+            return;
+        }
+
+
         if(task.repeat !== "none"){
 
-            tasks = tasks.filter(t =>
-                t.id !== task.id &&
-                t.sourceId !== task.id
-            );
+            tasks =
+                tasks.filter(t =>
+                    t.id !== task.id &&
+                    t.sourceId !== task.id
+                );
 
-        }else{
-
-            tasks = tasks.filter(
-                t => t.id !== task.id
-            );
         }
+        else{
+
+            tasks =
+                tasks.filter(
+                    t => t.id !== task.id
+                );
+
+        }
+
 
         saveTasks();
 
         closeModal();
 
         renderAll();
+
     });
 
-/* =========================================================
+
+/* =====================================================
    TODAY
-========================================================= */
+===================================================== */
 
 function renderToday(){
 
-    const key = todayKey();
+    const todayTasks =
+        tasks.filter(
+            task =>
+            task.date === todayKey()
+        );
 
-    const todayTasks = tasks.filter(
-        task => task.date === key
-    );
 
-    const total = todayTasks.length;
+    const total =
+        todayTasks.length;
 
-    const completed = todayTasks.filter(
-        task => task.completed
-    ).length;
+
+    const completed =
+        todayTasks.filter(
+            task => task.completed
+        ).length;
+
 
     const percent =
-        total === 0
-        ? 0
-        : Math.round((completed / total) * 100);
+        total
+        ? Math.round(
+            completed / total * 100
+        )
+        : 0;
+
 
     document.getElementById("todayPercent")
-        .textContent = `${percent}%`;
+        .textContent =
+        `${percent}%`;
+
 
     document.getElementById("todayProgress")
-        .style.width = `${percent}%`;
+        .style.width =
+        `${percent}%`;
 
-    let summary = "Aucune tâche prévue";
+
+    let summary =
+        "Aucune tâche prévue";
+
 
     if(total === 1){
-        summary = "1 tâche aujourd'hui";
+
+        summary =
+            "1 tâche aujourd'hui";
+
     }
+
 
     if(total > 1){
+
         summary =
             `${completed} / ${total} tâches terminées`;
+
     }
+
 
     if(total > 0 && completed === total){
-        summary = "Journée terminée ✓";
+
+        summary =
+            "Journée terminée ✓";
+
     }
 
+
     document.getElementById("todaySummary")
-        .textContent = summary;
+        .textContent =
+        summary;
+
 }
 
-/* =========================================================
+
+/* =====================================================
    STREAK
-========================================================= */
+===================================================== */
 
 function dayCompleted(date){
 
-    const dayTasks = tasks.filter(
-        task => task.date === dateKey(date)
-    );
+    const dayTasks =
+        tasks.filter(
+            task =>
+            task.date === dateKey(date)
+        );
 
-    if(dayTasks.length === 0){
+
+    if(!dayTasks.length){
         return false;
     }
 
-    return dayTasks.every(task => task.completed);
+
+    return dayTasks.every(
+        task => task.completed
+    );
+
 }
+
 
 function calculateCurrentStreak(){
 
     let streak = 0;
+
     let date = new Date();
+
 
     while(dayCompleted(date)){
 
         streak++;
 
-        date = addDays(date,-1);
+        date =
+            addDays(date,-1);
+
     }
 
+
     return streak;
+
 }
+
 
 function calculateBestStreak(){
 
-    const completedDates = [
-        ...new Set(
-            tasks
-                .filter(task => task.completed)
-                .map(task => task.date)
-        )
-    ].sort();
+    const dates =
+        [
+            ...new Set(
+                tasks
+                    .filter(t=>t.completed)
+                    .map(t=>t.date)
+            )
+        ].sort();
 
-    if(!completedDates.length){
+
+    if(!dates.length){
         return 0;
     }
 
+
     let best = 1;
+
     let current = 1;
 
-    for(let i=1;i<completedDates.length;i++){
+
+    for(let i=1;i<dates.length;i++){
 
         const previous =
-            parseDate(completedDates[i-1]);
+            parseDate(dates[i-1]);
+
 
         const currentDate =
-            parseDate(completedDates[i]);
+            parseDate(dates[i]);
 
-        const diff =
+
+        const difference =
             Math.round(
-                (currentDate - previous) /
+                (currentDate -
+                 previous) /
                 86400000
             );
 
-        if(diff === 1){
+
+        if(difference === 1){
 
             current++;
 
-            best = Math.max(best,current);
+            best =
+                Math.max(
+                    best,
+                    current
+                );
 
-        }else{
+        }
+        else{
 
             current = 1;
+
         }
+
     }
 
+
     return best;
+
 }
 
-/* =========================================================
-   STATISTICS
-========================================================= */
+
+/* =====================================================
+   STATS
+===================================================== */
 
 function renderStats(){
 
-    const now = new Date();
+    const now =
+        new Date();
 
-    const monthTasks = tasks.filter(task => {
 
-        const d = parseDate(task.date);
+    const monthTasks =
+        tasks.filter(task => {
 
-        return d.getMonth() === now.getMonth() &&
-               d.getFullYear() === now.getFullYear();
+            const d =
+                parseDate(task.date);
 
-    });
 
-    const total = monthTasks.length;
+            return(
+                d.getMonth() ===
+                now.getMonth() &&
+                d.getFullYear() ===
+                now.getFullYear()
+            );
+
+        });
+
+
+    const total =
+        monthTasks.length;
+
 
     const completed =
-        monthTasks.filter(t=>t.completed).length;
+        monthTasks.filter(
+            t=>t.completed
+        ).length;
+
 
     const percent =
         total
-        ? Math.round((completed / total) * 100)
+        ? Math.round(
+            completed / total * 100
+        )
         : 0;
 
-    const activeDays =
-        new Set(monthTasks.map(t=>t.date)).size;
 
     document.getElementById("statTasks")
-        .textContent = total;
+        .textContent =
+        total;
+
 
     document.getElementById("statCompletion")
-        .textContent = `${percent}%`;
+        .textContent =
+        `${percent}%`;
+
 
     document.getElementById("statStreak")
-        .textContent = calculateCurrentStreak();
+        .textContent =
+        calculateCurrentStreak();
+
 
     document.getElementById("statRecord")
-        .textContent = calculateBestStreak();
+        .textContent =
+        calculateBestStreak();
+
 
     document.getElementById("monthProgressText")
-        .textContent = `${percent}%`;
+        .textContent =
+        `${percent}%`;
+
 
     document.getElementById("monthProgressBar")
-        .style.width = `${percent}%`;
+        .style.width =
+        `${percent}%`;
 
-    document.getElementById("monthProgressBadge")
-        .textContent =
-            `${percent}% ce mois`;
 
-    renderCategoryStats(monthTasks);
+    renderCategoryStats(
+        monthTasks
+    );
+
 }
 
-/* =========================================================
+
+/* =====================================================
    CATEGORY STATS
-========================================================= */
+===================================================== */
 
 function renderCategoryStats(monthTasks){
 
     const container =
-        document.getElementById("categoryStats");
+        document.getElementById(
+            "categoryStats"
+        );
+
 
     container.innerHTML = "";
+
 
     const categories = [
         "Sport",
@@ -2154,185 +2862,235 @@ function renderCategoryStats(monthTasks){
         "Travail"
     ];
 
+
     const counts = {};
 
-    categories.forEach(cat=>{
-        counts[cat] =
+
+    categories.forEach(category=>{
+
+        counts[category] =
             monthTasks.filter(
-                task => task.category === cat
+                task =>
+                task.category === category
             ).length;
+
     });
 
-    const max =
-        Math.max(...Object.values(counts),1);
 
-    categories.forEach(category => {
+    const max =
+        Math.max(
+            ...Object.values(counts),
+            1
+        );
+
+
+    categories.forEach(category=>{
 
         const row =
             document.createElement("div");
 
-        row.className = "category-row";
+        row.className =
+            "category-row";
+
 
         const name =
             document.createElement("div");
 
-        name.className = "category-name";
-        name.textContent = category;
+        name.className =
+            "category-name";
+
+        name.textContent =
+            category;
+
 
         const bar =
             document.createElement("div");
 
-        bar.className = "category-bar";
+        bar.className =
+            "category-bar";
+
 
         const fill =
             document.createElement("div");
 
-        fill.className = "category-fill";
+        fill.className =
+            "category-fill";
+
 
         fill.style.width =
-            `${(counts[category]/max)*100}%`;
+            `${counts[category]/max*100}%`;
+
 
         bar.appendChild(fill);
+
 
         const count =
             document.createElement("div");
 
-        count.className = "category-count";
-        count.textContent = counts[category];
+        count.className =
+            "category-count";
+
+        count.textContent =
+            counts[category];
+
 
         row.appendChild(name);
+
         row.appendChild(bar);
+
         row.appendChild(count);
 
+
         container.appendChild(row);
+
     });
+
 }
 
-/* =========================================================
-   GREETING
-========================================================= */
 
-function renderGreeting(){
-
-    const hour = new Date().getHours();
-
-    let greeting = "Bonjour";
-    let text = "Organise ta journée simplement.";
-
-    if(hour >= 12 && hour < 18){
-        greeting = "Bon après-midi";
-        text = "Continue sur ta lancée.";
-    }
-
-    if(hour >= 18){
-        greeting = "Bonsoir";
-        text = "Termine la journée tranquillement.";
-    }
-
-    if(hour < 6){
-        greeting = "Bonne nuit";
-        text = "Il est peut-être temps de ralentir.";
-    }
-
-    document.getElementById("greetingTitle")
-        .textContent = greeting + ".";
-
-    document.getElementById("greetingText")
-        .textContent = text;
-
-    document.getElementById("headerDate")
-        .textContent =
-            new Date().toLocaleDateString("fr-FR",{
-                weekday:"long",
-                day:"numeric",
-                month:"long"
-            });
-}
-
-/* =========================================================
+/* =====================================================
    SEARCH
-========================================================= */
+===================================================== */
 
-document.getElementById("searchInput")
+document
+    .getElementById("searchInput")
     .addEventListener("input",(event)=>{
 
         const query =
-            event.target.value.trim().toLowerCase();
+            event.target.value
+                .trim()
+                .toLowerCase();
+
 
         const results =
-            document.getElementById("searchResults");
+            document.getElementById(
+                "searchResults"
+            );
+
 
         results.innerHTML = "";
 
+
         if(!query){
 
-            results.classList.remove("open");
+            results.classList.remove(
+                "open"
+            );
 
             return;
+
         }
+
 
         const matches =
             tasks
                 .filter(task =>
-                    task.name.toLowerCase().includes(query) ||
-                    task.note.toLowerCase().includes(query)
+                    task.name
+                        .toLowerCase()
+                        .includes(query) ||
+
+                    task.note
+                        .toLowerCase()
+                        .includes(query)
                 )
                 .slice(0,10);
 
+
         if(!matches.length){
 
-            results.innerHTML =
-                `<div style="padding:10px;color:var(--muted);font-size:11px;">
+            results.innerHTML = `
+                <div style="
+                    padding:10px;
+                    color:var(--muted);
+                    font-size:11px;
+                ">
                     Aucun résultat
-                </div>`;
+                </div>
+            `;
 
-        }else{
+        }
+        else{
 
-            matches.forEach(task => {
+            matches.forEach(task=>{
 
                 const result =
-                    document.createElement("div");
+                    document.createElement(
+                        "div"
+                    );
 
-                result.className = "search-result";
+
+                result.className =
+                    "search-result";
+
 
                 result.innerHTML = `
                     <div class="search-result-name">
                         ${escapeHTML(task.name)}
                     </div>
+
                     <div class="search-result-meta">
                         ${escapeHTML(task.date)}
-                        · ${escapeHTML(task.category)}
+                        ·
+                        ${escapeHTML(task.category)}
                     </div>
                 `;
 
-                result.addEventListener("click",()=>{
 
-                    selectedDate =
-                        parseDate(task.date);
+                result.addEventListener(
+                    "click",
+                    ()=>{
 
-                    currentMonth =
-                        new Date(
-                            selectedDate.getFullYear(),
-                            selectedDate.getMonth(),
-                            1
-                        );
+                        selectedDate =
+                            parseDate(
+                                task.date
+                            );
 
-                    document.getElementById("searchInput")
-                        .value = "";
 
-                    results.classList.remove("open");
+                        currentMonth =
+                            new Date(
+                                selectedDate
+                                    .getFullYear(),
+                                selectedDate
+                                    .getMonth(),
+                                1
+                            );
 
-                    renderAll();
 
-                    openModal(task);
-                });
+                        document
+                            .getElementById(
+                                "searchInput"
+                            )
+                            .value = "";
 
-                results.appendChild(result);
+
+                        results.classList
+                            .remove("open");
+
+
+                        renderAll();
+
+
+                        openModal(task);
+
+                    }
+                );
+
+
+                results.appendChild(
+                    result
+                );
+
             });
+
         }
 
-        results.classList.add("open");
+
+        results.classList.add(
+            "open"
+        );
+
     });
+
 
 function escapeHTML(value){
 
@@ -2342,13 +3100,16 @@ function escapeHTML(value){
         .replaceAll(">","&gt;")
         .replaceAll('"',"&quot;")
         .replaceAll("'","&#039;");
+
 }
 
-/* =========================================================
-   MONTH NAVIGATION
-========================================================= */
 
-document.getElementById("prevMonth")
+/* =====================================================
+   MONTH
+===================================================== */
+
+document
+    .getElementById("prevMonth")
     .addEventListener("click",()=>{
 
         currentMonth.setMonth(
@@ -2356,9 +3117,12 @@ document.getElementById("prevMonth")
         );
 
         renderCalendar();
+
     });
 
-document.getElementById("nextMonth")
+
+document
+    .getElementById("nextMonth")
     .addEventListener("click",()=>{
 
         currentMonth.setMonth(
@@ -2366,63 +3130,109 @@ document.getElementById("nextMonth")
         );
 
         renderCalendar();
+
     });
 
-/* =========================================================
+
+/* =====================================================
    THEME
-========================================================= */
+===================================================== */
 
 function loadTheme(){
 
-    const theme =
-        localStorage.getItem("habitsTheme");
+    if(
+        localStorage.getItem(
+            "habitsTheme"
+        ) === "dark"
+    ){
 
-    if(theme === "dark"){
-        document.body.classList.add("dark");
+        document.body.classList
+            .add("dark");
+
     }
+
 }
 
-document.getElementById("themeBtn")
+
+document
+    .getElementById("themeBtn")
     .addEventListener("click",()=>{
 
-        document.body.classList.toggle("dark");
+        document.body.classList
+            .toggle("dark");
+
 
         localStorage.setItem(
             "habitsTheme",
-            document.body.classList.contains("dark")
-            ? "dark"
-            : "light"
+
+            document.body.classList
+                .contains("dark")
+                ? "dark"
+                : "light"
         );
+
     });
 
-/* =========================================================
-   GLOBAL RENDER
-========================================================= */
+
+/* =====================================================
+   HEADER DATE
+===================================================== */
+
+function renderHeader(){
+
+    document.getElementById("headerDate")
+        .textContent =
+        new Date().toLocaleDateString(
+            "fr-FR",
+            {
+                weekday:"long",
+                day:"numeric",
+                month:"long"
+            }
+        );
+
+}
+
+
+/* =====================================================
+   RENDER
+===================================================== */
 
 function renderAll(){
 
     renderCalendar();
+
     renderTasks();
+
     renderToday();
+
     renderStats();
-    renderGreeting();
+
+    renderHeader();
+
 }
 
-/* =========================================================
+
+/* =====================================================
    START
-========================================================= */
+===================================================== */
 
 loadTheme();
 
 loadTasks();
 
-selectedDate = new Date();
 
-currentMonth = new Date(
-    new Date().getFullYear(),
-    new Date().getMonth(),
-    1
-);
+selectedDate =
+    new Date();
+
+
+currentMonth =
+    new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        1
+    );
+
 
 renderAll();
 
