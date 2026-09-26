@@ -639,4 +639,695 @@ function saveHabitForm(){
   showToast(editingId?"Habitude modifiée":"Habitude créée");
   go("habits");
   renderAll();
+}d=obj.frequency;
+  if(currentFreq==="xmonth")obj.weeklyGoal=obj.frequency;
+  if(!editingId)habits.push(obj);
+  saveData();
+  showToast(editingId?"Habitude modifiée":"Habitude créée");
+  editingId=null;
+  go("habits");
+  renderAll();
 }
+
+function addTask(text,k=dateKey(selectedDate)){
+  text=String(text||"").trim();if(!text)return;
+  const key="habitsV4Tasks";
+  let data={};
+  try{data=JSON.parse(localStorage.getItem(key)||"{}")}catch(e){data={}}
+  if(!Array.isArray(data[k]))data[k]=[];
+  data[k].push({id:String(Date.now())+Math.random(),text,done:false});
+  localStorage.setItem(key,JSON.stringify(data));
+  renderTasks();
+  renderCalendar();
+  showToast("Tâche ajoutée");
+}
+function getTasks(k=dateKey(selectedDate)){
+  try{
+    const data=JSON.parse(localStorage.getItem("habitsV4Tasks")||"{}");
+    return Array.isArray(data[k])?data[k]:[];
+  }catch(e){return []}
+}
+function saveTasks(data){
+  localStorage.setItem("habitsV4Tasks",JSON.stringify(data));
+}
+function toggleTask(id,k=dateKey(selectedDate)){
+  let data={};
+  try{data=JSON.parse(localStorage.getItem("habitsV4Tasks")||"{}")}catch(e){}
+  if(!Array.isArray(data[k]))return;
+  const task=data[k].find(x=>String(x.id)===String(id));
+  if(task)task.done=!task.done;
+  saveTasks(data);
+  renderTasks();
+  renderCalendar();
+}
+function deleteTask(id,k=dateKey(selectedDate)){
+  let data={};
+  try{data=JSON.parse(localStorage.getItem("habitsV4Tasks")||"{}")}catch(e){}
+  if(!Array.isArray(data[k]))return;
+  data[k]=data[k].filter(x=>String(x.id)!==String(id));
+  saveTasks(data);
+  renderTasks();
+  renderCalendar();
+}
+function addTaskFromToday(){
+  const input=document.getElementById("newTaskInput");
+  if(!input)return;
+  const text=input.value.trim();
+  if(!text)return;
+  addTask(text,dateKey(selectedDate));
+  input.value="";
+}
+function renderTasks(){
+  const list=document.getElementById("taskList");
+  const count=document.getElementById("taskCount");
+  const label=document.getElementById("taskDateLabel");
+  if(!list)return;
+
+  const k=dateKey(selectedDate);
+  const tasks=getTasks(k);
+  const done=tasks.filter(x=>x.done).length;
+
+  label.textContent=formatDate(selectedDate,{weekday:"long",day:"numeric",month:"long"});
+  count.textContent=`${done}/${tasks.length}`;
+
+  if(!tasks.length){
+    list.innerHTML=`<div class="task-empty">Aucune tâche pour cette journée.</div>`;
+    return;
+  }
+
+  list.innerHTML=tasks.map(t=>`
+    <div class="task-row ${t.done?"done":""}">
+      <button class="task-check ${t.done?"done":""}" onclick="toggleTask('${t.id}')">${t.done?"✓":""}</button>
+      <div class="task-text">${escapeHTML(t.text)}</div>
+      <button class="task-delete" onclick="deleteTask('${t.id}')" aria-label="Supprimer">×</button>
+    </div>
+  `).join("");
+}
+
+function renderTodayV4(){
+  const d=selectedDate;
+  const title=document.getElementById("todayTitle");
+  const subtitle=document.getElementById("todaySubtitle");
+
+  if(dateKey(d)===todayKey()){
+    title.textContent="Aujourd’hui";
+  }else{
+    title.textContent=formatDate(d,{weekday:"long",day:"numeric",month:"long"});
+  }
+
+  subtitle.textContent=formatDate(d,{
+    weekday:"long",
+    day:"numeric",
+    month:"long",
+    year:"numeric"
+  });
+
+  const list=habits.filter(h=>isActiveOn(h,d));
+  const container=document.getElementById("todayHabits");
+  const empty=document.getElementById("todayEmpty");
+
+  const completed=list.filter(h=>daySatisfied(h,d)).length;
+  document.getElementById("todayCount").textContent=
+    `${completed}/${list.length} terminée${list.length>1?"s":""}`;
+
+  container.innerHTML="";
+
+  if(!list.length){
+    empty.style.display="block";
+  }else{
+    empty.style.display="none";
+  }
+
+  list.forEach(h=>{
+    const k=dateKey(d);
+    const count=entryCount(h,k);
+    const req=requiredForDate(h,d);
+    const period=habitPeriodProgress(h,d);
+
+    const progressTarget=req||period.target||1;
+    const progressDone=req?count:period.done;
+    const pct=Math.min(100,Math.round(progressDone/progressTarget*100));
+
+    const card=document.createElement("div");
+    card.className="habit-card card"+(daySatisfied(h,d)?" is-complete":"");
+    card.style.borderLeft=`4px solid ${h.color}`;
+
+    card.innerHTML=`
+      <button class="round-check ${daySatisfied(h,d)?"done":""}"
+        aria-label="Valider"
+        onclick="toggleEntryV4('${h.id}','${k}',0)">
+        ${daySatisfied(h,d)?"✓":""}
+      </button>
+
+      <div class="habit-info">
+        <div class="habit-name">
+          ${escapeHTML(h.icon)} ${escapeHTML(h.name)}
+        </div>
+
+        <div class="habit-meta">
+          <span class="badge">${escapeHTML(h.category)}</span>
+          <span class="badge">${escapeHTML(frequencyLabel(h))}</span>
+        </div>
+
+        <div class="habit-mini-progress">
+          <div class="progress">
+            <span style="width:${pct}%"></span>
+          </div>
+          <span class="progress-count">${progressDone}/${progressTarget}</span>
+        </div>
+      </div>
+
+      <div class="habit-actions">
+        <button class="step-btn"
+          onclick="toggleEntryV4('${h.id}','${k}',-1)"
+          aria-label="Retirer une validation">−</button>
+
+        <button class="step-btn plus"
+          onclick="toggleEntryV4('${h.id}','${k}',1)"
+          aria-label="Ajouter une validation">+</button>
+
+        <button class="ghost-btn"
+          onclick="openDetail('${h.id}')">›</button>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+
+  renderTasks();
+}
+
+function toggleEntryV4(id,k,mode){
+  const h=habits.find(x=>String(x.id)===String(id));
+  if(!h)return;
+
+  const d=fromKey(k);
+  const current=entryCount(h,k);
+  let next=current;
+
+  if(mode===0){
+    next=current>0?0:(requiredForDate(h,d)||1);
+  }else{
+    next=clamp(current+mode,0,99);
+  }
+
+  setEntry(h,k,next);
+  saveData();
+
+  renderTodayV4();
+  renderHabits();
+  renderCalendar();
+  renderStats();
+
+  if(document.getElementById("page-detail").classList.contains("active")){
+    renderDetail(h.id);
+  }
+}
+
+function renderCalendarV4(){
+  const grid=document.getElementById("calendarGrid");
+  if(!grid)return;
+
+  grid.innerHTML="";
+
+  const y=calendarDate.getFullYear();
+  const m=calendarDate.getMonth();
+
+  document.getElementById("monthTitle").textContent=
+    calendarDate.toLocaleDateString("fr-BE",{
+      month:"long",
+      year:"numeric"
+    });
+
+  const first=new Date(y,m,1);
+  const start=(first.getDay()+6)%7;
+  const days=new Date(y,m+1,0).getDate();
+
+  for(let i=0;i<start;i++){
+    const b=document.createElement("button");
+    b.className="day muted";
+
+    const prevDate=new Date(y,m,0);
+    b.textContent=prevDate.getDate()-start+i+1;
+
+    grid.appendChild(b);
+  }
+
+  for(let n=1;n<=days;n++){
+    const d=new Date(y,m,n);
+    const k=dateKey(d);
+
+    const b=document.createElement("button");
+    b.className="day";
+    b.textContent=n;
+
+    if(k===todayKey())b.classList.add("today");
+    if(k===dateKey(selectedDate))b.classList.add("selected");
+
+    const hasHabit=habits.some(h=>entryCount(h,k)>0);
+    const tasks=getTasks(k);
+
+    if(hasHabit){
+      b.classList.add("has-habits");
+
+      const dot=document.createElement("span");
+      dot.className="day-dot";
+      b.appendChild(dot);
+    }
+
+    if(tasks.length){
+      b.classList.add("has-tasks");
+    }
+
+    b.onclick=()=>{
+      selectedDate=new Date(d);
+      renderCalendarV4();
+      go("today");
+    };
+
+    grid.appendChild(b);
+  }
+
+  while(grid.children.length%7){
+    const b=document.createElement("button");
+    b.className="day muted";
+    grid.appendChild(b);
+  }
+}
+
+function changeMonthV4(amount){
+  calendarDate.setMonth(calendarDate.getMonth()+amount);
+  renderCalendarV4();
+}
+
+function frequencyLabelV4(h){
+  if(h.frequencyType==="daily"){
+    return h.dailyGoal>1
+      ? `${h.dailyGoal}× / jour`
+      : "Tous les jours";
+  }
+
+  if(h.frequencyType==="weekly"){
+    return `${h.weeklyGoal}× / semaine`;
+  }
+
+  if(h.frequencyType==="xweek"){
+    return `${h.frequency}× / semaine`;
+  }
+
+  if(h.frequencyType==="xmonth"){
+    return `${h.frequency}× / mois`;
+  }
+
+  if(h.frequencyType==="specific"){
+    const names=["Dim","Lun","Mar","Mer","Jeu","Ven","Sam"];
+    return h.daysOfWeek.map(d=>names[d]).join(" · ");
+  }
+
+  return "";
+}
+
+function frequencyHelpV4(){
+  const help=document.getElementById("frequencyHelpV4");
+  if(!help)return;
+
+  const messages={
+    daily:"L’habitude peut être validée chaque jour. Tu peux définir plusieurs validations par jour.",
+    weekly:"L’objectif est évalué sur chaque semaine.",
+    xweek:"Choisis exactement combien de fois tu veux réaliser cette habitude chaque semaine.",
+    xmonth:"Choisis combien de fois tu veux réaliser cette habitude chaque mois.",
+    specific:"L’habitude apparaîtra uniquement les jours sélectionnés."
+  };
+
+  help.textContent=messages[currentFreq]||"";
+}
+
+function refreshFrequencyFormV4(){
+  document.querySelectorAll("#freqRow .segment").forEach(b=>{
+    b.classList.toggle("active",b.dataset.freq===currentFreq);
+  });
+
+  const specific=document.getElementById("specificWrap");
+  if(specific){
+    specific.style.display=currentFreq==="specific"?"block":"none";
+  }
+
+  const numberWrap=document.getElementById("freqNumberWrap");
+
+  if(numberWrap){
+    numberWrap.style.display=
+      currentFreq==="xweek"||currentFreq==="xmonth"
+      ?"flex"
+      :"none";
+  }
+
+  const label=document.getElementById("freqNumberLabel");
+
+  if(label){
+    if(currentFreq==="xmonth"){
+      label.textContent="Nombre de fois par mois";
+    }else{
+      label.textContent="Nombre de fois par semaine";
+    }
+  }
+
+  frequencyHelpV4();
+}
+
+function enhanceCreateFormV4(){
+  if(!document.getElementById("frequencyHelpV4")){
+    const row=document.getElementById("freqRow");
+
+    if(row){
+      const help=document.createElement("small");
+      help.id="frequencyHelpV4";
+      help.className="frequency-help";
+      row.parentElement.appendChild(help);
+    }
+  }
+
+  document.querySelectorAll("#freqRow .segment").forEach(button=>{
+    button.addEventListener("click",()=>{
+      currentFreq=button.dataset.freq;
+      refreshFrequencyFormV4();
+    });
+  });
+
+  const oldSave=window.saveHabitForm;
+
+  window.saveHabitForm=function(){
+    const oldCurrent=currentFreq;
+
+    if(currentFreq==="specific"&&selectedDays.length===0){
+      showToast("Choisis au moins un jour");
+      return;
+    }
+
+    oldSave();
+
+    currentFreq=oldCurrent;
+  };
+
+  refreshFrequencyFormV4();
+}
+
+function renderThemesV4(){
+  const grid=document.getElementById("themeGrid");
+  if(!grid)return;
+
+  const current=localStorage.getItem(THEME_KEY)||"sage";
+
+  grid.innerHTML=THEMES.map(t=>`
+    <div class="theme-card card ${current===t.id?"active":""}"
+         onclick="applyThemeV4('${t.id}')">
+
+      <div class="theme-preview"
+           style="background:${t.bg}">
+
+        ${Array.from({length:8},(_,i)=>`
+          <span class="preview-particle"
+                style="
+                  width:${4+i%4}px;
+                  height:${4+i%4}px;
+                  left:${8+i*11}%;
+                  animation-delay:${i*.45}s;
+                  animation-duration:${3+i%3}s
+                "></span>
+        `).join("")}
+
+      </div>
+
+      <div class="theme-info">
+        <strong>${escapeHTML(t.name)}</strong>
+        <span>${t.kind==="dark"?"Sombre":"Clair"}</span>
+      </div>
+    </div>
+  `).join("");
+}
+
+function applyThemeV4(id){
+  const theme=THEMES.find(t=>t.id===id);
+  if(!theme)return;
+
+  localStorage.setItem(THEME_KEY,id);
+
+  const root=document.documentElement;
+
+  root.style.setProperty("--bg",theme.bg);
+  root.style.setProperty("--accent",theme.accent);
+
+  let text;
+  let muted;
+  let surface;
+  let surface2;
+  let border;
+  let soft;
+
+  if(theme.kind==="dark"){
+    text="#f2f5f4";
+    muted="#9da8a5";
+    surface="rgba(18,22,25,.78)";
+    surface2="rgba(255,255,255,.055)";
+    border="rgba(255,255,255,.09)";
+    soft=`color-mix(in srgb,${theme.accent} 14%,transparent)`;
+  }else{
+    text="#17201b";
+    muted="#77837c";
+    surface="rgba(255,255,255,.82)";
+    surface2="rgba(255,255,255,.58)";
+    border="rgba(25,45,33,.09)";
+    soft=`color-mix(in srgb,${theme.accent} 13%,transparent)`;
+  }
+
+  root.style.setProperty("--text",text);
+  root.style.setProperty("--muted",muted);
+  root.style.setProperty("--surface",surface);
+  root.style.setProperty("--surface2",surface2);
+  root.style.setProperty("--border",border);
+  root.style.setProperty("--soft",soft);
+
+  document.querySelector('meta[name="theme-color"]')
+    ?.setAttribute("content",theme.bg);
+
+  createAmbientV4(theme);
+  renderThemesV4();
+
+  showToast(`Thème ${theme.name} activé`);
+}
+
+function createAmbientV4(theme){
+  const ambient=document.getElementById("ambient");
+  if(!ambient)return;
+
+  ambient.innerHTML="";
+
+  if(localStorage.getItem(MOTION_KEY)==="off")return;
+
+  let count=0;
+
+  if(theme.effect==="frost")count=28;
+  else if(theme.effect==="aurora")count=12;
+  else if(theme.effect==="nebula")count=20;
+  else if(theme.effect==="sakura")count=24;
+  else if(theme.effect==="forest")count=20;
+  else if(theme.effect==="cosmos")count=30;
+  else if(theme.effect==="crystal")count=18;
+  else count=8;
+
+  for(let i=0;i<count;i++){
+    const p=document.createElement("div");
+    p.className="ambient-particle";
+
+    const size=theme.effect==="frost"
+      ?Math.random()*7+3
+      :Math.random()*5+2;
+
+    p.style.width=size+"px";
+    p.style.height=size+"px";
+    p.style.left=Math.random()*100+"%";
+    p.style.setProperty("--dx",(Math.random()*160-80)+"px");
+    p.style.animationDuration=(Math.random()*9+7)+"s";
+    p.style.animationDelay=(-Math.random()*16)+"s";
+
+    if(theme.effect==="frost"){
+      p.textContent="❄";
+      p.style.fontSize=(Math.random()*12+8)+"px";
+      p.style.width="auto";
+      p.style.height="auto";
+      p.style.background="transparent";
+      p.style.boxShadow="none";
+    }else if(theme.effect==="sakura"){
+      p.style.background="#f39ab9";
+      p.style.borderRadius="100% 0 100% 0";
+    }else if(theme.effect==="forest"){
+      p.style.background=theme.accent;
+      p.style.boxShadow=`0 0 12px ${theme.accent}`;
+    }else if(theme.effect==="cosmos"){
+      p.style.background="#ffffff";
+      p.style.boxShadow="0 0 12px #fff";
+    }else{
+      p.style.background=theme.accent;
+      p.style.boxShadow=`0 0 10px ${theme.accent}`;
+    }
+
+    ambient.appendChild(p);
+  }
+}
+
+function renderThemes(){
+  renderThemesV4();
+}
+
+function toggleMotion(){
+  const off=localStorage.getItem(MOTION_KEY)==="off";
+
+  localStorage.setItem(MOTION_KEY,off?"on":"off");
+
+  updateMotionButton();
+
+  const theme=THEMES.find(
+    x=>x.id===(localStorage.getItem(THEME_KEY)||"sage")
+  );
+
+  createAmbientV4(theme);
+
+  showToast(off?"Animations activées":"Animations désactivées");
+}
+
+function updateMotionButton(){
+  const b=document.getElementById("motionBtn");
+  if(!b)return;
+
+  b.textContent=
+    localStorage.getItem(MOTION_KEY)==="off"
+    ?"Désactivées"
+    :"Activées";
+}
+
+function exportData(){
+  const payload={
+    app:"HABITS.",
+    version:4,
+    exportedAt:new Date().toISOString(),
+    habits,
+    tasks:JSON.parse(localStorage.getItem("habitsV4Tasks")||"{}"),
+    theme:localStorage.getItem(THEME_KEY)||"sage"
+  };
+
+  const blob=new Blob(
+    [JSON.stringify(payload,null,2)],
+    {type:"application/json"}
+  );
+
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");
+
+  a.href=url;
+  a.download="habits-backup.json";
+  a.click();
+
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+
+  showToast("Sauvegarde exportée");
+}
+
+function importData(event){
+  const file=event.target.files?.[0];
+  if(!file)return;
+
+  const reader=new FileReader();
+
+  reader.onload=()=>{
+    try{
+      const data=JSON.parse(reader.result);
+
+      if(Array.isArray(data.habits)){
+        habits=data.habits.map(normalizeHabit);
+        saveData();
+      }
+
+      if(data.tasks&&typeof data.tasks==="object"){
+        localStorage.setItem(
+          "habitsV4Tasks",
+          JSON.stringify(data.tasks)
+        );
+      }
+
+      if(data.theme){
+        localStorage.setItem(THEME_KEY,data.theme);
+        applyThemeV4(data.theme);
+      }
+
+      renderAll();
+      showToast("Sauvegarde importée");
+    }catch(e){
+      showToast("Fichier invalide");
+    }
+  };
+
+  reader.readAsText(file);
+  event.target.value="";
+}
+
+function resetAll(){
+  if(!confirm("Supprimer toutes tes habitudes, tâches et historiques ?"))return;
+
+  habits=[];
+  localStorage.removeItem(V2_KEY);
+  localStorage.removeItem(HABITS_KEY);
+  localStorage.removeItem("habitsV4Tasks");
+
+  saveData();
+  renderAll();
+
+  showToast("Données supprimées");
+}
+
+function renderAllV4(){
+  renderTodayV4();
+  renderHabits();
+  renderCalendarV4();
+  renderStats();
+  renderThemesV4();
+  updateMotionButton();
+}
+
+const originalRenderToday=window.renderToday;
+window.renderToday=renderTodayV4;
+
+const originalRenderCalendar=window.renderCalendar;
+window.renderCalendar=renderCalendarV4;
+
+const originalRenderThemes=window.renderThemes;
+window.renderThemes=renderThemesV4;
+
+document.addEventListener("keydown",e=>{
+  if(e.key==="Enter"&&
+     document.activeElement?.id==="newTaskInput"){
+    e.preventDefault();
+    addTaskFromToday();
+  }
+});
+
+loadData();
+
+if(!localStorage.getItem(THEME_KEY)){
+  localStorage.setItem(THEME_KEY,"sage");
+}
+
+applyThemeV4(
+  localStorage.getItem(THEME_KEY)||"sage"
+);
+
+setupForm();
+refreshForm();
+
+if(document.getElementById("fStart")&&!document.getElementById("fStart").value){
+  document.getElementById("fStart").value=todayKey();
+}
+
+enhanceCreateFormV4();
+renderAllV4();
+</script>
+</body>
+</html>
