@@ -1331,3 +1331,842 @@ renderAllV4();
 </script>
 </body>
 </html>
+function renderAdvancedStats(){
+  const c=document.getElementById("advancedStatsContent");
+  if(!c)return;
+
+  const total=habits.length;
+  const active=habits.filter(h=>isActiveOn(h,new Date())).length;
+  const completed=habits.filter(h=>daySatisfied(h,new Date())).length;
+
+  let totalEntries=0;
+  let categoryMap={};
+
+  habits.forEach(h=>{
+    Object.values(h.history||{}).forEach(v=>totalEntries+=Number(v)||0);
+    const cat=h.category||"Autres";
+    categoryMap[cat]=(categoryMap[cat]||0)+totalEntries;
+  });
+
+  const categories=Object.entries(categoryMap);
+
+  c.innerHTML=`
+    <div class="stats-grid">
+      <div class="stat-card card">
+        <div class="stat-label">Habitudes créées</div>
+        <div class="stat-number">${total}</div>
+        <p>Total de tes habitudes.</p>
+      </div>
+
+      <div class="stat-card card">
+        <div class="stat-label">Actives aujourd’hui</div>
+        <div class="stat-number">${active}</div>
+        <p>Habitudes prévues aujourd’hui.</p>
+      </div>
+
+      <div class="stat-card card">
+        <div class="stat-label">Objectifs atteints</div>
+        <div class="stat-number">${completed}</div>
+        <p>Objectifs remplis aujourd’hui.</p>
+      </div>
+    </div>
+
+    <div class="section-title">
+      <h2>Répartition par catégorie</h2>
+    </div>
+
+    <div class="habit-list">
+      ${
+        categories.length
+        ? categories.map(([name,count])=>`
+          <div class="habit-card card">
+            <div class="habit-info">
+              <div class="habit-name">${escapeHTML(name)}</div>
+              <div class="habit-mini-progress">
+                <div class="progress">
+                  <span style="width:${Math.min(100,count)}%"></span>
+                </div>
+                <span class="progress-count">${count}</span>
+              </div>
+            </div>
+          </div>
+        `).join("")
+        : `<div class="empty card">
+            <div class="big">◌</div>
+            <strong>Pas encore de données</strong>
+            <p>Commence à utiliser tes habitudes pour voir tes statistiques.</p>
+          </div>`
+      }
+    </div>
+  `;
+}
+
+function renderStats(){
+  const stats=document.getElementById("statsContent");
+  if(!stats)return;
+
+  const today=new Date();
+
+  let totalHabits=habits.length;
+  let todayActive=habits.filter(h=>isActiveOn(h,today));
+  let todayDone=todayActive.filter(h=>daySatisfied(h,today)).length;
+
+  let totalChecks=0;
+
+  habits.forEach(h=>{
+    Object.values(h.history||{}).forEach(v=>{
+      totalChecks+=Number(v)||0;
+    });
+  });
+
+  const last7=[];
+
+  for(let i=6;i>=0;i--){
+    const d=new Date();
+    d.setDate(d.getDate()-i);
+
+    let count=0;
+
+    habits.forEach(h=>{
+      if(isActiveOn(h,d)){
+        count+=entryCount(h,dateKey(d));
+      }
+    });
+
+    last7.push({
+      date:d,
+      count
+    });
+  }
+
+  const max=Math.max(1,...last7.map(x=>x.count));
+
+  stats.innerHTML=`
+    <div class="stats-grid">
+      <div class="stat-card card">
+        <div class="stat-label">Habitudes</div>
+        <div class="stat-number">${totalHabits}</div>
+        <p>Habitudes actuellement enregistrées.</p>
+      </div>
+
+      <div class="stat-card card">
+        <div class="stat-label">Aujourd’hui</div>
+        <div class="stat-number">${todayDone}/${todayActive.length}</div>
+        <p>Objectifs atteints aujourd’hui.</p>
+      </div>
+
+      <div class="stat-card card">
+        <div class="stat-label">Validations</div>
+        <div class="stat-number">${totalChecks}</div>
+        <p>Total des validations enregistrées.</p>
+      </div>
+    </div>
+
+    <div class="section-title">
+      <h2>Activité des 7 derniers jours</h2>
+      <span>Validations</span>
+    </div>
+
+    <div class="chart card">
+      ${
+        last7.map(x=>{
+          const height=Math.max(4,Math.round(x.count/max*100));
+          return `
+            <div class="bar-wrap">
+              <strong style="font-size:11px">${x.count}</strong>
+              <div class="bar" style="height:${height}%"></div>
+              <div class="bar-label">
+                ${x.date.toLocaleDateString("fr-BE",{weekday:"short"}).slice(0,2)}
+              </div>
+            </div>
+          `;
+        }).join("")
+      }
+    </div>
+
+    <div class="section-title">
+      <h2>Catégories</h2>
+    </div>
+
+    <div class="grid-2">
+      ${renderCategoryStats()}
+    </div>
+  `;
+}
+
+function renderCategoryStats(){
+  const map={};
+
+  habits.forEach(h=>{
+    const cat=h.category||"Autres";
+
+    if(!map[cat]){
+      map[cat]={
+        total:0,
+        done:0
+      };
+    }
+
+    map[cat].total++;
+
+    if(daySatisfied(h,new Date())){
+      map[cat].done++;
+    }
+  });
+
+  const entries=Object.entries(map);
+
+  if(!entries.length){
+    return `
+      <div class="feature-card card">
+        <strong>Aucune catégorie</strong>
+        <p>Crée des habitudes pour commencer.</p>
+      </div>
+    `;
+  }
+
+  return entries.map(([cat,data])=>`
+    <div class="feature-card card">
+      <div class="icon">◈</div>
+      <h3>${escapeHTML(cat)}</h3>
+      <p>${data.done}/${data.total} objectif${data.total>1?"s":""} atteint${data.done>1?"s":""} aujourd’hui.</p>
+      <div class="progress">
+        <span style="width:${data.total?data.done/data.total*100:0}%"></span>
+      </div>
+    </div>
+  `).join("");
+}
+
+function renderHabitDetail(){
+  const id=detailHabitId;
+
+  const h=habits.find(x=>String(x.id)===String(id));
+  const c=document.getElementById("habitDetailContent");
+
+  if(!c||!h)return;
+
+  const today=new Date();
+
+  const current=entryCount(h,dateKey(today));
+  const streak=currentStreak(h);
+
+  let total=0;
+
+  Object.values(h.history||{}).forEach(v=>{
+    total+=Number(v)||0;
+  });
+
+  const last30=[];
+
+  for(let i=29;i>=0;i--){
+    const d=new Date();
+    d.setDate(d.getDate()-i);
+
+    last30.push({
+      date:d,
+      value:entryCount(h,dateKey(d))
+    });
+  }
+
+  c.innerHTML=`
+    <div class="detail-top card">
+      <div class="detail-icon">${escapeHTML(h.icon)}</div>
+
+      <div class="detail-title">
+        <h1>${escapeHTML(h.name)}</h1>
+        <p>${escapeHTML(h.category)} · ${escapeHTML(frequencyLabel(h))}</p>
+      </div>
+
+      <button class="primary-btn" onclick="editHabit('${h.id}')">
+        Modifier
+      </button>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi card">
+        <strong>${current}</strong>
+        <span>Aujourd’hui</span>
+      </div>
+
+      <div class="kpi card">
+        <strong>${streak}</strong>
+        <span>Série</span>
+      </div>
+
+      <div class="kpi card">
+        <strong>${total}</strong>
+        <span>Total</span>
+      </div>
+
+      <div class="kpi card">
+        <strong>${h.dailyGoal||1}</strong>
+        <span>Objectif</span>
+      </div>
+    </div>
+
+    <div class="section-title">
+      <h2>30 derniers jours</h2>
+      <span>Activité</span>
+    </div>
+
+    <div class="heatmap card">
+      ${
+        last30.map(x=>{
+          const value=x.value;
+
+          let level="";
+
+          if(value>=4)level="l4";
+          else if(value>=3)level="l3";
+          else if(value>=2)level="l2";
+          else if(value>=1)level="l1";
+
+          return `<div class="heat ${level}" title="${dateKey(x.date)} : ${value}"></div>`;
+        }).join("")
+      }
+    </div>
+
+    ${
+      h.note
+      ? `
+        <div class="section-title">
+          <h2>Note</h2>
+        </div>
+
+        <div class="feature-card card">
+          <p>${escapeHTML(h.note)}</p>
+        </div>
+      `
+      : ""
+    }
+  `;
+}
+
+function openDetail(id){
+  detailHabitId=id;
+  go("detail");
+  renderHabitDetail();
+}
+
+function editHabit(id){
+  const h=habits.find(x=>String(x.id)===String(id));
+
+  if(!h)return;
+
+  editingId=h.id;
+
+  document.getElementById("fName").value=h.name;
+  document.getElementById("fCategory").value=h.category;
+  document.getElementById("fIcon").value=h.icon;
+  document.getElementById("fColor").value=h.color;
+
+  document.getElementById("fFrequency").value=h.frequency||1;
+  document.getElementById("fDailyGoal").value=h.dailyGoal||1;
+  document.getElementById("fWeeklyGoal").value=h.weeklyGoal||1;
+
+  document.getElementById("fStart").value=h.startDate||todayKey();
+  document.getElementById("fEnd").value=h.endDate||"";
+  document.getElementById("fNote").value=h.note||"";
+
+  currentFreq=h.frequencyType||"daily";
+
+  selectedDays=[...(h.daysOfWeek||[])];
+
+  go("create");
+
+  setupForm();
+  refreshForm();
+  refreshFrequencyFormV4();
+
+  document.querySelectorAll(".segment").forEach(btn=>{
+    btn.classList.toggle("active",btn.dataset.freq===currentFreq);
+  });
+}
+
+function deleteHabit(id){
+  const h=habits.find(x=>String(x.id)===String(id));
+
+  if(!h)return;
+
+  if(!confirm(`Supprimer l’habitude « ${h.name} » et tout son historique ?`)){
+    return;
+  }
+
+  habits=habits.filter(x=>String(x.id)!==String(id));
+
+  saveData();
+
+  if(detailHabitId===id){
+    detailHabitId=null;
+    go("habits");
+  }
+
+  renderAllV4();
+  showToast("Habitude supprimée");
+}
+
+function go(page){
+  document.querySelectorAll(".page").forEach(p=>{
+    p.classList.remove("active");
+  });
+
+  const target=document.getElementById("page-"+page);
+
+  if(!target)return;
+
+  target.classList.add("active");
+
+  document.querySelectorAll(".nav-item").forEach(item=>{
+    item.classList.toggle(
+      "active",
+      item.dataset.page===page
+    );
+  });
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+  if(page==="stats"){
+    renderStats();
+  }
+
+  if(page==="advanced-stats"){
+    renderAdvancedStats();
+  }
+
+  if(page==="detail"){
+    renderHabitDetail();
+  }
+
+  if(page==="themes"){
+    renderThemes();
+  }
+
+  if(page==="settings"){
+    updateMotionButton();
+  }
+}
+
+function changeMonth(delta){
+  calendarDate.setMonth(
+    calendarDate.getMonth()+delta
+  );
+
+  renderCalendarV4();
+}
+
+function selectToday(){
+  selectedDate=new Date();
+  calendarDate=new Date();
+
+  go("today");
+  renderAllV4();
+}
+
+function formatDate(date,options={}){
+  return new Intl.DateTimeFormat(
+    "fr-BE",
+    options
+  ).format(date);
+}
+
+function startOfWeek(date){
+  const d=new Date(date);
+  const day=d.getDay()||7;
+
+  d.setDate(d.getDate()-day+1);
+  d.setHours(0,0,0,0);
+
+  return d;
+}
+
+function endOfWeek(date){
+  const d=startOfWeek(date);
+  d.setDate(d.getDate()+6);
+  d.setHours(23,59,59,999);
+
+  return d;
+}
+
+function startOfMonth(date){
+  return new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    1
+  );
+}
+
+function endOfMonth(date){
+  return new Date(
+    date.getFullYear(),
+    date.getMonth()+1,
+    0,
+    23,
+    59,
+    59,
+    999
+  );
+}
+
+function periodProgress(h,anchor){
+  let target=0;
+  let done=0;
+
+  const s=startOfWeek(anchor);
+  const e=endOfWeek(anchor);
+
+  for(
+    let d=new Date(s);
+    d<=e;
+    d.setDate(d.getDate()+1)
+  ){
+    if(isActiveOn(h,d)){
+      target+=Math.max(1,h.dailyGoal||1);
+      done+=entryCount(h,dateKey(d));
+    }
+  }
+
+  return {
+    done,
+    target:Math.max(1,target),
+    pct:Math.min(
+      100,
+      Math.round(done/Math.max(1,target)*100)
+    )
+  };
+}
+
+function monthProgress(h,anchor){
+  const s=startOfMonth(anchor);
+  const e=endOfMonth(anchor);
+
+  let target=0;
+  let done=0;
+
+  for(
+    let d=new Date(s);
+    d<=e;
+    d.setDate(d.getDate()+1)
+  ){
+    if(isActiveOn(h,d)){
+      target+=Math.max(1,h.dailyGoal||1);
+      done+=entryCount(h,dateKey(d));
+    }
+  }
+
+  return {
+    done,
+    target:Math.max(1,target),
+    pct:Math.min(
+      100,
+      Math.round(done/Math.max(1,target)*100)
+    )
+  };
+}
+
+function habitPeriodProgress(h,d){
+  if(h.frequencyType==="xmonth"){
+    const month=monthProgress(h,d);
+
+    return {
+      done:Math.min(
+        entryCountRange(h,startOfMonth(d),d),
+        h.frequency
+      ),
+      target:Math.max(1,h.frequency),
+      pct:Math.min(
+        100,
+        Math.round(
+          entryCountRange(h,startOfMonth(d),d)/
+          Math.max(1,h.frequency)*100
+        )
+      )
+    };
+  }
+
+  if(
+    h.frequencyType==="weekly"||
+    h.frequencyType==="xweek"
+  ){
+    const s=startOfWeek(d);
+    const done=entryCountRange(h,s,d);
+
+    const target=
+      h.frequencyType==="xweek"
+      ? Math.max(1,h.frequency)
+      : Math.max(1,h.weeklyGoal);
+
+    return {
+      done:Math.min(done,target),
+      target,
+      pct:Math.min(
+        100,
+        Math.round(done/target*100)
+      )
+    };
+  }
+
+  return {
+    done:0,
+    target:1,
+    pct:0
+  };
+}
+
+function entryCountRange(h,start,end){
+  let total=0;
+
+  for(
+    let d=new Date(start);
+    d<=end;
+    d.setDate(d.getDate()+1)
+  ){
+    total+=entryCount(h,dateKey(d));
+  }
+
+  return total;
+}
+
+function frequencyLabel(h){
+  switch(h.frequencyType){
+    case "daily":
+      return `Tous les jours · ${h.dailyGoal||1}×`;
+
+    case "weekly":
+      return `Toutes les semaines · ${h.weeklyGoal||1}×`;
+
+    case "xweek":
+      return `${h.frequency||1}× par semaine`;
+
+    case "xmonth":
+      return `${h.frequency||1}× par mois`;
+
+    case "specific":
+      return "Jours précis";
+
+    default:
+      return "";
+  }
+}
+
+function refreshForm(){
+  const name=document.getElementById("fName");
+
+  if(!name)return;
+
+  document.getElementById("formTitle").textContent=
+    editingId
+    ? "Modifier l’habitude"
+    : "Créer une habitude";
+
+  document.getElementById("submitHabitBtn").textContent=
+    editingId
+    ? "Enregistrer"
+    : "Créer l’habitude";
+
+  document.getElementById("cancelHabitBtn").style.display=
+    editingId
+    ? "block"
+    : "none";
+
+  document.querySelectorAll(".day-choice").forEach(btn=>{
+    btn.classList.toggle(
+      "active",
+      selectedDays.includes(Number(btn.dataset.day))
+    );
+  });
+
+  document.querySelectorAll(".segment").forEach(btn=>{
+    btn.classList.toggle(
+      "active",
+      btn.dataset.freq===currentFreq
+    );
+  });
+
+  document.querySelectorAll(".color-choice").forEach(btn=>{
+    btn.classList.toggle(
+      "active",
+      btn.dataset.color===selectedColor
+    );
+  });
+
+  document.querySelectorAll(".icon-choice").forEach(btn=>{
+    btn.classList.toggle(
+      "active",
+      btn.dataset.icon===selectedIcon
+    );
+  });
+
+  refreshFrequencyFormV4();
+}
+
+function setupForm(){
+  const freqRow=document.getElementById("freqRow");
+
+  if(!freqRow)return;
+
+  document.querySelectorAll(".segment").forEach(btn=>{
+    btn.onclick=()=>{
+      currentFreq=btn.dataset.freq;
+
+      document.querySelectorAll(".segment").forEach(x=>{
+        x.classList.toggle(
+          "active",
+          x===btn
+        );
+      });
+
+      refreshFrequencyFormV4();
+    };
+  });
+
+  document.querySelectorAll(".day-choice").forEach(btn=>{
+    btn.onclick=()=>{
+      const day=Number(btn.dataset.day);
+
+      if(selectedDays.includes(day)){
+        selectedDays=selectedDays.filter(x=>x!==day);
+      }else{
+        selectedDays.push(day);
+      }
+
+      refreshForm();
+    };
+  });
+
+  document.querySelectorAll(".color-choice").forEach(btn=>{
+    btn.onclick=()=>{
+      selectedColor=btn.dataset.color;
+      refreshForm();
+    };
+  });
+
+  document.querySelectorAll(".icon-choice").forEach(btn=>{
+    btn.onclick=()=>{
+      selectedIcon=btn.dataset.icon;
+      refreshForm();
+    };
+  });
+}
+
+function cancelEdit(){
+  editingId=null;
+  selectedDays=[];
+  selectedColor="#6e9d7d";
+  selectedIcon="✓";
+  currentFreq="daily";
+
+  document.getElementById("habitForm").reset();
+
+  document.getElementById("fStart").value=todayKey();
+
+  refreshForm();
+}
+
+function submitHabit(e){
+  e.preventDefault();
+
+  const name=document.getElementById("fName").value.trim();
+
+  if(!name){
+    showToast("Donne un nom à ton habitude");
+    return;
+  }
+
+  const id=editingId||String(Date.now());
+
+  let h=habits.find(x=>String(x.id)===String(id));
+
+  if(!h){
+    h={
+      id,
+      history:{}
+    };
+  }
+
+  h.name=name;
+  h.category=document.getElementById("fCategory").value||"Autres";
+  h.icon=selectedIcon||"✓";
+  h.color=selectedColor||"#6e9d7d";
+  h.frequencyType=currentFreq;
+  h.frequency=Math.max(
+    1,
+    Number(document.getElementById("fFrequency").value)||1
+  );
+  h.dailyGoal=Math.max(
+    1,
+    Number(document.getElementById("fDailyGoal").value)||1
+  );
+  h.weeklyGoal=Math.max(
+    1,
+    Number(document.getElementById("fWeeklyGoal").value)||1
+  );
+  h.daysOfWeek=[...selectedDays];
+  h.startDate=
+    document.getElementById("fStart").value||
+    todayKey();
+  h.endDate=
+    document.getElementById("fEnd").value||
+    "";
+  h.note=
+    document.getElementById("fNote").value.trim();
+
+  if(
+    h.endDate &&
+    h.endDate<h.startDate
+  ){
+    showToast(
+      "La date de fin doit être après le début"
+    );
+    return;
+  }
+
+  if(
+    currentFreq==="specific" &&
+    !selectedDays.length
+  ){
+    showToast(
+      "Sélectionne au moins un jour"
+    );
+    return;
+  }
+
+  if(currentFreq==="daily"){
+    h.weeklyGoal=h.dailyGoal*7;
+  }
+
+  if(currentFreq==="weekly"){
+    h.frequency=1;
+  }
+
+  if(currentFreq==="xweek"){
+    h.weeklyGoal=h.frequency;
+  }
+
+  if(currentFreq==="xmonth"){
+    h.weeklyGoal=Math.min(
+      h.frequency,
+      31
+    );
+  }
+
+  if(!habits.some(x=>String(x.id)===String(id))){
+    habits.push(h);
+  }
+
+  saveData();
+
+  showToast(
+    editingId
+    ? "Habitude modifiée"
+    : "Habitude créée"
+  );
+
+  editingId=null;
+
+  go("habits");
+
+  renderAll();
+}
