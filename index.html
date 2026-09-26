@@ -46,11 +46,10 @@ body{
   color:var(--text);
   min-height:100vh;
   padding-bottom:30px;
+  transition:background .25s,color .25s;
 }
 
-button,
-input,
-select{
+button,input,select{
   font:inherit;
 }
 
@@ -619,7 +618,7 @@ button{
 /* SETTINGS */
 
 .settings-section{
-  margin-bottom:28px;
+  margin-bottom:35px;
 }
 
 .settings-section h2{
@@ -631,6 +630,22 @@ button{
   color:var(--muted);
   font-size:14px;
   margin-bottom:15px;
+}
+
+.theme-section-title{
+  display:flex;
+  align-items:center;
+  gap:9px;
+  margin-bottom:14px;
+}
+
+.theme-section-title span{
+  background:var(--surface2);
+  color:var(--primary);
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:800;
 }
 
 .theme-grid{
@@ -646,6 +661,13 @@ button{
   background:var(--surface);
   cursor:pointer;
   box-shadow:var(--shadow);
+  color:var(--text);
+  text-align:left;
+  transition:.2s;
+}
+
+.theme-option:hover{
+  transform:translateY(-2px);
 }
 
 .theme-option.active{
@@ -653,14 +675,42 @@ button{
 }
 
 .theme-preview{
-  height:55px;
+  height:62px;
   border-radius:11px;
   margin-bottom:9px;
+  position:relative;
+  overflow:hidden;
+}
+
+.theme-preview::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:var(--preview-pattern,none);
+}
+
+.theme-preview-line{
+  position:absolute;
+  width:45%;
+  height:10px;
+  margin:12px;
+  border-radius:99px;
+  background:var(--preview-primary);
+  z-index:2;
 }
 
 .theme-name{
   font-size:12px;
   font-weight:750;
+}
+
+.premium-note{
+  padding:13px 15px;
+  border-radius:15px;
+  background:var(--surface2);
+  color:var(--muted);
+  font-size:13px;
+  margin-bottom:16px;
 }
 
 /* HELP */
@@ -684,43 +734,39 @@ button{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:15px;
-  margin-bottom:22px;
 }
 
 .help-category{
   border:1px solid var(--border);
   background:var(--surface);
   border-radius:20px;
-  padding:20px;
+  padding:22px;
   cursor:pointer;
   text-align:left;
   box-shadow:var(--shadow);
   transition:.2s;
+  color:var(--text);
 }
 
 .help-category:hover{
-  transform:translateY(-2px);
+  transform:translateY(-3px);
   border-color:var(--primary2);
 }
 
-.help-category.active{
-  border:2px solid var(--primary);
-}
-
 .help-category-icon{
-  width:45px;
-  height:45px;
-  border-radius:14px;
+  width:52px;
+  height:52px;
+  border-radius:16px;
   background:var(--surface2);
   display:grid;
   place-items:center;
-  font-size:22px;
-  margin-bottom:14px;
+  font-size:25px;
+  margin-bottom:15px;
 }
 
 .help-category h3{
-  font-size:18px;
-  margin-bottom:5px;
+  font-size:19px;
+  margin-bottom:6px;
 }
 
 .help-category p{
@@ -729,34 +775,39 @@ button{
   line-height:1.5;
 }
 
-.help-content{
-  display:none;
+.help-page-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:22px;
 }
 
-.help-content.active{
-  display:block;
-  animation:fadeIn .2s ease;
+.help-back{
+  width:42px;
+  height:42px;
+  border:0;
+  border-radius:13px;
+  background:var(--surface2);
+  color:var(--text);
+  font-size:20px;
+  flex:none;
 }
 
-.help-section-title{
-  margin:26px 0 14px;
+.help-page-header h2{
+  font-size:26px;
 }
 
-.help-section-title h2{
-  font-size:23px;
-}
-
-.help-section-title p{
+.help-page-header p{
   color:var(--muted);
-  margin-top:5px;
-  line-height:1.5;
+  font-size:13px;
+  margin-top:3px;
 }
 
 .help-subnav{
   display:flex;
   flex-wrap:wrap;
   gap:8px;
-  margin-bottom:18px;
+  margin-bottom:20px;
 }
 
 .help-subnav button{
@@ -830,19 +881,6 @@ button{
   font-size:14px;
 }
 
-.help-link{
-  display:inline-flex;
-  margin-top:12px;
-  border:0;
-  background:var(--surface2);
-  color:var(--primary);
-  padding:8px 11px;
-  border-radius:10px;
-  font-weight:750;
-  font-size:12px;
-  cursor:pointer;
-}
-
 .technique{
   margin-top:10px;
   padding:13px;
@@ -856,6 +894,18 @@ button{
 
 .technique p{
   margin-top:4px;
+}
+
+.help-link{
+  display:inline-flex;
+  margin-top:12px;
+  border:0;
+  background:var(--surface2);
+  color:var(--primary);
+  padding:9px 12px;
+  border-radius:10px;
+  font-weight:750;
+  font-size:12px;
 }
 
 /* MODAL */
@@ -997,7 +1047,7 @@ button{
 .toast{
   position:fixed;
   left:50%;
-  bottom:25px;
+  bottom:95px;
   transform:translate(-50%,20px);
   background:var(--text);
   color:white;
@@ -1022,7 +1072,21 @@ button{
   display:none;
 }
 
+.mobile-nav-icon{
+  display:block;
+  font-size:23px;
+  line-height:1;
+  margin-bottom:4px;
+}
+
+.mobile-nav-label{
+  display:block;
+  font-size:9px;
+  line-height:1;
+}
+
 @media(max-width:900px){
+
   .header{
     padding:18px 4%;
   }
@@ -1047,9 +1111,10 @@ button{
     left:0;
     right:0;
     z-index:90;
-    padding:8px 8px calc(8px + env(safe-area-inset-bottom));
-    background:rgba(255,255,255,.94);
-    backdrop-filter:blur(15px);
+    padding:9px 7px calc(9px + env(safe-area-inset-bottom));
+    background:color-mix(in srgb,var(--surface) 94%,transparent);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
     border-top:1px solid var(--border);
   }
 
@@ -1057,10 +1122,10 @@ button{
     border:0;
     background:transparent;
     color:var(--muted);
-    padding:7px 2px;
-    border-radius:12px;
-    font-size:10px;
+    padding:6px 1px;
+    border-radius:13px;
     font-weight:700;
+    min-width:0;
   }
 
   .mobile-nav button.active{
@@ -1069,7 +1134,7 @@ button{
   }
 
   body{
-    padding-bottom:90px;
+    padding-bottom:105px;
   }
 
   .help-categories{
@@ -1078,6 +1143,7 @@ button{
 }
 
 @media(max-width:800px){
+
   .summary-grid,
   .stats-grid{
     grid-template-columns:1fr;
@@ -1086,6 +1152,10 @@ button{
   .habits-grid,
   .help-cards{
     grid-template-columns:1fr;
+  }
+
+  .help-card.full{
+    grid-column:auto;
   }
 
   .theme-grid{
@@ -1103,6 +1173,7 @@ button{
 }
 
 @media(max-width:480px){
+
   .page-title h1{
     font-size:28px;
   }
@@ -1140,14 +1211,33 @@ button{
     margin-top:8px;
   }
 
-  .help-intro{
-    padding:20px;
+  .mobile-nav-icon{
+    font-size:21px;
+  }
+
+  .mobile-nav-label{
+    font-size:8px;
+  }
+
+  .help-page-header h2{
+    font-size:22px;
   }
 }
 
-/* THEMES */
+/* =========================
+   ANCIENS THEMES PREMIUM
+   ========================= */
 
-/* LIGHT */
+.theme-sage{
+  --bg:#f4f8f5;
+  --surface:#ffffff;
+  --surface2:#edf5ef;
+  --text:#203128;
+  --muted:#718078;
+  --primary:#5f9675;
+  --primary2:#8fc3a4;
+  --border:#dfe9e2;
+}
 
 .theme-mint{
   --bg:#f2faf7;
@@ -1247,8 +1337,6 @@ button{
   --primary2:#91c1cc;
   --border:#d9e8ec;
 }
-
-/* DARK */
 
 .theme-midnight{
   --bg:#11151d;
@@ -1370,19 +1458,182 @@ button{
   --shadow:0 10px 30px rgba(0,0,0,.35);
 }
 
-.theme-midnight .btn-danger,
-.theme-graphite .btn-danger,
-.theme-darkforest .btn-danger,
-.theme-deepocean .btn-danger,
-.theme-darklavender .btn-danger,
-.theme-burgundy .btn-danger,
-.theme-darkblue .btn-danger,
-.theme-cyberpurple .btn-danger,
-.theme-darkcoffee .btn-danger,
-.theme-obsidian .btn-danger{
-  background:#3b2024;
-  color:#ff9d9d;
+/* =========================
+   NOUVEAUX THEMES ORIGINAUX
+   ========================= */
+
+.theme-aurora{
+  --bg:#071614;
+  --surface:#10231f;
+  --surface2:#17362e;
+  --text:#edfff8;
+  --muted:#91b9ac;
+  --primary:#59d6aa;
+  --primary2:#8ce8c8;
+  --border:#285044;
+  --shadow:0 10px 35px rgba(0,0,0,.3);
+  background-image:
+    radial-gradient(circle at 15% 20%,rgba(89,214,170,.16),transparent 28%),
+    radial-gradient(circle at 80% 10%,rgba(75,180,255,.13),transparent 25%),
+    radial-gradient(circle at 60% 90%,rgba(158,93,255,.12),transparent 30%);
 }
+
+.theme-waves{
+  --bg:#eef8fc;
+  --surface:rgba(255,255,255,.92);
+  --surface2:#dff1f7;
+  --text:#17323e;
+  --muted:#6d8792;
+  --primary:#3199bd;
+  --primary2:#74c4dc;
+  --border:#cfe6ef;
+  --shadow:0 10px 30px rgba(42,111,135,.09);
+  background-image:
+    repeating-radial-gradient(
+      ellipse at 0 0,
+      transparent 0,
+      transparent 18px,
+      rgba(49,153,189,.045) 19px,
+      rgba(49,153,189,.045) 21px
+    );
+}
+
+.theme-sakura{
+  --bg:#fff5f8;
+  --surface:rgba(255,255,255,.94);
+  --surface2:#fde8ef;
+  --text:#412c35;
+  --muted:#91747f;
+  --primary:#d66e96;
+  --primary2:#ed9fba;
+  --border:#f1d5e0;
+  --shadow:0 10px 30px rgba(155,72,105,.08);
+  background-image:
+    radial-gradient(circle at 12% 20%,rgba(214,110,150,.09) 0 4px,transparent 5px),
+    radial-gradient(circle at 70% 35%,rgba(214,110,150,.07) 0 3px,transparent 4px),
+    radial-gradient(circle at 40% 80%,rgba(214,110,150,.06) 0 5px,transparent 6px);
+}
+
+.theme-night{
+  --bg:#080b18;
+  --surface:#11162a;
+  --surface2:#1a2140;
+  --text:#f2f4ff;
+  --muted:#929ab9;
+  --primary:#849cff;
+  --primary2:#a9b8ff;
+  --border:#293252;
+  --shadow:0 10px 35px rgba(0,0,0,.35);
+  background-image:
+    radial-gradient(circle at 15% 15%,rgba(255,255,255,.55) 0 1px,transparent 2px),
+    radial-gradient(circle at 75% 25%,rgba(255,255,255,.4) 0 1px,transparent 2px),
+    radial-gradient(circle at 40% 65%,rgba(255,255,255,.35) 0 1px,transparent 2px),
+    radial-gradient(circle at 88% 82%,rgba(255,255,255,.5) 0 1px,transparent 2px);
+  background-size:130px 130px,180px 180px,210px 210px,160px 160px;
+}
+
+.theme-botanical{
+  --bg:#f2f8ee;
+  --surface:rgba(255,255,255,.94);
+  --surface2:#e5f0df;
+  --text:#263729;
+  --muted:#70806f;
+  --primary:#5b9b68;
+  --primary2:#8bbc94;
+  --border:#d5e4d0;
+  --shadow:0 10px 30px rgba(63,104,63,.08);
+  background-image:
+    radial-gradient(ellipse at 15% 15%,rgba(91,155,104,.09),transparent 20%),
+    radial-gradient(ellipse at 85% 70%,rgba(91,155,104,.08),transparent 25%);
+}
+
+.theme-nebula{
+  --bg:#0f0b1c;
+  --surface:#1a1430;
+  --surface2:#281d45;
+  --text:#f7f0ff;
+  --muted:#a99bbb;
+  --primary:#b27cff;
+  --primary2:#d09eff;
+  --border:#45336a;
+  --shadow:0 10px 40px rgba(0,0,0,.4);
+  background-image:
+    radial-gradient(circle at 20% 30%,rgba(255,72,182,.15),transparent 25%),
+    radial-gradient(circle at 80% 20%,rgba(76,125,255,.16),transparent 25%),
+    radial-gradient(circle at 50% 90%,rgba(161,72,255,.13),transparent 30%);
+}
+
+.theme-crystal{
+  --bg:#eef5ff;
+  --surface:rgba(255,255,255,.92);
+  --surface2:#e0ebfa;
+  --text:#233448;
+  --muted:#718196;
+  --primary:#668fd1;
+  --primary2:#93b2e2;
+  --border:#d2e0f3;
+  --shadow:0 10px 30px rgba(70,106,154,.09);
+  background-image:
+    linear-gradient(135deg,rgba(102,143,209,.05) 25%,transparent 25%),
+    linear-gradient(315deg,rgba(102,143,209,.05) 25%,transparent 25%);
+  background-size:55px 55px;
+}
+
+.theme-sunset{
+  --bg:#fff3ea;
+  --surface:rgba(255,255,255,.94);
+  --surface2:#fde4d3;
+  --text:#3d2a26;
+  --muted:#8b7068;
+  --primary:#e87552;
+  --primary2:#f1a078;
+  --border:#f1d3c2;
+  --shadow:0 10px 30px rgba(189,91,55,.09);
+  background-image:
+    radial-gradient(circle at 15% 90%,rgba(232,117,82,.11),transparent 28%),
+    radial-gradient(circle at 90% 10%,rgba(245,184,72,.13),transparent 25%);
+}
+
+.theme-holographic{
+  --bg:#f4f0ff;
+  --surface:rgba(255,255,255,.9);
+  --surface2:#eee8fc;
+  --text:#2d2940;
+  --muted:#79738e;
+  --primary:#8769ce;
+  --primary2:#aa91e0;
+  --border:#dfd7f2;
+  --shadow:0 10px 35px rgba(108,77,157,.1);
+  background-image:
+    linear-gradient(
+      115deg,
+      rgba(255,125,180,.08),
+      rgba(92,200,255,.08),
+      rgba(154,108,255,.08),
+      rgba(255,214,98,.08)
+    );
+}
+
+.theme-paper{
+  --bg:#f5f0e6;
+  --surface:#fffdf7;
+  --surface2:#eee8da;
+  --text:#39352c;
+  --muted:#817b6d;
+  --primary:#81765a;
+  --primary2:#aaa083;
+  --border:#ddd5c5;
+  --shadow:0 8px 25px rgba(76,68,50,.08);
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 28px,
+      rgba(100,90,65,.035) 29px
+    );
+}
+
+/* DARK MOBILE NAV */
 
 .theme-midnight .mobile-nav,
 .theme-graphite .mobile-nav,
@@ -1393,8 +1644,28 @@ button{
 .theme-darkblue .mobile-nav,
 .theme-cyberpurple .mobile-nav,
 .theme-darkcoffee .mobile-nav,
-.theme-obsidian .mobile-nav{
-  background:rgba(20,22,25,.94);
+.theme-obsidian .mobile-nav,
+.theme-aurora .mobile-nav,
+.theme-night .mobile-nav,
+.theme-nebula .mobile-nav{
+  background:rgba(15,17,22,.94);
+}
+
+.theme-midnight .btn-danger,
+.theme-graphite .btn-danger,
+.theme-darkforest .btn-danger,
+.theme-deepocean .btn-danger,
+.theme-darklavender .btn-danger,
+.theme-burgundy .btn-danger,
+.theme-darkblue .btn-danger,
+.theme-cyberpurple .btn-danger,
+.theme-darkcoffee .btn-danger,
+.theme-obsidian .btn-danger,
+.theme-aurora .btn-danger,
+.theme-night .btn-danger,
+.theme-nebula .btn-danger{
+  background:#3b2024;
+  color:#ff9d9d;
 }
 </style>
 </head>
@@ -1402,914 +1673,1063 @@ button{
 <body class="theme-sage">
 
 <header class="header">
+
   <div class="logo">
     <div class="logo-mark">H</div>
     <span>Habits.</span>
   </div>
 
   <nav class="desktop-nav">
-    <button class="nav-btn active" data-page="today">Aujourd’hui</button>
-    <button class="nav-btn" data-page="calendar">Calendrier</button>
-    <button class="nav-btn" data-page="habits">Habitudes</button>
-    <button class="nav-btn" data-page="stats">Statistiques</button>
-    <button class="nav-btn" data-page="help">Help</button>
-    <button class="nav-btn" data-page="settings">Réglages</button>
+
+    <button class="nav-btn active" data-page="today">
+      Aujourd’hui
+    </button>
+
+    <button class="nav-btn" data-page="calendar">
+      Calendrier
+    </button>
+
+    <button class="nav-btn" data-page="habits">
+      Habitudes
+    </button>
+
+    <button class="nav-btn" data-page="stats">
+      Statistiques
+    </button>
+
+    <button class="nav-btn" data-page="help">
+      Help
+    </button>
+
+    <button class="nav-btn" data-page="settings">
+      Réglages
+    </button>
+
   </nav>
+
 </header>
 
 <main class="container">
 
-  <!-- TODAY -->
+<!-- TODAY -->
 
-  <section id="page-today" class="page active">
+<section id="page-today" class="page active">
 
-    <div class="page-title">
-      <h1 id="todayTitle">Aujourd’hui</h1>
-      <p id="todaySubtitle"></p>
+  <div class="page-title">
+    <h1 id="todayTitle">Aujourd’hui</h1>
+    <p id="todaySubtitle"></p>
+  </div>
+
+  <div class="progress-card card">
+
+    <div class="progress-info">
+      <h2 id="progressTitle">Ta journée</h2>
+      <p id="progressSubtitle">Continue comme ça.</p>
     </div>
 
-    <div class="progress-card card">
-      <div class="progress-info">
-        <h2 id="progressTitle">Ta journée</h2>
-        <p id="progressSubtitle">Continue comme ça.</p>
-      </div>
-
-      <div class="progress-ring" id="progressRing">
-        <div class="progress-ring-inner" id="progressPercent">0%</div>
-      </div>
+    <div class="progress-ring" id="progressRing">
+      <div class="progress-ring-inner" id="progressPercent">0%</div>
     </div>
 
-    <div class="summary-grid">
-      <div class="summary-card card">
-        <div class="summary-number" id="summaryHabits">0</div>
-        <div class="summary-label">Habitudes terminées</div>
-      </div>
+  </div>
 
-      <div class="summary-card card">
-        <div class="summary-number" id="summaryTasks">0</div>
-        <div class="summary-label">Tâches terminées</div>
-      </div>
+  <div class="summary-grid">
 
-      <div class="summary-card card">
-        <div class="summary-number" id="summaryTotal">0</div>
-        <div class="summary-label">Éléments aujourd’hui</div>
-      </div>
+    <div class="summary-card card">
+      <div class="summary-number" id="summaryHabits">0</div>
+      <div class="summary-label">Habitudes terminées</div>
     </div>
 
-    <div class="section-header">
-      <h2>Habitudes</h2>
-      <button class="btn btn-primary" id="goHabits">+ Habitude</button>
+    <div class="summary-card card">
+      <div class="summary-number" id="summaryTasks">0</div>
+      <div class="summary-label">Tâches terminées</div>
     </div>
 
-    <div class="habits-list" id="todayHabits"></div>
-
-    <div class="section-header">
-      <h2>Tâches</h2>
-      <button class="btn btn-primary" id="addTaskBtn">+ Tâche</button>
+    <div class="summary-card card">
+      <div class="summary-number" id="summaryTotal">0</div>
+      <div class="summary-label">Éléments aujourd’hui</div>
     </div>
 
-    <div class="tasks-list" id="todayTasks"></div>
+  </div>
 
-  </section>
+  <div class="section-header">
+    <h2>Habitudes</h2>
+    <button class="btn btn-primary" id="goHabits">+ Habitude</button>
+  </div>
 
-  <!-- CALENDAR -->
+  <div class="habits-list" id="todayHabits"></div>
 
-  <section id="page-calendar" class="page">
+  <div class="section-header">
+    <h2>Tâches</h2>
+    <button class="btn btn-primary" id="addTaskBtn">+ Tâche</button>
+  </div>
 
-    <div class="page-title">
-      <h1>Calendrier</h1>
-      <p>Visualise tes habitudes et tes tâches.</p>
-    </div>
+  <div class="tasks-list" id="todayTasks"></div>
 
-    <div class="calendar-card card">
+</section>
 
-      <div class="calendar-top">
-        <div class="calendar-title" id="calendarTitle"></div>
+<!-- CALENDAR -->
 
-        <div class="calendar-nav">
-          <button id="prevMonth">‹</button>
-          <button id="calendarToday">Aujourd’hui</button>
-          <button id="nextMonth">›</button>
-        </div>
-      </div>
+<section id="page-calendar" class="page">
 
-      <div class="calendar-weekdays">
-        <div>Lun</div>
-        <div>Mar</div>
-        <div>Mer</div>
-        <div>Jeu</div>
-        <div>Ven</div>
-        <div>Sam</div>
-        <div>Dim</div>
-      </div>
+  <div class="page-title">
+    <h1>Calendrier</h1>
+    <p>Visualise tes habitudes et tes tâches.</p>
+  </div>
 
-      <div class="calendar-grid" id="calendarGrid"></div>
+  <div class="calendar-card card">
 
-    </div>
+    <div class="calendar-top">
 
-  </section>
+      <div class="calendar-title" id="calendarTitle"></div>
 
-  <!-- HABITS -->
-
-  <section id="page-habits" class="page">
-
-    <div class="page-title">
-      <h1>Habitudes</h1>
-      <p>Construis des habitudes régulières et durables.</p>
-    </div>
-
-    <div class="section-header">
-      <h2>Mes habitudes</h2>
-      <button class="btn btn-primary" id="addHabitBtn">+ Habitude</button>
-    </div>
-
-    <div class="habits-grid" id="habitsGrid"></div>
-
-  </section>
-
-  <!-- STATS -->
-
-  <section id="page-stats" class="page">
-
-    <div class="page-title">
-      <h1>Statistiques</h1>
-      <p>Observe ton évolution au fil du temps.</p>
-    </div>
-
-    <div class="stats-grid">
-
-      <div class="stat-card card">
-        <div class="stat-value" id="statCompletion">0%</div>
-        <div class="stat-label">Complétion</div>
-      </div>
-
-      <div class="stat-card card">
-        <div class="stat-value" id="statHabits">0</div>
-        <div class="stat-label">Habitudes actives</div>
-      </div>
-
-      <div class="stat-card card">
-        <div class="stat-value" id="statTasks">0</div>
-        <div class="stat-label">Tâches terminées</div>
+      <div class="calendar-nav">
+        <button id="prevMonth">‹</button>
+        <button id="calendarToday">Aujourd’hui</button>
+        <button id="nextMonth">›</button>
       </div>
 
     </div>
 
-    <div class="chart-card card">
-      <div class="section-header" style="margin-top:0">
-        <h2>Les 7 derniers jours</h2>
-      </div>
-
-      <div class="chart" id="weeklyChart"></div>
+    <div class="calendar-weekdays">
+      <div>Lun</div>
+      <div>Mar</div>
+      <div>Mer</div>
+      <div>Jeu</div>
+      <div>Ven</div>
+      <div>Sam</div>
+      <div>Dim</div>
     </div>
 
-    <div class="chart-card card">
-      <div class="section-header" style="margin-top:0">
-        <h2>Catégories</h2>
-      </div>
+    <div class="calendar-grid" id="calendarGrid"></div>
 
-      <div class="category-list" id="categoryStats"></div>
+  </div>
+
+</section>
+
+<!-- HABITS -->
+
+<section id="page-habits" class="page">
+
+  <div class="page-title">
+    <h1>Habitudes</h1>
+    <p>Construis des habitudes régulières et durables.</p>
+  </div>
+
+  <div class="section-header">
+    <h2>Mes habitudes</h2>
+    <button class="btn btn-primary" id="addHabitBtn">+ Habitude</button>
+  </div>
+
+  <div class="habits-grid" id="habitsGrid"></div>
+
+</section>
+
+<!-- STATS -->
+
+<section id="page-stats" class="page">
+
+  <div class="page-title">
+    <h1>Statistiques</h1>
+    <p>Observe ton évolution au fil du temps.</p>
+  </div>
+
+  <div class="stats-grid">
+
+    <div class="stat-card card">
+      <div class="stat-value" id="statCompletion">0%</div>
+      <div class="stat-label">Complétion</div>
     </div>
 
-  </section>
-
-  <!-- HELP -->
-
-  <section id="page-help" class="page">
-
-    <div class="page-title">
-      <h1>Help</h1>
-      <p>Des techniques simples pour mieux gérer ton quotidien.</p>
+    <div class="stat-card card">
+      <div class="stat-value" id="statHabits">0</div>
+      <div class="stat-label">Habitudes actives</div>
     </div>
 
-    <div class="help-intro card">
-      <h2>Comment veux-tu progresser ?</h2>
+    <div class="stat-card card">
+      <div class="stat-value" id="statTasks">0</div>
+      <div class="stat-label">Tâches terminées</div>
+    </div>
+
+  </div>
+
+  <div class="chart-card card">
+
+    <div class="section-header" style="margin-top:0">
+      <h2>Les 7 derniers jours</h2>
+    </div>
+
+    <div class="chart" id="weeklyChart"></div>
+
+  </div>
+
+  <div class="chart-card card">
+
+    <div class="section-header" style="margin-top:0">
+      <h2>Catégories</h2>
+    </div>
+
+    <div class="category-list" id="categoryStats"></div>
+
+  </div>
+
+</section>
+
+<!-- HELP HOME -->
+
+<section id="page-help" class="page">
+
+  <div class="page-title">
+    <h1>Help</h1>
+    <p>Des techniques simples pour mieux gérer ton quotidien.</p>
+  </div>
+
+  <div class="help-intro card">
+
+    <h2>De quoi as-tu besoin ?</h2>
+
+    <p>
+      Choisis une catégorie pour ouvrir une page dédiée
+      avec des conseils et des techniques concrètes.
+    </p>
+
+  </div>
+
+  <div class="help-categories">
+
+    <button class="help-category" data-help-page="stress">
+
+      <div class="help-category-icon">🧠</div>
+
+      <h3>Stress</h3>
+
       <p>
-        Choisis une catégorie pour retrouver des techniques concrètes,
-        expliquées simplement et directement applicables.
+        Respiration, retour au calme et gestion des moments stressants.
       </p>
+
+    </button>
+
+    <button class="help-category" data-help-page="sleep">
+
+      <div class="help-category-icon">😴</div>
+
+      <h3>Sommeil</h3>
+
+      <p>
+        Récupération, routine du soir et environnement favorable.
+      </p>
+
+    </button>
+
+    <button class="help-category" data-help-page="study">
+
+      <div class="help-category-icon">📚</div>
+
+      <h3>Études</h3>
+
+      <p>
+        Méthodes de travail adaptées à chaque matière.
+      </p>
+
+    </button>
+
+  </div>
+
+</section>
+
+<!-- STRESS PAGE -->
+
+<section id="page-help-stress" class="page">
+
+  <div class="help-page-header">
+
+    <button class="help-back" data-help-back="help">‹</button>
+
+    <div>
+      <h2>Stress</h2>
+      <p>Techniques pour retrouver progressivement ton calme.</p>
     </div>
 
-    <div class="help-categories">
+  </div>
 
-      <button class="help-category active" data-help-main="stress">
-        <div class="help-category-icon">🧠</div>
-        <h3>Stress</h3>
-        <p>Respiration, retour au calme et gestion des moments stressants.</p>
-      </button>
+  <div class="help-cards">
 
-      <button class="help-category" data-help-main="sleep">
-        <div class="help-category-icon">😴</div>
-        <h3>Sommeil</h3>
-        <p>Améliorer ta récupération et construire une meilleure routine.</p>
-      </button>
+    <div class="help-card">
 
-      <button class="help-category" data-help-main="study">
-        <div class="help-category-icon">📚</div>
-        <h3>Études</h3>
-        <p>Des méthodes adaptées à chaque matière pour apprendre efficacement.</p>
-      </button>
+      <div class="help-card-icon">🌬️</div>
 
-    </div>
+      <h3>Respiration 4–6</h3>
 
-    <!-- STRESS -->
+      <p>
+        Inspire doucement pendant environ 4 secondes,
+        puis expire pendant environ 6 secondes.
+      </p>
 
-    <div class="help-content active" id="help-stress">
-
-      <div class="help-section-title">
-        <h2>Gérer le stress</h2>
+      <div class="technique">
+        <strong>Comment faire</strong>
         <p>
-          Le but n'est pas forcément de supprimer le stress,
-          mais de faire redescendre son intensité et de retrouver du contrôle.
+          Répète pendant 2 à 5 minutes et garde une respiration confortable.
         </p>
       </div>
 
-      <div class="help-cards">
-
-        <div class="help-card">
-          <div class="help-card-icon">🌬️</div>
-          <h3>Respiration 4–6</h3>
-          <p>
-            Inspire doucement pendant environ 4 secondes,
-            puis expire pendant environ 6 secondes.
-          </p>
-
-          <div class="technique">
-            <strong>Comment faire</strong>
-            <p>
-              Répète pendant 2 à 5 minutes. L'expiration plus longue
-              aide à ralentir progressivement le rythme respiratoire.
-            </p>
-          </div>
-        </div>
-
-        <div class="help-card">
-          <div class="help-card-icon">⬛</div>
-          <h3>Respiration carrée</h3>
-          <p>
-            Une méthode simple pour donner un rythme à ta respiration
-            lorsque ton esprit part dans tous les sens.
-          </p>
-
-          <div class="technique">
-            <strong>4 étapes</strong>
-            <p>
-              Inspire 4 s → bloque 4 s → expire 4 s → bloque 4 s.
-              Répète plusieurs cycles.
-            </p>
-          </div>
-        </div>
-
-        <div class="help-card">
-          <div class="help-card-icon">👀</div>
-          <h3>Technique 5–4–3–2–1</h3>
-          <p>
-            Utile lorsque tu te sens submergé ou que tes pensées tournent en boucle.
-          </p>
-
-          <ul>
-            <li>5 choses que tu vois</li>
-            <li>4 choses que tu peux toucher</li>
-            <li>3 sons que tu entends</li>
-            <li>2 odeurs que tu remarques</li>
-            <li>1 chose que tu peux goûter ou imaginer</li>
-          </ul>
-        </div>
-
-        <div class="help-card">
-          <div class="help-card-icon">💪</div>
-          <h3>Relâchement musculaire</h3>
-          <p>
-            Contracte doucement un groupe musculaire pendant quelques secondes,
-            puis relâche complètement.
-          </p>
-
-          <div class="technique">
-            <strong>Commence simplement</strong>
-            <p>
-              Poings → épaules → visage → jambes.
-              Observe la différence entre tension et relâchement.
-            </p>
-          </div>
-        </div>
-
-        <div class="help-card full">
-          <div class="help-card-icon">🎯</div>
-          <h3>Avant un contrôle ou une situation stressante</h3>
-
-          <ul>
-            <li>Prépare ce qui peut l'être à l'avance.</li>
-            <li>Évite de réviser frénétiquement dans les dernières minutes.</li>
-            <li>Fais quelques respirations lentes.</li>
-            <li>Concentre-toi sur la prochaine action, pas sur tout le problème.</li>
-            <li>Si tu bloques, passe temporairement à autre chose puis reviens-y.</li>
-          </ul>
-        </div>
-
-      </div>
     </div>
 
-    <!-- SLEEP -->
+    <div class="help-card">
 
-    <div class="help-content" id="help-sleep">
+      <div class="help-card-icon">⬛</div>
 
-      <div class="help-section-title">
-        <h2>Sommeil</h2>
+      <h3>Respiration carrée</h3>
+
+      <p>
+        Une méthode simple pour donner un rythme régulier
+        à ta respiration.
+      </p>
+
+      <div class="technique">
+        <strong>4 étapes</strong>
         <p>
-          Une bonne récupération aide notamment la concentration,
-          la mémoire et la capacité à apprendre.
+          Inspire 4 s → bloque 4 s → expire 4 s → bloque 4 s.
         </p>
       </div>
 
-      <div class="help-cards">
-
-        <div class="help-card">
-          <div class="help-card-icon">🕐</div>
-          <h3>Garde un rythme régulier</h3>
-          <p>
-            Essaie de garder des horaires de coucher et surtout de lever
-            relativement réguliers. Ton organisme apprécie la stabilité.
-          </p>
-        </div>
-
-        <div class="help-card">
-          <div class="help-card-icon">📱</div>
-          <h3>Prépare la transition vers la nuit</h3>
-          <p>
-            Évite de passer directement d'une activité très stimulante
-            à ton lit. Une période calme peut aider ton cerveau à ralentir.
-          </p>
-        </div>
-
-        <div class="help-card">
-          <div class="help-card-icon">🌙</div>
-          <h3>Crée un environnement favorable</h3>
-          <ul>
-            <li>Pièce suffisamment sombre</li>
-            <li>Température confortable</li>
-            <li>Le moins de bruit possible</li>
-            <li>Lit associé principalement au repos</li>
-          </ul>
-        </div>
-
-        <div class="help-card">
-          <div class="help-card-icon">☕</div>
-          <h3>Attention aux stimulants</h3>
-          <p>
-            La caféine peut rester active plusieurs heures.
-            Évite d'en consommer tard si elle perturbe ton endormissement.
-          </p>
-        </div>
-
-        <div class="help-card full">
-          <div class="help-card-icon">🧘</div>
-          <h3>Si tu n'arrives pas à t'endormir</h3>
-          <p>
-            Évite de regarder constamment l'heure. Essaie plutôt une activité
-            calme et peu stimulante, puis retourne au lit lorsque la somnolence revient.
-          </p>
-        </div>
-
-      </div>
     </div>
 
-    <!-- STUDIES -->
+    <div class="help-card">
 
-    <div class="help-content" id="help-study">
+      <div class="help-card-icon">👀</div>
 
-      <div class="help-section-title">
-        <h2>Études</h2>
+      <h3>Technique 5–4–3–2–1</h3>
+
+      <p>
+        Une technique d'ancrage qui permet de ramener ton attention
+        vers ce qui t'entoure.
+      </p>
+
+      <ul>
+        <li>5 choses que tu vois</li>
+        <li>4 choses que tu peux toucher</li>
+        <li>3 sons que tu entends</li>
+        <li>2 odeurs que tu remarques</li>
+        <li>1 chose que tu peux goûter ou imaginer</li>
+      </ul>
+
+    </div>
+
+    <div class="help-card">
+
+      <div class="help-card-icon">💪</div>
+
+      <h3>Relâchement musculaire</h3>
+
+      <p>
+        Contracte doucement un groupe musculaire quelques secondes,
+        puis relâche complètement.
+      </p>
+
+      <div class="technique">
+        <strong>Commence par</strong>
         <p>
-          Les meilleures techniques dépendent du type de matière et de ce que tu dois apprendre.
+          Poings → épaules → visage → jambes.
         </p>
       </div>
 
-      <div class="help-subnav">
+    </div>
 
-        <button class="active" data-study-topic="general">
-          Général
-        </button>
+    <div class="help-card full">
 
-        <button data-study-topic="math">
-          Mathématiques
-        </button>
+      <div class="help-card-icon">🎯</div>
 
-        <button data-study-topic="physics">
-          Physique
-        </button>
+      <h3>Avant un contrôle</h3>
 
-        <button data-study-topic="science">
-          Sciences
-        </button>
+      <ul>
+        <li>Prépare ce qui peut l'être à l'avance.</li>
+        <li>Évite les révisions frénétiques dans les dernières minutes.</li>
+        <li>Fais quelques respirations lentes.</li>
+        <li>Concentre-toi sur la prochaine action.</li>
+        <li>Si tu bloques, passe temporairement à autre chose.</li>
+      </ul>
 
-        <button data-study-topic="history">
-          Histoire
-        </button>
+    </div>
 
-        <button data-study-topic="french">
-          Français
-        </button>
+  </div>
 
-        <button data-study-topic="dutch">
-          Néerlandais
-        </button>
+</section>
 
-        <button data-study-topic="english">
-          Anglais
-        </button>
+<!-- SLEEP PAGE -->
 
-        <button data-study-topic="computer">
-          Informatique
-        </button>
+<section id="page-help-sleep" class="page">
 
-        <button data-study-topic="other">
-          Autres
-        </button>
+  <div class="help-page-header">
 
-      </div>
+    <button class="help-back" data-help-back="help">‹</button>
 
-      <!-- GENERAL -->
+    <div>
+      <h2>Sommeil</h2>
+      <p>Construire de meilleures conditions pour récupérer.</p>
+    </div>
 
-      <div class="help-topic active" id="study-general">
+  </div>
 
-        <div class="help-cards">
+  <div class="help-cards">
 
-          <div class="help-card">
-            <div class="help-card-icon">📅</div>
-            <h3>Sois régulier</h3>
-            <p>
-              Une matière est généralement plus facile à retenir lorsque tu la travailles
-              régulièrement plutôt que de tout concentrer juste avant une évaluation.
-            </p>
+    <div class="help-card">
 
-            <div class="technique">
-              <strong>Conseil</strong>
-              <p>
-                Même une courte session peut être utile si elle est répétée régulièrement.
-              </p>
-            </div>
-          </div>
+      <div class="help-card-icon">🕐</div>
 
-          <div class="help-card">
-            <div class="help-card-icon">🌙</div>
-            <h3>Prends soin de ta récupération</h3>
-            <p>
-              Le sommeil joue un rôle important dans la récupération et la consolidation
-              des apprentissages. Réviser davantage en supprimant systématiquement du
-              sommeil n'est donc pas une stratégie durable.
-            </p>
+      <h3>Garde un rythme régulier</h3>
 
-            <button class="help-link" data-open-help="sleep">
-              → Voir les conseils sur le sommeil
-            </button>
-          </div>
+      <p>
+        Essaie de garder des horaires de coucher et surtout de lever
+        relativement réguliers.
+      </p>
 
-          <div class="help-card">
-            <div class="help-card-icon">🧠</div>
-            <h3>Rappelle-toi plutôt que relis</h3>
-            <p>
-              Relire une page donne souvent une impression de familiarité.
-              Essaie plutôt de fermer ton cours et de retrouver les informations de mémoire.
-            </p>
+    </div>
 
-            <div class="technique">
-              <strong>Rappel actif</strong>
-              <p>
-                Pose-toi une question → réponds sans regarder → vérifie → corrige.
-              </p>
-            </div>
-          </div>
+    <div class="help-card">
 
-          <div class="help-card">
-            <div class="help-card-icon">⏱️</div>
-            <h3>Travaille par blocs</h3>
-            <p>
-              Organise ton travail en périodes de concentration séparées par de vraies pauses.
-            </p>
+      <div class="help-card-icon">📱</div>
 
-            <div class="technique">
-              <strong>Exemple</strong>
-              <p>
-                25–50 minutes de travail puis 5–10 minutes de pause.
-                Adapte la durée à ta capacité de concentration.
-              </p>
-            </div>
-          </div>
+      <h3>Prépare la transition vers la nuit</h3>
 
+      <p>
+        Évite de passer directement d'une activité très stimulante
+        au lit. Une période plus calme peut faciliter la transition.
+      </p>
+
+    </div>
+
+    <div class="help-card">
+
+      <div class="help-card-icon">🌙</div>
+
+      <h3>Crée un environnement favorable</h3>
+
+      <ul>
+        <li>Pièce suffisamment sombre</li>
+        <li>Température confortable</li>
+        <li>Le moins de bruit possible</li>
+        <li>Lit principalement associé au repos</li>
+      </ul>
+
+    </div>
+
+    <div class="help-card">
+
+      <div class="help-card-icon">☕</div>
+
+      <h3>Attention aux stimulants</h3>
+
+      <p>
+        La caféine peut rester active plusieurs heures.
+        Évite d'en consommer tard si elle perturbe ton endormissement.
+      </p>
+
+    </div>
+
+    <div class="help-card full">
+
+      <div class="help-card-icon">🧘</div>
+
+      <h3>Si tu n'arrives pas à t'endormir</h3>
+
+      <p>
+        Évite de regarder constamment l'heure. Essaie plutôt une activité
+        calme et peu stimulante, puis retourne au lit lorsque la somnolence revient.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- STUDIES PAGE -->
+
+<section id="page-help-study" class="page">
+
+  <div class="help-page-header">
+
+    <button class="help-back" data-help-back="help">‹</button>
+
+    <div>
+      <h2>Études</h2>
+      <p>Choisis une matière pour voir les techniques adaptées.</p>
+    </div>
+
+  </div>
+
+  <div class="help-subnav">
+
+    <button class="active" data-study-topic="general">Général</button>
+    <button data-study-topic="math">Mathématiques</button>
+    <button data-study-topic="physics">Physique</button>
+    <button data-study-topic="science">Sciences</button>
+    <button data-study-topic="history">Histoire</button>
+    <button data-study-topic="french">Français</button>
+    <button data-study-topic="dutch">Néerlandais</button>
+    <button data-study-topic="english">Anglais</button>
+    <button data-study-topic="computer">Informatique</button>
+    <button data-study-topic="other">Autres</button>
+
+  </div>
+
+  <!-- GENERAL -->
+
+  <div class="help-topic active" id="study-general">
+
+    <div class="help-cards">
+
+      <div class="help-card">
+
+        <div class="help-card-icon">📅</div>
+
+        <h3>Sois régulier</h3>
+
+        <p>
+          Travailler régulièrement permet généralement de mieux répartir
+          l'effort plutôt que de tout concentrer avant une évaluation.
+        </p>
+
+        <div class="technique">
+          <strong>Conseil</strong>
+          <p>
+            Même une courte session peut être utile lorsqu'elle est répétée régulièrement.
+          </p>
         </div>
 
       </div>
 
-      <!-- MATH -->
+      <div class="help-card">
 
-      <div class="help-topic" id="study-math">
+        <div class="help-card-icon">🌙</div>
 
-        <div class="help-cards">
+        <h3>Prends soin de ta récupération</h3>
 
-          <div class="help-card">
-            <div class="help-card-icon">📄</div>
-            <h3>Feuille blanche</h3>
-            <p>
-              Prends une feuille sans regarder ton cours et écris tout ce que tu sais
-              sur la notion : formules, étapes, définitions, méthodes.
-            </p>
-            <div class="technique">
-              <strong>Ensuite</strong>
-              <p>
-                Compare avec ton cours et marque précisément les éléments oubliés.
-              </p>
-            </div>
-          </div>
+        <p>
+          La récupération et le sommeil jouent un rôle important dans
+          la consolidation des apprentissages. Travailler davantage
+          en supprimant systématiquement du sommeil n'est donc pas durable.
+        </p>
 
-          <div class="help-card">
-            <div class="help-card-icon">✏️</div>
-            <h3>Exercices sans correction</h3>
-            <p>
-              En mathématiques, connaître une formule ne signifie pas forcément
-              savoir l'utiliser. Fais des exercices sans regarder directement la solution.
-            </p>
-          </div>
+        <button class="help-link" data-help-page="sleep">
+          → Voir les conseils sur le sommeil
+        </button>
 
-          <div class="help-card">
-            <div class="help-card-icon">🔎</div>
-            <h3>Analyse tes erreurs</h3>
-            <p>
-              Ne te contente pas de regarder la bonne réponse.
-              Identifie l'étape exacte où ton raisonnement a dévié.
-            </p>
-          </div>
+      </div>
 
+      <div class="help-card">
+
+        <div class="help-card-icon">🧠</div>
+
+        <h3>Rappel actif</h3>
+
+        <p>
+          Ferme ton cours et essaie de retrouver les informations
+          de mémoire avant de vérifier.
+        </p>
+
+        <div class="technique">
+          <strong>Méthode</strong>
+          <p>
+            Question → réponse de mémoire → vérification → correction.
+          </p>
         </div>
 
       </div>
 
-      <!-- PHYSICS -->
+      <div class="help-card">
 
-      <div class="help-topic" id="study-physics">
+        <div class="help-card-icon">⏱️</div>
 
-        <div class="help-cards">
+        <h3>Travaille par blocs</h3>
 
-          <div class="help-card">
-            <div class="help-card-icon">🧑‍🏫</div>
-            <h3>Technique de Feynman</h3>
-            <p>
-              Explique une notion avec des mots simples, comme si tu devais l'expliquer
-              à quelqu'un qui ne connaît pas le sujet.
-            </p>
+        <p>
+          Organise ton travail en périodes de concentration
+          séparées par de vraies pauses.
+        </p>
 
-            <div class="technique">
-              <strong>Les étapes</strong>
-              <p>
-                Choisis une notion → explique-la simplement → repère les trous →
-                retourne au cours → recommence.
-              </p>
-            </div>
-          </div>
-
-          <div class="help-card">
-            <div class="help-card-icon">📄</div>
-            <h3>Feuille blanche</h3>
-            <p>
-              Sans regarder le cours, écris les lois, unités, relations et concepts
-              dont tu te souviens.
-            </p>
-          </div>
-
-          <div class="help-card">
-            <div class="help-card-icon">🧮</div>
-            <h3>Exercices progressifs</h3>
-            <p>
-              Commence par un exercice simple pour vérifier la méthode,
-              puis augmente progressivement la difficulté.
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- SCIENCE -->
-
-      <div class="help-topic" id="study-science">
-
-        <div class="help-cards">
-
-          <div class="help-card">
-            <div class="help-card-icon">🧑‍🏫</div>
-            <h3>Feynman</h3>
-            <p>
-              Explique le phénomène avec des mots simples sans réciter ton cours.
-              Si tu utilises un terme que tu ne comprends pas, retourne chercher sa définition.
-            </p>
-          </div>
-
-          <div class="help-card">
-            <div class="help-card-icon">📄</div>
-            <h3>Feuille blanche</h3>
-            <p>
-              Reproduis de mémoire les schémas, étapes, définitions et mécanismes importants.
-            </p>
-          </div>
-
-          <div class="help-card">
-            <div class="help-card-icon">❓</div>
-            <h3>Questions-réponses</h3>
-            <p>
-              Transforme ton cours en questions puis réponds-y sans regarder.
-              C'est particulièrement utile pour les définitions et mécanismes.
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- HISTORY -->
-
-      <div class="help-topic" id="study-history">
-
-        <div class="help-cards">
-
-          <div class="help-card">
-            <div class="help-card-icon">🧠</div>
-            <h3>Blurting</h3>
-            <p>
-              Lis une partie du cours, ferme-la, puis écris tout ce dont tu te souviens
-              sans essayer de regarder tes notes.
-            </p>
-
-            <div class="technique">
-              <strong>La correction est essentielle</strong>
-              <p>
-                Compare ensuite avec le cours et complète uniquement ce qui manque.
-              </p>
-            </div>
-          </div>
-
-          <div class="help-card">
-            <div class="help-card-icon">🗓️</div>
-            <h3>Chronologie</h3>
-            <p>
-              Construis une ligne du temps avec les dates et événements importants.
-              Essaie ensuite de la reconstruire de mémoire.
-            </p>
-          </div>
-
-          <div class="help-card">
-            <div class="help-card-icon">🔗</div>
-            <h3>Relie les causes et conséquences</h3>
-            <p>
-              Pour chaque événement, demande-toi : pourquoi est-il arrivé ?
-              Quelles ont été ses conséquences ?
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- FRENCH -->
-
-      <div class="help-topic" id="study-french">
-
-        <div class="help-cards">
-
-          <div class="help-card">
-            <div class="help-card-icon">📝</div>
-            <h3>Plans de rédaction</h3>
-            <p>
-              Avant de rédiger, construis rapidement ton plan et associe
-              à chaque idée les arguments ou exemples nécessaires.
-            </p>
-          </div>
-
-          <div class="help-card">
-            <div class="help-card-icon">🧠</div>
-            <h3>Rappel actif</h3>
-            <p>
-              Ferme ton cours et tente de retrouver les notions,
-              définitions et procédés étudiés.
-            </p>
-          </div>
-
-          <div class="help-card">
-            <div class="help-card-icon">🔎</div>
-            <h3>Analyse de textes</h3>
-            <p>
-              Entraîne-toi à identifier l'idée principale, les procédés utilisés
-              et leur effet, plutôt qu'à simplement relire l'analyse.
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- DUTCH -->
-
-      <div class="help-topic" id="study-dutch">
-
-        <div class="help-cards">
-
-          <div class="help-card">
-            <div class="help-card-icon">🔁</div>
-            <h3>Répétition espacée</h3>
-            <p>
-              Revois le vocabulaire plusieurs fois en espaçant progressivement les révisions.
-            </p>
-          </div>
-
-          <div class="help-card">
-            <div class="help-card-icon">🗣️</div>
-            <h3>Récupération active</h3>
-            <p>
-              Cache la traduction et essaie de retrouver le mot.
-              Puis utilise-le dans une phrase.
-            </p>
-          </div>
-
-          <div class="help-card">
-            <div class="help-card-icon">💬</div>
-            <h3>Travaille en phrases</h3>
-            <p>
-              Apprendre uniquement des listes de mots est moins proche de l'utilisation réelle.
-              Crée des phrases avec le vocabulaire appris.
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- ENGLISH -->
-
-      <div class="help-topic" id="study-english">
-
-        <div class="help-cards">
-
-          <div class="help-card">
-            <div class="help-card-icon">🔁</div>
-            <h3>Répétition espacée</h3>
-            <p>
-              Revois régulièrement le vocabulaire et les structures grammaticales
-              en augmentant progressivement l'intervalle entre les révisions.
-            </p>
-          </div>
-
-          <div class="help-card">
-            <div class="help-card-icon">🗣️</div>
-            <h3>Active ton vocabulaire</h3>
-            <p>
-              Ne te contente pas de reconnaître un mot.
-              Essaie de le retrouver puis de l'utiliser dans une phrase.
-            </p>
-          </div>
-
-          <div class="help-card">
-            <div class="help-card-icon">🎧</div>
-            <h3>Compréhension</h3>
-            <p>
-              Écoute de courts contenus adaptés à ton niveau et essaie de résumer
-              ce que tu as compris sans regarder de transcription.
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- COMPUTER -->
-
-      <div class="help-topic" id="study-computer">
-
-        <div class="help-cards">
-
-          <div class="help-card">
-            <div class="help-card-icon">💻</div>
-            <h3>Apprends en codant</h3>
-            <p>
-              En informatique, passer du temps à lire du code ne remplace pas la pratique.
-              Écris toi-même de petits programmes.
-            </p>
-          </div>
-
-          <div class="help-card">
-            <div class="help-card-icon">🧑‍🏫</div>
-            <h3>Explique ton code</h3>
-            <p>
-              Essaie d'expliquer chaque partie de ton programme avec tes propres mots.
-              Si tu n'arrives pas à l'expliquer, c'est probablement une notion à revoir.
-            </p>
-          </div>
-
-          <div class="help-card">
-            <div class="help-card-icon">🧩</div>
-            <h3>Découpe les problèmes</h3>
-            <p>
-              Au lieu d'essayer de résoudre tout le programme d'un coup,
-              transforme le problème en plusieurs petites étapes.
-            </p>
-          </div>
-
-        </div>
-
-      </div>
-
-      <!-- OTHER -->
-
-      <div class="help-topic" id="study-other">
-
-        <div class="help-cards">
-
-          <div class="help-card">
-            <div class="help-card-icon">📄</div>
-            <h3>Feuille blanche</h3>
-            <p>
-              Ferme ton cours et écris tout ce que tu connais sur le sujet.
-              Vérifie ensuite ce qui manque.
-            </p>
-          </div>
-
-          <div class="help-card">
-            <div class="help-card-icon">🧠</div>
-            <h3>Rappel actif</h3>
-            <p>
-              Transforme tes notes en questions et essaie d'y répondre
-              sans regarder la réponse.
-            </p>
-          </div>
-
-          <div class="help-card">
-            <div class="help-card-icon">🧑‍🏫</div>
-            <h3>Feynman</h3>
-            <p>
-              Explique la notion simplement comme si tu devais l'enseigner
-              à quelqu'un d'autre.
-            </p>
-          </div>
-
-          <div class="help-card">
-            <div class="help-card-icon">🔁</div>
-            <h3>Répétition espacée</h3>
-            <p>
-              Reviens plusieurs fois sur la matière avec des intervalles
-              de plus en plus longs.
-            </p>
-          </div>
-
+        <div class="technique">
+          <strong>Exemple</strong>
+          <p>
+            25–50 minutes de travail puis 5–10 minutes de pause.
+          </p>
         </div>
 
       </div>
 
     </div>
 
-  </section>
+  </div>
 
-  <!-- SETTINGS -->
+  <!-- MATH -->
 
-  <section id="page-settings" class="page">
+  <div class="help-topic" id="study-math">
 
-    <div class="page-title">
-      <h1>Réglages</h1>
-      <p>Personnalise ton expérience.</p>
-    </div>
+    <div class="help-cards">
 
-    <div class="settings-section">
+      <div class="help-card">
 
-      <h2>Thèmes clairs</h2>
-      <p>Choisis une apparence lumineuse.</p>
+        <div class="help-card-icon">📄</div>
 
-      <div class="theme-grid" id="lightThemes"></div>
+        <h3>Feuille blanche</h3>
 
-    </div>
+        <p>
+          Sans regarder ton cours, écris tout ce que tu sais :
+          formules, définitions, méthodes et étapes.
+        </p>
 
-    <div class="settings-section">
+        <div class="technique">
+          <strong>Ensuite</strong>
+          <p>
+            Compare avec ton cours et repère précisément les éléments oubliés.
+          </p>
+        </div>
 
-      <h2>Thèmes foncés</h2>
-      <p>Pour une interface plus sombre.</p>
+      </div>
 
-      <div class="theme-grid" id="darkThemes"></div>
+      <div class="help-card">
 
-    </div>
+        <div class="help-card-icon">✏️</div>
 
-    <div class="settings-section">
+        <h3>Exercices sans correction</h3>
 
-      <h2>Actions</h2>
-      <p>Quelques actions rapides.</p>
+        <p>
+          Fais les exercices sans regarder directement la solution.
+          En mathématiques, savoir appliquer une méthode est essentiel.
+        </p>
 
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn btn-secondary" id="settingsToday">
-          Revenir à aujourd’hui
-        </button>
+      </div>
 
-        <button class="btn btn-danger" id="resetData">
-          Réinitialiser les données
-        </button>
+      <div class="help-card">
+
+        <div class="help-card-icon">🔎</div>
+
+        <h3>Analyse tes erreurs</h3>
+
+        <p>
+          Identifie l'étape exacte où ton raisonnement a dévié
+          au lieu de simplement regarder la bonne réponse.
+        </p>
+
       </div>
 
     </div>
 
-  </section>
+  </div>
+
+  <!-- PHYSICS -->
+
+  <div class="help-topic" id="study-physics">
+
+    <div class="help-cards">
+
+      <div class="help-card">
+
+        <div class="help-card-icon">🧑‍🏫</div>
+
+        <h3>Technique de Feynman</h3>
+
+        <p>
+          Explique une notion avec des mots simples,
+          comme si tu devais l'enseigner à quelqu'un.
+        </p>
+
+        <div class="technique">
+          <strong>Étapes</strong>
+          <p>
+            Explique → repère les trous → retourne au cours → recommence.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="help-card">
+
+        <div class="help-card-icon">📄</div>
+
+        <h3>Feuille blanche</h3>
+
+        <p>
+          Sans regarder ton cours, écris les lois, unités,
+          relations et concepts dont tu te souviens.
+        </p>
+
+      </div>
+
+      <div class="help-card">
+
+        <div class="help-card-icon">🧮</div>
+
+        <h3>Exercices progressifs</h3>
+
+        <p>
+          Commence par un exercice simple puis augmente progressivement
+          la difficulté.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- SCIENCE -->
+
+  <div class="help-topic" id="study-science">
+
+    <div class="help-cards">
+
+      <div class="help-card">
+
+        <div class="help-card-icon">🧑‍🏫</div>
+
+        <h3>Feynman</h3>
+
+        <p>
+          Explique le phénomène avec des mots simples sans réciter ton cours.
+        </p>
+
+      </div>
+
+      <div class="help-card">
+
+        <div class="help-card-icon">📄</div>
+
+        <h3>Feuille blanche</h3>
+
+        <p>
+          Reproduis de mémoire les schémas, étapes,
+          définitions et mécanismes importants.
+        </p>
+
+      </div>
+
+      <div class="help-card">
+
+        <div class="help-card-icon">❓</div>
+
+        <h3>Questions-réponses</h3>
+
+        <p>
+          Transforme ton cours en questions puis réponds-y sans regarder.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- HISTORY -->
+
+  <div class="help-topic" id="study-history">
+
+    <div class="help-cards">
+
+      <div class="help-card">
+
+        <div class="help-card-icon">🧠</div>
+
+        <h3>Blurting</h3>
+
+        <p>
+          Lis une partie du cours, ferme-la puis écris tout ce dont
+          tu te souviens sans regarder tes notes.
+        </p>
+
+        <div class="technique">
+          <strong>Correction</strong>
+          <p>
+            Compare ensuite avec le cours et complète uniquement ce qui manque.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="help-card">
+
+        <div class="help-card-icon">🗓️</div>
+
+        <h3>Chronologie</h3>
+
+        <p>
+          Construis une ligne du temps avec les dates et événements importants.
+        </p>
+
+      </div>
+
+      <div class="help-card">
+
+        <div class="help-card-icon">🔗</div>
+
+        <h3>Causes et conséquences</h3>
+
+        <p>
+          Pour chaque événement, demande-toi pourquoi il est arrivé
+          et quelles ont été ses conséquences.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- FRENCH -->
+
+  <div class="help-topic" id="study-french">
+
+    <div class="help-cards">
+
+      <div class="help-card">
+        <div class="help-card-icon">📝</div>
+        <h3>Plans de rédaction</h3>
+        <p>
+          Construis ton plan avant de rédiger et associe
+          chaque idée à ses arguments ou exemples.
+        </p>
+      </div>
+
+      <div class="help-card">
+        <div class="help-card-icon">🧠</div>
+        <h3>Rappel actif</h3>
+        <p>
+          Ferme ton cours et retrouve les notions,
+          définitions et procédés étudiés.
+        </p>
+      </div>
+
+      <div class="help-card">
+        <div class="help-card-icon">🔎</div>
+        <h3>Analyse de textes</h3>
+        <p>
+          Identifie l'idée principale, les procédés utilisés
+          et leur effet plutôt que de simplement relire l'analyse.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- DUTCH -->
+
+  <div class="help-topic" id="study-dutch">
+
+    <div class="help-cards">
+
+      <div class="help-card">
+        <div class="help-card-icon">🔁</div>
+        <h3>Répétition espacée</h3>
+        <p>
+          Revois le vocabulaire plusieurs fois en espaçant progressivement
+          les révisions.
+        </p>
+      </div>
+
+      <div class="help-card">
+        <div class="help-card-icon">🗣️</div>
+        <h3>Récupération active</h3>
+        <p>
+          Cache la traduction et retrouve le mot.
+          Utilise-le ensuite dans une phrase.
+        </p>
+      </div>
+
+      <div class="help-card">
+        <div class="help-card-icon">💬</div>
+        <h3>Travaille en phrases</h3>
+        <p>
+          Crée des phrases avec le vocabulaire appris
+          plutôt que de mémoriser uniquement des listes.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ENGLISH -->
+
+  <div class="help-topic" id="study-english">
+
+    <div class="help-cards">
+
+      <div class="help-card">
+        <div class="help-card-icon">🔁</div>
+        <h3>Répétition espacée</h3>
+        <p>
+          Revois régulièrement le vocabulaire et les structures grammaticales.
+        </p>
+      </div>
+
+      <div class="help-card">
+        <div class="help-card-icon">🗣️</div>
+        <h3>Active ton vocabulaire</h3>
+        <p>
+          Essaie de retrouver les mots puis de les utiliser
+          dans une phrase.
+        </p>
+      </div>
+
+      <div class="help-card">
+        <div class="help-card-icon">🎧</div>
+        <h3>Compréhension</h3>
+        <p>
+          Écoute de courts contenus adaptés à ton niveau
+          et résume ce que tu as compris.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- COMPUTER -->
+
+  <div class="help-topic" id="study-computer">
+
+    <div class="help-cards">
+
+      <div class="help-card">
+        <div class="help-card-icon">💻</div>
+        <h3>Apprends en codant</h3>
+        <p>
+          Écris toi-même de petits programmes.
+          La pratique complète la lecture du code.
+        </p>
+      </div>
+
+      <div class="help-card">
+        <div class="help-card-icon">🧑‍🏫</div>
+        <h3>Explique ton code</h3>
+        <p>
+          Explique chaque partie avec tes propres mots.
+          Si tu bloques, revois la notion concernée.
+        </p>
+      </div>
+
+      <div class="help-card">
+        <div class="help-card-icon">🧩</div>
+        <h3>Découpe les problèmes</h3>
+        <p>
+          Transforme un gros problème en plusieurs petites étapes.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- OTHER -->
+
+  <div class="help-topic" id="study-other">
+
+    <div class="help-cards">
+
+      <div class="help-card">
+        <div class="help-card-icon">📄</div>
+        <h3>Feuille blanche</h3>
+        <p>
+          Ferme ton cours et écris tout ce que tu connais sur le sujet.
+        </p>
+      </div>
+
+      <div class="help-card">
+        <div class="help-card-icon">🧠</div>
+        <h3>Rappel actif</h3>
+        <p>
+          Transforme tes notes en questions et réponds sans regarder.
+        </p>
+      </div>
+
+      <div class="help-card">
+        <div class="help-card-icon">🧑‍🏫</div>
+        <h3>Feynman</h3>
+        <p>
+          Explique la notion simplement comme si tu devais l'enseigner.
+        </p>
+      </div>
+
+      <div class="help-card">
+        <div class="help-card-icon">🔁</div>
+        <h3>Répétition espacée</h3>
+        <p>
+          Reviens plusieurs fois sur la matière avec des intervalles
+          de plus en plus longs.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- SETTINGS -->
+
+<section id="page-settings" class="page">
+
+  <div class="page-title">
+    <h1>Réglages</h1>
+    <p>Personnalise ton expérience.</p>
+  </div>
+
+  <div class="settings-section">
+
+    <div class="theme-section-title">
+      <h2>Thèmes originaux</h2>
+      <span>NOUVEAUX</span>
+    </div>
+
+    <p>
+      Des apparences plus originales avec motifs et ambiances.
+    </p>
+
+    <div class="theme-grid" id="originalThemes"></div>
+
+  </div>
+
+  <div class="settings-section">
+
+    <div class="theme-section-title">
+      <h2>Thèmes Premium</h2>
+      <span>CLASSIQUES</span>
+    </div>
+
+    <div class="premium-note">
+      Les anciens thèmes sont conservés ici.
+      Tu peux toujours les utiliser comme avant.
+    </div>
+
+    <div class="theme-grid" id="premiumLightThemes"></div>
+
+    <div style="height:15px"></div>
+
+    <div class="theme-grid" id="premiumDarkThemes"></div>
+
+  </div>
+
+  <div class="settings-section">
+
+    <h2>Actions</h2>
+    <p>Quelques actions rapides.</p>
+
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+
+      <button class="btn btn-secondary" id="settingsToday">
+        Revenir à aujourd’hui
+      </button>
+
+      <button class="btn btn-danger" id="resetData">
+        Réinitialiser les données
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
 
 </main>
 
@@ -2318,27 +2738,33 @@ button{
 <nav class="mobile-nav">
 
   <button class="active" data-page="today">
-    Aujourd’hui
+    <span class="mobile-nav-icon">⌂</span>
+    <span class="mobile-nav-label">Aujourd’hui</span>
   </button>
 
   <button data-page="calendar">
-    Calendrier
+    <span class="mobile-nav-icon">▦</span>
+    <span class="mobile-nav-label">Calendrier</span>
   </button>
 
   <button data-page="habits">
-    Habitudes
+    <span class="mobile-nav-icon">✓</span>
+    <span class="mobile-nav-label">Habitudes</span>
   </button>
 
   <button data-page="stats">
-    Stats
+    <span class="mobile-nav-icon">▥</span>
+    <span class="mobile-nav-label">Stats</span>
   </button>
 
   <button data-page="help">
-    Help
+    <span class="mobile-nav-icon">?</span>
+    <span class="mobile-nav-label">Help</span>
   </button>
 
   <button data-page="settings">
-    Réglages
+    <span class="mobile-nav-icon">⚙</span>
+    <span class="mobile-nav-label">Réglages</span>
   </button>
 
 </nav>
@@ -2355,11 +2781,19 @@ button{
     </div>
 
     <div class="form-group">
+
       <label for="habitName">Nom</label>
-      <input class="form-input" id="habitName" placeholder="Ex. Faire du sport">
+
+      <input
+        class="form-input"
+        id="habitName"
+        placeholder="Ex. Faire du sport"
+      >
+
     </div>
 
     <div class="form-group">
+
       <label for="habitCategory">Catégorie</label>
 
       <select class="form-input" id="habitCategory">
@@ -2370,6 +2804,7 @@ button{
         <option>Personnel</option>
         <option>Autre</option>
       </select>
+
     </div>
 
     <div class="form-group">
@@ -2397,7 +2832,10 @@ button{
     <div class="extra-frequency" id="weeklyExtra">
 
       <div class="form-group">
-        <label for="weeklyTarget">Combien de fois par semaine ?</label>
+
+        <label for="weeklyTarget">
+          Combien de fois par semaine ?
+        </label>
 
         <input
           class="form-input"
@@ -2407,6 +2845,7 @@ button{
           max="7"
           value="2"
         >
+
       </div>
 
     </div>
@@ -2414,7 +2853,10 @@ button{
     <div class="extra-frequency" id="monthlyExtra">
 
       <div class="form-group">
-        <label for="monthlyTarget">Combien de fois par mois ?</label>
+
+        <label for="monthlyTarget">
+          Combien de fois par mois ?
+        </label>
 
         <input
           class="form-input"
@@ -2424,6 +2866,7 @@ button{
           max="31"
           value="5"
         >
+
       </div>
 
     </div>
@@ -2534,193 +2977,135 @@ let editingHabitId = null;
 let selectedFrequency = "daily";
 let selectedDays = [];
 
-/* THEMES */
+/* =========================
+   THEMES
+   ========================= */
 
-const themes = [
+const premiumThemes = [
 
-  {
-    id:"sage",
-    name:"Sauge",
-    type:"light",
-    bg:"#f4f8f5",
-    surface:"#ffffff",
-    primary:"#5f9675"
-  },
+  {id:"sage",name:"Sauge",type:"light",bg:"#f4f8f5",surface:"#fff",primary:"#5f9675"},
+  {id:"mint",name:"Menthe",type:"light",bg:"#f2faf7",surface:"#fff",primary:"#48a889"},
+  {id:"ocean",name:"Océan",type:"light",bg:"#f2f8fb",surface:"#fff",primary:"#428ca7"},
+  {id:"lavender",name:"Lavande",type:"light",bg:"#f7f5fb",surface:"#fff",primary:"#8068bd"},
+  {id:"rose",name:"Rose",type:"light",bg:"#fcf5f7",surface:"#fff",primary:"#c8758a"},
+  {id:"amber",name:"Ambre",type:"light",bg:"#fcf8ef",surface:"#fff",primary:"#c6943d"},
+  {id:"forest",name:"Forêt",type:"light",bg:"#f1f7f3",surface:"#fff",primary:"#3e805d"},
+  {id:"sky",name:"Ciel",type:"light",bg:"#f1f8fc",surface:"#fff",primary:"#4c9bc0"},
+  {id:"coffee",name:"Café",type:"light",bg:"#f8f5f1",surface:"#fff",primary:"#9a7150"},
+  {id:"glacier",name:"Glacier",type:"light",bg:"#f3f8fa",surface:"#fff",primary:"#5d99a9"},
 
-  {
-    id:"mint",
-    name:"Menthe",
-    type:"light",
-    bg:"#f2faf7",
-    surface:"#ffffff",
-    primary:"#48a889"
-  },
+  {id:"midnight",name:"Minuit",type:"dark",bg:"#11151d",surface:"#191f29",primary:"#78a9e8"},
+  {id:"graphite",name:"Graphite",type:"dark",bg:"#111",surface:"#1b1b1b",primary:"#b0b0b0"},
+  {id:"darkforest",name:"Forêt sombre",type:"dark",bg:"#0e1712",surface:"#15231a",primary:"#70bd8d"},
+  {id:"deepocean",name:"Océan profond",type:"dark",bg:"#0c151c",surface:"#13212b",primary:"#58a8ca"},
+  {id:"darklavender",name:"Lavande sombre",type:"dark",bg:"#14111b",surface:"#1e1928",primary:"#9b7bd0"},
+  {id:"burgundy",name:"Bordeaux",type:"dark",bg:"#190f13",surface:"#25151b",primary:"#c96b80"},
+  {id:"darkblue",name:"Bleu nuit",type:"dark",bg:"#0c111c",surface:"#141c2b",primary:"#648fd8"},
+  {id:"cyberpurple",name:"Cyber",type:"dark",bg:"#120d1a",surface:"#1d1428",primary:"#a86ee0"},
+  {id:"darkcoffee",name:"Café sombre",type:"dark",bg:"#17110d",surface:"#241a14",primary:"#bd8658"},
+  {id:"obsidian",name:"Obsidienne",type:"dark",bg:"#0b0c0d",surface:"#151719",primary:"#d0d3d5"}
 
-  {
-    id:"ocean",
-    name:"Océan",
-    type:"light",
-    bg:"#f2f8fb",
-    surface:"#ffffff",
-    primary:"#428ca7"
-  },
+];
 
-  {
-    id:"lavender",
-    name:"Lavande",
-    type:"light",
-    bg:"#f7f5fb",
-    surface:"#ffffff",
-    primary:"#8068bd"
-  },
+const originalThemes = [
 
   {
-    id:"rose",
-    name:"Rose",
-    type:"light",
-    bg:"#fcf5f7",
-    surface:"#ffffff",
-    primary:"#c8758a"
-  },
-
-  {
-    id:"amber",
-    name:"Ambre",
-    type:"light",
-    bg:"#fcf8ef",
-    surface:"#ffffff",
-    primary:"#c6943d"
-  },
-
-  {
-    id:"forest",
-    name:"Forêt",
-    type:"light",
-    bg:"#f1f7f3",
-    surface:"#ffffff",
-    primary:"#3e805d"
-  },
-
-  {
-    id:"sky",
-    name:"Ciel",
-    type:"light",
-    bg:"#f1f8fc",
-    surface:"#ffffff",
-    primary:"#4c9bc0"
-  },
-
-  {
-    id:"coffee",
-    name:"Café",
-    type:"light",
-    bg:"#f8f5f1",
-    surface:"#ffffff",
-    primary:"#9a7150"
-  },
-
-  {
-    id:"glacier",
-    name:"Glacier",
-    type:"light",
-    bg:"#f3f8fa",
-    surface:"#ffffff",
-    primary:"#5d99a9"
-  },
-
-  {
-    id:"midnight",
-    name:"Minuit",
+    id:"aurora",
+    name:"Aurora",
     type:"dark",
-    bg:"#11151d",
-    surface:"#191f29",
-    primary:"#78a9e8"
+    bg:"#071614",
+    surface:"#10231f",
+    primary:"#59d6aa"
   },
 
   {
-    id:"graphite",
-    name:"Graphite",
-    type:"dark",
-    bg:"#111111",
-    surface:"#1b1b1b",
-    primary:"#b0b0b0"
+    id:"waves",
+    name:"Waves",
+    type:"light",
+    bg:"#eef8fc",
+    surface:"#ffffff",
+    primary:"#3199bd"
   },
 
   {
-    id:"darkforest",
-    name:"Forêt sombre",
-    type:"dark",
-    bg:"#0e1712",
-    surface:"#15231a",
-    primary:"#70bd8d"
+    id:"sakura",
+    name:"Sakura",
+    type:"light",
+    bg:"#fff5f8",
+    surface:"#ffffff",
+    primary:"#d66e96"
   },
 
   {
-    id:"deepocean",
-    name:"Océan profond",
+    id:"night",
+    name:"Night Sky",
     type:"dark",
-    bg:"#0c151c",
-    surface:"#13212b",
-    primary:"#58a8ca"
+    bg:"#080b18",
+    surface:"#11162a",
+    primary:"#849cff"
   },
 
   {
-    id:"darklavender",
-    name:"Lavande sombre",
-    type:"dark",
-    bg:"#14111b",
-    surface:"#1e1928",
-    primary:"#9b7bd0"
+    id:"botanical",
+    name:"Botanical",
+    type:"light",
+    bg:"#f2f8ee",
+    surface:"#ffffff",
+    primary:"#5b9b68"
   },
 
   {
-    id:"burgundy",
-    name:"Bordeaux",
+    id:"nebula",
+    name:"Nebula",
     type:"dark",
-    bg:"#190f13",
-    surface:"#25151b",
-    primary:"#c96b80"
+    bg:"#0f0b1c",
+    surface:"#1a1430",
+    primary:"#b27cff"
   },
 
   {
-    id:"darkblue",
-    name:"Bleu nuit",
-    type:"dark",
-    bg:"#0c111c",
-    surface:"#141c2b",
-    primary:"#648fd8"
+    id:"crystal",
+    name:"Crystal",
+    type:"light",
+    bg:"#eef5ff",
+    surface:"#ffffff",
+    primary:"#668fd1"
   },
 
   {
-    id:"cyberpurple",
-    name:"Cyber",
-    type:"dark",
-    bg:"#120d1a",
-    surface:"#1d1428",
-    primary:"#a86ee0"
+    id:"sunset",
+    name:"Sunset",
+    type:"light",
+    bg:"#fff3ea",
+    surface:"#ffffff",
+    primary:"#e87552"
   },
 
   {
-    id:"darkcoffee",
-    name:"Café sombre",
-    type:"dark",
-    bg:"#17110d",
-    surface:"#241a14",
-    primary:"#bd8658"
+    id:"holographic",
+    name:"Holographic",
+    type:"light",
+    bg:"#f4f0ff",
+    surface:"#ffffff",
+    primary:"#8769ce"
   },
 
   {
-    id:"obsidian",
-    name:"Obsidienne",
-    type:"dark",
-    bg:"#0b0c0d",
-    surface:"#151719",
-    primary:"#d0d3d5"
+    id:"paper",
+    name:"Paper",
+    type:"light",
+    bg:"#f5f0e6",
+    surface:"#fffdf7",
+    primary:"#81765a"
   }
 
 ];
 
-/* UTILS */
+const themes = [...premiumThemes,...originalThemes];
+
+/* =========================
+   UTILS
+   ========================= */
 
 function saveData(){
 
@@ -2749,7 +3134,7 @@ function parseKey(key){
 
 function isSameDay(a,b){
 
-  return dateKey(a) === dateKey(b);
+  return dateKey(a)===dateKey(b);
 
 }
 
@@ -2758,7 +3143,7 @@ function startOfWeek(date){
   const d = new Date(date);
   const day = d.getDay();
 
-  const diff = day === 0 ? -6 : 1-day;
+  const diff = day===0 ? -6 : 1-day;
 
   d.setDate(d.getDate()+diff);
   d.setHours(0,0,0,0);
@@ -2780,13 +3165,22 @@ function endOfWeek(date){
 
 function startOfMonth(date){
 
-  return new Date(date.getFullYear(),date.getMonth(),1);
+  return new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    1
+  );
 
 }
 
 function endOfMonth(date){
 
-  return new Date(date.getFullYear(),date.getMonth()+1,0,23,59,59,999);
+  return new Date(
+    date.getFullYear(),
+    date.getMonth()+1,
+    0,
+    23,59,59,999
+  );
 
 }
 
@@ -2829,6 +3223,7 @@ function showToast(message){
   const toast = document.getElementById("toast");
 
   toast.textContent = message;
+
   toast.classList.add("show");
 
   setTimeout(()=>{
@@ -2837,22 +3232,24 @@ function showToast(message){
 
 }
 
-/* FREQUENCY */
+/* =========================
+   FREQUENCY
+   ========================= */
 
 function frequencyLabel(habit){
 
-  if(habit.frequency === "daily"){
+  if(habit.frequency==="daily"){
     return "Tous les jours";
   }
 
-  if(habit.frequency === "weekly"){
-    return habit.target === 1
+  if(habit.frequency==="weekly"){
+    return habit.target===1
       ? "1 fois par semaine"
       : `${habit.target} fois par semaine`;
   }
 
-  if(habit.frequency === "monthly"){
-    return habit.target === 1
+  if(habit.frequency==="monthly"){
+    return habit.target===1
       ? "1 fois par mois"
       : `${habit.target} fois par mois`;
   }
@@ -2863,87 +3260,46 @@ function frequencyLabel(habit){
 
 function getHabitTarget(habit){
 
-  if(habit.frequency === "daily"){
+  if(habit.frequency==="daily"){
     return 7;
   }
 
-  return Number(habit.target || 1);
+  return Number(habit.target||1);
 
 }
 
 function getHabitCount(habit,date){
 
-  if(habit.frequency === "daily"){
+  const start =
+    habit.frequency==="monthly"
+      ? startOfMonth(date)
+      : startOfWeek(date);
 
-    const start = startOfWeek(date);
-    const end = endOfWeek(date);
+  const end =
+    habit.frequency==="monthly"
+      ? endOfMonth(date)
+      : endOfWeek(date);
 
-    let count = 0;
+  let count=0;
 
-    Object.keys(habit.completions || {}).forEach(key=>{
+  Object.keys(habit.completions||{}).forEach(key=>{
 
-      const d = parseKey(key);
+    const d=parseKey(key);
 
-      if(d>=start && d<=end && habit.completions[key]){
-        count++;
-      }
+    if(d>=start && d<=end && habit.completions[key]){
+      count++;
+    }
 
-    });
+  });
 
-    return count;
-
-  }
-
-  if(habit.frequency === "weekly"){
-
-    const start = startOfWeek(date);
-    const end = endOfWeek(date);
-
-    let count = 0;
-
-    Object.keys(habit.completions || {}).forEach(key=>{
-
-      const d = parseKey(key);
-
-      if(d>=start && d<=end && habit.completions[key]){
-        count++;
-      }
-
-    });
-
-    return count;
-
-  }
-
-  if(habit.frequency === "monthly"){
-
-    const start = startOfMonth(date);
-    const end = endOfMonth(date);
-
-    let count = 0;
-
-    Object.keys(habit.completions || {}).forEach(key=>{
-
-      const d = parseKey(key);
-
-      if(d>=start && d<=end && habit.completions[key]){
-        count++;
-      }
-
-    });
-
-    return count;
-
-  }
-
-  return 0;
+  return count;
 
 }
 
 function getHabitProgress(habit,date){
 
-  const target = getHabitTarget(habit);
-  const count = getHabitCount(habit,date);
+  const target=getHabitTarget(habit);
+  const count=getHabitCount(habit,date);
 
   return Math.min(100,(count/target)*100);
 
@@ -2951,14 +3307,14 @@ function getHabitProgress(habit,date){
 
 function getHabitPeriodText(habit,date){
 
-  const count = getHabitCount(habit,date);
-  const target = getHabitTarget(habit);
+  const count=getHabitCount(habit,date);
+  const target=getHabitTarget(habit);
 
-  if(habit.frequency === "daily"){
+  if(habit.frequency==="daily"){
     return `${count}/7 cette semaine`;
   }
 
-  if(habit.frequency === "weekly"){
+  if(habit.frequency==="weekly"){
     return `${count}/${target} cette semaine`;
   }
 
@@ -2966,7 +3322,9 @@ function getHabitPeriodText(habit,date){
 
 }
 
-/* NAVIGATION */
+/* =========================
+   NAVIGATION
+   ========================= */
 
 function goToPage(page){
 
@@ -2974,14 +3332,17 @@ function goToPage(page){
     el.classList.remove("active");
   });
 
-  const target = document.getElementById(`page-${page}`);
+  const target=document.getElementById(`page-${page}`);
 
   if(target){
     target.classList.add("active");
   }
 
   document.querySelectorAll("[data-page]").forEach(btn=>{
-    btn.classList.toggle("active",btn.dataset.page===page);
+    btn.classList.toggle(
+      "active",
+      btn.dataset.page===page
+    );
   });
 
   window.scrollTo({
@@ -3005,68 +3366,76 @@ document.getElementById("goHabits").addEventListener("click",()=>{
   goToPage("habits");
 });
 
-/* TODAY */
+/* =========================
+   TODAY
+   ========================= */
 
 function renderToday(){
 
-  const today = new Date();
+  const today=new Date();
 
-  const isToday = isSameDay(currentDate,today);
+  const isToday=isSameDay(currentDate,today);
 
-  document.getElementById("todayTitle").textContent =
-    isToday ? "Aujourd’hui" : capitalize(formatDate(currentDate));
+  document.getElementById("todayTitle").textContent=
+    isToday
+      ? "Aujourd’hui"
+      : capitalize(formatDate(currentDate));
 
-  document.getElementById("todaySubtitle").textContent =
+  document.getElementById("todaySubtitle").textContent=
     isToday
       ? capitalize(formatDate(currentDate))
       : "Journée sélectionnée";
 
-  document.getElementById("progressTitle").textContent =
-    isToday ? "Ta journée" : "Cette journée";
+  document.getElementById("progressTitle").textContent=
+    isToday
+      ? "Ta journée"
+      : "Cette journée";
 
-  const key = dateKey(currentDate);
+  const key=dateKey(currentDate);
 
-  const dayTasks = tasks.filter(task=>task.date===key);
+  const dayTasks=tasks.filter(task=>task.date===key);
 
-  const completedTasks = dayTasks.filter(task=>task.completed).length;
+  const completedTasks=
+    dayTasks.filter(task=>task.completed).length;
 
-  let completedHabits = 0;
+  let completedHabits=0;
 
   habits.forEach(habit=>{
 
-    if(habit.frequency === "daily"){
-
-      if(habit.completions && habit.completions[key]){
-        completedHabits++;
-      }
-
-    }else{
-
-      if(getHabitProgress(habit,currentDate)>=100){
-        completedHabits++;
-      }
-
+    if(
+      habit.frequency==="daily" &&
+      habit.completions &&
+      habit.completions[key]
+    ){
+      completedHabits++;
     }
 
   });
 
-  const total = habits.length + dayTasks.length;
-  const completed = completedHabits + completedTasks;
+  const total=habits.length+dayTasks.length;
+  const completed=completedHabits+completedTasks;
 
-  const percent = total
-    ? Math.round((completed/total)*100)
-    : 0;
+  const percent=
+    total
+      ? Math.round((completed/total)*100)
+      : 0;
 
-  document.getElementById("summaryHabits").textContent = completedHabits;
-  document.getElementById("summaryTasks").textContent = completedTasks;
-  document.getElementById("summaryTotal").textContent = total;
+  document.getElementById("summaryHabits").textContent=
+    completedHabits;
 
-  document.getElementById("progressPercent").textContent = `${percent}%`;
+  document.getElementById("summaryTasks").textContent=
+    completedTasks;
 
-  document.getElementById("progressRing").style.background =
+  document.getElementById("summaryTotal").textContent=
+    total;
+
+  document.getElementById("progressPercent").textContent=
+    `${percent}%`;
+
+  document.getElementById("progressRing").style.background=
     `conic-gradient(var(--primary) ${percent*3.6}deg,var(--surface2) 0deg)`;
 
-  document.getElementById("progressSubtitle").textContent =
+  document.getElementById("progressSubtitle").textContent=
     percent===100
       ? "Tout est terminé. Bravo !"
       : percent===0
@@ -3080,31 +3449,33 @@ function renderToday(){
 
 function renderTodayHabits(){
 
-  const container = document.getElementById("todayHabits");
+  const container=document.getElementById("todayHabits");
 
   if(!habits.length){
 
-    container.innerHTML =
+    container.innerHTML=
       `<div class="empty">Aucune habitude pour le moment.</div>`;
 
     return;
 
   }
 
-  const key = dateKey(currentDate);
+  const key=dateKey(currentDate);
 
-  container.innerHTML = habits.map(habit=>{
+  container.innerHTML=habits.map(habit=>{
 
-    const done = !!(habit.completions && habit.completions[key]);
+    const done=
+      !!(habit.completions && habit.completions[key]);
 
-    const progress = getHabitProgress(habit,currentDate);
+    const progress=
+      getHabitProgress(habit,currentDate);
 
     return `
 
       <div class="habit-item">
 
         <button
-          class="check-btn ${done ? "done":""}"
+          class="check-btn ${done?"done":""}"
           onclick="toggleHabit('${habit.id}','${key}')"
         >
           ✓
@@ -3148,15 +3519,15 @@ function renderTodayHabits(){
 
 function toggleHabit(id,key){
 
-  const habit = habits.find(h=>h.id===id);
+  const habit=habits.find(h=>h.id===id);
 
-  if(!habit) return;
+  if(!habit)return;
 
   if(!habit.completions){
-    habit.completions = {};
+    habit.completions={};
   }
 
-  habit.completions[key] = !habit.completions[key];
+  habit.completions[key]=!habit.completions[key];
 
   saveData();
   renderAll();
@@ -3165,27 +3536,27 @@ function toggleHabit(id,key){
 
 function renderTodayTasks(){
 
-  const container = document.getElementById("todayTasks");
+  const container=document.getElementById("todayTasks");
 
-  const key = dateKey(currentDate);
+  const key=dateKey(currentDate);
 
-  const dayTasks = tasks.filter(task=>task.date===key);
+  const dayTasks=tasks.filter(task=>task.date===key);
 
   if(!dayTasks.length){
 
-    container.innerHTML =
+    container.innerHTML=
       `<div class="empty">Aucune tâche pour cette journée.</div>`;
 
     return;
 
   }
 
-  container.innerHTML = dayTasks.map(task=>`
+  container.innerHTML=dayTasks.map(task=>`
 
     <div class="task-item">
 
       <button
-        class="check-btn ${task.completed ? "done":""}"
+        class="check-btn ${task.completed?"done":""}"
         onclick="toggleTask('${task.id}')"
       >
         ✓
@@ -3195,7 +3566,7 @@ function renderTodayTasks(){
 
         <div
           class="item-name"
-          style="${task.completed ? "text-decoration:line-through;opacity:.55":""}"
+          style="${task.completed?"text-decoration:line-through;opacity:.55":""}"
         >
           ${escapeHtml(task.name)}
         </div>
@@ -3225,11 +3596,11 @@ function renderTodayTasks(){
 
 function toggleTask(id){
 
-  const task = tasks.find(t=>t.id===id);
+  const task=tasks.find(t=>t.id===id);
 
-  if(!task) return;
+  if(!task)return;
 
-  task.completed = !task.completed;
+  task.completed=!task.completed;
 
   saveData();
   renderAll();
@@ -3238,22 +3609,24 @@ function toggleTask(id){
 
 function deleteTask(id){
 
-  tasks = tasks.filter(task=>task.id!==id);
+  tasks=tasks.filter(task=>task.id!==id);
 
   saveData();
   renderAll();
 
 }
 
-/* HABITS */
+/* =========================
+   HABITS
+   ========================= */
 
 function renderHabits(){
 
-  const container = document.getElementById("habitsGrid");
+  const container=document.getElementById("habitsGrid");
 
   if(!habits.length){
 
-    container.innerHTML =
+    container.innerHTML=
       `<div class="empty" style="grid-column:1/-1">
         Aucune habitude créée pour le moment.
       </div>`;
@@ -3262,9 +3635,10 @@ function renderHabits(){
 
   }
 
-  container.innerHTML = habits.map(habit=>{
+  container.innerHTML=habits.map(habit=>{
 
-    const progress = getHabitProgress(habit,currentDate);
+    const progress=
+      getHabitProgress(habit,currentDate);
 
     return `
 
@@ -3305,10 +3679,12 @@ function renderHabits(){
         <div class="progress-wrap">
 
           <div class="progress-track">
+
             <div
               class="progress-bar"
               style="width:${progress}%"
             ></div>
+
           </div>
 
           <div class="progress-text">
@@ -3331,16 +3707,19 @@ function deleteHabit(id){
     return;
   }
 
-  habits = habits.filter(h=>h.id!==id);
+  habits=habits.filter(h=>h.id!==id);
 
   saveData();
   renderAll();
 
 }
 
-/* HABIT MODAL */
+/* =========================
+   HABIT MODAL
+   ========================= */
 
-const habitModal = document.getElementById("habitModal");
+const habitModal=
+  document.getElementById("habitModal");
 
 function updateFrequencyUI(){
 
@@ -3354,10 +3733,16 @@ function updateFrequencyUI(){
   });
 
   document.getElementById("weeklyExtra")
-    .classList.toggle("show",selectedFrequency==="weekly");
+    .classList.toggle(
+      "show",
+      selectedFrequency==="weekly"
+    );
 
   document.getElementById("monthlyExtra")
-    .classList.toggle("show",selectedFrequency==="monthly");
+    .classList.toggle(
+      "show",
+      selectedFrequency==="monthly"
+    );
 
 }
 
@@ -3365,7 +3750,7 @@ document.querySelectorAll(".frequency-btn").forEach(btn=>{
 
   btn.addEventListener("click",()=>{
 
-    selectedFrequency = btn.dataset.frequency;
+    selectedFrequency=btn.dataset.frequency;
 
     updateFrequencyUI();
 
@@ -3377,11 +3762,11 @@ document.querySelectorAll(".day-btn").forEach(btn=>{
 
   btn.addEventListener("click",()=>{
 
-    const day = Number(btn.dataset.day);
+    const day=Number(btn.dataset.day);
 
     if(selectedDays.includes(day)){
 
-      selectedDays =
+      selectedDays=
         selectedDays.filter(d=>d!==day);
 
     }else{
@@ -3401,15 +3786,15 @@ document.querySelectorAll(".day-btn").forEach(btn=>{
 
 function openHabitModal(id=null){
 
-  editingHabitId = id;
+  editingHabitId=id;
 
-  selectedFrequency = "daily";
-  selectedDays = [];
+  selectedFrequency="daily";
+  selectedDays=[];
 
-  document.getElementById("habitName").value = "";
-  document.getElementById("habitCategory").value = "Sport";
-  document.getElementById("weeklyTarget").value = 2;
-  document.getElementById("monthlyTarget").value = 5;
+  document.getElementById("habitName").value="";
+  document.getElementById("habitCategory").value="Sport";
+  document.getElementById("weeklyTarget").value=2;
+  document.getElementById("monthlyTarget").value=5;
 
   document.querySelectorAll(".day-btn").forEach(btn=>{
     btn.classList.remove("active");
@@ -3417,29 +3802,29 @@ function openHabitModal(id=null){
 
   if(id){
 
-    const habit = habits.find(h=>h.id===id);
+    const habit=habits.find(h=>h.id===id);
 
-    if(!habit) return;
+    if(!habit)return;
 
-    document.getElementById("habitModalTitle").textContent =
+    document.getElementById("habitModalTitle").textContent=
       "Modifier l’habitude";
 
-    document.getElementById("habitName").value = habit.name;
-    document.getElementById("habitCategory").value = habit.category;
+    document.getElementById("habitName").value=habit.name;
+    document.getElementById("habitCategory").value=habit.category;
 
-    selectedFrequency = habit.frequency || "daily";
+    selectedFrequency=habit.frequency||"daily";
 
     if(selectedFrequency==="weekly"){
-      document.getElementById("weeklyTarget").value =
-        habit.target || 1;
+      document.getElementById("weeklyTarget").value=
+        habit.target||1;
     }
 
     if(selectedFrequency==="monthly"){
-      document.getElementById("monthlyTarget").value =
-        habit.target || 1;
+      document.getElementById("monthlyTarget").value=
+        habit.target||1;
     }
 
-    selectedDays = [...(habit.recommendedDays || [])];
+    selectedDays=[...(habit.recommendedDays||[])];
 
     document.querySelectorAll(".day-btn").forEach(btn=>{
 
@@ -3452,7 +3837,7 @@ function openHabitModal(id=null){
 
   }else{
 
-    document.getElementById("habitModalTitle").textContent =
+    document.getElementById("habitModalTitle").textContent=
       "Nouvelle habitude";
 
   }
@@ -3481,7 +3866,7 @@ document.getElementById("cancelHabit")
 document.getElementById("saveHabit")
   .addEventListener("click",()=>{
 
-    const name =
+    const name=
       document.getElementById("habitName").value.trim();
 
     if(!name){
@@ -3491,15 +3876,17 @@ document.getElementById("saveHabit")
 
     }
 
-    let target = 1;
+    let target=1;
 
     if(selectedFrequency==="weekly"){
 
-      target = Math.max(
+      target=Math.max(
         1,
         Math.min(
           7,
-          Number(document.getElementById("weeklyTarget").value || 1)
+          Number(
+            document.getElementById("weeklyTarget").value||1
+          )
         )
       );
 
@@ -3507,11 +3894,13 @@ document.getElementById("saveHabit")
 
     if(selectedFrequency==="monthly"){
 
-      target = Math.max(
+      target=Math.max(
         1,
         Math.min(
           31,
-          Number(document.getElementById("monthlyTarget").value || 1)
+          Number(
+            document.getElementById("monthlyTarget").value||1
+          )
         )
       );
 
@@ -3519,17 +3908,19 @@ document.getElementById("saveHabit")
 
     if(editingHabitId){
 
-      const habit = habits.find(h=>h.id===editingHabitId);
+      const habit=
+        habits.find(h=>h.id===editingHabitId);
 
       if(habit){
 
-        habit.name = name;
-        habit.category =
+        habit.name=name;
+
+        habit.category=
           document.getElementById("habitCategory").value;
 
-        habit.frequency = selectedFrequency;
-        habit.target = target;
-        habit.recommendedDays = selectedDays;
+        habit.frequency=selectedFrequency;
+        habit.target=target;
+        habit.recommendedDays=selectedDays;
 
       }
 
@@ -3539,11 +3930,15 @@ document.getElementById("saveHabit")
 
         id:uid(),
         name,
+
         category:
           document.getElementById("habitCategory").value,
+
         frequency:selectedFrequency,
         target,
+
         recommendedDays:selectedDays,
+
         completions:{}
 
       });
@@ -3562,14 +3957,18 @@ document.getElementById("saveHabit")
 
   });
 
-/* TASK MODAL */
+/* =========================
+   TASK MODAL
+   ========================= */
 
-const taskModal = document.getElementById("taskModal");
+const taskModal=
+  document.getElementById("taskModal");
 
 document.getElementById("addTaskBtn")
   .addEventListener("click",()=>{
 
-    document.getElementById("taskName").value = "";
+    document.getElementById("taskName").value="";
+
     taskModal.classList.add("open");
 
   });
@@ -3589,7 +3988,7 @@ document.getElementById("cancelTask")
 document.getElementById("saveTask")
   .addEventListener("click",()=>{
 
-    const name =
+    const name=
       document.getElementById("taskName").value.trim();
 
     if(!name){
@@ -3603,9 +4002,12 @@ document.getElementById("saveTask")
 
       id:uid(),
       name,
+
       category:
         document.getElementById("taskCategory").value,
+
       date:dateKey(currentDate),
+
       completed:false
 
     });
@@ -3618,14 +4020,16 @@ document.getElementById("saveTask")
 
   });
 
-/* CALENDAR */
+/* =========================
+   CALENDAR
+   ========================= */
 
 function renderCalendar(){
 
-  const year = calendarDate.getFullYear();
-  const month = calendarDate.getMonth();
+  const year=calendarDate.getFullYear();
+  const month=calendarDate.getMonth();
 
-  document.getElementById("calendarTitle").textContent =
+  document.getElementById("calendarTitle").textContent=
     capitalize(
       calendarDate.toLocaleDateString("fr-FR",{
         month:"long",
@@ -3633,58 +4037,57 @@ function renderCalendar(){
       })
     );
 
-  const grid = document.getElementById("calendarGrid");
+  const grid=document.getElementById("calendarGrid");
 
-  grid.innerHTML = "";
+  grid.innerHTML="";
 
-  const first = new Date(year,month,1);
+  const first=new Date(year,month,1);
 
-  const firstDay =
+  const firstDay=
     first.getDay()===0
       ? 6
       : first.getDay()-1;
 
-  const daysInMonth =
+  const daysInMonth=
     new Date(year,month+1,0).getDate();
 
-  const previousMonthDays =
+  const previousMonthDays=
     new Date(year,month,0).getDate();
 
-  const totalCells =
+  const totalCells=
     Math.ceil((firstDay+daysInMonth)/7)*7;
 
   for(let i=0;i<totalCells;i++){
 
     let dayNumber;
     let date;
-    let muted = false;
+    let muted=false;
 
     if(i<firstDay){
 
-      dayNumber =
+      dayNumber=
         previousMonthDays-firstDay+i+1;
 
-      date =
+      date=
         new Date(year,month-1,dayNumber);
 
-      muted = true;
+      muted=true;
 
     }else if(i>=firstDay+daysInMonth){
 
-      dayNumber =
+      dayNumber=
         i-(firstDay+daysInMonth)+1;
 
-      date =
+      date=
         new Date(year,month+1,dayNumber);
 
-      muted = true;
+      muted=true;
 
     }else{
 
-      dayNumber =
-        i-firstDay+1;
+      dayNumber=i-firstDay+1;
 
-      date =
+      date=
         new Date(year,month,dayNumber);
 
     }
@@ -3699,38 +4102,46 @@ function renderCalendar(){
 
 function createCalendarDay(date,muted){
 
-  const div = document.createElement("div");
+  const div=document.createElement("div");
 
-  div.className =
-    `calendar-day ${muted ? "muted":""} ${
-      isSameDay(date,new Date()) ? "today":""
+  div.className=
+    `calendar-day ${muted?"muted":""} ${
+      isSameDay(date,new Date())?"today":""
     }`;
 
-  const key = dateKey(date);
+  const key=dateKey(date);
 
-  const completedHabits =
+  const completedHabits=
     habits.filter(h=>
       h.completions &&
       h.completions[key]
     ).length;
 
-  const completedTasks =
+  const completedTasks=
     tasks.filter(t=>
       t.date===key &&
       t.completed
     ).length;
 
-  let dots = "";
+  let dots="";
 
-  for(let i=0;i<Math.min(completedHabits,5);i++){
-    dots += `<span class="dot"></span>`;
+  for(
+    let i=0;
+    i<Math.min(completedHabits,5);
+    i++
+  ){
+    dots+=`<span class="dot"></span>`;
   }
 
-  for(let i=0;i<Math.min(completedTasks,5);i++){
-    dots += `<span class="dot task"></span>`;
+  for(
+    let i=0;
+    i<Math.min(completedTasks,5);
+    i++
+  ){
+    dots+=`<span class="dot task"></span>`;
   }
 
-  div.innerHTML = `
+  div.innerHTML=`
 
     <div class="day-number">
       ${date.getDate()}
@@ -3744,24 +4155,14 @@ function createCalendarDay(date,muted){
 
   div.addEventListener("click",()=>{
 
-    /*
-      IMPORTANT :
-      On sélectionne exactement la date cliquée.
-      On ne remet PAS currentDate à aujourd'hui.
-    */
+    currentDate=new Date(date);
 
-    currentDate = new Date(date);
-
-    /*
-      Le calendrier se repositionne également sur le mois
-      correspondant à la date sélectionnée.
-    */
-
-    calendarDate = new Date(
-      date.getFullYear(),
-      date.getMonth(),
-      1
-    );
+    calendarDate=
+      new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        1
+      );
 
     goToPage("today");
 
@@ -3796,51 +4197,52 @@ document.getElementById("nextMonth")
 document.getElementById("calendarToday")
   .addEventListener("click",()=>{
 
-    currentDate = new Date();
-    calendarDate = new Date();
+    currentDate=new Date();
+    calendarDate=new Date();
 
     renderCalendar();
-
     goToPage("today");
 
   });
 
-/* STATS */
+/* =========================
+   STATS
+   ========================= */
 
 function renderStats(){
 
-  const completedTaskCount =
+  const completedTaskCount=
     tasks.filter(t=>t.completed).length;
 
-  let completionCount = 0;
+  let completionCount=0;
 
   habits.forEach(habit=>{
 
-    completionCount +=
-      Object.values(habit.completions || {})
+    completionCount+=
+      Object.values(habit.completions||{})
         .filter(Boolean).length;
 
   });
 
-  const total =
-    tasks.length + completionCount;
+  const total=
+    tasks.length+completionCount;
 
-  const completed =
-    completedTaskCount + completionCount;
+  const completed=
+    completedTaskCount+completionCount;
 
-  const completion =
+  const completion=
     total
       ? Math.round((completed/total)*100)
       : 0;
 
   document.getElementById("statCompletion")
-    .textContent = `${completion}%`;
+    .textContent=`${completion}%`;
 
   document.getElementById("statHabits")
-    .textContent = habits.length;
+    .textContent=habits.length;
 
   document.getElementById("statTasks")
-    .textContent = completedTaskCount;
+    .textContent=completedTaskCount;
 
   renderWeeklyChart();
   renderCategoryStats();
@@ -3849,14 +4251,14 @@ function renderStats(){
 
 function renderWeeklyChart(){
 
-  const container =
+  const container=
     document.getElementById("weeklyChart");
 
-  const days = [];
+  const days=[];
 
   for(let i=6;i>=0;i--){
 
-    const d = new Date();
+    const d=new Date();
 
     d.setHours(0,0,0,0);
     d.setDate(d.getDate()-i);
@@ -3865,17 +4267,17 @@ function renderWeeklyChart(){
 
   }
 
-  const values = days.map(day=>{
+  const values=days.map(day=>{
 
-    const key = dateKey(day);
+    const key=dateKey(day);
 
-    const habitsDone =
+    const habitsDone=
       habits.filter(h=>
         h.completions &&
         h.completions[key]
       ).length;
 
-    const tasksDone =
+    const tasksDone=
       tasks.filter(t=>
         t.date===key &&
         t.completed
@@ -3885,14 +4287,14 @@ function renderWeeklyChart(){
 
   });
 
-  const max = Math.max(...values,1);
+  const max=Math.max(...values,1);
 
-  container.innerHTML =
+  container.innerHTML=
     days.map((day,i)=>{
 
-      const value = values[i];
+      const value=values[i];
 
-      const height =
+      const height=
         value===0
           ? 4
           : Math.max(10,(value/max)*160);
@@ -3926,52 +4328,52 @@ function renderWeeklyChart(){
 
 function renderCategoryStats(){
 
-  const container =
+  const container=
     document.getElementById("categoryStats");
 
-  const categories = {};
+  const categories={};
 
   tasks.forEach(task=>{
 
-    if(!task.completed) return;
+    if(!task.completed)return;
 
-    categories[task.category] =
-      (categories[task.category] || 0)+1;
+    categories[task.category]=
+      (categories[task.category]||0)+1;
 
   });
 
   habits.forEach(habit=>{
 
-    const count =
-      Object.values(habit.completions || {})
+    const count=
+      Object.values(habit.completions||{})
         .filter(Boolean).length;
 
     if(count>0){
 
-      categories[habit.category] =
-        (categories[habit.category] || 0)+count;
+      categories[habit.category]=
+        (categories[habit.category]||0)+count;
 
     }
 
   });
 
-  const entries =
+  const entries=
     Object.entries(categories)
       .sort((a,b)=>b[1]-a[1]);
 
   if(!entries.length){
 
-    container.innerHTML =
+    container.innerHTML=
       `<div class="empty">Pas encore assez de données.</div>`;
 
     return;
 
   }
 
-  const max =
+  const max=
     Math.max(...entries.map(e=>e[1]),1);
 
-  container.innerHTML =
+  container.innerHTML=
     entries.map(([name,value])=>`
 
       <div class="category-row">
@@ -3981,10 +4383,12 @@ function renderCategoryStats(){
         </div>
 
         <div class="category-track">
+
           <div
             class="category-fill"
             style="width:${(value/max)*100}%"
           ></div>
+
         </div>
 
         <div class="category-number">
@@ -3997,139 +4401,170 @@ function renderCategoryStats(){
 
 }
 
-/* HELP NAVIGATION */
-
-document.querySelectorAll("[data-help-main]").forEach(button=>{
-
-  button.addEventListener("click",()=>{
-
-    const category = button.dataset.helpMain;
-
-    document.querySelectorAll("[data-help-main]")
-      .forEach(btn=>{
-        btn.classList.toggle(
-          "active",
-          btn===button
-        );
-      });
-
-    document.querySelectorAll(".help-content")
-      .forEach(content=>{
-        content.classList.remove("active");
-      });
-
-    const target =
-      document.getElementById(`help-${category}`);
-
-    if(target){
-      target.classList.add("active");
-    }
-
-  });
-
-});
-
-document.querySelectorAll("[data-study-topic]").forEach(button=>{
-
-  button.addEventListener("click",()=>{
-
-    const topic =
-      button.dataset.studyTopic;
-
-    document.querySelectorAll("[data-study-topic]")
-      .forEach(btn=>{
-        btn.classList.toggle(
-          "active",
-          btn===button
-        );
-      });
-
-    document.querySelectorAll(".help-topic")
-      .forEach(topicElement=>{
-        topicElement.classList.remove("active");
-      });
-
-    const target =
-      document.getElementById(`study-${topic}`);
-
-    if(target){
-      target.classList.add("active");
-    }
-
-  });
-
-});
+/* =========================
+   HELP NAVIGATION
+   ========================= */
 
 /*
-  Liens internes de Help.
-  Exemple :
-  Études → Général → Sommeil
+  Depuis la page Help :
+  Stress / Sommeil / Études
+  ouvrent maintenant une vraie page.
 */
 
-document.querySelectorAll("[data-open-help]").forEach(button=>{
+document.querySelectorAll("[data-help-page]")
+  .forEach(button=>{
 
-  button.addEventListener("click",()=>{
+    button.addEventListener("click",()=>{
 
-    const targetCategory =
-      button.dataset.openHelp;
+      const page=button.dataset.helpPage;
 
-    document.querySelectorAll("[data-help-main]")
-      .forEach(btn=>{
+      goToPage(`help-${page}`);
 
-        btn.classList.toggle(
-          "active",
-          btn.dataset.helpMain===targetCategory
-        );
-
-      });
-
-    document.querySelectorAll(".help-content")
-      .forEach(content=>{
-
-        content.classList.toggle(
-          "active",
-          content.id===`help-${targetCategory}`
-        );
-
-      });
-
-    document.querySelectorAll(".help-topic")
-      .forEach(topic=>{
-
-        topic.classList.remove("active");
-
-      });
-
-    window.scrollTo({
-      top:0,
-      behavior:"smooth"
     });
 
   });
 
-});
+/*
+  Retour vers la page principale Help.
+*/
 
-/* THEMES */
+document.querySelectorAll("[data-help-back]")
+  .forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+      goToPage(button.dataset.helpBack);
+
+    });
+
+  });
+
+/*
+  Lien Études → Sommeil.
+*/
+
+document.querySelectorAll("[data-help-page]")
+  .forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+      if(button.dataset.helpPage==="sleep"){
+        goToPage("help-sleep");
+      }
+
+    });
+
+  });
+
+/*
+  Navigation entre les matières.
+*/
+
+document.querySelectorAll("[data-study-topic]")
+  .forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+      const topic=
+        button.dataset.studyTopic;
+
+      document.querySelectorAll("[data-study-topic]")
+        .forEach(btn=>{
+
+          btn.classList.toggle(
+            "active",
+            btn===button
+          );
+
+        });
+
+      document.querySelectorAll(".help-topic")
+        .forEach(topicElement=>{
+
+          topicElement.classList.remove("active");
+
+        });
+
+      const target=
+        document.getElementById(`study-${topic}`);
+
+      if(target){
+        target.classList.add("active");
+      }
+
+      window.scrollTo({
+        top:0,
+        behavior:"smooth"
+      });
+
+    });
+
+  });
+
+/* =========================
+   THEMES
+   ========================= */
+
+function getThemePattern(id){
+
+  const patterns={
+
+    aurora:
+      "radial-gradient(circle at 20% 20%,rgba(89,214,170,.35),transparent 35%),radial-gradient(circle at 80% 20%,rgba(75,180,255,.3),transparent 35%)",
+
+    waves:
+      "repeating-radial-gradient(ellipse at 0 0,transparent 0,transparent 10px,rgba(49,153,189,.08) 11px,rgba(49,153,189,.08) 13px)",
+
+    sakura:
+      "radial-gradient(circle at 20% 25%,rgba(214,110,150,.22) 0 3px,transparent 4px),radial-gradient(circle at 75% 65%,rgba(214,110,150,.18) 0 4px,transparent 5px)",
+
+    night:
+      "radial-gradient(circle at 15% 20%,rgba(255,255,255,.75) 0 1px,transparent 2px),radial-gradient(circle at 75% 35%,rgba(255,255,255,.55) 0 1px,transparent 2px),radial-gradient(circle at 50% 80%,rgba(255,255,255,.45) 0 1px,transparent 2px)",
+
+    botanical:
+      "radial-gradient(ellipse at 20% 20%,rgba(91,155,104,.15),transparent 35%),radial-gradient(ellipse at 80% 80%,rgba(91,155,104,.12),transparent 35%)",
+
+    nebula:
+      "radial-gradient(circle at 20% 30%,rgba(255,72,182,.3),transparent 35%),radial-gradient(circle at 80% 20%,rgba(76,125,255,.3),transparent 35%)",
+
+    crystal:
+      "linear-gradient(135deg,rgba(102,143,209,.12) 25%,transparent 25%),linear-gradient(315deg,rgba(102,143,209,.12) 25%,transparent 25%)",
+
+    sunset:
+      "radial-gradient(circle at 15% 90%,rgba(232,117,82,.2),transparent 35%),radial-gradient(circle at 90% 10%,rgba(245,184,72,.2),transparent 35%)",
+
+    holographic:
+      "linear-gradient(115deg,rgba(255,125,180,.18),rgba(92,200,255,.18),rgba(154,108,255,.18),rgba(255,214,98,.18))",
+
+    paper:
+      "repeating-linear-gradient(0deg,transparent,transparent 12px,rgba(100,90,65,.08) 13px)"
+
+  };
+
+  return patterns[id]||"none";
+
+}
 
 function applyTheme(theme){
 
-  document.body.className = `theme-${theme}`;
+  document.body.className=`theme-${theme}`;
 
   localStorage.setItem(
     THEME_KEY,
     theme
   );
 
-  const selected =
+  const selected=
     themes.find(t=>t.id===theme);
 
   if(selected){
 
-    document.querySelector('meta[name="theme-color"]')
-      .setAttribute(
-        "content",
-        selected.bg
-      );
+    document.querySelector(
+      'meta[name="theme-color"]'
+    ).setAttribute(
+      "content",
+      selected.bg
+    );
 
   }
 
@@ -4137,23 +4572,14 @@ function applyTheme(theme){
 
 }
 
-function renderThemes(){
+function createThemeButton(theme,current){
 
-  const light =
-    document.getElementById("lightThemes");
+  const pattern=getThemePattern(theme.id);
 
-  const dark =
-    document.getElementById("darkThemes");
-
-  if(!light || !dark) return;
-
-  const current =
-    localStorage.getItem(THEME_KEY) || "sage";
-
-  const create = theme=>`
+  return `
 
     <button
-      class="theme-option ${theme.id===current ? "active":""}"
+      class="theme-option ${theme.id===current?"active":""}"
       onclick="applyTheme('${theme.id}')"
     >
 
@@ -4162,17 +4588,15 @@ function renderThemes(){
         style="
           background:${theme.bg};
           border:1px solid ${theme.primary};
+          --preview-pattern:${pattern};
         "
       >
+
         <div
-          style="
-            width:45%;
-            height:10px;
-            margin:12px;
-            border-radius:99px;
-            background:${theme.primary};
-          "
+          class="theme-preview-line"
+          style="--preview-primary:${theme.primary}"
         ></div>
+
       </div>
 
       <div class="theme-name">
@@ -4183,32 +4607,64 @@ function renderThemes(){
 
   `;
 
-  light.innerHTML =
-    themes
-      .filter(t=>t.type==="light")
-      .map(create)
+}
+
+function renderThemes(){
+
+  const original=
+    document.getElementById("originalThemes");
+
+  const premiumLight=
+    document.getElementById("premiumLightThemes");
+
+  const premiumDark=
+    document.getElementById("premiumDarkThemes");
+
+  if(
+    !original ||
+    !premiumLight ||
+    !premiumDark
+  ){
+    return;
+  }
+
+  const current=
+    localStorage.getItem(THEME_KEY)||"sage";
+
+  original.innerHTML=
+    originalThemes
+      .map(theme=>
+        createThemeButton(theme,current)
+      )
       .join("");
 
-  dark.innerHTML =
-    themes
-      .filter(t=>t.type==="dark")
-      .map(create)
+  premiumLight.innerHTML=
+    premiumThemes
+      .filter(theme=>theme.type==="light")
+      .map(theme=>
+        createThemeButton(theme,current)
+      )
+      .join("");
+
+  premiumDark.innerHTML=
+    premiumThemes
+      .filter(theme=>theme.type==="dark")
+      .map(theme=>
+        createThemeButton(theme,current)
+      )
       .join("");
 
 }
 
-const savedTheme =
-  localStorage.getItem(THEME_KEY) || "sage";
-
-applyTheme(savedTheme);
-
-/* SETTINGS */
+/* =========================
+   SETTINGS
+   ========================= */
 
 document.getElementById("settingsToday")
   .addEventListener("click",()=>{
 
-    currentDate = new Date();
-    calendarDate = new Date();
+    currentDate=new Date();
+    calendarDate=new Date();
 
     goToPage("today");
 
@@ -4223,8 +4679,8 @@ document.getElementById("resetData")
       return;
     }
 
-    tasks = [];
-    habits = [];
+    tasks=[];
+    habits=[];
 
     saveData();
     renderAll();
@@ -4233,7 +4689,9 @@ document.getElementById("resetData")
 
   });
 
-/* RENDER */
+/* =========================
+   RENDER
+   ========================= */
 
 function renderAll(){
 
@@ -4245,11 +4703,20 @@ function renderAll(){
 
 }
 
-/* INITIAL */
+/* =========================
+   INITIALISATION
+   ========================= */
+
+const savedTheme=
+  localStorage.getItem(THEME_KEY)||"sage";
+
+applyTheme(savedTheme);
 
 renderAll();
 
-/* SERVICE WORKER */
+/* =========================
+   SERVICE WORKER
+   ========================= */
 
 if("serviceWorker" in navigator){
 
@@ -4258,10 +4725,12 @@ if("serviceWorker" in navigator){
     navigator.serviceWorker
       .register("./sw.js")
       .catch(error=>{
+
         console.log(
           "Service Worker error:",
           error
         );
+
       });
 
   });
