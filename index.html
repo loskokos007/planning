@@ -2169,4 +2169,267 @@ function submitHabit(e){
   go("habits");
 
   renderAll();
+}function exportData(){
+  const blob=new Blob([JSON.stringify({version:2,exportedAt:new Date().toISOString(),habits},null,2)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="habits-backup.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);showToast("Sauvegarde exportée");
 }
+function importData(e){
+  const file=e.target.files?.[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const data=JSON.parse(reader.result);const incoming=Array.isArray(data)?data:data.habits;if(!Array.isArray(incoming))throw Error();habits=incoming.map(normalizeHabit);saveData();renderAll();showToast("Sauvegarde importée")}catch(err){showToast("Fichier invalide")}};reader.readAsText(file);e.target.value="";
+}
+function resetAll(){if(confirm("Supprimer toutes les habitudes et leur historique ? Cette action est irréversible.")){habits=[];saveData();renderAll();showToast("Données réinitialisées")}}
+
+function themePreview(theme){
+  const p=document.createElement("div");p.className="theme-preview "+(theme.effect==="forest"?"forest":"");p.style.background=themeBackground(theme);
+  for(let i=0;i<14;i++){const s=document.createElement("i");s.className="preview-particle";s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.width=s.style.height=(2+Math.random()*5)+"px";s.style.animationDelay=-Math.random()*4+"s";p.appendChild(s)}
+  return p;
+}
+function themeBackground(t){
+  if(t.effect==="frost")return"radial-gradient(circle at 20% 20%,#fff,transparent 25%),radial-gradient(circle at 80% 75%,#bfeaff,transparent 35%),linear-gradient(135deg,#f8fdff,#dcecf5)";
+  if(t.effect==="aurora")return"radial-gradient(circle at 20% 20%,#43f5bd,transparent 35%),radial-gradient(circle at 80% 20%,#696dff,transparent 35%),#07120f";
+  if(t.effect==="nebula")return"radial-gradient(circle at 20% 20%,#ff48bb55,transparent 30%),radial-gradient(circle at 80% 25%,#6658ff77,transparent 35%),radial-gradient(circle at 50% 90%,#00dfff44,transparent 35%),#090714";
+  if(t.effect==="sakura")return"radial-gradient(circle at 25% 20%,#ff8db955,transparent 30%),radial-gradient(circle at 80% 80%,#8e4d7d55,transparent 35%),#150b12";
+  if(t.effect==="forest")return"radial-gradient(circle at 20% 80%,#3cff8450,transparent 30%),radial-gradient(circle at 80% 15%,#a4ffbd22,transparent 30%),linear-gradient(135deg,#06110b,#0c2116)";
+  if(t.effect==="cosmos")return"radial-gradient(circle at 65% 35%,#7186ff55,transparent 25%),radial-gradient(circle at 25% 75%,#9b6dff33,transparent 35%),#050713";
+  if(t.effect==="crystal")return"linear-gradient(135deg,#101c2e,#080c15 45%,#183b55)";
+  return`linear-gradient(135deg,${t.bg},${t.bg})`;
+}
+function renderThemes(){
+  const grid=document.getElementById("themeGrid"),current=localStorage.getItem(THEME_KEY)||"sage";grid.innerHTML="";
+  const groups=[["Clairs",THEMES.filter(t=>t.kind==="light")],["Foncés",THEMES.filter(t=>t.kind==="dark")]];
+  groups.forEach(([label,list])=>{const title=document.createElement("div");title.style.gridColumn="1/-1";title.innerHTML=`<div class="section-title"><h2>${label}</h2><span>${list.length} thèmes</span></div>`;grid.appendChild(title);list.forEach(t=>{const card=document.createElement("button");card.className="theme-card card "+(current===t.id?"active":"");card.appendChild(themePreview(t));const info=document.createElement("div");info.className="theme-info";info.innerHTML=`<strong>${escapeHTML(t.name)} ${current===t.id?"✓":""}</strong><span>${t.kind==="light"?"Clair":"Foncé"} · ${t.effect==="sage"?"minimal":"animé"}</span>`;card.appendChild(info);card.onclick=()=>applyTheme(t.id);grid.appendChild(card)})})
+}
+function applyTheme(id){
+  const t=THEMES.find(x=>x.id===id)||THEMES[0];localStorage.setItem(THEME_KEY,id);
+  document.documentElement.style.setProperty("--bg",t.bg);document.documentElement.style.setProperty("--accent",t.accent);
+  document.documentElement.style.setProperty("--accent2",mix(t.accent,t.kind==="light"?"#ffffff":"#18233b",.45));
+  document.documentElement.style.setProperty("--soft",t.kind==="light"?hexAlpha(t.accent,.13):hexAlpha(t.accent,.16));
+  document.documentElement.style.setProperty("--text",t.kind==="light"?"#17201b":"#f3f7ff");document.documentElement.style.setProperty("--muted",t.kind==="light"?"#77837c":"#9ca8b9");
+  document.documentElement.style.setProperty("--surface",t.kind==="light"?"rgba(255,255,255,.82)":"rgba(14,18,29,.72)");
+  document.documentElement.style.setProperty("--surface2",t.kind==="light"?"rgba(255,255,255,.58)":"rgba(25,30,44,.58)");
+  document.documentElement.style.setProperty("--border",t.kind==="light"?"rgba(25,45,33,.09)":"rgba(220,230,255,.10)");
+  document.getElementById("ambient").innerHTML="";document.body.dataset.theme=t.effect;
+  spawnAmbient(t);renderThemes();showToast(`${t.name} activé`);
+}
+function hexAlpha(hex,a){const h=hex.replace("#","");const r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16);return`rgba(${r},${g},${b},${a})`}
+function mix(a,b,p){const A=a.replace("#",""),B=b.replace("#","");const ar=parseInt(A.slice(0,2),16),ag=parseInt(A.slice(2,4),16),ab=parseInt(A.slice(4,6),16),br=parseInt(B.slice(0,2),16),bg=parseInt(B.slice(2,4),16),bb=parseInt(B.slice(4,6),16);return"#"+[ar+(br-ar)*p,ag+(bg-ag)*p,ab+(bb-ab)*p].map(x=>Math.round(x).toString(16).padStart(2,"0")).join("")}
+function spawnAmbient(t){
+  const root=document.getElementById("ambient");const reduced=localStorage.getItem(MOTION_KEY)==="off";if(reduced||t.effect==="sage")return;
+  const n=t.effect==="nebula"||t.effect==="cosmos"?75:45;
+  for(let i=0;i<n;i++){const s=document.createElement("span");s.className="ambient-particle";s.style.left=Math.random()*100+"%";s.style.top=Math.random()*100+"%";s.style.setProperty("--dx",(Math.random()*180-90)+"px");s.style.animationDuration=(7+Math.random()*18)+"s";s.style.animationDelay=(-Math.random()*20)+"s";
+    if(t.effect==="sakura"){s.textContent="✦";s.style.color="#f3a2bf";s.style.fontSize=(8+Math.random()*10)+"px";s.style.background="transparent"}
+    else if(t.effect==="frost"){s.textContent="❄";s.style.color="#fff";s.style.fontSize=(10+Math.random()*13)+"px";s.style.background="transparent"}
+    else if(t.effect==="forest"){s.style.background="#a6ffb7";s.style.boxShadow="0 0 12px #8aff9f"}
+    else{s.style.background="#fff";s.style.width=s.style.height=(1+Math.random()*3)+"px";s.style.boxShadow="0 0 9px #fff"}
+    root.appendChild(s)}
+}
+function toggleMotion(){const on=localStorage.getItem(MOTION_KEY)!=="off";localStorage.setItem(MOTION_KEY,on?"off":"on");applyTheme(localStorage.getItem(THEME_KEY)||"sage");updateMotionButton()}
+function updateMotionButton(){document.getElementById("motionBtn").textContent=localStorage.getItem(MOTION_KEY)==="off"?"Désactivées":"Activées"}
+
+function init(){
+  loadData();selectedDate=new Date();calendarDate=new Date();document.getElementById("fStart").value=todayKey();refreshForm();
+  applyTheme(localStorage.getItem(THEME_KEY)||"sage");renderAll();updateMotionButton();
+}
+init();
+
+/* ===== HABITS V4 LOGIC ===== */
+const TASKS_KEY="habitsV4Tasks";
+let dailyTasks={};
+
+function loadTasks(){
+  try{dailyTasks=JSON.parse(localStorage.getItem(TASKS_KEY)||"{}")||{}}
+  catch(e){dailyTasks={}}
+}
+function saveTasks(){localStorage.setItem(TASKS_KEY,JSON.stringify(dailyTasks))}
+function tasksFor(k){if(!Array.isArray(dailyTasks[k]))dailyTasks[k]=[];return dailyTasks[k]}
+function selectedDateKey(){return dateKey(selectedDate||new Date())}
+function addTask(text,k=selectedDateKey()){
+  const value=String(text||"").trim();if(!value)return;
+  tasksFor(k).push({id:String(Date.now())+Math.random(),text:value,done:false});
+  saveTasks();renderToday();renderCalendar();showToast("Tâche ajoutée");
+}
+function addTaskFromToday(){
+  const input=document.getElementById("newTaskInput");if(!input)return;
+  if(!input.value.trim()){input.focus();return}
+  addTask(input.value);input.value="";input.focus();
+}
+function toggleTask(k,id){
+  const arr=tasksFor(k),t=arr.find(x=>String(x.id)===String(id));if(!t)return;
+  t.done=!t.done;saveTasks();renderToday();renderCalendar();
+}
+function deleteTask(k,id){
+  if(!dailyTasks[k])return;
+  dailyTasks[k]=dailyTasks[k].filter(x=>String(x.id)!==String(id));
+  if(!dailyTasks[k].length)delete dailyTasks[k];
+  saveTasks();renderToday();renderCalendar();
+}
+function taskCount(k){return (dailyTasks[k]||[]).length}
+function taskDoneCount(k){return (dailyTasks[k]||[]).filter(t=>t.done).length}
+
+function renderTasks(){
+  const k=selectedDateKey(),list=document.getElementById("taskList"),label=document.getElementById("taskDateLabel"),count=document.getElementById("taskCount");
+  if(!list)return;
+  label.textContent=formatDate(selectedDate,{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+  const arr=tasksFor(k);
+  count.textContent=arr.length?`${taskDoneCount(k)}/${arr.length}`:"0";
+  list.innerHTML="";
+  if(!arr.length){list.innerHTML='<div class="task-empty">Aucune tâche pour ce jour. Ajoute ce que tu dois faire.</div>';return}
+  arr.forEach(t=>{
+    const row=document.createElement("div");row.className="task-row"+(t.done?" done":"");
+    row.innerHTML=`<button class="task-check ${t.done?"done":""}" aria-label="${t.done?"Tâche terminée":"Marquer comme terminée"}">${t.done?"✓":""}</button><div class="task-text">${escapeHTML(t.text)}</div><button class="task-delete" aria-label="Supprimer">×</button>`;
+    row.querySelector(".task-check").onclick=()=>toggleTask(k,t.id);
+    row.querySelector(".task-delete").onclick=()=>deleteTask(k,t.id);
+    list.appendChild(row);
+  });
+}
+function renderCalendarV4(){
+  const grid=document.getElementById("calendarGrid");if(!grid)return;
+  grid.innerHTML="";
+  const y=calendarDate.getFullYear(),m=calendarDate.getMonth();
+  document.getElementById("monthTitle").textContent=calendarDate.toLocaleDateString("fr-BE",{month:"long",year:"numeric"});
+  const first=new Date(y,m,1),start=(first.getDay()+6)%7,days=new Date(y,m+1,0).getDate();
+  for(let i=0;i<start;i++){const b=document.createElement("button");b.className="day muted";b.textContent=new Date(y,m,0).getDate()-start+i+1;grid.appendChild(b)}
+  for(let n=1;n<=days;n++){
+    const d=new Date(y,m,n),k=dateKey(d),b=document.createElement("button");b.className="day";b.textContent=n;
+    if(k===todayKey())b.classList.add("today");
+    if(k===dateKey(selectedDate))b.classList.add("selected");
+    const count=habits.filter(h=>entryCount(h,k)>0).length;
+    if(count){const dot=document.createElement("span");dot.className="day-dot";dot.style.transform=`translateX(-50%) scale(${1+Math.min(count,4)*.15})`;b.appendChild(dot)}
+    if(taskCount(k))b.classList.add("has-tasks");
+    b.onclick=()=>{selectedDate=new Date(d);go("today")};
+    grid.appendChild(b);
+  }
+  while(grid.children.length%7){const b=document.createElement("button");b.className="day muted";grid.appendChild(b)}
+}
+renderCalendar=renderCalendarV4;
+
+function periodLabel(h,d=new Date()){
+  if(h.frequencyType==="xmonth")return `${h.frequency} fois ce mois`;
+  if(h.frequencyType==="weekly")return `${h.weeklyGoal} fois cette semaine`;
+  if(h.frequencyType==="xweek")return `${h.frequency} fois cette semaine`;
+  if(h.frequencyType==="daily")return `${h.dailyGoal} fois aujourd’hui`;
+  if(h.frequencyType==="specific")return `${h.dailyGoal} fois ce jour`;
+  return "";
+}
+function progressForCard(h,d){
+  const p=habitPeriodProgress(h,d);
+  if(h.frequencyType==="daily"||h.frequencyType==="specific"){
+    const c=entryCount(h,dateKey(d)),t=h.dailyGoal;
+    return {done:Math.min(c,t),target:t,pct:Math.min(100,Math.round(c/t*100))};
+  }
+  return p;
+}
+function habitCardHTML(h,d,context){
+  const k=dateKey(d),current=entryCount(h,k),p=progressForCard(h,d);
+  const satisfied=daySatisfied(h,d);
+  const active=isActiveOn(h,d);
+  const card=document.createElement("div");
+  card.className="habit-card card"+(satisfied?" is-complete":"");
+  card.style.borderLeft=`4px solid ${h.color}`;
+  const progressText=`${p.done}/${p.target}`;
+  card.innerHTML=`
+    <button class="round-check ${satisfied?"done":""}" aria-label="${satisfied?"Désactiver":"Valider"}">${satisfied?"✓":""}</button>
+    <div class="habit-info">
+      <div class="habit-name">${escapeHTML(h.icon)} ${escapeHTML(h.name)}</div>
+      <div class="habit-meta"><span class="badge">${escapeHTML(h.category)}</span><span class="badge">${escapeHTML(frequencyLabel(h))}</span>${currentStreak(h)?`<span class="badge">🔥 ${currentStreak(h)}</span>`:""}</div>
+      <div class="habit-mini-progress">
+        <div class="progress"><span style="width:${p.pct}%"></span></div>
+        <span class="progress-count">${progressText}</span>
+      </div>
+    </div>
+    <div class="habit-actions">
+      <button class="step-btn minus" aria-label="Retirer une fois">−</button>
+      <button class="step-btn plus" aria-label="Ajouter une fois">＋</button>
+    </div>
+    ${context==="all"?`<button class="ghost-btn" onclick="openDetail('${h.id}')">Détails</button><button class="delete-btn" onclick="deleteHabit('${h.id}')">×</button>`:`<button class="ghost-btn" onclick="event.stopPropagation();openDetail('${h.id}')">›</button>`}
+  `;
+  const check=card.querySelector(".round-check");
+  check.onclick=()=>toggleEntryV4(h.id,d,"check");
+  card.querySelector(".plus").onclick=()=>toggleEntryV4(h.id,d,"plus");
+  card.querySelector(".minus").onclick=()=>toggleEntryV4(h.id,d,"minus");
+  return card;
+}
+function toggleEntryV4(id,d,mode){
+  const h=habits.find(x=>String(x.id)===String(id));if(!h)return;
+  const k=dateKey(d),cur=entryCount(h,k);
+  const p=progressForCard(h,d);
+  let next=cur;
+  if(mode==="plus")next=Math.min(99,cur+1);
+  else if(mode==="minus")next=Math.max(0,cur-1);
+  else {
+    if(cur===0) next=1;
+    else if(cur<p.target) next=Math.min(99,cur+1);
+    else next=0;
+  }
+  setEntry(h,k,next);saveData();renderAllV4();showToast(next>cur?"Progression +1":"Progression mise à jour");
+}
+function renderTodayV4(){
+  const d=selectedDate;
+  document.getElementById("todayTitle").textContent=dateKey(d)===todayKey()?"Aujourd’hui":formatDate(d,{weekday:"long",day:"numeric",month:"long"});
+  document.getElementById("todaySubtitle").textContent=formatDate(d,{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+  const list=habits.filter(h=>isActiveOn(h,d));
+  const done=list.filter(h=>daySatisfied(h,d)).length;
+  document.getElementById("todayCount").textContent=`${done}/${list.length} terminée${list.length>1?"s":""}`;
+  const c=document.getElementById("todayHabits");c.innerHTML="";
+  document.getElementById("todayEmpty").style.display=list.length?"none":"block";
+  list.forEach(h=>c.appendChild(habitCardHTML(h,d,"today")));
+  renderTasks();
+}
+function renderHabitsV4(){
+  const c=document.getElementById("allHabits");c.innerHTML="";
+  if(!habits.length){c.innerHTML=`<div class="empty card"><div class="big">✦</div><strong>Aucune habitude</strong><p>Commence par créer une habitude.</p></div>`;return}
+  const d=new Date();
+  habits.forEach(h=>c.appendChild(habitCardHTML(h,d,"all")));
+}
+function renderAllV4(){
+  renderTodayV4();renderHabitsV4();renderCalendarV4();renderStats();
+  if(document.getElementById("page-advanced-stats")?.classList.contains("active"))renderAdvancedStats();
+}
+renderToday=renderTodayV4;
+renderHabits=renderHabitsV4;
+renderAll=renderAllV4;
+
+function refreshFrequencyFormV4(){
+  const f=document.getElementById("fFrequency"),daily=document.getElementById("fDailyGoal"),weekly=document.getElementById("fWeeklyGoal");
+  const fl=document.getElementById("freqNumberLabel"),fw=document.getElementById("freqNumberWrap"),dw=document.getElementById("specificWrap");
+  const help=document.getElementById("frequencyHelpV4");
+  if(!f||!help)return;
+  const descriptions={
+    daily:"L’habitude est prévue chaque jour. Tu peux définir combien de fois tu veux la réaliser chaque jour.",
+    weekly:"L’objectif est compté sur la semaine. Exemple : 7 fois = 7 validations à atteindre du lundi au dimanche.",
+    xweek:"Tu choisis exactement combien de fois réaliser cette habitude pendant chaque semaine.",
+    xmonth:"Tu choisis exactement combien de fois réaliser cette habitude pendant chaque mois.",
+    specific:"Tu choisis les jours précis où cette habitude apparaît."
+  };
+  help.textContent=descriptions[currentFreq]||"";
+  if(currentFreq==="daily"){
+    fw.style.display="none";f.style.display="none";dw.style.display="none";
+  }else if(currentFreq==="weekly"){
+    fw.style.display="block";fl.textContent="Objectif de la semaine";f.value=f.value||"1";f.style.display="none";dw.style.display="none";
+  }else if(currentFreq==="xweek"){
+    fw.style.display="block";fl.textContent="Nombre de fois par semaine";f.style.display="block";dw.style.display="none";
+  }else if(currentFreq==="xmonth"){
+    fw.style.display="block";fl.textContent="Nombre de fois par mois";f.style.display="block";dw.style.display="none";
+  }else{
+    fw.style.display="none";f.style.display="none";dw.style.display="block";
+  }
+  daily.parentElement.style.display=(currentFreq==="daily"||currentFreq==="specific")?"block":"none";
+  weekly.parentElement.style.display=(currentFreq==="weekly")?"block":"none";
+}
+function enhanceCreateFormV4(){
+  const freq=document.getElementById("freqRow"),helpWrap=document.getElementById("freqNumberWrap");
+  if(!freq||document.getElementById("frequencyHelpV4"))return;
+  const help=document.createElement("small");help.id="frequencyHelpV4";help.className="frequency-help";
+  helpWrap.parentElement.appendChild(help);
+  const title=document.createElement("div");title.className="form-section-title";title.textContent="Objectif & planification";
+  freq.parentElement.parentElement.insertBefore(title,freq.parentElement);
+  freq.querySelectorAll(".segment").forEach(btn=>{
+    btn.addEventListener("click",()=>{currentFreq=btn.dataset.freq;refreshFrequencyFormV4()});
+  });
+  refreshFrequencyFormV4();
+}
+loadTasks();
+enhanceCreateFormV4();
+renderAllV4();
+</script>
+</body>
+</html>
