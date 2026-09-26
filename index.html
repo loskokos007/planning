@@ -127,7 +127,7 @@ a{
 }
 
 /* =========================================================
-   SPECIAL BACKGROUND
+   PREMIUM AMBIENT BACKGROUNDS
 ========================================================= */
 
 .special-bg{
@@ -138,13 +138,23 @@ a{
   z-index:-2;
 }
 
-/* ---------- AURORA ---------- */
+/* =========================================================
+   AURORA
+========================================================= */
 
 .aurora-layer{
   position:absolute;
-  inset:-20%;
+  inset:-25%;
   overflow:hidden;
-  filter:saturate(120%);
+
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(45,255,190,.08),
+      transparent 42%
+    );
+
+  filter:saturate(135%);
 }
 
 .aurora-one,
@@ -153,14 +163,14 @@ a{
 .aurora-four{
   position:absolute;
 
-  width:55vw;
-  height:55vw;
+  width:58vw;
+  height:58vw;
 
   border-radius:50%;
 
-  filter:blur(80px);
+  filter:blur(75px);
 
-  opacity:.20;
+  opacity:.30;
 
   animation:
     auroraFloat
@@ -171,34 +181,99 @@ a{
 }
 
 .aurora-one{
-  background:#65e5bd;
-  left:-12%;
-  top:-10%;
+  background:
+    radial-gradient(
+      circle,
+      #42f5bd,
+      #18cda2 40%,
+      transparent 70%
+    );
+
+  left:-13%;
+  top:-13%;
 }
 
 .aurora-two{
-  background:#7168ff;
+  background:
+    radial-gradient(
+      circle,
+      #756dff,
+      #4e52e8 42%,
+      transparent 70%
+    );
+
   right:-15%;
-  top:5%;
+  top:3%;
+
   animation-delay:-4s;
   animation-duration:16s;
 }
 
 .aurora-three{
-  background:#d66cff;
-  left:25%;
-  bottom:-25%;
+  background:
+    radial-gradient(
+      circle,
+      #dc70ff,
+      #873eff 42%,
+      transparent 70%
+    );
+
+  left:23%;
+  bottom:-28%;
+
   animation-delay:-7s;
   animation-duration:18s;
 }
 
 .aurora-four{
-  background:#3cc9ff;
-  left:50%;
-  top:35%;
-  opacity:.10;
+  background:
+    radial-gradient(
+      circle,
+      #35e9ff,
+      transparent 68%
+    );
+
+  left:48%;
+  top:32%;
+
+  opacity:.18;
+
   animation-delay:-10s;
   animation-duration:20s;
+}
+
+.aurora-ribbon{
+  position:absolute;
+
+  width:115%;
+  height:32%;
+
+  left:-8%;
+  top:14%;
+
+  border-radius:50%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(69,255,198,.18),
+      rgba(97,246,255,.22),
+      rgba(157,99,255,.16),
+      transparent
+    );
+
+  filter:blur(25px);
+
+  transform:
+    rotate(-8deg)
+    skewX(-15deg);
+
+  animation:
+    auroraRibbon 10s
+    ease-in-out
+    infinite
+    alternate;
 }
 
 @keyframes auroraFloat{
@@ -211,20 +286,40 @@ a{
 
   50%{
     transform:
-      translate3d(60px,-40px,0)
-      scale(1.15)
-      rotate(8deg);
+      translate3d(70px,-45px,0)
+      scale(1.18)
+      rotate(9deg);
   }
 
   100%{
     transform:
-      translate3d(-50px,55px,0)
-      scale(1.32)
-      rotate(-8deg);
+      translate3d(-55px,60px,0)
+      scale(1.36)
+      rotate(-9deg);
   }
 }
 
-/* ---------- MIDNIGHT ---------- */
+@keyframes auroraRibbon{
+  0%{
+    transform:
+      rotate(-8deg)
+      translateX(-4%)
+      scaleY(.9);
+    opacity:.35;
+  }
+
+  100%{
+    transform:
+      rotate(-3deg)
+      translateX(8%)
+      scaleY(1.15);
+    opacity:.8;
+  }
+}
+
+/* =========================================================
+   MIDNIGHT
+========================================================= */
 
 .stars{
   position:absolute;
@@ -245,14 +340,44 @@ a{
     50px 80px,
     90px 140px;
 
-  opacity:.38;
+  opacity:.42;
 
   animation:
     starsMove 20s linear infinite;
 }
 
+.stars::before{
+  content:"";
+
+  position:absolute;
+
+  width:180px;
+  height:180px;
+
+  border-radius:50%;
+
+  right:8%;
+  top:8%;
+
+  background:
+    radial-gradient(
+      circle at 35% 35%,
+      #ffffff,
+      #c7d3ff 25%,
+      rgba(125,145,255,.25) 48%,
+      transparent 70%
+    );
+
+  box-shadow:
+    0 0 70px rgba(125,145,255,.18),
+    0 0 140px rgba(100,120,255,.10);
+
+  opacity:.65;
+}
+
 .stars::after{
   content:"";
+
   position:absolute;
   inset:0;
 
@@ -261,10 +386,11 @@ a{
       ellipse at center,
       transparent 20%,
       rgba(80,100,180,.10) 65%,
-      rgba(0,0,0,.22)
+      rgba(0,0,0,.28)
     );
 
-  animation:starsPulse 5s ease-in-out infinite alternate;
+  animation:
+    starsPulse 5s ease-in-out infinite alternate;
 }
 
 @keyframes starsMove{
@@ -284,16 +410,66 @@ a{
 }
 
 @keyframes starsPulse{
-  from{
-    opacity:.35;
-  }
-
-  to{
-    opacity:.85;
-  }
+  from{opacity:.35}
+  to{opacity:.9}
 }
 
-/* ---------- SAKURA ---------- */
+/* =========================================================
+   SAKURA
+========================================================= */
+
+.sakura-glow{
+  position:absolute;
+  width:70vw;
+  height:70vw;
+
+  left:-15%;
+  top:-15%;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,132,178,.22),
+      rgba(255,176,205,.09) 35%,
+      transparent 70%
+    );
+
+  filter:blur(25px);
+
+  animation:
+    sakuraGlow 9s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+.sakura-glow-two{
+  position:absolute;
+  width:55vw;
+  height:55vw;
+
+  right:-15%;
+  bottom:-15%;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,211,226,.20),
+      transparent 70%
+    );
+
+  filter:blur(30px);
+
+  animation:
+    sakuraGlow 12s
+    ease-in-out
+    infinite
+    alternate-reverse;
+}
 
 .petals{
   position:absolute;
@@ -314,12 +490,14 @@ a{
   background:
     linear-gradient(
       135deg,
-      #ffd4e3,
-      #ef83ad
+      #ffe4ef,
+      #f49abb 45%,
+      #df6898
     );
 
   box-shadow:
-    0 2px 8px rgba(217,90,135,.15);
+    0 2px 12px rgba(217,90,135,.25),
+    0 0 7px rgba(255,150,194,.15);
 
   opacity:.82;
 
@@ -329,8 +507,19 @@ a{
     infinite;
 }
 
-@keyframes sakuraFall{
+@keyframes sakuraGlow{
+  0%{
+    transform:scale(.85) translate3d(0,0,0);
+    opacity:.55;
+  }
 
+  100%{
+    transform:scale(1.18) translate3d(5%,4%,0);
+    opacity:1;
+  }
+}
+
+@keyframes sakuraFall{
   0%{
     transform:
       translate3d(0,-50px,0)
@@ -356,7 +545,9 @@ a{
   }
 }
 
-/* ---------- CYBER ---------- */
+/* =========================================================
+   CYBER
+========================================================= */
 
 .cyber-grid{
   position:absolute;
@@ -364,12 +555,12 @@ a{
 
   background:
     linear-gradient(
-      rgba(120,70,255,.08) 1px,
+      rgba(120,70,255,.11) 1px,
       transparent 1px
     ),
     linear-gradient(
       90deg,
-      rgba(70,220,255,.08) 1px,
+      rgba(70,220,255,.11) 1px,
       transparent 1px
     );
 
@@ -400,25 +591,56 @@ a{
   position:absolute;
   width:55vw;
   height:55vw;
+
   border-radius:50%;
 
   background:
     radial-gradient(
       circle,
-      rgba(179,90,255,.22),
-      transparent 65%
+      rgba(179,90,255,.28),
+      rgba(80,220,255,.10) 40%,
+      transparent 68%
     );
 
   filter:blur(20px);
 
   left:50%;
   top:15%;
+
   transform:translateX(-50%);
 
   animation:
     cyberPulse
     4s ease-in-out infinite
     alternate;
+}
+
+.cyber-beam{
+  position:absolute;
+
+  width:120%;
+  height:2px;
+
+  left:-10%;
+  top:43%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #55e8ff,
+      #b66cff,
+      transparent
+    );
+
+  box-shadow:
+    0 0 18px #55e8ff,
+    0 0 35px rgba(182,108,255,.7);
+
+  animation:
+    cyberBeam 5s
+    ease-in-out
+    infinite alternate;
 }
 
 @keyframes cyberMove{
@@ -440,6 +662,542 @@ a{
   to{
     opacity:1;
     transform:translateX(-50%) scale(1.15);
+  }
+}
+
+@keyframes cyberBeam{
+  from{
+    transform:translateY(-120px) rotate(-2deg);
+    opacity:.15;
+  }
+
+  to{
+    transform:translateY(120px) rotate(2deg);
+    opacity:.85;
+  }
+}
+
+/* =========================================================
+   NEBULA
+========================================================= */
+
+.nebula-layer{
+  position:absolute;
+  inset:-20%;
+
+  background:
+    radial-gradient(
+      ellipse at 20% 20%,
+      rgba(255,69,180,.24),
+      transparent 30%
+    ),
+    radial-gradient(
+      ellipse at 75% 25%,
+      rgba(92,87,255,.25),
+      transparent 34%
+    ),
+    radial-gradient(
+      ellipse at 45% 80%,
+      rgba(0,224,255,.16),
+      transparent 32%
+    );
+
+  filter:blur(12px);
+
+  animation:
+    nebulaMove 18s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+.nebula-cloud{
+  position:absolute;
+
+  width:55vw;
+  height:28vw;
+
+  border-radius:50%;
+
+  filter:blur(45px);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,77,180,.15),
+      rgba(116,83,255,.25),
+      rgba(69,220,255,.12)
+    );
+
+  left:20%;
+  top:35%;
+
+  transform:rotate(-18deg);
+
+  animation:
+    cloudFloat 11s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+.space-dust{
+  position:absolute;
+  inset:0;
+
+  background-image:
+    radial-gradient(circle,rgba(255,255,255,.7) 1px,transparent 1.5px),
+    radial-gradient(circle,rgba(133,211,255,.6) 1px,transparent 1.5px);
+
+  background-size:
+    130px 130px,
+    220px 220px;
+
+  opacity:.28;
+
+  animation:
+    dustMove 35s
+    linear
+    infinite;
+}
+
+@keyframes nebulaMove{
+  0%{
+    transform:scale(1) rotate(0deg);
+  }
+
+  100%{
+    transform:scale(1.12) rotate(4deg);
+  }
+}
+
+@keyframes cloudFloat{
+  from{
+    transform:rotate(-18deg) translate(-30px,0) scale(.9);
+  }
+
+  to{
+    transform:rotate(-8deg) translate(40px,-25px) scale(1.1);
+  }
+}
+
+@keyframes dustMove{
+  from{
+    background-position:0 0,0 0;
+  }
+
+  to{
+    background-position:130px 90px,-100px 180px;
+  }
+}
+
+/* =========================================================
+   COSMOS
+========================================================= */
+
+.cosmos-layer{
+  position:absolute;
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(90,106,255,.13),
+      transparent 35%
+    );
+}
+
+.cosmos-star{
+  position:absolute;
+
+  width:3px;
+  height:3px;
+
+  border-radius:50%;
+
+  background:white;
+
+  box-shadow:
+    0 0 8px rgba(255,255,255,.8);
+
+  animation:
+    cosmosTwinkle
+    2s ease-in-out
+    infinite alternate;
+}
+
+.cosmos-orbit{
+  position:absolute;
+
+  width:470px;
+  height:180px;
+
+  border:
+    1px solid
+    rgba(130,150,255,.18);
+
+  border-radius:50%;
+
+  left:50%;
+  top:43%;
+
+  transform:
+    translate(-50%,-50%)
+    rotate(-18deg);
+
+  box-shadow:
+    0 0 30px rgba(93,112,255,.08);
+
+  animation:
+    orbitRotate
+    15s
+    linear
+    infinite;
+}
+
+.cosmos-planet{
+  position:absolute;
+
+  width:74px;
+  height:74px;
+
+  border-radius:50%;
+
+  left:calc(50% - 37px);
+  top:calc(43% - 37px);
+
+  background:
+    radial-gradient(
+      circle at 32% 28%,
+      #c9d0ff,
+      #6c72df 42%,
+      #302b80 75%,
+      #151331
+    );
+
+  box-shadow:
+    0 0 35px rgba(112,118,255,.35),
+    inset -12px -10px 25px rgba(0,0,0,.35);
+}
+
+@keyframes cosmosTwinkle{
+  from{
+    opacity:.2;
+    transform:scale(.7);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1.4);
+  }
+}
+
+@keyframes orbitRotate{
+  from{
+    transform:
+      translate(-50%,-50%)
+      rotate(-18deg)
+      scale(.95);
+  }
+
+  to{
+    transform:
+      translate(-50%,-50%)
+      rotate(342deg)
+      scale(1.05);
+  }
+}
+
+/* =========================================================
+   FROST
+========================================================= */
+
+.frost-layer{
+  position:absolute;
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(145,231,255,.22),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 80%,
+      rgba(111,163,255,.18),
+      transparent 35%
+    );
+}
+
+.frost-crystal{
+  position:absolute;
+
+  width:180px;
+  height:180px;
+
+  border:
+    1px solid
+    rgba(194,244,255,.24);
+
+  clip-path:
+    polygon(
+      50% 0%,
+      62% 34%,
+      100% 50%,
+      62% 66%,
+      50% 100%,
+      38% 66%,
+      0% 50%,
+      38% 34%
+    );
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(160,235,255,.12),
+      transparent 70%
+    );
+
+  filter:
+    drop-shadow(
+      0 0 22px
+      rgba(100,220,255,.12)
+    );
+
+  animation:
+    frostFloat
+    9s ease-in-out
+    infinite
+    alternate;
+}
+
+.frost-one{
+  left:8%;
+  top:12%;
+}
+
+.frost-two{
+  right:8%;
+  bottom:8%;
+  width:240px;
+  height:240px;
+  animation-delay:-4s;
+}
+
+@keyframes frostFloat{
+  from{
+    transform:rotate(0deg) scale(.85);
+    opacity:.35;
+  }
+
+  to{
+    transform:rotate(28deg) scale(1.1);
+    opacity:.75;
+  }
+}
+
+/* =========================================================
+   CRYSTAL
+========================================================= */
+
+.crystal-layer{
+  position:absolute;
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at 25% 20%,
+      rgba(255,255,255,.22),
+      transparent 22%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(116,223,255,.12),
+      transparent 28%
+    );
+}
+
+.crystal-shard{
+  position:absolute;
+
+  width:260px;
+  height:360px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.16),
+      rgba(120,200,255,.05),
+      rgba(170,110,255,.12)
+    );
+
+  clip-path:
+    polygon(
+      45% 0,
+      100% 28%,
+      78% 100%,
+      20% 72%,
+      0 20%
+    );
+
+  border:
+    1px solid
+    rgba(255,255,255,.12);
+
+  filter:
+    drop-shadow(
+      0 0 35px
+      rgba(130,200,255,.10)
+    );
+
+  transform:rotate(18deg);
+
+  animation:
+    crystalFloat
+    12s ease-in-out
+    infinite alternate;
+}
+
+.crystal-one{
+  left:-4%;
+  top:-8%;
+}
+
+.crystal-two{
+  right:-5%;
+  bottom:-15%;
+  transform:rotate(-20deg);
+  animation-delay:-5s;
+}
+
+@keyframes crystalFloat{
+  from{
+    transform:rotate(18deg) translateY(0);
+  }
+
+  to{
+    transform:rotate(25deg) translateY(-35px);
+  }
+}
+
+/* =========================================================
+   ENCHANTED FOREST
+========================================================= */
+
+.forest-layer{
+  position:absolute;
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at 30% 20%,
+      rgba(91,255,151,.15),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(47,177,104,.12),
+      transparent 32%
+    );
+}
+
+.firefly{
+  position:absolute;
+
+  width:5px;
+  height:5px;
+
+  border-radius:50%;
+
+  background:#aaffc4;
+
+  box-shadow:
+    0 0 8px #aaffc4,
+    0 0 20px rgba(120,255,174,.75);
+
+  animation:
+    fireflyMove
+    6s ease-in-out
+    infinite alternate;
+}
+
+@keyframes fireflyMove{
+  0%{
+    transform:
+      translate3d(0,0,0)
+      scale(.5);
+    opacity:.15;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+  100%{
+    transform:
+      translate3d(60px,-45px,0)
+      scale(1.2);
+    opacity:.2;
+  }
+}
+
+/* =========================================================
+   NOCTURNE
+========================================================= */
+
+.nocturne-layer{
+  position:absolute;
+  inset:0;
+
+  background:
+    radial-gradient(
+      ellipse at 20% 20%,
+      rgba(255,172,100,.12),
+      transparent 25%
+    ),
+    radial-gradient(
+      ellipse at 80% 80%,
+      rgba(180,92,255,.12),
+      transparent 30%
+    );
+}
+
+.nocturne-lamp{
+  position:absolute;
+
+  width:280px;
+  height:280px;
+
+  right:-80px;
+  top:-90px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,210,142,.26),
+      rgba(255,170,90,.08) 35%,
+      transparent 68%
+    );
+
+  filter:blur(15px);
+
+  animation:
+    lampPulse
+    5s ease-in-out
+    infinite alternate;
+}
+
+@keyframes lampPulse{
+  from{
+    opacity:.5;
+    transform:scale(.9);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1.1);
   }
 }
 
@@ -1220,7 +1978,7 @@ header{
 }
 
 /* =========================================================
-   HELP DETAIL PAGES
+   HELP DETAIL
 ========================================================= */
 
 .help-detail{
@@ -1467,6 +2225,10 @@ header{
   font-size:13px;
 }
 
+/* =========================================================
+   SUBJECT PAGES
+========================================================= */
+
 .subject-grid{
   display:grid;
 
@@ -1516,6 +2278,113 @@ header{
   color:var(--muted);
 }
 
+.subject-hero{
+  padding:34px;
+
+  position:relative;
+
+  overflow:hidden;
+
+  margin-bottom:18px;
+}
+
+.subject-hero::before{
+  content:"";
+
+  position:absolute;
+
+  width:300px;
+  height:300px;
+
+  right:-100px;
+  top:-120px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      var(--accent-soft),
+      transparent 70%
+    );
+
+  animation:
+    subjectGlow 6s
+    ease-in-out
+    infinite
+    alternate;
+}
+
+.subject-hero-content{
+  position:relative;
+  z-index:1;
+}
+
+.subject-emoji{
+  width:70px;
+  height:70px;
+
+  border-radius:22px;
+
+  display:grid;
+  place-items:center;
+
+  background:var(--accent-soft);
+
+  font-size:34px;
+
+  margin-bottom:18px;
+}
+
+.subject-hero h1{
+  margin:0;
+
+  font-size:
+    clamp(34px,5vw,50px);
+
+  letter-spacing:-2px;
+}
+
+.subject-hero p{
+  max-width:720px;
+
+  color:var(--muted);
+
+  line-height:1.65;
+
+  margin:10px 0 0;
+}
+
+.subject-pill{
+  display:inline-flex;
+
+  margin-top:16px;
+
+  padding:7px 11px;
+
+  border-radius:100px;
+
+  background:var(--accent-soft);
+
+  color:var(--accent);
+
+  font-size:11px;
+
+  font-weight:800;
+}
+
+@keyframes subjectGlow{
+  from{
+    transform:scale(.85);
+    opacity:.5;
+  }
+
+  to{
+    transform:scale(1.12);
+    opacity:1;
+  }
+}
+
 /* =========================================================
    SETTINGS
 ========================================================= */
@@ -1545,6 +2414,58 @@ header{
   font-size:13px;
 }
 
+.theme-section{
+  margin-top:24px;
+}
+
+.theme-section:first-child{
+  margin-top:0;
+}
+
+.theme-section-head{
+  display:flex;
+
+  align-items:center;
+  justify-content:space-between;
+
+  gap:12px;
+
+  margin-bottom:11px;
+}
+
+.theme-section-title{
+  font-size:14px;
+
+  font-weight:850;
+
+  letter-spacing:-.2px;
+}
+
+.theme-section-description{
+  color:var(--muted);
+
+  font-size:11px;
+}
+
+.theme-section-title::before{
+  content:"";
+
+  display:inline-block;
+
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:var(--accent);
+
+  margin-right:7px;
+
+  box-shadow:
+    0 0 10px
+    var(--glow);
+}
+
 .theme-grid{
   display:grid;
 
@@ -1555,13 +2476,15 @@ header{
 }
 
 .theme-btn{
+  position:relative;
+
   border:
     2px solid
     transparent;
 
-  border-radius:17px;
+  border-radius:19px;
 
-  padding:9px;
+  padding:8px;
 
   background:var(--surface2);
 
@@ -1570,33 +2493,63 @@ header{
   color:var(--text);
 
   transition:
-    transform .2s,
-    border-color .2s,
-    box-shadow .2s;
+    transform .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease;
 }
 
 .theme-btn:hover{
-  transform:translateY(-2px);
+  transform:translateY(-3px);
 }
 
 .theme-btn.active{
   border-color:var(--accent);
 
   box-shadow:
-    0 8px 24px
+    0 8px 28px
     var(--glow);
 }
 
 .theme-preview{
-  height:55px;
+  height:67px;
 
-  border-radius:12px;
+  border-radius:13px;
 
   margin-bottom:8px;
 
   position:relative;
 
   overflow:hidden;
+
+  isolation:isolate;
+}
+
+.theme-preview::before{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background:
+    linear-gradient(
+      125deg,
+      transparent 15%,
+      rgba(255,255,255,.24),
+      transparent 55%
+    );
+
+  transform:
+    translateX(-120%)
+    skewX(-15deg);
+
+  transition:
+    transform .8s ease;
+}
+
+.theme-btn:hover .theme-preview::before{
+  transform:
+    translateX(120%)
+    skewX(-15deg);
 }
 
 .theme-preview::after{
@@ -1604,28 +2557,96 @@ header{
 
   position:absolute;
 
-  inset:0;
+  width:28px;
+  height:28px;
+
+  right:8px;
+  top:8px;
+
+  border-radius:50%;
 
   background:
-    linear-gradient(
-      125deg,
-      transparent 25%,
-      rgba(255,255,255,.18),
-      transparent 75%
-    );
+    rgba(255,255,255,.25);
 
-  transform:translateX(-100%);
+  filter:blur(5px);
 
-  transition:.7s;
+  box-shadow:
+    0 0 14px
+    rgba(255,255,255,.22);
 }
 
-.theme-btn:hover .theme-preview::after{
-  transform:translateX(100%);
+.theme-preview .preview-dot{
+  position:absolute;
+
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:rgba(255,255,255,.72);
+
+  box-shadow:
+    0 0 8px
+    rgba(255,255,255,.8);
+}
+
+.theme-preview .preview-dot:nth-child(1){
+  left:12px;
+  bottom:11px;
+}
+
+.theme-preview .preview-dot:nth-child(2){
+  left:27px;
+  bottom:18px;
+
+  width:4px;
+  height:4px;
+}
+
+.theme-preview .preview-line{
+  position:absolute;
+
+  left:10px;
+  right:10px;
+  bottom:8px;
+
+  height:4px;
+
+  border-radius:10px;
+
+  background:
+    rgba(255,255,255,.28);
 }
 
 .theme-name{
   font-size:11px;
-  font-weight:750;
+  font-weight:800;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:space-between;
+
+  gap:5px;
+}
+
+.theme-premium-mark{
+  font-size:9px;
+
+  padding:3px 6px;
+
+  border-radius:100px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.10),
+      var(--accent-soft)
+    );
+
+  color:var(--accent);
+
+  font-weight:900;
 }
 
 /* =========================================================
@@ -1872,21 +2893,18 @@ header{
 }
 
 /* =========================================================
-   LIGHT THEMES
+   CLASSIC LIGHT THEMES
 ========================================================= */
 
 body[data-theme="sage"]{
   --bg:#f3f7f2;
   --surface:rgba(255,255,255,.80);
   --surface-solid:#fff;
-
   --text:#18201c;
   --muted:#78827d;
-
   --accent:#789b83;
   --accent2:#b9d1bd;
   --accent-soft:rgba(120,155,131,.14);
-
   --glow:rgba(120,155,131,.20);
 }
 
@@ -1894,14 +2912,11 @@ body[data-theme="cream"]{
   --bg:#faf6ed;
   --surface:rgba(255,252,244,.84);
   --surface-solid:#fffaf0;
-
   --text:#302b22;
   --muted:#8b8375;
-
   --accent:#b28c5a;
   --accent2:#d8bf98;
   --accent-soft:rgba(178,140,90,.14);
-
   --glow:rgba(178,140,90,.18);
 }
 
@@ -1909,14 +2924,11 @@ body[data-theme="sky"]{
   --bg:#eef7fb;
   --surface:rgba(255,255,255,.82);
   --surface-solid:#fff;
-
   --text:#17252d;
   --muted:#73858e;
-
   --accent:#5b9bb5;
   --accent2:#a9d4e5;
   --accent-soft:rgba(91,155,181,.14);
-
   --glow:rgba(91,155,181,.18);
 }
 
@@ -1924,14 +2936,11 @@ body[data-theme="lavender"]{
   --bg:#f6f2fb;
   --surface:rgba(255,255,255,.82);
   --surface-solid:#fff;
-
   --text:#292332;
   --muted:#81788d;
-
   --accent:#927bb8;
   --accent2:#c9b9df;
   --accent-soft:rgba(146,123,184,.14);
-
   --glow:rgba(146,123,184,.20);
 }
 
@@ -1939,14 +2948,11 @@ body[data-theme="peach"]{
   --bg:#fff4ef;
   --surface:rgba(255,255,255,.82);
   --surface-solid:#fff;
-
   --text:#332420;
   --muted:#927b73;
-
   --accent:#d98f72;
   --accent2:#efc1ad;
   --accent-soft:rgba(217,143,114,.14);
-
   --glow:rgba(217,143,114,.20);
 }
 
@@ -1954,14 +2960,11 @@ body[data-theme="mint"]{
   --bg:#eff9f4;
   --surface:rgba(255,255,255,.82);
   --surface-solid:#fff;
-
   --text:#172820;
   --muted:#708279;
-
   --accent:#55a47d;
   --accent2:#a8d6be;
   --accent-soft:rgba(85,164,125,.14);
-
   --glow:rgba(85,164,125,.20);
 }
 
@@ -1969,14 +2972,11 @@ body[data-theme="lemon"]{
   --bg:#fbfae9;
   --surface:rgba(255,255,255,.82);
   --surface-solid:#fffef2;
-
   --text:#2b2b20;
   --muted:#87876d;
-
   --accent:#a6a53f;
   --accent2:#d7d68b;
   --accent-soft:rgba(166,165,63,.15);
-
   --glow:rgba(166,165,63,.20);
 }
 
@@ -1984,14 +2984,11 @@ body[data-theme="sakura"]{
   --bg:#fff2f6;
   --surface:rgba(255,255,255,.79);
   --surface-solid:#fff8fa;
-
   --text:#34212a;
   --muted:#927680;
-
   --accent:#d9799c;
   --accent2:#f1b6ca;
   --accent-soft:rgba(217,121,156,.15);
-
   --glow:rgba(217,121,156,.22);
 }
 
@@ -1999,14 +2996,11 @@ body[data-theme="ocean"]{
   --bg:#edf7f8;
   --surface:rgba(255,255,255,.80);
   --surface-solid:#faffff;
-
   --text:#14282c;
   --muted:#71868a;
-
   --accent:#3e9ba5;
   --accent2:#91d1d3;
   --accent-soft:rgba(62,155,165,.14);
-
   --glow:rgba(62,155,165,.20);
 }
 
@@ -2014,228 +3008,24 @@ body[data-theme="sunset"]{
   --bg:#fff2e8;
   --surface:rgba(255,255,255,.80);
   --surface-solid:#fffaf5;
-
   --text:#30221c;
   --muted:#927d71;
-
   --accent:#d47d55;
   --accent2:#efb48e;
   --accent-soft:rgba(212,125,85,.14);
-
   --glow:rgba(212,125,85,.20);
 }
-
-/* =========================================================
-   DARK THEMES
-========================================================= */
-
-body[data-theme="midnight"]{
-  --bg:#080b12;
-  --surface:rgba(17,22,34,.76);
-  --surface-solid:#111622;
-  --surface2:rgba(25,31,45,.70);
-
-  --text:#eef2ff;
-  --muted:#8e98ad;
-
-  --accent:#788cff;
-  --accent2:#a7b2ff;
-  --accent-soft:rgba(120,140,255,.15);
-
-  --border:rgba(255,255,255,.08);
-  --nav:rgba(14,18,29,.82);
-
-  --glow:rgba(120,140,255,.22);
-}
-
-body[data-theme="forest-dark"]{
-  --bg:#09110d;
-  --surface:rgba(17,28,21,.78);
-  --surface-solid:#121d16;
-  --surface2:rgba(25,40,30,.72);
-
-  --text:#edf8ef;
-  --muted:#8a9c8e;
-
-  --accent:#62a873;
-  --accent2:#9ed2a7;
-  --accent-soft:rgba(98,168,115,.15);
-
-  --border:rgba(255,255,255,.07);
-  --nav:rgba(12,20,15,.82);
-
-  --glow:rgba(98,168,115,.20);
-}
-
-body[data-theme="ocean-dark"]{
-  --bg:#061116;
-  --surface:rgba(11,28,35,.78);
-  --surface-solid:#0d2229;
-  --surface2:rgba(17,38,47,.72);
-
-  --text:#e9f8fb;
-  --muted:#7f9ba1;
-
-  --accent:#45b9c5;
-  --accent2:#8ee2e5;
-  --accent-soft:rgba(69,185,197,.15);
-
-  --border:rgba(255,255,255,.07);
-  --nav:rgba(7,19,24,.82);
-
-  --glow:rgba(69,185,197,.22);
-}
-
-body[data-theme="purple-dark"]{
-  --bg:#100a18;
-  --surface:rgba(29,18,39,.78);
-  --surface-solid:#20132b;
-  --surface2:rgba(40,25,53,.72);
-
-  --text:#f7edff;
-  --muted:#9e8baa;
-
-  --accent:#a66cff;
-  --accent2:#d0aaff;
-  --accent-soft:rgba(166,108,255,.15);
-
-  --border:rgba(255,255,255,.08);
-  --nav:rgba(19,11,27,.82);
-
-  --glow:rgba(166,108,255,.22);
-}
-
-body[data-theme="coffee"]{
-  --bg:#120d0a;
-  --surface:rgba(34,25,20,.80);
-  --surface-solid:#241a15;
-  --surface2:rgba(46,34,27,.72);
-
-  --text:#f8eee5;
-  --muted:#a79385;
-
-  --accent:#c28b62;
-  --accent2:#e0b38d;
-  --accent-soft:rgba(194,139,98,.15);
-
-  --border:rgba(255,255,255,.08);
-  --nav:rgba(22,15,12,.82);
-
-  --glow:rgba(194,139,98,.20);
-}
-
-body[data-theme="cyber"]{
-  --bg:#08070f;
-  --surface:rgba(19,15,31,.78);
-  --surface-solid:#171227;
-  --surface2:rgba(31,24,47,.72);
-
-  --text:#f8f1ff;
-  --muted:#a497b2;
-
-  --accent:#b66cff;
-  --accent2:#55e8ff;
-  --accent-soft:rgba(182,108,255,.15);
-
-  --border:rgba(180,100,255,.16);
-  --nav:rgba(12,9,20,.84);
-
-  --glow:rgba(182,108,255,.28);
-}
-
-body[data-theme="ruby"]{
-  --bg:#12080b;
-  --surface:rgba(31,14,19,.80);
-  --surface-solid:#241116;
-  --surface2:rgba(45,20,28,.72);
-
-  --text:#fff0f2;
-  --muted:#a88b91;
-
-  --accent:#e65d79;
-  --accent2:#ff9daf;
-  --accent-soft:rgba(230,93,121,.15);
-
-  --border:rgba(255,255,255,.08);
-  --nav:rgba(20,9,13,.84);
-
-  --glow:rgba(230,93,121,.22);
-}
-
-body[data-theme="slate"]{
-  --bg:#090d12;
-  --surface:rgba(20,27,35,.80);
-  --surface-solid:#151c24;
-  --surface2:rgba(28,37,48,.74);
-
-  --text:#eef3f7;
-  --muted:#8e9aa5;
-
-  --accent:#7899b2;
-  --accent2:#a8c6d8;
-  --accent-soft:rgba(120,153,178,.15);
-
-  --border:rgba(255,255,255,.08);
-  --nav:rgba(12,16,22,.84);
-
-  --glow:rgba(120,153,178,.20);
-}
-
-body[data-theme="aurora"]{
-  --bg:#080c15;
-  --surface:rgba(15,22,34,.72);
-  --surface-solid:#111927;
-  --surface2:rgba(24,34,50,.72);
-
-  --text:#f1f8ff;
-  --muted:#8c9bac;
-
-  --accent:#69d6b4;
-  --accent2:#9c7cff;
-  --accent-soft:rgba(105,214,180,.14);
-
-  --border:rgba(255,255,255,.08);
-  --nav:rgba(11,16,27,.80);
-
-  --glow:rgba(105,214,180,.25);
-}
-
-body[data-theme="graphite"]{
-  --bg:#0b0b0c;
-  --surface:rgba(24,24,26,.82);
-  --surface-solid:#1a1a1c;
-  --surface2:rgba(33,33,36,.74);
-
-  --text:#f5f5f5;
-  --muted:#96969b;
-
-  --accent:#d0d0d5;
-  --accent2:#888890;
-  --accent-soft:rgba(208,208,213,.13);
-
-  --border:rgba(255,255,255,.09);
-  --nav:rgba(15,15,17,.86);
-
-  --glow:rgba(208,208,213,.15);
-}
-
-/* =========================================================
-   EXTRA PREMIUM THEMES
-========================================================= */
 
 body[data-theme="rosewood"]{
   --bg:#f8eef0;
   --surface:rgba(255,255,255,.82);
   --surface-solid:#fff9fa;
   --surface2:rgba(255,255,255,.58);
-
   --text:#321d23;
   --muted:#90747c;
-
   --accent:#a95f70;
   --accent2:#d9a0ad;
   --accent-soft:rgba(169,95,112,.14);
-
   --glow:rgba(169,95,112,.20);
 }
 
@@ -2244,15 +3034,136 @@ body[data-theme="sand"]{
   --surface:rgba(255,255,255,.80);
   --surface-solid:#fffdf7;
   --surface2:rgba(255,255,255,.55);
-
   --text:#2e2a22;
   --muted:#89806e;
-
   --accent:#9b8760;
   --accent2:#cdbd99;
   --accent-soft:rgba(155,135,96,.14);
-
   --glow:rgba(155,135,96,.20);
+}
+
+/* =========================================================
+   CLASSIC DARK THEMES
+========================================================= */
+
+body[data-theme="midnight"]{
+  --bg:#080b12;
+  --surface:rgba(17,22,34,.76);
+  --surface-solid:#111622;
+  --surface2:rgba(25,31,45,.70);
+  --text:#eef2ff;
+  --muted:#8e98ad;
+  --accent:#788cff;
+  --accent2:#a7b2ff;
+  --accent-soft:rgba(120,140,255,.15);
+  --border:rgba(255,255,255,.08);
+  --nav:rgba(14,18,29,.82);
+  --glow:rgba(120,140,255,.22);
+}
+
+body[data-theme="forest-dark"]{
+  --bg:#09110d;
+  --surface:rgba(17,28,21,.78);
+  --surface-solid:#121d16;
+  --surface2:rgba(25,40,30,.72);
+  --text:#edf8ef;
+  --muted:#8a9c8e;
+  --accent:#62a873;
+  --accent2:#9ed2a7;
+  --accent-soft:rgba(98,168,115,.15);
+  --border:rgba(255,255,255,.07);
+  --nav:rgba(12,20,15,.82);
+  --glow:rgba(98,168,115,.20);
+}
+
+body[data-theme="ocean-dark"]{
+  --bg:#061116;
+  --surface:rgba(11,28,35,.78);
+  --surface-solid:#0d2229;
+  --surface2:rgba(17,38,47,.72);
+  --text:#e9f8fb;
+  --muted:#7f9ba1;
+  --accent:#45b9c5;
+  --accent2:#8ee2e5;
+  --accent-soft:rgba(69,185,197,.15);
+  --border:rgba(255,255,255,.07);
+  --nav:rgba(7,19,24,.82);
+  --glow:rgba(69,185,197,.22);
+}
+
+body[data-theme="purple-dark"]{
+  --bg:#100a18;
+  --surface:rgba(29,18,39,.78);
+  --surface-solid:#20132b;
+  --surface2:rgba(40,25,53,.72);
+  --text:#f7edff;
+  --muted:#9e8baa;
+  --accent:#a66cff;
+  --accent2:#d0aaff;
+  --accent-soft:rgba(166,108,255,.15);
+  --border:rgba(255,255,255,.08);
+  --nav:rgba(19,11,27,.82);
+  --glow:rgba(166,108,255,.22);
+}
+
+body[data-theme="coffee"]{
+  --bg:#120d0a;
+  --surface:rgba(34,25,20,.80);
+  --surface-solid:#241a15;
+  --surface2:rgba(46,34,27,.72);
+  --text:#f8eee5;
+  --muted:#a79385;
+  --accent:#c28b62;
+  --accent2:#e0b38d;
+  --accent-soft:rgba(194,139,98,.15);
+  --border:rgba(255,255,255,.08);
+  --nav:rgba(22,15,12,.82);
+  --glow:rgba(194,139,98,.20);
+}
+
+body[data-theme="ruby"]{
+  --bg:#12080b;
+  --surface:rgba(31,14,19,.80);
+  --surface-solid:#241116;
+  --surface2:rgba(45,20,28,.72);
+  --text:#fff0f2;
+  --muted:#a88b91;
+  --accent:#e65d79;
+  --accent2:#ff9daf;
+  --accent-soft:rgba(230,93,121,.15);
+  --border:rgba(255,255,255,.08);
+  --nav:rgba(20,9,13,.84);
+  --glow:rgba(230,93,121,.22);
+}
+
+body[data-theme="slate"]{
+  --bg:#090d12;
+  --surface:rgba(20,27,35,.80);
+  --surface-solid:#151c24;
+  --surface2:rgba(28,37,48,.74);
+  --text:#eef3f7;
+  --muted:#8e9aa5;
+  --accent:#7899b2;
+  --accent2:#a8c6d8;
+  --accent-soft:rgba(120,153,178,.15);
+  --border:rgba(255,255,255,.08);
+  --nav:rgba(12,16,22,.84);
+  --glow:rgba(120,153,178,.20);
+}
+
+body[data-theme="graphite"]{
+  --bg:#0b0b0c;
+  --surface:rgba(24,24,26,.82);
+  --surface-solid:#1a1a1c;
+  --surface2:rgba(33,33,36,.74);
+  --text:#f5f5f5;
+  --muted:#96969b;
+  --accent:#d0d0d5;
+  --accent2:#888890;
+  --accent-soft:rgba(208,208,213,.13);
+  --border:rgba(255,255,255,.09);
+  --nav:rgba(15,15,17,.86);
+  --glow:rgba(208,208,213,.15);
 }
 
 body[data-theme="deep-violet"]{
@@ -2260,17 +3171,13 @@ body[data-theme="deep-violet"]{
   --surface:rgba(25,17,35,.80);
   --surface-solid:#1b1026;
   --surface2:rgba(37,24,50,.72);
-
   --text:#f8efff;
   --muted:#a28eaf;
-
   --accent:#c078ff;
   --accent2:#efb3ff;
   --accent-soft:rgba(192,120,255,.15);
-
   --border:rgba(255,255,255,.08);
   --nav:rgba(14,8,21,.84);
-
   --glow:rgba(192,120,255,.24);
 }
 
@@ -2279,18 +3186,127 @@ body[data-theme="ember"]{
   --surface:rgba(31,18,15,.80);
   --surface-solid:#261411;
   --surface2:rgba(47,25,21,.72);
-
   --text:#fff1ea;
   --muted:#a98c82;
-
   --accent:#f07851;
   --accent2:#ffb08f;
   --accent-soft:rgba(240,120,81,.15);
-
   --border:rgba(255,255,255,.08);
   --nav:rgba(20,10,8,.84);
-
   --glow:rgba(240,120,81,.24);
+}
+
+/* =========================================================
+   PREMIUM THEME VARIABLES
+========================================================= */
+
+body[data-theme="aurora"]{
+  --bg:#050b12;
+  --surface:rgba(10,21,29,.68);
+  --surface-solid:#0c1922;
+  --surface2:rgba(16,31,40,.68);
+  --text:#ecfffa;
+  --muted:#86a8a4;
+
+  --accent:#55f0bd;
+  --accent2:#76e9dc;
+
+  --accent-soft:rgba(67,240,184,.15);
+  --border:rgba(90,255,213,.13);
+  --nav:rgba(5,15,22,.76);
+
+  --glow:
+    rgba(48,255,190,.40);
+}
+
+body[data-theme="nebula"]{
+  --bg:#080713;
+  --surface:rgba(20,16,37,.70);
+  --surface-solid:#17122b;
+  --surface2:rgba(31,24,52,.70);
+  --text:#faf5ff;
+  --muted:#a99db7;
+  --accent:#e06cff;
+  --accent2:#65dfff;
+  --accent-soft:rgba(224,108,255,.15);
+  --border:rgba(224,108,255,.14);
+  --nav:rgba(11,8,21,.78);
+  --glow:rgba(224,108,255,.34);
+}
+
+body[data-theme="cosmos"]{
+  --bg:#050713;
+  --surface:rgba(12,17,36,.70);
+  --surface-solid:#10162d;
+  --surface2:rgba(19,27,50,.70);
+  --text:#f1f5ff;
+  --muted:#909bb5;
+  --accent:#7186ff;
+  --accent2:#b6c0ff;
+  --accent-soft:rgba(113,134,255,.15);
+  --border:rgba(130,150,255,.13);
+  --nav:rgba(7,10,23,.78);
+  --glow:rgba(113,134,255,.30);
+}
+
+body[data-theme="frost"]{
+  --bg:#061017;
+  --surface:rgba(14,31,40,.70);
+  --surface-solid:#102630;
+  --surface2:rgba(22,43,54,.70);
+  --text:#effcff;
+  --muted:#8fa9b2;
+  --accent:#7de5ff;
+  --accent2:#b5c9ff;
+  --accent-soft:rgba(125,229,255,.15);
+  --border:rgba(145,235,255,.15);
+  --nav:rgba(6,17,23,.78);
+  --glow:rgba(105,222,255,.30);
+}
+
+body[data-theme="crystal"]{
+  --bg:#080c15;
+  --surface:rgba(18,25,39,.70);
+  --surface-solid:#141c2d;
+  --surface2:rgba(26,37,55,.70);
+  --text:#f3f8ff;
+  --muted:#95a3b6;
+  --accent:#8ecfff;
+  --accent2:#c3a4ff;
+  --accent-soft:rgba(142,207,255,.15);
+  --border:rgba(180,220,255,.15);
+  --nav:rgba(9,13,22,.80);
+  --glow:rgba(142,207,255,.28);
+}
+
+body[data-theme="enchanted"]{
+  --bg:#06100c;
+  --surface:rgba(12,29,20,.70);
+  --surface-solid:#10251a;
+  --surface2:rgba(20,43,29,.70);
+  --text:#effff3;
+  --muted:#8fa99a;
+  --accent:#76ef9a;
+  --accent2:#b0ffc6;
+  --accent-soft:rgba(118,239,154,.15);
+  --border:rgba(118,239,154,.13);
+  --nav:rgba(6,17,11,.80);
+  --glow:rgba(118,239,154,.30);
+}
+
+body[data-theme="nocturne"]{
+  --bg:#0b0810;
+  --surface:rgba(28,21,31,.72);
+  --surface-solid:#211822;
+  --surface2:rgba(40,29,44,.72);
+  --text:#fff6ed;
+  --muted:#a99a96;
+  --accent:#e4a267;
+  --accent2:#d991cf;
+  --accent-soft:rgba(228,162,103,.15);
+  --border:rgba(255,205,153,.12);
+  --nav:rgba(15,10,16,.82);
+  --glow:rgba(228,162,103,.28);
 }
 
 /* =========================================================
@@ -2348,7 +3364,8 @@ body[data-theme="ember"]{
     font-size:31px;
   }
 
-  .detail-hero{
+  .detail-hero,
+  .subject-hero{
     padding:26px;
   }
 }
@@ -2398,6 +3415,23 @@ body[data-theme="ember"]{
     width:58px;
     height:58px;
   }
+
+  .subject-hero h1{
+    font-size:35px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    scroll-behavior:auto !important;
+    transition-duration:.01ms !important;
+  }
+
 }
 
 </style>
@@ -2408,10 +3442,6 @@ body[data-theme="ember"]{
 <div class="special-bg" id="specialBg"></div>
 
 <div class="app">
-
-<!-- =======================================================
-     HEADER
-======================================================= -->
 
 <header>
 
@@ -2464,7 +3494,6 @@ Voici ce que tu peux accomplir aujourd’hui.
 
 </div>
 
-
 <div class="section-title">
 
 <h2>
@@ -2477,9 +3506,7 @@ Mes habitudes
 
 </div>
 
-
 <div id="todayHabits" class="habit-list"></div>
-
 
 <div
 id="todayEmpty"
@@ -2487,9 +3514,7 @@ class="card"
 style="padding:25px;text-align:center;display:none"
 >
 
-<div
-style="font-size:30px;margin-bottom:10px"
->
+<div style="font-size:30px;margin-bottom:10px">
 ✦
 </div>
 
@@ -2497,9 +3522,7 @@ style="font-size:30px;margin-bottom:10px"
 Aucune habitude pour aujourd’hui
 </strong>
 
-<p
-style="color:var(--muted);font-size:13px"
->
+<p style="color:var(--muted);font-size:13px">
 Crée ta première habitude depuis l’onglet Habitudes.
 </p>
 
@@ -2526,36 +3549,25 @@ Visualise ta régularité jour après jour.
 
 </div>
 
-
 <div class="calendar-card card">
 
 <div class="calendar-head">
 
-<div
-class="month-title"
-id="monthTitle"
-></div>
+<div class="month-title" id="monthTitle"></div>
 
 <div class="month-actions">
 
-<button
-class="icon-btn"
-onclick="changeMonth(-1)"
->
+<button class="icon-btn" onclick="changeMonth(-1)">
 ‹
 </button>
 
-<button
-class="icon-btn"
-onclick="changeMonth(1)"
->
+<button class="icon-btn" onclick="changeMonth(1)">
 ›
 </button>
 
 </div>
 
 </div>
-
 
 <div class="weekdays">
 
@@ -2569,11 +3581,7 @@ onclick="changeMonth(1)"
 
 </div>
 
-
-<div
-id="calendarGrid"
-class="calendar-grid"
-></div>
+<div id="calendarGrid" class="calendar-grid"></div>
 
 </div>
 
@@ -2598,12 +3606,7 @@ Crée une routine qui correspond réellement à ton quotidien.
 
 </div>
 
-
-<div
-id="allHabits"
-class="habit-list"
-></div>
-
+<div id="allHabits" class="habit-list"></div>
 
 <button
 class="create-habit"
@@ -2633,7 +3636,6 @@ Observe ta progression et ta régularité.
 
 </div>
 
-
 <div class="stats-grid">
 
 <div class="stat-card card">
@@ -2642,15 +3644,11 @@ Observe ta progression et ta régularité.
 Habitudes actives
 </div>
 
-<div
-class="stat-number"
-id="statHabits"
->
+<div class="stat-number" id="statHabits">
 0
 </div>
 
 </div>
-
 
 <div class="stat-card card">
 
@@ -2658,15 +3656,11 @@ id="statHabits"
 Complétions
 </div>
 
-<div
-class="stat-number"
-id="statDone"
->
+<div class="stat-number" id="statDone">
 0
 </div>
 
 </div>
-
 
 <div class="stat-card card">
 
@@ -2674,55 +3668,29 @@ id="statDone"
 Régularité
 </div>
 
-<div
-class="stat-number"
-id="statRate"
->
+<div class="stat-number" id="statRate">
 0%
 </div>
 
 <div class="progress">
-
-<div
-id="rateBar"
-style="width:0%"
-></div>
-
+<div id="rateBar" style="width:0%"></div>
 </div>
 
 </div>
 
 </div>
-
 
 <div class="section-title">
-
-<h2>
-7 derniers jours
-</h2>
-
+<h2>7 derniers jours</h2>
 </div>
 
-
-<div
-class="card chart"
-id="chart"
-></div>
-
+<div class="card chart" id="chart"></div>
 
 <div class="section-title">
-
-<h2>
-Par catégorie
-</h2>
-
+<h2>Par catégorie</h2>
 </div>
 
-
-<div
-id="categoryStats"
-class="habit-list"
-></div>
+<div id="categoryStats" class="habit-list"></div>
 
 </section>
 
@@ -2746,9 +3714,7 @@ améliorer ton sommeil et apprendre plus efficacement.
 
 </div>
 
-
 <div class="help-grid">
-
 
 <div
 class="help-topic card"
@@ -2769,7 +3735,6 @@ Respiration, recentrage, avant un contrôle et gestion de la pression.
 
 </div>
 
-
 <div
 class="help-topic card"
 onclick="openHelpPage('sleep')"
@@ -2788,7 +3753,6 @@ Construire une meilleure routine nocturne et récupérer efficacement.
 </p>
 
 </div>
-
 
 <div
 class="help-topic card"
@@ -2809,7 +3773,6 @@ Méthodes de mémorisation, concentration et techniques par matière.
 
 </div>
 
-
 </div>
 
 </section>
@@ -2819,18 +3782,11 @@ Méthodes de mémorisation, concentration et techniques par matière.
      HELP — STRESS
 ======================================================= -->
 
-<section
-id="page-help-stress"
-class="page help-detail"
->
+<section id="page-help-stress" class="page help-detail">
 
-<button
-class="help-back"
-onclick="backToHelp()"
->
+<button class="help-back" onclick="backToHelp()">
 ← Retour à l’aide
 </button>
-
 
 <div class="detail-hero card">
 
@@ -2850,14 +3806,11 @@ simplement lorsque la pression monte.
 
 </div>
 
-
 <div class="guide card">
 
 <div class="guide-header">
 
-<div class="guide-icon">
-🫁
-</div>
+<div class="guide-icon">🫁</div>
 
 <div>
 
@@ -2873,135 +3826,77 @@ Quelques méthodes simples à utiliser lorsque tu sens la pression monter.
 
 </div>
 
-
 <div class="tip-grid">
 
-
 <div class="tip">
-
-<div class="tip-number">
-1
-</div>
-
-<h3>
-Respiration 4–6
-</h3>
-
+<div class="tip-number">1</div>
+<h3>Respiration 4–6</h3>
 <p>
 Inspire doucement pendant 4 secondes puis expire pendant 6 secondes.
 Répète pendant 2 à 5 minutes. L’objectif est surtout de ralentir
 progressivement ta respiration.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-2
-</div>
-
-<h3>
-Respiration carrée
-</h3>
-
+<div class="tip-number">2</div>
+<h3>Respiration carrée</h3>
 <p>
 Inspire 4 secondes, bloque 4 secondes, expire 4 secondes,
 puis reste 4 secondes sans inspirer. Répète plusieurs cycles
 si cela t’aide à retrouver ton calme.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-3
-</div>
-
-<h3>
-Technique 5–4–3–2–1
-</h3>
-
+<div class="tip-number">3</div>
+<h3>Technique 5–4–3–2–1</h3>
 <p>
 Identifie 5 choses que tu vois, 4 que tu peux toucher,
 3 que tu entends, 2 que tu sens et 1 que tu peux goûter.
 Cela aide à ramener l’attention au présent.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-4
-</div>
-
-<h3>
-Relâchement musculaire
-</h3>
-
+<div class="tip-number">4</div>
+<h3>Relâchement musculaire</h3>
 <p>
 Contracte doucement un groupe musculaire pendant quelques secondes,
 puis relâche-le complètement. Passe progressivement des jambes
 jusqu’au visage.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-5
-</div>
-
-<h3>
-Avant un contrôle
-</h3>
-
+<div class="tip-number">5</div>
+<h3>Avant un contrôle</h3>
 <p>
 Évite de chercher à tout revoir dans les dernières minutes.
 Prépare ton matériel, respire lentement et commence par lire
 les consignes avant de résoudre les exercices.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-6
-</div>
-
-<h3>
-Quand la pression monte
-</h3>
-
+<div class="tip-number">6</div>
+<h3>Quand la pression monte</h3>
 <p>
 Découpe la situation en une seule prochaine action :
 ouvrir le cours, lire la question, écrire la première étape,
 ou commencer un exercice.
 </p>
-
 </div>
 
 </div>
 
 </div>
-
 
 <div class="guide card">
 
 <div class="guide-header">
 
-<div class="guide-icon">
-⚡
-</div>
+<div class="guide-icon">⚡</div>
 
 <div>
 
@@ -3017,78 +3912,42 @@ Prépare ton environnement plutôt que d’essayer de tout contrôler.
 
 </div>
 
-
 <div class="tip-grid">
 
 <div class="tip">
-
-<div class="tip-number">
-1
-</div>
-
-<h3>
-Prépare tes affaires
-</h3>
-
+<div class="tip-number">1</div>
+<h3>Prépare tes affaires</h3>
 <p>
 Matériel, feuilles, eau, calculatrice si nécessaire :
 préparer ces éléments à l’avance évite une partie du stress de dernière minute.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-2
-</div>
-
-<h3>
-Commence par lire
-</h3>
-
+<div class="tip-number">2</div>
+<h3>Commence par lire</h3>
 <p>
 Lis l’ensemble des consignes avant de te précipiter sur la première question.
 Identifie les exercices que tu comprends immédiatement.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-3
-</div>
-
-<h3>
-Découpe le problème
-</h3>
-
+<div class="tip-number">3</div>
+<h3>Découpe le problème</h3>
 <p>
 Si une question semble énorme, transforme-la en petites étapes.
 La prochaine action est souvent beaucoup plus simple que le problème entier.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-4
-</div>
-
-<h3>
-Accepte une part d’incertitude
-</h3>
-
+<div class="tip-number">4</div>
+<h3>Accepte une part d’incertitude</h3>
 <p>
 Tu n’as pas besoin d’être certain de réussir chaque question avant
 de commencer. Avance avec les informations que tu as.
 </p>
-
 </div>
 
 </div>
@@ -3102,24 +3961,15 @@ de commencer. Avance avec les informations que tu as.
      HELP — SLEEP
 ======================================================= -->
 
-<section
-id="page-help-sleep"
-class="page help-detail"
->
+<section id="page-help-sleep" class="page help-detail">
 
-<button
-class="help-back"
-onclick="backToHelp()"
->
+<button class="help-back" onclick="backToHelp()">
 ← Retour à l’aide
 </button>
 
-
 <div class="detail-hero card">
 
-<div class="detail-icon">
-🌙
-</div>
+<div class="detail-icon">🌙</div>
 
 <h1>
 Améliorer son sommeil
@@ -3132,14 +3982,11 @@ et de la transition entre la journée et la nuit.
 
 </div>
 
-
 <div class="guide card">
 
 <div class="guide-header">
 
-<div class="guide-icon">
-🛏️
-</div>
+<div class="guide-icon">🛏️</div>
 
 <div>
 
@@ -3156,134 +4003,76 @@ qu'une routine parfaite.
 
 </div>
 
-
 <div class="tip-grid">
 
-
 <div class="tip">
-
-<div class="tip-number">
-1
-</div>
-
-<h3>
-Garde des horaires réguliers
-</h3>
-
+<div class="tip-number">1</div>
+<h3>Garde des horaires réguliers</h3>
 <p>
 Essaie de garder une heure de lever relativement stable.
 La régularité aide ton organisme à anticiper les périodes
 de sommeil et d’éveil.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-2
-</div>
-
-<h3>
-Crée une transition
-</h3>
-
+<div class="tip-number">2</div>
+<h3>Crée une transition</h3>
 <p>
 Les 30 à 60 dernières minutes peuvent être plus calmes :
 lumière moins forte, activité tranquille et moins de stimulation.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-3
-</div>
-
-<h3>
-Optimise la chambre
-</h3>
-
+<div class="tip-number">3</div>
+<h3>Optimise la chambre</h3>
 <p>
 Une chambre sombre, calme et suffisamment fraîche peut faciliter
 l’endormissement. Évite autant que possible les sources lumineuses
 directement visibles depuis le lit.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-4
-</div>
-
-<h3>
-Attention aux stimulants
-</h3>
-
+<div class="tip-number">4</div>
+<h3>Attention aux stimulants</h3>
 <p>
 La caféine et certains stimulants peuvent rester actifs plusieurs
 heures. Si ton sommeil est perturbé, observe notamment leur horaire
 de consommation.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-5
-</div>
-
-<h3>
-Si tu ne t’endors pas
-</h3>
-
+<div class="tip-number">5</div>
+<h3>Si tu ne t’endors pas</h3>
 <p>
 Évite de regarder constamment l’heure. Si tu restes éveillé longtemps,
 fais quelque chose de calme avec une lumière faible puis retourne
 au lit lorsque la somnolence revient.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-6
-</div>
-
-<h3>
-Le lendemain
-</h3>
-
+<div class="tip-number">6</div>
+<h3>Le lendemain</h3>
 <p>
 Après une mauvaise nuit, évite de transformer toute ta journée
 en période de récupération. Reprends progressivement ton rythme
 habituel et privilégie la régularité.
 </p>
-
 </div>
 
 </div>
 
 </div>
-
 
 <div class="guide card">
 
 <div class="guide-header">
 
-<div class="guide-icon">
-📵
-</div>
+<div class="guide-icon">📵</div>
 
 <div>
 
@@ -3299,78 +4088,42 @@ Une transition progressive peut rendre l’endormissement plus simple.
 
 </div>
 
-
 <div class="tip-grid">
 
 <div class="tip">
-
-<div class="tip-number">
-1
-</div>
-
-<h3>
-Diminue la stimulation
-</h3>
-
+<div class="tip-number">1</div>
+<h3>Diminue la stimulation</h3>
 <p>
 Passe progressivement d’activités très stimulantes à des activités
 plus calmes.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-2
-</div>
-
-<h3>
-Prépare demain
-</h3>
-
+<div class="tip-number">2</div>
+<h3>Prépare demain</h3>
 <p>
 Prépare rapidement tes affaires et ton environnement afin de ne pas
 avoir à y penser une fois au lit.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-3
-</div>
-
-<h3>
-Garde une ambiance calme
-</h3>
-
+<div class="tip-number">3</div>
+<h3>Garde une ambiance calme</h3>
 <p>
 Une lumière moins forte et une activité tranquille peuvent aider
 à créer une séparation claire entre journée et nuit.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-4
-</div>
-
-<h3>
-Ne cherche pas la perfection
-</h3>
-
+<div class="tip-number">4</div>
+<h3>Ne cherche pas la perfection</h3>
 <p>
 Une soirée différente de temps en temps ne détruit pas une routine.
 L’objectif est surtout de retrouver régulièrement un rythme stable.
 </p>
-
 </div>
 
 </div>
@@ -3384,18 +4137,11 @@ L’objectif est surtout de retrouver régulièrement un rythme stable.
      HELP — STUDY
 ======================================================= -->
 
-<section
-id="page-help-study"
-class="page help-detail"
->
+<section id="page-help-study" class="page help-detail">
 
-<button
-class="help-back"
-onclick="backToHelp()"
->
+<button class="help-back" onclick="backToHelp()">
 ← Retour à l’aide
 </button>
-
 
 <div class="detail-hero card">
 
@@ -3413,7 +4159,6 @@ permettent de construire une méthode de travail plus active.
 </p>
 
 </div>
-
 
 <div class="guide card">
 
@@ -3437,96 +4182,56 @@ Ne te contente pas de relire : force ton cerveau à récupérer l’information.
 
 </div>
 
-
 <div class="tip-grid">
 
-
 <div class="tip">
-
-<div class="tip-number">
-1
-</div>
-
-<h3>
-Active recall
-</h3>
-
+<div class="tip-number">1</div>
+<h3>Active recall</h3>
 <p>
 Ferme ton cours et essaye de retrouver les informations de mémoire.
 C’est plus exigeant que relire, mais cela permet de vérifier ce que
 tu sais réellement.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-2
-</div>
-
-<h3>
-Blurting
-</h3>
-
+<div class="tip-number">2</div>
+<h3>Blurting</h3>
 <p>
 Lis une partie du cours, ferme-le puis écris tout ce dont tu te
 souviens. Compare ensuite avec le cours et complète les éléments
 manquants.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-3
-</div>
-
-<h3>
-Méthode Feynman
-</h3>
-
+<div class="tip-number">3</div>
+<h3>Méthode Feynman</h3>
 <p>
 Explique une notion avec des mots simples, comme si tu devais
 l'expliquer à quelqu'un qui ne connaît pas le sujet.
 Les zones où tu bloques indiquent ce qu'il faut retravailler.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-4
-</div>
-
-<h3>
-Répétition espacée
-</h3>
-
+<div class="tip-number">4</div>
+<h3>Répétition espacée</h3>
 <p>
 Revois une notion plusieurs fois à des moments différents plutôt
 que de concentrer toute la mémorisation dans une seule session.
 </p>
-
 </div>
 
 </div>
 
 </div>
-
 
 <div class="guide card">
 
 <div class="guide-header">
 
-<div class="guide-icon">
-🎯
-</div>
+<div class="guide-icon">🎯</div>
 
 <div>
 
@@ -3535,153 +4240,58 @@ Par matière
 </h2>
 
 <p>
-Clique sur une matière pour afficher une stratégie adaptée.
+Clique sur une matière pour ouvrir sa page dédiée.
 </p>
 
 </div>
 
 </div>
 
-
 <div class="subject-grid">
 
-<button
-class="subject"
-onclick="subjectTip('Mathématiques')"
->
-
-<strong>
-Mathématiques
-</strong>
-
-<span>
-Exercices & raisonnement
-</span>
-
+<button class="subject" onclick="openSubjectPage('Mathématiques')">
+<strong>Mathématiques</strong>
+<span>Exercices & raisonnement</span>
 </button>
 
-
-<button
-class="subject"
-onclick="subjectTip('Physique')"
->
-
-<strong>
-Physique
-</strong>
-
-<span>
-Formules & applications
-</span>
-
+<button class="subject" onclick="openSubjectPage('Physique')">
+<strong>Physique</strong>
+<span>Formules & applications</span>
 </button>
 
-
-<button
-class="subject"
-onclick="subjectTip('Sciences')"
->
-
-<strong>
-Sciences
-</strong>
-
-<span>
-Compréhension & schémas
-</span>
-
+<button class="subject" onclick="openSubjectPage('Sciences')">
+<strong>Sciences</strong>
+<span>Compréhension & schémas</span>
 </button>
 
-
-<button
-class="subject"
-onclick="subjectTip('Histoire')"
->
-
-<strong>
-Histoire
-</strong>
-
-<span>
-Chronologie & causes
-</span>
-
+<button class="subject" onclick="openSubjectPage('Histoire')">
+<strong>Histoire</strong>
+<span>Chronologie & causes</span>
 </button>
 
-
-<button
-class="subject"
-onclick="subjectTip('Français')"
->
-
-<strong>
-Français
-</strong>
-
-<span>
-Analyse & rédaction
-</span>
-
+<button class="subject" onclick="openSubjectPage('Français')">
+<strong>Français</strong>
+<span>Analyse & rédaction</span>
 </button>
 
-
-<button
-class="subject"
-onclick="subjectTip('Néerlandais')"
->
-
-<strong>
-Néerlandais
-</strong>
-
-<span>
-Vocabulaire & pratique
-</span>
-
+<button class="subject" onclick="openSubjectPage('Néerlandais')">
+<strong>Néerlandais</strong>
+<span>Vocabulaire & pratique</span>
 </button>
 
-
-<button
-class="subject"
-onclick="subjectTip('Anglais')"
->
-
-<strong>
-Anglais
-</strong>
-
-<span>
-Vocabulaire & compréhension
-</span>
-
+<button class="subject" onclick="openSubjectPage('Anglais')">
+<strong>Anglais</strong>
+<span>Vocabulaire & compréhension</span>
 </button>
 
-
-<button
-class="subject"
-onclick="subjectTip('Informatique')"
->
-
-<strong>
-Informatique
-</strong>
-
-<span>
-Code & résolution
-</span>
-
+<button class="subject" onclick="openSubjectPage('Informatique')">
+<strong>Informatique</strong>
+<span>Code & résolution</span>
 </button>
 
 </div>
 
-
-<div
-id="subjectAdvice"
-style="margin-top:15px"
-></div>
-
 </div>
-
 
 <div class="guide card">
 
@@ -3705,82 +4315,97 @@ Organise ton travail autour d’actions concrètes.
 
 </div>
 
-
 <div class="tip-grid">
 
 <div class="tip">
-
-<div class="tip-number">
-1
-</div>
-
-<h3>
-Définis un objectif
-</h3>
-
+<div class="tip-number">1</div>
+<h3>Définis un objectif</h3>
 <p>
 Remplace « étudier les maths » par une action précise :
 « faire les exercices 4 à 8 » ou « apprendre les dérivées composées ».
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-2
-</div>
-
-<h3>
-Travaille activement
-</h3>
-
+<div class="tip-number">2</div>
+<h3>Travaille activement</h3>
 <p>
 Pose-toi des questions, fais des exercices ou explique la matière
 au lieu de seulement surligner et relire.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-3
-</div>
-
-<h3>
-Corrige tes erreurs
-</h3>
-
+<div class="tip-number">3</div>
+<h3>Corrige tes erreurs</h3>
 <p>
 Une erreur est utile si tu comprends pourquoi elle est arrivée.
 Note les erreurs récurrentes et reviens dessus plus tard.
 </p>
-
 </div>
-
 
 <div class="tip">
-
-<div class="tip-number">
-4
-</div>
-
-<h3>
-Termine par un rappel
-</h3>
-
+<div class="tip-number">4</div>
+<h3>Termine par un rappel</h3>
 <p>
 À la fin de la session, ferme ton cours et résume ce que tu as appris
 sans regarder tes notes.
 </p>
-
 </div>
 
 </div>
 
+</div>
+
+</section>
+
+
+<!-- =======================================================
+     SUBJECT DETAIL PAGE
+======================================================= -->
+
+<section id="page-help-subject" class="page help-detail">
+
+<button
+class="help-back"
+onclick="backToStudy()"
+>
+← Retour aux matières
+</button>
+
+<div class="subject-hero card">
+
+<div class="subject-hero-content">
+
+<div
+class="subject-emoji"
+id="subjectEmoji"
+>
+📚
+</div>
+
+<h1 id="subjectTitle">
+Matière
+</h1>
+
+<p id="subjectIntro">
+Conseils personnalisés pour travailler cette matière.
+</p>
+
+<div
+class="subject-pill"
+id="subjectPill"
+>
+Méthode de travail
+</div>
+
+</div>
+
+</div>
+
+<div
+id="subjectGuides"
+>
 </div>
 
 </section>
@@ -3804,9 +4429,7 @@ Personnalise HABITS. comme tu le souhaites.
 
 </div>
 
-
 <div class="settings-grid">
-
 
 <div class="settings-card card">
 
@@ -3818,11 +4441,47 @@ Thème
 Choisis l'ambiance visuelle de ton application.
 </p>
 
+<div class="theme-section">
+
+<div class="theme-section-head">
+
+<div class="theme-section-title">
+Classic
+</div>
+
+<div class="theme-section-description">
+Sobre & élégant
+</div>
+
+</div>
 
 <div
 class="theme-grid"
-id="themeGrid"
+id="classicThemeGrid"
 ></div>
+
+</div>
+
+<div class="theme-section">
+
+<div class="theme-section-head">
+
+<div class="theme-section-title">
+Premium
+</div>
+
+<div class="theme-section-description">
+Animé & immersif
+</div>
+
+</div>
+
+<div
+class="theme-grid"
+id="premiumThemeGrid"
+></div>
+
+</div>
 
 </div>
 
@@ -3837,7 +4496,6 @@ Données
 Gère les données enregistrées localement sur cet appareil.
 </p>
 
-
 <button
 class="secondary-btn"
 style="width:100%;margin-bottom:9px"
@@ -3845,7 +4503,6 @@ onclick="exportData()"
 >
 Exporter mes habitudes
 </button>
-
 
 <button
 class="secondary-btn"
@@ -3870,7 +4527,6 @@ Réinitialiser les données
 
 <nav class="bottom-nav">
 
-
 <button
 class="nav-item active"
 data-page="today"
@@ -3889,7 +4545,6 @@ Aujourd’hui
 
 </button>
 
-
 <button
 class="nav-item"
 data-page="calendar"
@@ -3907,7 +4562,6 @@ Calendrier
 
 </button>
 
-
 <button
 class="nav-item"
 data-page="habits"
@@ -3924,7 +4578,6 @@ Habitudes
 </span>
 
 </button>
-
 
 <button
 class="nav-item"
@@ -3944,7 +4597,6 @@ Stats
 
 </button>
 
-
 <button
 class="nav-item"
 data-page="help"
@@ -3963,7 +4615,6 @@ Aide
 
 </button>
 
-
 <button
 class="nav-item"
 data-page="settings"
@@ -3979,7 +4630,7 @@ r="3"
 />
 
 <path
-d="M19.4 15a1.8 1.8 0 00.36 1.98l.06.06-1.4 1.4-.06-.06a1.8 1.8 0 00-1.98-.36 1.8 1.8 0 00-1.08 1.65V20h-2v-.33a1.8 1.8 0 00-1.08-1.65 1.8 1.8 0 00-1.98.36l-.06.06-1.4-1.4.06-.06A1.8 1.8 0 009.4 15a1.8 1.8 0 00-1.65-1.08H7v-2h.75A1.8 1.8 0 009.4 10a1.8 1.8 0 00-.36-1.98l-.06-.06 1.4-1.4.06.06a1.8 1.8 0 001.98.36A1.8 1.8 0 0013.5 5.3V5h2v.33a1.8 1.8 0 001.08 1.65 1.8 1.8 0 001.98-.36l.06-.06 1.4 1.4-.06.06A1.8 1.8 0 0019.4 10a1.8 1.8 0 001.65 1.08H21v2h-.33A1.8 1.8 0 0019.4 15z"
+d="M19.4 15a1.8 1.8 0 00.36 1.98l.06.06-1.4 1.4-.06-.06a1.8 1.8 0 00-1.98-.36 1.8 1.8 0 00-1.08 1.65V20h-2v-.33a1.8 1.8 0 00-1.08-1.65 1.8 1.8 0 00-1.98.36l-.06.06-1.4-1.4.06-.06A1.8 1.8 0 009.4 15a1.8 1.8 0 00-1.65-1.08H7v-2h.75A1.8 1.8 0 009.4 10a1.8 1.8 0 00-.36-1.98l-.06-.06 1.4-1.4.06.06A1.8 1.8 0 0012.98 8.6a1.8 1.8 0 001.08-1.65V5h2v.33a1.8 1.8 0 001.08 1.65 1.8 1.8 0 001.98-.36l.06-.06 1.4 1.4-.06.06A1.8 1.8 0 0019.4 10a1.8 1.8 0 001.65 1.08H21v2h-.33A1.8 1.8 0 0019.4 15z"
 />
 
 </svg>
@@ -4006,7 +4657,6 @@ id="habitModal"
 
 <div class="modal-box">
 
-
 <div class="modal-head">
 
 <h2>
@@ -4022,7 +4672,6 @@ onclick="closeModal()"
 
 </div>
 
-
 <div class="form-group">
 
 <label>
@@ -4037,7 +4686,6 @@ placeholder="Ex. Faire du sport"
 
 </div>
 
-
 <div class="form-group">
 
 <label>
@@ -4046,38 +4694,17 @@ Catégorie
 
 <select id="habitCategory">
 
-<option>
-Sport
-</option>
-
-<option>
-Études
-</option>
-
-<option>
-Santé
-</option>
-
-<option>
-Sommeil
-</option>
-
-<option>
-Personnel
-</option>
-
-<option>
-Productivité
-</option>
-
-<option>
-Autre
-</option>
+<option>Sport</option>
+<option>Études</option>
+<option>Santé</option>
+<option>Sommeil</option>
+<option>Personnel</option>
+<option>Productivité</option>
+<option>Autre</option>
 
 </select>
 
 </div>
-
 
 <div class="form-group">
 
@@ -4094,7 +4721,6 @@ value="3"
 >
 
 </div>
-
 
 <div class="modal-actions">
 
@@ -4152,16 +4778,12 @@ function loadHabits(){
 
   }
 
-
   const oldKeys = [
-
     "habitsV8Habits",
     "habitsPremiumHabits",
     "habitsV7Habits",
     "habitsV6Habits"
-
   ];
-
 
   for(const key of oldKeys){
 
@@ -4190,7 +4812,6 @@ function loadHabits(){
     }
 
   }
-
 
   return [];
 
@@ -4288,19 +4909,14 @@ function goToPage(page){
       p.classList.remove("active");
     });
 
-
   const target =
     document.getElementById(
       "page-"+page
     );
 
-
   if(target){
-
     target.classList.add("active");
-
   }
-
 
   document
     .querySelectorAll(".nav-item")
@@ -4312,7 +4928,6 @@ function goToPage(page){
       );
 
     });
-
 
   if(page==="today"){
     renderToday();
@@ -4334,7 +4949,6 @@ function goToPage(page){
     renderThemeButtons();
   }
 
-
   window.scrollTo({
     top:0,
     behavior:"smooth"
@@ -4355,18 +4969,26 @@ function openHelpPage(topic){
       p.classList.remove("active");
     });
 
-
   const target =
     document.getElementById(
       "page-help-"+topic
     );
 
-
   if(!target) return;
-
 
   target.classList.add("active");
 
+  setHelpNavActive();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+function setHelpNavActive(){
 
   document
     .querySelectorAll(".nav-item")
@@ -4379,18 +5001,964 @@ function openHelpPage(topic){
 
     });
 
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
 }
 
 
 function backToHelp(){
 
   goToPage("help");
+
+}
+
+
+function backToStudy(){
+
+  openHelpPage("study");
+
+}
+
+
+/* =========================================================
+   SUBJECT DATA
+========================================================= */
+
+const subjectData = {
+
+  "Mathématiques":{
+
+    emoji:"📐",
+
+    intro:
+      "En mathématiques, le plus important est de transformer les connaissances en réflexes de résolution. Comprendre une méthode puis l’appliquer sur plusieurs exercices vaut mieux que relire passivement le cours.",
+
+    pill:
+      "Exercices • Raisonnement",
+
+    guides:[
+
+      {
+        icon:"🧩",
+        title:"Méthode de travail",
+        subtitle:"Construis ton raisonnement étape par étape.",
+
+        tips:[
+
+          [
+            "1",
+            "Comprends la méthode",
+            "Avant de faire beaucoup d’exercices, assure-toi de comprendre pourquoi la formule ou la méthode fonctionne. Reformule-la avec tes propres mots."
+          ],
+
+          [
+            "2",
+            "Commence sans regarder",
+            "Lis l’énoncé, identifie ce qui est demandé et essaye une première approche avant de regarder la correction."
+          ],
+
+          [
+            "3",
+            "Écris les étapes",
+            "Évite de passer directement au résultat. Écris les transformations importantes : formule, remplacement, calcul et conclusion."
+          ],
+
+          [
+            "4",
+            "Analyse tes erreurs",
+            "Après une erreur, identifie sa catégorie : calcul, formule, signe, compréhension ou raisonnement. Cela permet de cibler les révisions."
+          ]
+
+        ]
+      },
+
+      {
+        icon:"🎯",
+        title:"Techniques efficaces",
+        subtitle:"Pour préparer une interrogation ou un examen.",
+
+        tips:[
+
+          [
+            "1",
+            "Exercices mélangés",
+            "Une fois le chapitre compris, mélange les types d’exercices. Cela t’oblige à identifier toi-même la méthode à utiliser."
+          ],
+
+          [
+            "2",
+            "Feuille blanche",
+            "Sans regarder le cours, écris les formules, définitions et méthodes dont tu te souviens. Vérifie ensuite ce qui manque."
+          ],
+
+          [
+            "3",
+            "Refais les erreurs",
+            "Deux ou trois jours plus tard, refais les exercices où tu t’étais trompé sans regarder la correction."
+          ],
+
+          [
+            "4",
+            "Dernière révision",
+            "La veille, privilégie les méthodes, formules et erreurs fréquentes plutôt qu’un nouveau chapitre entier."
+          ]
+
+        ]
+      },
+
+      {
+        icon:"⚠️",
+        title:"À éviter",
+        subtitle:"Les pièges classiques en mathématiques.",
+
+        tips:[
+
+          [
+            "1",
+            "Relire uniquement",
+            "Lire le cours plusieurs fois peut donner une impression de maîtrise. Vérifie plutôt que tu peux retrouver et appliquer les informations."
+          ],
+
+          [
+            "2",
+            "Apprendre sans comprendre",
+            "Une formule isolée est difficile à utiliser si tu ne sais pas quand et pourquoi elle intervient."
+          ],
+
+          [
+            "3",
+            "Ignorer les unités",
+            "Dans les problèmes, vérifie toujours les unités et la cohérence du résultat obtenu."
+          ],
+
+          [
+            "4",
+            "Sauter les étapes",
+            "Même si le calcul semble évident, écrire les étapes importantes rend les erreurs beaucoup plus faciles à détecter."
+          ]
+
+        ]
+      }
+
+    ]
+
+  },
+
+
+  "Physique":{
+
+    emoji:"⚛️",
+
+    intro:
+      "En physique, commence par comprendre la situation avant de chercher une formule. Identifie les grandeurs, leurs unités et les relations entre elles.",
+
+    pill:
+      "Formules • Applications",
+
+    guides:[
+
+      {
+        icon:"🔬",
+        title:"Résoudre un problème",
+        subtitle:"Une méthode claire pour éviter les erreurs.",
+
+        tips:[
+
+          [
+            "1",
+            "Lis la situation",
+            "Avant de calculer, identifie ce que le problème décrit réellement : mouvement, force, énergie, électricité ou autre phénomène."
+          ],
+
+          [
+            "2",
+            "Liste les données",
+            "Écris les grandeurs connues avec leur symbole et leur unité. Fais la même chose pour la grandeur recherchée."
+          ],
+
+          [
+            "3",
+            "Choisis la relation",
+            "Écris la formule avant de remplacer les valeurs. Cela permet de vérifier que la relation correspond bien au problème."
+          ],
+
+          [
+            "4",
+            "Vérifie le résultat",
+            "Regarde l’unité finale, l’ordre de grandeur et le signe. Un résultat absurde peut révéler une erreur de conversion."
+          ]
+
+        ]
+      },
+
+      {
+        icon:"📏",
+        title:"Formules & unités",
+        subtitle:"La précision commence avant le calcul.",
+
+        tips:[
+
+          [
+            "1",
+            "Mémorise les relations",
+            "Apprends surtout à reconnaître dans quelles situations utiliser chaque relation."
+          ],
+
+          [
+            "2",
+            "Convertis avant",
+            "Mets les grandeurs dans les unités attendues par la formule avant de calculer."
+          ],
+
+          [
+            "3",
+            "Garde les symboles",
+            "Écris d’abord la relation avec les symboles puis remplace les valeurs. Tu limites ainsi les erreurs de structure."
+          ],
+
+          [
+            "4",
+            "Analyse les dimensions",
+            "Les unités peuvent servir de contrôle : si elles ne correspondent pas à la grandeur recherchée, reviens sur ton calcul."
+          ]
+
+        ]
+      },
+
+      {
+        icon:"🧠",
+        title:"Réviser la physique",
+        subtitle:"Comprendre plutôt que réciter.",
+
+        tips:[
+
+          [
+            "1",
+            "Explique le phénomène",
+            "Essaie d’expliquer avec tes mots ce qui se passe physiquement avant de mémoriser les équations."
+          ],
+
+          [
+            "2",
+            "Fais des schémas",
+            "Un schéma permet souvent de visualiser les forces, mouvements, circuits ou échanges d’énergie."
+          ],
+
+          [
+            "3",
+            "Refais les exercices",
+            "Après avoir étudié une correction, ferme-la et refais le problème entièrement."
+          ],
+
+          [
+            "4",
+            "Classe tes erreurs",
+            "Sépare les erreurs de compréhension, d’unité, de formule et de calcul."
+          ]
+
+        ]
+      }
+
+    ]
+
+  },
+
+
+  "Sciences":{
+
+    emoji:"🧬",
+
+    intro:
+      "Pour les sciences, cherche d’abord à comprendre les mécanismes et les relations entre les notions. Les schémas et explications personnelles sont particulièrement utiles.",
+
+    pill:
+      "Compréhension • Schémas",
+
+    guides:[
+
+      {
+        icon:"🧠",
+        title:"Comprendre un chapitre",
+        subtitle:"Transforme le cours en système logique.",
+
+        tips:[
+
+          [
+            "1",
+            "Repère les grandes idées",
+            "Commence par identifier les concepts principaux avant de mémoriser les détails."
+          ],
+
+          [
+            "2",
+            "Construis un schéma",
+            "Relie les notions avec des flèches, causes, conséquences et exemples."
+          ],
+
+          [
+            "3",
+            "Explique à voix haute",
+            "Ferme le cours et explique le mécanisme avec tes propres mots."
+          ],
+
+          [
+            "4",
+            "Teste les détails",
+            "Une fois la structure comprise, utilise des questions courtes pour vérifier les détails."
+          ]
+
+        ]
+      },
+
+      {
+        icon:"🧪",
+        title:"Apprendre les processus",
+        subtitle:"Pour les mécanismes et séquences.",
+
+        tips:[
+
+          [
+            "1",
+            "Ordre logique",
+            "Écris les étapes dans l’ordre sans regarder le cours."
+          ],
+
+          [
+            "2",
+            "Cause → effet",
+            "Pour chaque étape, demande-toi ce qui la provoque et ce qu’elle entraîne."
+          ],
+
+          [
+            "3",
+            "Dessine",
+            "Transforme les descriptions complexes en schémas simples."
+          ],
+
+          [
+            "4",
+            "Récupération active",
+            "Reproduis le schéma de mémoire puis compare-le à ton cours."
+          ]
+
+        ]
+      }
+
+    ]
+
+  },
+
+
+  "Histoire":{
+
+    emoji:"🏛️",
+
+    intro:
+      "En histoire, ne mémorise pas uniquement des dates. Construis une structure avec les périodes, les acteurs, les causes, les événements et les conséquences.",
+
+    pill:
+      "Chronologie • Causes • Conséquences",
+
+    guides:[
+
+      {
+        icon:"🗓️",
+        title:"Construire une chronologie",
+        subtitle:"Donne une structure temporelle au cours.",
+
+        tips:[
+
+          [
+            "1",
+            "Repère les périodes",
+            "Commence par diviser le chapitre en grandes périodes ou événements."
+          ],
+
+          [
+            "2",
+            "Place les dates clés",
+            "Apprends surtout les dates qui permettent de structurer la chronologie."
+          ],
+
+          [
+            "3",
+            "Associe les acteurs",
+            "Relie chaque événement aux personnes, États ou groupes concernés."
+          ],
+
+          [
+            "4",
+            "Raconte l’histoire",
+            "Ferme le cours et raconte la période dans l’ordre avec tes propres mots."
+          ]
+
+        ]
+      },
+
+      {
+        icon:"🔗",
+        title:"Causes & conséquences",
+        subtitle:"Comprendre les relations entre les événements.",
+
+        tips:[
+
+          [
+            "1",
+            "Pourquoi ?",
+            "Pour chaque événement important, demande-toi quelles sont ses causes."
+          ],
+
+          [
+            "2",
+            "Que se passe-t-il ?",
+            "Résume l’événement sans recopier le cours."
+          ],
+
+          [
+            "3",
+            "Et après ?",
+            "Identifie les conséquences à court et à long terme."
+          ],
+
+          [
+            "4",
+            "Relie les éléments",
+            "Crée des flèches entre causes, événements et conséquences."
+          ]
+
+        ]
+      },
+
+      {
+        icon:"🎯",
+        title:"Préparer une interrogation",
+        subtitle:"Tester ta mémoire plutôt que relire.",
+
+        tips:[
+
+          [
+            "1",
+            "Questions rapides",
+            "Transforme les titres du cours en questions."
+          ],
+
+          [
+            "2",
+            "Dates de mémoire",
+            "Écris les dates importantes sans regarder puis vérifie."
+          ],
+
+          [
+            "3",
+            "Mini-récit",
+            "Explique le chapitre en quelques minutes sans notes."
+          ],
+
+          [
+            "4",
+            "Corrige les trous",
+            "Révise uniquement les éléments que tu n’as pas réussi à retrouver."
+          ]
+
+        ]
+      }
+
+    ]
+
+  },
+
+
+  "Français":{
+
+    emoji:"✍️",
+
+    intro:
+      "En français, combine compréhension du texte, maîtrise des notions et entraînement à la rédaction. La qualité du raisonnement compte autant que les connaissances.",
+
+    pill:
+      "Analyse • Rédaction",
+
+    guides:[
+
+      {
+        icon:"📖",
+        title:"Analyse de texte",
+        subtitle:"Construis une réponse précise.",
+
+        tips:[
+
+          [
+            "1",
+            "Observe",
+            "Repère d’abord les éléments réellement présents dans le texte : mots, figures, structure ou registre."
+          ],
+
+          [
+            "2",
+            "Nomme la technique",
+            "Identifie précisément le procédé ou la notion utilisée."
+          ],
+
+          [
+            "3",
+            "Explique l’effet",
+            "Ne t’arrête pas au nom du procédé : explique ce qu’il produit dans le texte."
+          ],
+
+          [
+            "4",
+            "Cite intelligemment",
+            "Utilise une courte citation comme preuve puis analyse-la."
+          ]
+
+        ]
+      },
+
+      {
+        icon:"📝",
+        title:"Rédaction",
+        subtitle:"Construis avant d’écrire.",
+
+        tips:[
+
+          [
+            "1",
+            "Comprends le sujet",
+            "Identifie exactement ce qui est demandé et les contraintes."
+          ],
+
+          [
+            "2",
+            "Fais un plan",
+            "Organise tes idées avant de rédiger les paragraphes."
+          ],
+
+          [
+            "3",
+            "Développe",
+            "Une idée importante doit être expliquée, justifiée et illustrée."
+          ],
+
+          [
+            "4",
+            "Relis en plusieurs passes",
+            "Fais une passe pour le fond puis une autre pour les fautes, accords et conjugaisons."
+          ]
+
+        ]
+      }
+
+    ]
+
+  },
+
+
+  "Néerlandais":{
+
+    emoji:"🇳🇱",
+
+    intro:
+      "Pour progresser en néerlandais, transforme le vocabulaire en utilisation réelle. Les mots sont plus faciles à retenir lorsqu’ils sont associés à des phrases et à des situations.",
+
+    pill:
+      "Vocabulaire • Pratique",
+
+    guides:[
+
+      {
+        icon:"🗣️",
+        title:"Apprendre le vocabulaire",
+        subtitle:"Passe du mot isolé à la phrase.",
+
+        tips:[
+
+          [
+            "1",
+            "Apprends par contexte",
+            "Associe chaque mot à une phrase courte plutôt qu’à une traduction seule."
+          ],
+
+          [
+            "2",
+            "Récupère sans regarder",
+            "Cache la traduction et retrouve le mot dans l’autre langue."
+          ],
+
+          [
+            "3",
+            "Utilise le mot",
+            "Écris ou prononce plusieurs phrases avec le nouveau vocabulaire."
+          ],
+
+          [
+            "4",
+            "Espace les rappels",
+            "Reviens régulièrement sur les mots au lieu de tout apprendre en une seule fois."
+          ]
+
+        ]
+      },
+
+      {
+        icon:"🎧",
+        title:"Compréhension",
+        subtitle:"Habitue ton cerveau à la langue.",
+
+        tips:[
+
+          [
+            "1",
+            "Écoute régulièrement",
+            "Même quelques minutes d’exposition fréquente peuvent te familiariser avec les sons."
+          ],
+
+          [
+            "2",
+            "Cherche l’idée globale",
+            "Ne bloque pas sur chaque mot inconnu lorsque tu écoutes un texte."
+          ],
+
+          [
+            "3",
+            "Repère les mots connus",
+            "Utilise le contexte pour reconstruire le sens des phrases."
+          ],
+
+          [
+            "4",
+            "Reformule",
+            "Après une écoute, résume ce que tu as compris avec des phrases simples."
+          ]
+
+        ]
+      }
+
+    ]
+
+  },
+
+
+  "Anglais":{
+
+    emoji:"🇬🇧",
+
+    intro:
+      "Pour l’anglais, combine vocabulaire, compréhension et production. L’objectif est de pouvoir récupérer les mots et les structures lorsque tu en as besoin.",
+
+    pill:
+      "Vocabulary • Grammar • Practice",
+
+    guides:[
+
+      {
+        icon:"📚",
+        title:"Vocabulaire",
+        subtitle:"Mémorise pour pouvoir réutiliser.",
+
+        tips:[
+
+          [
+            "1",
+            "Apprends en contexte",
+            "Associe le mot à une phrase ou une situation."
+          ],
+
+          [
+            "2",
+            "Teste-toi dans les deux sens",
+            "Passe anglais → français puis français → anglais."
+          ],
+
+          [
+            "3",
+            "Crée tes propres phrases",
+            "Une phrase personnelle rend souvent le mot plus facile à retrouver."
+          ],
+
+          [
+            "4",
+            "Révise progressivement",
+            "Utilise des rappels espacés plutôt qu’une longue session unique."
+          ]
+
+        ]
+      },
+
+      {
+        icon:"🎙️",
+        title:"Production",
+        subtitle:"Force-toi à utiliser la langue.",
+
+        tips:[
+
+          [
+            "1",
+            "Parle à voix haute",
+            "Décris ce que tu fais ou explique un sujet avec des phrases simples."
+          ],
+
+          [
+            "2",
+            "Reformule",
+            "Prends une phrase et essaye de la dire autrement."
+          ],
+
+          [
+            "3",
+            "Travaille les erreurs",
+            "Note les erreurs grammaticales qui reviennent souvent."
+          ],
+
+          [
+            "4",
+            "Lis puis résume",
+            "Lis un court texte puis explique son contenu sans le regarder."
+          ]
+
+        ]
+      }
+
+    ]
+
+  },
+
+
+  "Informatique":{
+
+    emoji:"💻",
+
+    intro:
+      "En informatique, la compréhension vient énormément de la pratique. Écris du code, teste, observe les erreurs et apprends à isoler précisément un problème.",
+
+    pill:
+      "Code • Debug • Logique",
+
+    guides:[
+
+      {
+        icon:"⌨️",
+        title:"Apprendre à coder",
+        subtitle:"Construis plutôt que recopier.",
+
+        tips:[
+
+          [
+            "1",
+            "Écris toi-même",
+            "Évite de recopier directement une solution. Essaie d’abord de produire ton propre raisonnement."
+          ],
+
+          [
+            "2",
+            "Découpe le problème",
+            "Transforme une grosse fonctionnalité en petites fonctions ou étapes."
+          ],
+
+          [
+            "3",
+            "Teste souvent",
+            "Teste une petite partie du programme avant d’ajouter beaucoup de code."
+          ],
+
+          [
+            "4",
+            "Explique ton code",
+            "Si tu peux expliquer précisément ce que fait chaque partie, tu comprends probablement mieux le programme."
+          ]
+
+        ]
+      },
+
+      {
+        icon:"🐛",
+        title:"Debug efficacement",
+        subtitle:"Ne change pas tout au hasard.",
+
+        tips:[
+
+          [
+            "1",
+            "Lis l’erreur",
+            "Le message d’erreur donne souvent une indication sur l’endroit ou le type du problème."
+          ],
+
+          [
+            "2",
+            "Reproduis le bug",
+            "Identifie précisément l’action qui déclenche le problème."
+          ],
+
+          [
+            "3",
+            "Isole",
+            "Réduis le problème à la plus petite partie de code possible."
+          ],
+
+          [
+            "4",
+            "Teste une hypothèse",
+            "Modifie une seule chose à la fois afin de savoir ce qui a réellement corrigé le problème."
+          ]
+
+        ]
+      },
+
+      {
+        icon:"🚀",
+        title:"Progresser sur un projet",
+        subtitle:"Transforme le projet en entraînement.",
+
+        tips:[
+
+          [
+            "1",
+            "Découpe les fonctionnalités",
+            "Fais une liste claire des petites fonctionnalités à développer."
+          ],
+
+          [
+            "2",
+            "Commence simple",
+            "Fais fonctionner une première version avant de chercher à la rendre parfaite."
+          ],
+
+          [
+            "3",
+            "Refactorise ensuite",
+            "Quand la fonctionnalité marche, améliore la structure et la lisibilité."
+          ],
+
+          [
+            "4",
+            "Documente ce que tu apprends",
+            "Garde une petite liste des problèmes rencontrés et de leurs solutions."
+          ]
+
+        ]
+      }
+
+    ]
+
+  }
+
+};
+
+
+/* =========================================================
+   SUBJECT PAGE
+========================================================= */
+
+function openSubjectPage(subject){
+
+  const data =
+    subjectData[subject];
+
+  if(!data) return;
+
+  document
+    .querySelectorAll(".page")
+    .forEach(p=>{
+      p.classList.remove("active");
+    });
+
+  const page =
+    document.getElementById(
+      "page-help-subject"
+    );
+
+  page.classList.add("active");
+
+  document.getElementById(
+    "subjectEmoji"
+  ).textContent =
+    data.emoji;
+
+  document.getElementById(
+    "subjectTitle"
+  ).textContent =
+    subject;
+
+  document.getElementById(
+    "subjectIntro"
+  ).textContent =
+    data.intro;
+
+  document.getElementById(
+    "subjectPill"
+  ).textContent =
+    data.pill;
+
+  const container =
+    document.getElementById(
+      "subjectGuides"
+    );
+
+  container.innerHTML="";
+
+  data.guides.forEach(guide=>{
+
+    const section =
+      document.createElement("div");
+
+    section.className =
+      "guide card";
+
+    section.innerHTML=`
+
+      <div class="guide-header">
+
+        <div class="guide-icon">
+          ${guide.icon}
+        </div>
+
+        <div>
+
+          <h2>
+            ${escapeHTML(guide.title)}
+          </h2>
+
+          <p>
+            ${escapeHTML(guide.subtitle)}
+          </p>
+
+        </div>
+
+      </div>
+
+      <div class="tip-grid">
+
+        ${guide.tips.map(tip=>`
+
+          <div class="tip">
+
+            <div class="tip-number">
+              ${escapeHTML(tip[0])}
+            </div>
+
+            <h3>
+              ${escapeHTML(tip[1])}
+            </h3>
+
+            <p>
+              ${escapeHTML(tip[2])}
+            </p>
+
+          </div>
+
+        `).join("")}
+
+      </div>
+
+    `;
+
+    container.appendChild(section);
+
+  });
+
+  setHelpNavActive();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
 }
 
@@ -4402,9 +5970,7 @@ function backToHelp(){
 function getCompletions(habit){
 
   if(!habit.completions){
-
     habit.completions=[];
-
   }
 
   return habit.completions;
@@ -4429,24 +5995,17 @@ function toggleHabit(id,date){
       h=>h.id===id
     );
 
-
   if(!habit) return;
-
 
   const key =
     dateKey(date);
 
-
   if(!habit.completions){
-
     habit.completions=[];
-
   }
-
 
   const index =
     habit.completions.indexOf(key);
-
 
   if(index>=0){
 
@@ -4461,9 +6020,7 @@ function toggleHabit(id,date){
 
   }
 
-
   saveHabits();
-
 
   renderToday();
   renderHabits();
@@ -4492,7 +6049,6 @@ function renderToday(){
       "todaySubtitle"
     );
 
-
   if(isToday(selectedDate)){
 
     title.textContent =
@@ -4515,21 +6071,17 @@ function renderToday(){
 
   }
 
-
   const container =
     document.getElementById(
       "todayHabits"
     );
 
-
   container.innerHTML="";
-
 
   const list =
     getDueHabits(
       selectedDate
     );
-
 
   document
     .getElementById(
@@ -4537,7 +6089,6 @@ function renderToday(){
     )
     .textContent =
       `${list.filter(h=>isCompleted(h,selectedDate)).length}/${list.length} terminée${list.length>1?"s":""}`;
-
 
   document
     .getElementById(
@@ -4548,7 +6099,6 @@ function renderToday(){
         ? "none"
         : "block";
 
-
   list.forEach(habit=>{
 
     const done =
@@ -4557,16 +6107,13 @@ function renderToday(){
         selectedDate
       );
 
-
     const el =
       document.createElement(
         "div"
       );
 
-
     el.className =
       "habit-card card";
-
 
     el.innerHTML=`
 
@@ -4597,7 +6144,6 @@ function renderToday(){
 
     `;
 
-
     el
       .querySelector(
         ".round-check"
@@ -4610,7 +6156,6 @@ function renderToday(){
         );
 
       };
-
 
     container.appendChild(el);
 
@@ -4630,9 +6175,7 @@ function renderHabits(){
       "allHabits"
     );
 
-
   container.innerHTML="";
-
 
   if(!habits.length){
 
@@ -4667,7 +6210,6 @@ function renderHabits(){
 
   }
 
-
   habits.forEach(habit=>{
 
     const el =
@@ -4675,10 +6217,8 @@ function renderHabits(){
         "div"
       );
 
-
     el.className =
       "habit-card card";
-
 
     el.innerHTML=`
 
@@ -4715,7 +6255,6 @@ function renderHabits(){
 
     `;
 
-
     el
       .querySelector(
         ".round-check"
@@ -4728,7 +6267,6 @@ function renderHabits(){
         );
 
       };
-
 
     el
       .querySelector(
@@ -4747,9 +6285,7 @@ function renderHabits(){
               h=>h.id!==habit.id
             );
 
-
           saveHabits();
-
 
           renderHabits();
           renderToday();
@@ -4759,7 +6295,6 @@ function renderHabits(){
         }
 
       };
-
 
     container.appendChild(el);
 
@@ -4778,18 +6313,15 @@ function openModal(){
     "habitName"
   ).value="";
 
-
   document.getElementById(
     "habitFrequency"
   ).value=3;
-
 
   document
     .getElementById(
       "habitModal"
     )
     .classList.add("open");
-
 
   setTimeout(()=>{
 
@@ -4824,12 +6356,10 @@ function createHabit(){
       "habitName"
     ).value.trim();
 
-
   const category =
     document.getElementById(
       "habitCategory"
     ).value;
-
 
   const frequency =
     Math.max(
@@ -4844,7 +6374,6 @@ function createHabit(){
       )
     );
 
-
   if(!name){
 
     document
@@ -4856,7 +6385,6 @@ function createHabit(){
     return;
 
   }
-
 
   habits.push({
 
@@ -4877,12 +6405,9 @@ function createHabit(){
 
   });
 
-
   saveHabits();
 
-
   closeModal();
-
 
   renderHabits();
   renderToday();
@@ -4902,7 +6427,6 @@ function changeMonth(amount){
     calendarDate.getMonth()+amount
   );
 
-
   renderCalendar();
 
 }
@@ -4912,7 +6436,6 @@ function hasCompletionOn(date){
 
   const key =
     dateKey(date);
-
 
   return habits.some(
     h=>
@@ -4930,17 +6453,13 @@ function renderCalendar(){
       "calendarGrid"
     );
 
-
   grid.innerHTML="";
-
 
   const year =
     calendarDate.getFullYear();
 
-
   const month =
     calendarDate.getMonth();
-
 
   document.getElementById(
     "monthTitle"
@@ -4953,7 +6472,6 @@ function renderCalendar(){
       }
     );
 
-
   const first =
     new Date(
       year,
@@ -4961,16 +6479,13 @@ function renderCalendar(){
       1
     );
 
-
   let start =
     first.getDay();
-
 
   start =
     start===0
       ? 6
       : start-1;
-
 
   const days =
     new Date(
@@ -4979,14 +6494,12 @@ function renderCalendar(){
       0
     ).getDate();
 
-
   const previousDays =
     new Date(
       year,
       month,
       0
     ).getDate();
-
 
   for(
     let i=start-1;
@@ -4997,25 +6510,20 @@ function renderCalendar(){
     const d =
       previousDays-i;
 
-
     const btn =
       document.createElement(
         "button"
       );
 
-
     btn.className =
       "day muted";
-
 
     btn.textContent =
       d;
 
-
     grid.appendChild(btn);
 
   }
-
 
   for(
     let d=1;
@@ -5030,16 +6538,13 @@ function renderCalendar(){
         d
       );
 
-
     const btn =
       document.createElement(
         "button"
       );
 
-
     btn.className =
       "day";
-
 
     if(isToday(date)){
 
@@ -5048,7 +6553,6 @@ function renderCalendar(){
       );
 
     }
-
 
     if(
       dateKey(date)
@@ -5062,10 +6566,8 @@ function renderCalendar(){
 
     }
 
-
     btn.innerHTML =
       `${d}`;
-
 
     if(hasCompletionOn(date)){
 
@@ -5074,15 +6576,12 @@ function renderCalendar(){
           "span"
         );
 
-
       dot.className =
         "day-dot";
-
 
       btn.appendChild(dot);
 
     }
-
 
     btn.onclick=()=>{
 
@@ -5093,24 +6592,20 @@ function renderCalendar(){
           d
         );
 
-
       goToPage(
         "today"
       );
 
     };
 
-
     grid.appendChild(btn);
 
   }
-
 
   const totalCells =
     Math.ceil(
       grid.children.length/7
     )*7;
-
 
   for(
     let d=1;
@@ -5123,14 +6618,11 @@ function renderCalendar(){
         "button"
       );
 
-
     btn.className =
       "day muted";
 
-
     btn.textContent =
       d;
-
 
     grid.appendChild(btn);
 
@@ -5150,9 +6642,7 @@ function renderStats(){
   ).textContent =
     habits.length;
 
-
   let total=0;
-
 
   habits.forEach(h=>{
 
@@ -5161,15 +6651,12 @@ function renderStats(){
 
   });
 
-
   document.getElementById(
     "statDone"
   ).textContent =
     total;
 
-
   const last7=[];
-
 
   for(
     let i=6;
@@ -5180,15 +6667,12 @@ function renderStats(){
     const d =
       new Date();
 
-
     d.setDate(
       d.getDate()-i
     );
 
-
     const key =
       dateKey(d);
-
 
     const count =
       habits.filter(
@@ -5197,7 +6681,6 @@ function renderStats(){
             .includes(key)
       ).length;
 
-
     last7.push({
       date:d,
       count
@@ -5205,10 +6688,8 @@ function renderStats(){
 
   }
 
-
   const possible =
     habits.length*7;
-
 
   const completed =
     last7.reduce(
@@ -5216,7 +6697,6 @@ function renderStats(){
         sum+x.count,
       0
     );
-
 
   const rate =
     possible
@@ -5227,12 +6707,10 @@ function renderStats(){
         )
       : 0;
 
-
   document.getElementById(
     "statRate"
   ).textContent =
     rate+"%";
-
 
   document.getElementById(
     "rateBar"
@@ -5242,15 +6720,12 @@ function renderStats(){
       rate
     )+"%";
 
-
   const chart =
     document.getElementById(
       "chart"
     );
 
-
   chart.innerHTML="";
-
 
   const max =
     Math.max(
@@ -5260,7 +6735,6 @@ function renderStats(){
       )
     );
 
-
   last7.forEach(item=>{
 
     const wrap =
@@ -5268,14 +6742,11 @@ function renderStats(){
         "div"
       );
 
-
     wrap.className =
       "bar-wrap";
 
-
     const height =
       (item.count/max)*100;
-
 
     wrap.innerHTML=`
 
@@ -5297,16 +6768,11 @@ function renderStats(){
 
     `;
 
-
     chart.appendChild(wrap);
 
   });
 
-
-  /* categories */
-
   const cat={};
-
 
   habits.forEach(h=>{
 
@@ -5314,13 +6780,9 @@ function renderStats(){
       h.category ||
       "Autre";
 
-
     if(!cat[c]){
-
       cat[c]=0;
-
     }
-
 
     cat[c] +=
       getCompletions(h)
@@ -5328,19 +6790,15 @@ function renderStats(){
 
   });
 
-
   const categoryStats =
     document.getElementById(
       "categoryStats"
     );
 
-
   categoryStats.innerHTML="";
-
 
   const entries =
     Object.entries(cat);
-
 
   if(!entries.length){
 
@@ -5359,7 +6817,6 @@ function renderStats(){
 
   }
 
-
   const maxCat =
     Math.max(
       ...entries.map(
@@ -5367,7 +6824,6 @@ function renderStats(){
       ),
       1
     );
-
 
   entries.forEach(
     ([category,count])=>{
@@ -5377,14 +6833,11 @@ function renderStats(){
           "div"
         );
 
-
       el.className =
         "card";
 
-
       el.style.padding =
         "18px";
-
 
       el.innerHTML=`
 
@@ -5411,7 +6864,6 @@ function renderStats(){
 
         </div>
 
-
         <div class="progress">
 
           <div
@@ -5423,7 +6875,6 @@ function renderStats(){
         </div>
 
       `;
-
 
       categoryStats.appendChild(
         el
@@ -5439,195 +6890,332 @@ function renderStats(){
    THEMES
 ========================================================= */
 
+/*
+  CLASSIC :
+  - Dark en premier
+  - Light ensuite
+
+  PREMIUM :
+  - Animés
+  - Immersifs
+  - Effets spécifiques
+*/
+
 const themes=[
 
-  /* LIGHT */
+  /* =========================
+     CLASSIC — DARK
+  ========================= */
 
-  [
-    "sage",
-    "Sauge",
-    "#f3f7f2",
-    "#789b83"
-  ],
+  {
+    id:"midnight",
+    name:"Midnight",
+    bg:"#080b12",
+    accent:"#788cff",
+    type:"classic",
+    kind:"dark"
+  },
 
-  [
-    "cream",
-    "Crème",
-    "#faf6ed",
-    "#b28c5a"
-  ],
+  {
+    id:"forest-dark",
+    name:"Forest",
+    bg:"#09110d",
+    accent:"#62a873",
+    type:"classic",
+    kind:"dark"
+  },
 
-  [
-    "sky",
-    "Ciel",
-    "#eef7fb",
-    "#5b9bb5"
-  ],
+  {
+    id:"ocean-dark",
+    name:"Deep Ocean",
+    bg:"#061116",
+    accent:"#45b9c5",
+    type:"classic",
+    kind:"dark"
+  },
 
-  [
-    "lavender",
-    "Lavande",
-    "#f6f2fb",
-    "#927bb8"
-  ],
+  {
+    id:"purple-dark",
+    name:"Purple Night",
+    bg:"#100a18",
+    accent:"#a66cff",
+    type:"classic",
+    kind:"dark"
+  },
 
-  [
-    "peach",
-    "Pêche",
-    "#fff4ef",
-    "#d98f72"
-  ],
+  {
+    id:"coffee",
+    name:"Coffee",
+    bg:"#120d0a",
+    accent:"#c28b62",
+    type:"classic",
+    kind:"dark"
+  },
 
-  [
-    "mint",
-    "Menthe",
-    "#eff9f4",
-    "#55a47d"
-  ],
+  {
+    id:"ruby",
+    name:"Ruby",
+    bg:"#12080b",
+    accent:"#e65d79",
+    type:"classic",
+    kind:"dark"
+  },
 
-  [
-    "lemon",
-    "Citron",
-    "#fbfae9",
-    "#a6a53f"
-  ],
+  {
+    id:"slate",
+    name:"Slate",
+    bg:"#090d12",
+    accent:"#7899b2",
+    type:"classic",
+    kind:"dark"
+  },
 
-  [
-    "sakura",
-    "Sakura",
-    "#fff2f6",
-    "#d9799c"
-  ],
+  {
+    id:"graphite",
+    name:"Graphite",
+    bg:"#0b0b0c",
+    accent:"#d0d0d5",
+    type:"classic",
+    kind:"dark"
+  },
 
-  [
-    "ocean",
-    "Océan",
-    "#edf7f8",
-    "#3e9ba5"
-  ],
+  {
+    id:"deep-violet",
+    name:"Deep Violet",
+    bg:"#0c0713",
+    accent:"#c078ff",
+    type:"classic",
+    kind:"dark"
+  },
 
-  [
-    "sunset",
-    "Sunset",
-    "#fff2e8",
-    "#d47d55"
-  ],
+  {
+    id:"ember",
+    name:"Ember",
+    bg:"#120a08",
+    accent:"#f07851",
+    type:"classic",
+    kind:"dark"
+  },
 
-  [
-    "rosewood",
-    "Rosewood",
-    "#f8eef0",
-    "#a95f70"
-  ],
+  /* =========================
+     CLASSIC — LIGHT
+  ========================= */
 
-  [
-    "sand",
-    "Sand",
-    "#f5f0e6",
-    "#9b8760"
-  ],
+  {
+    id:"sage",
+    name:"Sauge",
+    bg:"#f3f7f2",
+    accent:"#789b83",
+    type:"classic",
+    kind:"light"
+  },
 
+  {
+    id:"cream",
+    name:"Crème",
+    bg:"#faf6ed",
+    accent:"#b28c5a",
+    type:"classic",
+    kind:"light"
+  },
 
-  /* DARK */
+  {
+    id:"sky",
+    name:"Ciel",
+    bg:"#eef7fb",
+    accent:"#5b9bb5",
+    type:"classic",
+    kind:"light"
+  },
 
-  [
-    "midnight",
-    "Midnight",
-    "#080b12",
-    "#788cff"
-  ],
+  {
+    id:"lavender",
+    name:"Lavande",
+    bg:"#f6f2fb",
+    accent:"#927bb8",
+    type:"classic",
+    kind:"light"
+  },
 
-  [
-    "forest-dark",
-    "Forest",
-    "#09110d",
-    "#62a873"
-  ],
+  {
+    id:"peach",
+    name:"Pêche",
+    bg:"#fff4ef",
+    accent:"#d98f72",
+    type:"classic",
+    kind:"light"
+  },
 
-  [
-    "ocean-dark",
-    "Deep Ocean",
-    "#061116",
-    "#45b9c5"
-  ],
+  {
+    id:"mint",
+    name:"Menthe",
+    bg:"#eff9f4",
+    accent:"#55a47d",
+    type:"classic",
+    kind:"light"
+  },
 
-  [
-    "purple-dark",
-    "Purple Night",
-    "#100a18",
-    "#a66cff"
-  ],
+  {
+    id:"lemon",
+    name:"Citron",
+    bg:"#fbfae9",
+    accent:"#a6a53f",
+    type:"classic",
+    kind:"light"
+  },
 
-  [
-    "coffee",
-    "Coffee",
-    "#120d0a",
-    "#c28b62"
-  ],
+  {
+    id:"ocean",
+    name:"Océan",
+    bg:"#edf7f8",
+    accent:"#3e9ba5",
+    type:"classic",
+    kind:"light"
+  },
 
-  [
-    "cyber",
-    "Cyber",
-    "#08070f",
-    "#b66cff"
-  ],
+  {
+    id:"sunset",
+    name:"Sunset",
+    bg:"#fff2e8",
+    accent:"#d47d55",
+    type:"classic",
+    kind:"light"
+  },
 
-  [
-    "ruby",
-    "Ruby",
-    "#12080b",
-    "#e65d79"
-  ],
+  {
+    id:"rosewood",
+    name:"Rosewood",
+    bg:"#f8eef0",
+    accent:"#a95f70",
+    type:"classic",
+    kind:"light"
+  },
 
-  [
-    "slate",
-    "Slate",
-    "#090d12",
-    "#7899b2"
-  ],
+  {
+    id:"sand",
+    name:"Sand",
+    bg:"#f5f0e6",
+    accent:"#9b8760",
+    type:"classic",
+    kind:"light"
+  },
 
-  [
-    "aurora",
-    "Aurora",
-    "#080c15",
-    "#69d6b4"
-  ],
+  /* =========================
+     PREMIUM
+  ========================= */
 
-  [
-    "graphite",
-    "Graphite",
-    "#0b0b0c",
-    "#d0d0d5"
-  ],
+  {
+    id:"aurora",
+    name:"Aurora",
+    bg:"#050b12",
+    accent:"#55f0bd",
+    type:"premium",
+    effect:"aurora"
+  },
 
-  [
-    "deep-violet",
-    "Deep Violet",
-    "#0c0713",
-    "#c078ff"
-  ],
+  {
+    id:"sakura",
+    name:"Sakura",
+    bg:"#fff2f6",
+    accent:"#d9799c",
+    type:"premium",
+    effect:"sakura"
+  },
 
-  [
-    "ember",
-    "Ember",
-    "#120a08",
-    "#f07851"
-  ]
+  {
+    id:"cyber",
+    name:"Cyber",
+    bg:"#08070f",
+    accent:"#b66cff",
+    type:"premium",
+    effect:"cyber"
+  },
+
+  {
+    id:"midnight-premium",
+    name:"Midnight Stars",
+    bg:"#080b12",
+    accent:"#788cff",
+    type:"premium",
+    effect:"midnight"
+  },
+
+  {
+    id:"nebula",
+    name:"Nebula",
+    bg:"#080713",
+    accent:"#e06cff",
+    type:"premium",
+    effect:"nebula"
+  },
+
+  {
+    id:"cosmos",
+    name:"Cosmos",
+    bg:"#050713",
+    accent:"#7186ff",
+    type:"premium",
+    effect:"cosmos"
+  },
+
+  {
+    id:"frost",
+    name:"Frost",
+    bg:"#061017",
+    accent:"#7de5ff",
+    type:"premium",
+    effect:"frost"
+  },
+
+  {
+    id:"crystal",
+    name:"Crystal",
+    bg:"#080c15",
+    accent:"#8ecfff",
+    type:"premium",
+    effect:"crystal"
+  },
+
+  {
+    id:"enchanted",
+    name:"Enchanted Forest",
+    bg:"#06100c",
+    accent:"#76ef9a",
+    type:"premium",
+    effect:"enchanted"
+  },
+
+  {
+    id:"nocturne",
+    name:"Nocturne",
+    bg:"#0b0810",
+    accent:"#e4a267",
+    type:"premium",
+    effect:"nocturne"
+  }
 
 ];
 
 
 function applyTheme(theme){
 
-  document.body.dataset.theme =
-    theme;
+  /*
+    midnight-premium utilise la même palette que Midnight
+    mais avec l'effet Premium.
+  */
 
+  const actualTheme =
+    theme==="midnight-premium"
+      ? "midnight"
+      : theme;
+
+  document.body.dataset.theme =
+    actualTheme;
 
   localStorage.setItem(
     THEME_KEY,
     theme
   );
-
 
   renderThemeButtons();
 
@@ -5636,93 +7224,404 @@ function applyTheme(theme){
 }
 
 
-function renderThemeButtons(){
+function createThemePreview(theme){
 
-  const grid =
-    document.getElementById(
-      "themeGrid"
+  const preview =
+    document.createElement(
+      "div"
     );
 
+  preview.className =
+    "theme-preview";
 
-  if(!grid) return;
+  preview.style.background =
+    getThemePreviewBackground(
+      theme
+    );
+
+  const dot1 =
+    document.createElement(
+      "span"
+    );
+
+  dot1.className =
+    "preview-dot";
+
+  const dot2 =
+    document.createElement(
+      "span"
+    );
+
+  dot2.className =
+    "preview-dot";
+
+  const line =
+    document.createElement(
+      "span"
+    );
+
+  line.className =
+    "preview-line";
+
+  preview.appendChild(dot1);
+  preview.appendChild(dot2);
+  preview.appendChild(line);
+
+  return preview;
+
+}
 
 
-  grid.innerHTML="";
+function getThemePreviewBackground(theme){
 
+  const bg =
+    theme.bg;
+
+  const accent =
+    theme.accent;
+
+  if(theme.effect==="aurora"){
+
+    return `
+      radial-gradient(
+        ellipse at 20% 20%,
+        #4effc2 0%,
+        transparent 38%
+      ),
+      radial-gradient(
+        ellipse at 80% 30%,
+        #756dff 0%,
+        transparent 40%
+      ),
+      radial-gradient(
+        ellipse at 50% 100%,
+        #d96dff 0%,
+        transparent 45%
+      ),
+      linear-gradient(
+        135deg,
+        #061015,
+        #102329
+      )
+    `;
+
+  }
+
+  if(theme.effect==="sakura"){
+
+    return `
+      radial-gradient(
+        circle at 25% 25%,
+        #ffbfd7 0 7%,
+        transparent 8%
+      ),
+      radial-gradient(
+        circle at 65% 65%,
+        #ef86b0 0 6%,
+        transparent 7%
+      ),
+      linear-gradient(
+        135deg,
+        #fff0f5,
+        #f3b4cb
+      )
+    `;
+
+  }
+
+  if(theme.effect==="cyber"){
+
+    return `
+      linear-gradient(
+        rgba(87,222,255,.18) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgba(183,94,255,.18) 1px,
+        transparent 1px
+      ),
+      radial-gradient(
+        circle at center,
+        #a65aff55,
+        transparent 58%
+      ),
+      #090711
+    `;
+
+  }
+
+  if(theme.effect==="midnight"){
+
+    return `
+      radial-gradient(
+        circle at 76% 20%,
+        #dbe2ff 0 4%,
+        #7685ff55 5%,
+        transparent 18%
+      ),
+      radial-gradient(
+        circle at 18% 30%,
+        #fff 0 1%,
+        transparent 2%
+      ),
+      radial-gradient(
+        circle at 45% 70%,
+        #b8c5ff 0 1%,
+        transparent 2%
+      ),
+      linear-gradient(
+        135deg,
+        #060912,
+        #10182c
+      )
+    `;
+
+  }
+
+  if(theme.effect==="nebula"){
+
+    return `
+      radial-gradient(
+        ellipse at 20% 30%,
+        #ff59c9aa,
+        transparent 38%
+      ),
+      radial-gradient(
+        ellipse at 75% 25%,
+        #6265ffbb,
+        transparent 40%
+      ),
+      radial-gradient(
+        ellipse at 55% 90%,
+        #55e8ffaa,
+        transparent 40%
+      ),
+      #090713
+    `;
+
+  }
+
+  if(theme.effect==="cosmos"){
+
+    return `
+      radial-gradient(
+        circle at 50% 50%,
+        #7b89ff55,
+        transparent 24%
+      ),
+      radial-gradient(
+        circle at 25% 30%,
+        white 0 1px,
+        transparent 2px
+      ),
+      radial-gradient(
+        circle at 75% 70%,
+        #9caeff 0 1px,
+        transparent 2px
+      ),
+      #050713
+    `;
+
+  }
+
+  if(theme.effect==="frost"){
+
+    return `
+      radial-gradient(
+        circle at 20% 20%,
+        #a9f0ff88,
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 80% 80%,
+        #7e9eff77,
+        transparent 32%
+      ),
+      linear-gradient(
+        135deg,
+        #07151d,
+        #12303b
+      )
+    `;
+
+  }
+
+  if(theme.effect==="crystal"){
+
+    return `
+      linear-gradient(
+        125deg,
+        #b5e7ff22 0 18%,
+        transparent 19% 45%,
+        #c59dff22 46% 65%,
+        transparent 66%
+      ),
+      linear-gradient(
+        135deg,
+        #0a0e18,
+        #172237
+      )
+    `;
+
+  }
+
+  if(theme.effect==="enchanted"){
+
+    return `
+      radial-gradient(
+        circle at 25% 30%,
+        #79ff9e66,
+        transparent 25%
+      ),
+      radial-gradient(
+        circle at 75% 70%,
+        #2fb66b55,
+        transparent 30%
+      ),
+      linear-gradient(
+        135deg,
+        #06100b,
+        #12321e
+      )
+    `;
+
+  }
+
+  if(theme.effect==="nocturne"){
+
+    return `
+      radial-gradient(
+        circle at 80% 20%,
+        #ffd59d66,
+        transparent 32%
+      ),
+      radial-gradient(
+        circle at 20% 80%,
+        #d47edc55,
+        transparent 35%
+      ),
+      linear-gradient(
+        135deg,
+        #0b0810,
+        #281a28
+      )
+    `;
+
+  }
+
+  return `
+    radial-gradient(
+      circle at 78% 22%,
+      ${accent},
+      transparent 20%
+    ),
+    linear-gradient(
+      135deg,
+      ${bg},
+      ${accent}22
+    )
+  `;
+
+}
+
+
+function renderThemeButtons(){
+
+  const classicGrid =
+    document.getElementById(
+      "classicThemeGrid"
+    );
+
+  const premiumGrid =
+    document.getElementById(
+      "premiumThemeGrid"
+    );
+
+  if(!classicGrid || !premiumGrid){
+    return;
+  }
+
+  classicGrid.innerHTML="";
+  premiumGrid.innerHTML="";
 
   const current =
-    document.body.dataset.theme;
+    localStorage.getItem(
+      THEME_KEY
+    )
+    ||
+    "sage";
 
+  themes.forEach(theme=>{
 
-  themes.forEach(
-    theme=>{
+    const button =
+      document.createElement(
+        "button"
+      );
 
-      const [
-        id,
-        name,
-        bg,
-        accent
-      ] = theme;
+    button.className =
+      "theme-btn";
 
+    if(theme.id===current){
 
-      const button =
-        document.createElement(
-          "button"
-        );
+      button.classList.add(
+        "active"
+      );
 
+    }
 
-      button.className =
-        "theme-btn";
+    const preview =
+      createThemePreview(theme);
 
+    button.appendChild(
+      preview
+    );
 
-      if(id===current){
+    const name =
+      document.createElement(
+        "div"
+      );
 
-        button.classList.add(
-          "active"
-        );
+    name.className =
+      "theme-name";
 
+    name.innerHTML=`
+      <span>
+        ${escapeHTML(theme.name)}
+      </span>
+
+      ${
+        theme.type==="premium"
+          ? `<span class="theme-premium-mark">✦</span>`
+          : ""
       }
+    `;
 
+    button.appendChild(name);
 
-      button.innerHTML=`
+    button.onclick=()=>{
 
-        <div
-          class="theme-preview"
-          style="
-            background:
-              radial-gradient(
-                circle at 78% 22%,
-                ${accent} 0 18%,
-                transparent 19%
-              ),
-              linear-gradient(
-                135deg,
-                ${bg},
-                ${accent}22
-              )
-          "
-        ></div>
+      applyTheme(
+        theme.id
+      );
 
-        <div class="theme-name">
-          ${name}
-        </div>
+    };
 
-      `;
+    if(theme.type==="premium"){
 
+      premiumGrid.appendChild(
+        button
+      );
 
-      button.onclick=()=>{
+    }else{
 
-        applyTheme(id);
-
-      };
-
-
-      grid.appendChild(
+      classicGrid.appendChild(
         button
       );
 
     }
-  );
+
+  });
 
 }
 
@@ -5738,31 +7637,37 @@ function updateSpecialBackground(){
       "specialBg"
     );
 
-
   bg.innerHTML="";
 
-
-  const theme =
+  const storedTheme =
+    localStorage.getItem(
+      THEME_KEY
+    )
+    ||
     document.body.dataset.theme;
-
 
   /* ---------- SAKURA ---------- */
 
-  if(theme==="sakura"){
+  if(storedTheme==="sakura"){
+
+    bg.innerHTML=`
+
+      <div class="sakura-glow"></div>
+
+      <div class="sakura-glow-two"></div>
+
+      <div class="petals"></div>
+
+    `;
 
     const petals =
-      document.createElement(
-        "div"
+      bg.querySelector(
+        ".petals"
       );
-
-
-    petals.className =
-      "petals";
-
 
     for(
       let i=0;
-      i<34;
+      i<38;
       i++
     ){
 
@@ -5771,15 +7676,12 @@ function updateSpecialBackground(){
           "div"
         );
 
-
       p.className =
         "petal";
-
 
       p.style.left =
         Math.random()*100+
         "%";
-
 
       p.style.animationDuration =
         (
@@ -5787,12 +7689,10 @@ function updateSpecialBackground(){
           Math.random()*10
         )+"s";
 
-
       p.style.animationDelay =
         (
           -Math.random()*14
         )+"s";
-
 
       p.style.width =
         (
@@ -5800,29 +7700,22 @@ function updateSpecialBackground(){
           Math.random()*8
         )+"px";
 
-
       p.style.height =
         (
           6+
           Math.random()*5
         )+"px";
 
-
       petals.appendChild(p);
 
     }
-
-
-    bg.appendChild(
-      petals
-    );
 
   }
 
 
   /* ---------- AURORA ---------- */
 
-  if(theme==="aurora"){
+  if(storedTheme==="aurora"){
 
     bg.innerHTML=`
 
@@ -5833,6 +7726,8 @@ function updateSpecialBackground(){
         <div class="aurora-three"></div>
         <div class="aurora-four"></div>
 
+        <div class="aurora-ribbon"></div>
+
       </div>
 
     `;
@@ -5840,9 +7735,9 @@ function updateSpecialBackground(){
   }
 
 
-  /* ---------- MIDNIGHT ---------- */
+  /* ---------- MIDNIGHT PREMIUM ---------- */
 
-  if(theme==="midnight"){
+  if(storedTheme==="midnight-premium"){
 
     bg.innerHTML=`
 
@@ -5855,7 +7750,7 @@ function updateSpecialBackground(){
 
   /* ---------- CYBER ---------- */
 
-  if(theme==="cyber"){
+  if(storedTheme==="cyber"){
 
     bg.innerHTML=`
 
@@ -5863,76 +7758,181 @@ function updateSpecialBackground(){
 
       <div class="cyber-grid"></div>
 
+      <div class="cyber-beam"></div>
+
     `;
 
   }
 
-}
+
+  /* ---------- NEBULA ---------- */
+
+  if(storedTheme==="nebula"){
+
+    bg.innerHTML=`
+
+      <div class="nebula-layer"></div>
+
+      <div class="nebula-cloud"></div>
+
+      <div class="space-dust"></div>
+
+    `;
+
+  }
 
 
-/* =========================================================
-   HELP — SUBJECT ADVICE
-========================================================= */
+  /* ---------- COSMOS ---------- */
 
-function subjectTip(subject){
+  if(storedTheme==="cosmos"){
 
-  const data={
+    bg.innerHTML=`
+
+      <div class="cosmos-layer"></div>
+
+      <div class="cosmos-orbit"></div>
+
+      <div class="cosmos-planet"></div>
+
+    `;
+
+    const layer =
+      document.querySelector(
+        ".cosmos-layer"
+      );
+
+    for(
+      let i=0;
+      i<70;
+      i++
+    ){
+
+      const star =
+        document.createElement(
+          "span"
+        );
+
+      star.className =
+        "cosmos-star";
+
+      star.style.left =
+        Math.random()*100+"%";
+
+      star.style.top =
+        Math.random()*100+"%";
+
+      star.style.animationDelay =
+        -Math.random()*3+"s";
+
+      star.style.transform =
+        `scale(${.5+Math.random()*1.2})`;
+
+      layer.appendChild(star);
+
+    }
+
+  }
 
 
-    "Mathématiques":
-      "Travaille surtout avec des exercices. Après chaque correction, note précisément l’erreur : calcul, formule, raisonnement ou compréhension.",
+  /* ---------- FROST ---------- */
+
+  if(storedTheme==="frost"){
+
+    bg.innerHTML=`
+
+      <div class="frost-layer">
+
+        <div class="frost-crystal frost-one"></div>
+        <div class="frost-crystal frost-two"></div>
+
+      </div>
+
+    `;
+
+  }
 
 
-    "Physique":
-      "Commence par identifier les grandeurs connues et inconnues, écris la formule avant de remplacer les valeurs et vérifie les unités.",
+  /* ---------- CRYSTAL ---------- */
+
+  if(storedTheme==="crystal"){
+
+    bg.innerHTML=`
+
+      <div class="crystal-layer">
+
+        <div class="crystal-shard crystal-one"></div>
+        <div class="crystal-shard crystal-two"></div>
+
+      </div>
+
+    `;
+
+  }
 
 
-    "Sciences":
-      "Transforme les chapitres en questions. Utilise des schémas et explique les mécanismes avec tes propres mots.",
+  /* ---------- ENCHANTED ---------- */
+
+  if(storedTheme==="enchanted"){
+
+    bg.innerHTML=`
+
+      <div class="forest-layer"></div>
+
+    `;
+
+    const layer =
+      document.querySelector(
+        ".forest-layer"
+      );
+
+    for(
+      let i=0;
+      i<28;
+      i++
+    ){
+
+      const f =
+        document.createElement(
+          "span"
+        );
+
+      f.className =
+        "firefly";
+
+      f.style.left =
+        Math.random()*100+"%";
+
+      f.style.top =
+        Math.random()*100+"%";
+
+      f.style.animationDelay =
+        -Math.random()*6+"s";
+
+      f.style.animationDuration =
+        4+
+        Math.random()*5+
+        "s";
+
+      layer.appendChild(f);
+
+    }
+
+  }
 
 
-    "Histoire":
-      "Construis une chronologie puis relie les événements par leurs causes et conséquences. Teste-toi ensuite sans regarder le cours.",
+  /* ---------- NOCTURNE ---------- */
 
+  if(storedTheme==="nocturne"){
 
-    "Français":
-      "Pour une analyse, distingue toujours l’observation, la technique utilisée et son effet. Pour une rédaction, construis d’abord ton plan.",
+    bg.innerHTML=`
 
+      <div class="nocturne-layer"></div>
 
-    "Néerlandais":
-      "Utilise régulièrement le vocabulaire en contexte. Fais des phrases plutôt que de mémoriser uniquement des listes de mots.",
+      <div class="nocturne-lamp"></div>
 
+    `;
 
-    "Anglais":
-      "Combine compréhension, vocabulaire et production. Essaie de reformuler les phrases sans regarder la réponse.",
-
-
-    "Informatique":
-      "Écris du code régulièrement. Quand tu bloques, isole le problème et teste une petite partie plutôt que de modifier tout le programme."
-
-  };
-
-
-  document.getElementById(
-    "subjectAdvice"
-  ).innerHTML=`
-
-    <div class="tip">
-
-      <h3
-        style="margin-top:0"
-      >
-        ${escapeHTML(subject)}
-      </h3>
-
-      <p>
-        ${data[subject]}
-      </p>
-
-    </div>
-
-  `;
-
+  }
 
 }
 
@@ -5954,7 +7954,6 @@ function exportData(){
 
   };
 
-
   const blob =
     new Blob(
       [
@@ -5970,29 +7969,23 @@ function exportData(){
       }
     );
 
-
   const url =
     URL.createObjectURL(
       blob
     );
-
 
   const a =
     document.createElement(
       "a"
     );
 
-
   a.href =
     url;
-
 
   a.download =
     "habits-backup.json";
 
-
   a.click();
-
 
   URL.revokeObjectURL(
     url
@@ -6013,12 +8006,9 @@ function resetData(){
 
   }
 
-
   habits=[];
 
-
   saveHabits();
-
 
   renderToday();
   renderHabits();
@@ -6077,10 +8067,15 @@ function escapeHTML(value){
     ||
     "sage";
 
+  /*
+    midnight-premium possède sa propre valeur de stockage,
+    mais utilise la palette Midnight dans le CSS.
+  */
 
   document.body.dataset.theme =
-    savedTheme;
-
+    savedTheme==="midnight-premium"
+      ? "midnight"
+      : savedTheme;
 
   renderThemeButtons();
 
