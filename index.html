@@ -63,6 +63,8 @@ button{
   cursor:pointer;
 }
 
+/* HEADER — NE RESTE PLUS FIXE */
+
 .header{
   height:78px;
   padding:0 5%;
@@ -72,9 +74,6 @@ button{
   background:rgba(255,255,255,.82);
   backdrop-filter:blur(18px);
   border-bottom:1px solid var(--border);
-  position:sticky;
-  top:0;
-  z-index:50;
 }
 
 .logo{
@@ -271,7 +270,6 @@ button{
 
 .primaryBtn:hover{
   transform:translateY(-1px);
-  filter:brightness(.98);
 }
 
 .secondaryBtn{
@@ -579,7 +577,6 @@ button{
   display:flex;
   align-items:flex-end;
   justify-content:center;
-  gap:6px;
   position:relative;
 }
 
@@ -1017,6 +1014,7 @@ body.theme-coffee{
 /* RESPONSIVE */
 
 @media(max-width:800px){
+
   .header{
     height:68px;
     padding:0 4%;
@@ -1081,6 +1079,7 @@ body.theme-coffee{
 }
 
 @media(max-width:480px){
+
   .card{
     padding:17px;
     border-radius:19px;
@@ -1128,351 +1127,713 @@ body.theme-coffee{
 <body class="theme-sage">
 
 <header class="header">
+
   <div class="logo">
     <div class="logoMark">H</div>
     <span>Habits.</span>
   </div>
 
   <nav class="desktopNav">
-    <button class="navBtn active" data-page="today">Aujourd’hui</button>
-    <button class="navBtn" data-page="calendar">Calendrier</button>
-    <button class="navBtn" data-page="habits">Habitudes</button>
-    <button class="navBtn" data-page="stats">Statistiques</button>
-    <button class="navBtn" data-page="settings">Réglages</button>
+
+    <button class="navBtn active" data-page="today">
+      Aujourd’hui
+    </button>
+
+    <button class="navBtn" data-page="calendar">
+      Calendrier
+    </button>
+
+    <button class="navBtn" data-page="habits">
+      Habitudes
+    </button>
+
+    <button class="navBtn" data-page="stats">
+      Statistiques
+    </button>
+
+    <button class="navBtn" data-page="settings">
+      Réglages
+    </button>
+
   </nav>
+
 </header>
+
 
 <main class="container">
 
-  <!-- TODAY -->
-  <section id="page-today" class="page active">
+<!-- TODAY -->
 
-    <h1 class="pageTitle" id="todayTitle">Aujourd’hui</h1>
-    <p class="pageSubtitle" id="todayDate"></p>
+<section id="page-today" class="page active">
 
-    <div class="todayTop">
+  <h1 class="pageTitle">Aujourd’hui</h1>
 
-      <div class="card progressCard">
-        <div class="progressInfo">
-          <h2 id="progressText">0%</h2>
-          <p id="progressSub">Commence ta journée.</p>
-        </div>
+  <p class="pageSubtitle" id="todayDate"></p>
 
-        <div class="progressRing" id="progressRing">
-          <span id="progressNumber">0%</span>
-        </div>
-      </div>
+  <div class="todayTop">
 
-      <div class="card">
-        <div class="cardTitle">Résumé</div>
-        <div class="cardSub">Ton activité aujourd’hui</div>
+    <div class="card progressCard">
 
-        <div style="margin-top:20px">
-          <strong id="todayHabitsCount">0</strong>
-          <span class="statLabel"> habitudes</span>
-        </div>
+      <div class="progressInfo">
 
-        <div style="margin-top:12px">
-          <strong id="todayTasksCount">0</strong>
-          <span class="statLabel"> tâches</span>
-        </div>
-      </div>
+        <h2 id="progressText">0%</h2>
 
-    </div>
-
-    <div class="sectionHeader">
-      <h2>Habitudes</h2>
-      <button class="secondaryBtn" id="goHabits">Gérer</button>
-    </div>
-
-    <div id="todayHabits" class="list"></div>
-
-    <div class="sectionHeader">
-      <h2>Tâches</h2>
-      <button class="primaryBtn" id="addTaskBtn">+ Tâche</button>
-    </div>
-
-    <div id="todayTasks" class="list"></div>
-
-  </section>
-
-
-  <!-- CALENDAR -->
-  <section id="page-calendar" class="page">
-
-    <h1 class="pageTitle">Calendrier</h1>
-    <p class="pageSubtitle">Visualise ton activité au fil des jours.</p>
-
-    <div class="calendar">
-
-      <div class="calendarHeader">
-        <div class="monthTitle" id="calendarMonth"></div>
-
-        <div class="calendarControls">
-          <button class="iconBtn" id="prevMonth">‹</button>
-          <button class="iconBtn" id="todayMonth">Aujourd’hui</button>
-          <button class="iconBtn" id="nextMonth">›</button>
-        </div>
-      </div>
-
-      <div class="weekdays">
-        <div>Lun</div>
-        <div>Mar</div>
-        <div>Mer</div>
-        <div>Jeu</div>
-        <div>Ven</div>
-        <div>Sam</div>
-        <div>Dim</div>
-      </div>
-
-      <div class="calendarGrid" id="calendarGrid"></div>
-
-    </div>
-
-  </section>
-
-
-  <!-- HABITS -->
-  <section id="page-habits" class="page">
-
-    <div class="sectionHeader" style="margin-top:0">
-      <div>
-        <h1 class="pageTitle">Habitudes</h1>
-        <p class="pageSubtitle" style="margin-bottom:0">
-          Construis des habitudes qui te ressemblent.
+        <p id="progressSub">
+          Commence ta journée.
         </p>
+
       </div>
 
-      <button class="primaryBtn" id="newHabitBtn">+ Habitude</button>
-    </div>
+      <div class="progressRing" id="progressRing">
 
-    <div id="habitsList" class="grid grid2"></div>
+        <span id="progressNumber">
+          0%
+        </span>
 
-  </section>
-
-
-  <!-- STATS -->
-  <section id="page-stats" class="page">
-
-    <h1 class="pageTitle">Statistiques</h1>
-    <p class="pageSubtitle">Observe ta régularité et tes progrès.</p>
-
-    <div class="grid grid3">
-
-      <div class="card">
-        <div class="cardSub">Complétion</div>
-        <div class="statValue" id="statCompletion">0%</div>
-        <div class="statLabel">des éléments terminés</div>
-      </div>
-
-      <div class="card">
-        <div class="cardSub">Habitudes</div>
-        <div class="statValue" id="statHabits">0</div>
-        <div class="statLabel">habitudes actives</div>
-      </div>
-
-      <div class="card">
-        <div class="cardSub">Tâches</div>
-        <div class="statValue" id="statTasks">0</div>
-        <div class="statLabel">tâches terminées</div>
       </div>
 
     </div>
 
-    <div class="grid grid2" style="margin-top:18px">
-
-      <div class="card">
-        <div class="cardTitle">Activité des 7 derniers jours</div>
-        <div class="cardSub">Habitudes et tâches complétées</div>
-        <div class="chart" id="weeklyChart"></div>
-      </div>
-
-      <div class="card">
-        <div class="cardTitle">Par catégorie</div>
-        <div class="cardSub">Tes domaines les plus actifs</div>
-        <div id="categoryStats"></div>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- SETTINGS -->
-  <section id="page-settings" class="page">
-
-    <h1 class="pageTitle">Réglages</h1>
-    <p class="pageSubtitle">Personnalise ton expérience.</p>
 
     <div class="card">
 
-      <div class="cardTitle">Apparence</div>
-      <div class="cardSub">Choisis ton thème préféré.</div>
+      <div class="cardTitle">
+        Résumé
+      </div>
 
-      <div class="themeGrid" id="themeGrid"></div>
+      <div class="cardSub">
+        Ton activité aujourd’hui
+      </div>
+
+      <div style="margin-top:20px">
+
+        <strong id="todayHabitsCount">
+          0
+        </strong>
+
+        <span class="statLabel">
+          habitudes
+        </span>
+
+      </div>
+
+      <div style="margin-top:12px">
+
+        <strong id="todayTasksCount">
+          0
+        </strong>
+
+        <span class="statLabel">
+          tâches
+        </span>
+
+      </div>
 
     </div>
 
-    <div class="card" style="margin-top:18px">
+  </div>
 
-      <div class="settingRow">
-        <div class="settingInfo">
-          <div class="settingTitle">Retour à aujourd’hui</div>
-          <div class="settingDesc">
-            Revenir rapidement à la date actuelle.
-          </div>
-        </div>
 
-        <button class="secondaryBtn" id="settingsToday">
+  <div class="sectionHeader">
+
+    <h2>Habitudes</h2>
+
+    <button class="secondaryBtn" id="goHabits">
+      Gérer
+    </button>
+
+  </div>
+
+  <div id="todayHabits" class="list"></div>
+
+
+  <div class="sectionHeader">
+
+    <h2>Tâches</h2>
+
+    <button class="primaryBtn" id="addTaskBtn">
+      + Tâche
+    </button>
+
+  </div>
+
+  <div id="todayTasks" class="list"></div>
+
+</section>
+
+
+<!-- CALENDAR -->
+
+<section id="page-calendar" class="page">
+
+  <h1 class="pageTitle">
+    Calendrier
+  </h1>
+
+  <p class="pageSubtitle">
+    Visualise ton activité au fil des jours.
+  </p>
+
+  <div class="calendar">
+
+    <div class="calendarHeader">
+
+      <div
+        class="monthTitle"
+        id="calendarMonth">
+      </div>
+
+      <div class="calendarControls">
+
+        <button
+          class="iconBtn"
+          id="prevMonth">
+          ‹
+        </button>
+
+        <button
+          class="iconBtn"
+          id="todayMonth">
           Aujourd’hui
         </button>
-      </div>
 
-      <div class="settingRow">
-        <div class="settingInfo">
-          <div class="settingTitle">Réinitialiser les données</div>
-          <div class="settingDesc">
-            Supprime toutes tes habitudes et tes tâches.
-          </div>
-        </div>
-
-        <button class="dangerBtn" id="resetData">
-          Réinitialiser
+        <button
+          class="iconBtn"
+          id="nextMonth">
+          ›
         </button>
+
       </div>
 
     </div>
 
-  </section>
+
+    <div class="weekdays">
+
+      <div>Lun</div>
+      <div>Mar</div>
+      <div>Mer</div>
+      <div>Jeu</div>
+      <div>Ven</div>
+      <div>Sam</div>
+      <div>Dim</div>
+
+    </div>
+
+
+    <div
+      class="calendarGrid"
+      id="calendarGrid">
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- HABITS -->
+
+<section id="page-habits" class="page">
+
+  <div
+    class="sectionHeader"
+    style="margin-top:0">
+
+    <div>
+
+      <h1 class="pageTitle">
+        Habitudes
+      </h1>
+
+      <p
+        class="pageSubtitle"
+        style="margin-bottom:0">
+
+        Construis des habitudes qui te ressemblent.
+
+      </p>
+
+    </div>
+
+    <button
+      class="primaryBtn"
+      id="newHabitBtn">
+
+      + Habitude
+
+    </button>
+
+  </div>
+
+
+  <div
+    id="habitsList"
+    class="grid grid2">
+  </div>
+
+</section>
+
+
+<!-- STATS -->
+
+<section id="page-stats" class="page">
+
+  <h1 class="pageTitle">
+    Statistiques
+  </h1>
+
+  <p class="pageSubtitle">
+    Observe ta régularité et tes progrès.
+  </p>
+
+
+  <div class="grid grid3">
+
+    <div class="card">
+
+      <div class="cardSub">
+        Complétion
+      </div>
+
+      <div
+        class="statValue"
+        id="statCompletion">
+        0%
+      </div>
+
+      <div class="statLabel">
+        des éléments terminés
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="cardSub">
+        Habitudes
+      </div>
+
+      <div
+        class="statValue"
+        id="statHabits">
+        0
+      </div>
+
+      <div class="statLabel">
+        habitudes actives
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="cardSub">
+        Tâches
+      </div>
+
+      <div
+        class="statValue"
+        id="statTasks">
+        0
+      </div>
+
+      <div class="statLabel">
+        tâches terminées
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div
+    class="grid grid2"
+    style="margin-top:18px">
+
+    <div class="card">
+
+      <div class="cardTitle">
+        Activité des 7 derniers jours
+      </div>
+
+      <div class="cardSub">
+        Habitudes et tâches complétées
+      </div>
+
+      <div
+        class="chart"
+        id="weeklyChart">
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="cardTitle">
+        Par catégorie
+      </div>
+
+      <div class="cardSub">
+        Tes domaines les plus actifs
+      </div>
+
+      <div id="categoryStats"></div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SETTINGS -->
+
+<section id="page-settings" class="page">
+
+  <h1 class="pageTitle">
+    Réglages
+  </h1>
+
+  <p class="pageSubtitle">
+    Personnalise ton expérience.
+  </p>
+
+
+  <div class="card">
+
+    <div class="cardTitle">
+      Apparence
+    </div>
+
+    <div class="cardSub">
+      Choisis ton thème préféré.
+    </div>
+
+    <div
+      class="themeGrid"
+      id="themeGrid">
+    </div>
+
+  </div>
+
+
+  <div
+    class="card"
+    style="margin-top:18px">
+
+    <div class="settingRow">
+
+      <div class="settingInfo">
+
+        <div class="settingTitle">
+          Retour à aujourd’hui
+        </div>
+
+        <div class="settingDesc">
+          Revenir rapidement à la date actuelle.
+        </div>
+
+      </div>
+
+      <button
+        class="secondaryBtn"
+        id="settingsToday">
+
+        Aujourd’hui
+
+      </button>
+
+    </div>
+
+
+    <div class="settingRow">
+
+      <div class="settingInfo">
+
+        <div class="settingTitle">
+          Réinitialiser les données
+        </div>
+
+        <div class="settingDesc">
+          Supprime toutes tes habitudes et tes tâches.
+        </div>
+
+      </div>
+
+      <button
+        class="dangerBtn"
+        id="resetData">
+
+        Réinitialiser
+
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
 
 </main>
 
 
 <!-- MOBILE NAV -->
+
 <nav class="mobileNav">
+
   <div class="mobileNavInner">
 
-    <button class="active" data-page="today">
-      <span class="mobileIcon">⌂</span>
+    <button
+      class="active"
+      data-page="today">
+
+      <span class="mobileIcon">
+        ⌂
+      </span>
+
       Aujourd’hui
+
     </button>
+
 
     <button data-page="calendar">
-      <span class="mobileIcon">□</span>
+
+      <span class="mobileIcon">
+        □
+      </span>
+
       Calendrier
+
     </button>
+
 
     <button data-page="habits">
-      <span class="mobileIcon">✓</span>
+
+      <span class="mobileIcon">
+        ✓
+      </span>
+
       Habitudes
+
     </button>
+
 
     <button data-page="stats">
-      <span class="mobileIcon">▥</span>
+
+      <span class="mobileIcon">
+        ▥
+      </span>
+
       Stats
+
     </button>
 
+
     <button data-page="settings">
-      <span class="mobileIcon">⚙</span>
+
+      <span class="mobileIcon">
+        ⚙
+      </span>
+
       Réglages
+
     </button>
 
   </div>
+
 </nav>
 
 
 <!-- HABIT MODAL -->
-<div class="modalOverlay" id="habitModal">
+
+<div
+  class="modalOverlay"
+  id="habitModal">
 
   <div class="modal">
 
     <div class="modalHeader">
-      <h2 id="habitModalTitle">Nouvelle habitude</h2>
-      <button class="closeBtn" id="closeHabitModal">×</button>
+
+      <h2 id="habitModalTitle">
+        Nouvelle habitude
+      </h2>
+
+      <button
+        class="closeBtn"
+        id="closeHabitModal">
+        ×
+      </button>
+
     </div>
 
-    <input type="hidden" id="habitEditId">
+
+    <input
+      type="hidden"
+      id="habitEditId">
+
 
     <div class="formGroup">
-      <label>Nom de l’habitude</label>
+
+      <label>
+        Nom de l’habitude
+      </label>
+
       <input
         class="formInput"
         id="habitName"
-        placeholder="Ex : Faire du sport"
-      >
+        placeholder="Ex : Faire du sport">
+
     </div>
 
-    <div class="formGroup">
-      <label>Catégorie</label>
 
-      <select class="formSelect" id="habitCategory">
-        <option value="Sport">Sport</option>
-        <option value="Études">Études</option>
-        <option value="Santé">Santé</option>
-        <option value="Bien-être">Bien-être</option>
-        <option value="Maison">Maison</option>
-        <option value="Personnel">Personnel</option>
-        <option value="Autre">Autre</option>
+    <div class="formGroup">
+
+      <label>
+        Catégorie
+      </label>
+
+      <select
+        class="formSelect"
+        id="habitCategory">
+
+        <option value="Sport">
+          Sport
+        </option>
+
+        <option value="Études">
+          Études
+        </option>
+
+        <option value="Santé">
+          Santé
+        </option>
+
+        <option value="Bien-être">
+          Bien-être
+        </option>
+
+        <option value="Maison">
+          Maison
+        </option>
+
+        <option value="Personnel">
+          Personnel
+        </option>
+
+        <option value="Autre">
+          Autre
+        </option>
+
       </select>
 
     </div>
 
+
     <div class="formGroup">
-      <label>Fréquence</label>
+
+      <label>
+        Fréquence
+      </label>
+
 
       <div class="frequencyChoices">
 
         <button
           type="button"
           class="frequencyChoice active"
-          data-frequency="daily"
-        >
+          data-frequency="daily">
+
           Tous les jours
+
         </button>
+
 
         <button
           type="button"
           class="frequencyChoice"
-          data-frequency="weekly"
-        >
+          data-frequency="weekly">
+
           Par semaine
+
         </button>
+
 
         <button
           type="button"
           class="frequencyChoice"
-          data-frequency="monthly"
-        >
+          data-frequency="monthly">
+
           Par mois
+
         </button>
 
       </div>
 
-      <div class="frequencyExtra" id="weeklyExtra">
+
+      <div
+        class="frequencyExtra"
+        id="weeklyExtra">
 
         <label style="margin-top:14px">
+
           Combien de fois par semaine ?
+
         </label>
 
-        <select class="formSelect" id="weeklyTarget">
-          <option value="1">1 fois</option>
-          <option value="2">2 fois</option>
-          <option value="3">3 fois</option>
-          <option value="4">4 fois</option>
-          <option value="5">5 fois</option>
-          <option value="6">6 fois</option>
-          <option value="7">7 fois</option>
+        <select
+          class="formSelect"
+          id="weeklyTarget">
+
+          <option value="1">
+            1 fois
+          </option>
+
+          <option value="2">
+            2 fois
+          </option>
+
+          <option value="3">
+            3 fois
+          </option>
+
+          <option value="4">
+            4 fois
+          </option>
+
+          <option value="5">
+            5 fois
+          </option>
+
+          <option value="6">
+            6 fois
+          </option>
+
+          <option value="7">
+            7 fois
+          </option>
+
         </select>
 
       </div>
 
-      <div class="frequencyExtra" id="monthlyExtra">
+
+      <div
+        class="frequencyExtra"
+        id="monthlyExtra">
 
         <label style="margin-top:14px">
+
           Combien de fois par mois ?
+
         </label>
 
-        <select class="formSelect" id="monthlyTarget">
+        <select
+          class="formSelect"
+          id="monthlyTarget">
+
           <option value="1">1 fois</option>
           <option value="2">2 fois</option>
           <option value="3">3 fois</option>
@@ -1488,36 +1849,93 @@ body.theme-coffee{
           <option value="25">25 fois</option>
           <option value="30">30 fois</option>
           <option value="31">31 fois</option>
+
         </select>
 
       </div>
 
     </div>
 
+
     <div class="formGroup">
-      <label>Jours recommandés</label>
 
-      <div class="daysGrid" id="recommendedDays">
+      <label>
+        Jours recommandés
+      </label>
 
-        <button class="dayChoice" data-day="1">Lun</button>
-        <button class="dayChoice" data-day="2">Mar</button>
-        <button class="dayChoice" data-day="3">Mer</button>
-        <button class="dayChoice" data-day="4">Jeu</button>
-        <button class="dayChoice" data-day="5">Ven</button>
-        <button class="dayChoice" data-day="6">Sam</button>
-        <button class="dayChoice" data-day="0">Dim</button>
+      <div
+        class="daysGrid"
+        id="recommendedDays">
+
+        <button
+          class="dayChoice"
+          data-day="1">
+          Lun
+        </button>
+
+        <button
+          class="dayChoice"
+          data-day="2">
+          Mar
+        </button>
+
+        <button
+          class="dayChoice"
+          data-day="3">
+          Mer
+        </button>
+
+        <button
+          class="dayChoice"
+          data-day="4">
+          Jeu
+        </button>
+
+        <button
+          class="dayChoice"
+          data-day="5">
+          Ven
+        </button>
+
+        <button
+          class="dayChoice"
+          data-day="6">
+          Sam
+        </button>
+
+        <button
+          class="dayChoice"
+          data-day="0">
+          Dim
+        </button>
 
       </div>
 
-      <div class="settingDesc" style="margin-top:8px">
+      <div
+        class="settingDesc"
+        style="margin-top:8px">
+
         Facultatif. Cela sert à organiser tes habitudes.
+
       </div>
 
     </div>
 
+
     <div class="modalActions">
-      <button class="secondaryBtn" id="cancelHabit">Annuler</button>
-      <button class="primaryBtn" id="saveHabit">Enregistrer</button>
+
+      <button
+        class="secondaryBtn"
+        id="cancelHabit">
+        Annuler
+      </button>
+
+      <button
+        class="primaryBtn"
+        id="saveHabit">
+        Enregistrer
+      </button>
+
     </div>
 
   </div>
@@ -1526,42 +1944,95 @@ body.theme-coffee{
 
 
 <!-- TASK MODAL -->
-<div class="modalOverlay" id="taskModal">
+
+<div
+  class="modalOverlay"
+  id="taskModal">
 
   <div class="modal">
 
     <div class="modalHeader">
-      <h2>Nouvelle tâche</h2>
-      <button class="closeBtn" id="closeTaskModal">×</button>
+
+      <h2>
+        Nouvelle tâche
+      </h2>
+
+      <button
+        class="closeBtn"
+        id="closeTaskModal">
+        ×
+      </button>
+
     </div>
 
+
     <div class="formGroup">
-      <label>Tâche</label>
+
+      <label>
+        Tâche
+      </label>
 
       <input
         class="formInput"
         id="taskName"
-        placeholder="Ex : Faire mes devoirs"
-      >
+        placeholder="Ex : Faire mes devoirs">
+
     </div>
 
-    <div class="formGroup">
-      <label>Catégorie</label>
 
-      <select class="formSelect" id="taskCategory">
-        <option value="Études">Études</option>
-        <option value="Sport">Sport</option>
-        <option value="Santé">Santé</option>
-        <option value="Maison">Maison</option>
-        <option value="Personnel">Personnel</option>
-        <option value="Autre">Autre</option>
+    <div class="formGroup">
+
+      <label>
+        Catégorie
+      </label>
+
+      <select
+        class="formSelect"
+        id="taskCategory">
+
+        <option value="Études">
+          Études
+        </option>
+
+        <option value="Sport">
+          Sport
+        </option>
+
+        <option value="Santé">
+          Santé
+        </option>
+
+        <option value="Maison">
+          Maison
+        </option>
+
+        <option value="Personnel">
+          Personnel
+        </option>
+
+        <option value="Autre">
+          Autre
+        </option>
+
       </select>
 
     </div>
 
+
     <div class="modalActions">
-      <button class="secondaryBtn" id="cancelTask">Annuler</button>
-      <button class="primaryBtn" id="saveTask">Ajouter</button>
+
+      <button
+        class="secondaryBtn"
+        id="cancelTask">
+        Annuler
+      </button>
+
+      <button
+        class="primaryBtn"
+        id="saveTask">
+        Ajouter
+      </button>
+
     </div>
 
   </div>
@@ -1569,127 +2040,232 @@ body.theme-coffee{
 </div>
 
 
-<div class="toast" id="toast"></div>
+<div
+  class="toast"
+  id="toast">
+</div>
 
 
 <script>
-/* =========================================================
-   DATA
-========================================================= */
+
+/* ================================
+   DONNÉES
+================================ */
 
 const TASKS_KEY = "habitsV8Tasks";
 const HABITS_KEY = "habitsV8Habits";
 const THEME_KEY = "habitsV8Theme";
 
-let tasks = JSON.parse(localStorage.getItem(TASKS_KEY) || "[]");
-let habits = JSON.parse(localStorage.getItem(HABITS_KEY) || "[]");
+let tasks =
+  JSON.parse(
+    localStorage.getItem(TASKS_KEY) || "[]"
+  );
+
+let habits =
+  JSON.parse(
+    localStorage.getItem(HABITS_KEY) || "[]"
+  );
 
 let currentDate = new Date();
 let calendarDate = new Date();
 
+
 const themes = [
+
   ["sage","Sauge","#f4f8f5","#5f9675"],
+
   ["mint","Menthe","#effaf5","#35a87b"],
+
   ["ocean","Océan","#f1f8fb","#428eaa"],
+
   ["lavender","Lavande","#f7f4fb","#8566a8"],
+
   ["rose","Rose","#fff5f6","#bd6878"],
+
   ["amber","Ambre","#fffaf0","#c58a2d"],
+
   ["forest","Forêt","#eef5ef","#386b48"],
+
   ["midnight","Midnight","#101514","#79c39a"],
+
   ["graphite","Graphite","#17181a","#b8bcc4"],
+
   ["sky","Ciel","#f1f7ff","#4e8fd1"],
+
   ["coffee","Café","#f8f4ef","#90694f"]
+
 ];
 
 
-/* =========================================================
-   HELPERS
-========================================================= */
+/* ================================
+   OUTILS
+================================ */
 
 function saveData(){
-  localStorage.setItem(TASKS_KEY, JSON.stringify(tasks));
-  localStorage.setItem(HABITS_KEY, JSON.stringify(habits));
+
+  localStorage.setItem(
+    TASKS_KEY,
+    JSON.stringify(tasks)
+  );
+
+  localStorage.setItem(
+    HABITS_KEY,
+    JSON.stringify(habits)
+  );
+
 }
+
 
 function dateKey(date){
-  const y = date.getFullYear();
-  const m = String(date.getMonth()+1).padStart(2,"0");
-  const d = String(date.getDate()).padStart(2,"0");
+
+  const y =
+    date.getFullYear();
+
+  const m =
+    String(date.getMonth()+1)
+      .padStart(2,"0");
+
+  const d =
+    String(date.getDate())
+      .padStart(2,"0");
 
   return `${y}-${m}-${d}`;
+
 }
+
 
 function parseKey(key){
-  const [y,m,d] = key.split("-").map(Number);
+
+  const [y,m,d] =
+    key.split("-").map(Number);
+
   return new Date(y,m-1,d);
+
 }
 
-function todayKey(){
-  return dateKey(new Date());
-}
 
 function isSameDay(a,b){
+
   return dateKey(a) === dateKey(b);
+
 }
 
-function startOfWeek(date){
-  const d = new Date(date);
-  const day = d.getDay();
-  const diff = day === 0 ? -6 : 1-day;
 
-  d.setDate(d.getDate()+diff);
+function startOfWeek(date){
+
+  const d =
+    new Date(date);
+
+  const day =
+    d.getDay();
+
+  const diff =
+    day === 0 ? -6 : 1-day;
+
+  d.setDate(
+    d.getDate()+diff
+  );
+
   d.setHours(0,0,0,0);
 
   return d;
+
 }
+
 
 function endOfWeek(date){
-  const d = startOfWeek(date);
-  d.setDate(d.getDate()+6);
+
+  const d =
+    startOfWeek(date);
+
+  d.setDate(
+    d.getDate()+6
+  );
+
   return d;
+
 }
+
 
 function startOfMonth(date){
-  return new Date(date.getFullYear(),date.getMonth(),1);
+
+  return new Date(
+    date.getFullYear(),
+    date.getMonth(),
+    1
+  );
+
 }
+
 
 function endOfMonth(date){
-  return new Date(date.getFullYear(),date.getMonth()+1,0);
+
+  return new Date(
+    date.getFullYear(),
+    date.getMonth()+1,
+    0
+  );
+
 }
+
 
 function formatDate(date){
-  return date.toLocaleDateString("fr-BE",{
-    weekday:"long",
-    day:"numeric",
-    month:"long"
-  });
+
+  return date.toLocaleDateString(
+    "fr-BE",
+    {
+      weekday:"long",
+      day:"numeric",
+      month:"long"
+    }
+  );
+
 }
+
 
 function capitalize(str){
+
   return str.charAt(0).toUpperCase()+str.slice(1);
+
 }
+
 
 function uid(){
-  return Date.now().toString(36)+Math.random().toString(36).slice(2);
+
+  return Date.now().toString(36)
+    + Math.random()
+      .toString(36)
+      .slice(2);
+
 }
+
 
 function showToast(message){
-  const toast = document.getElementById("toast");
+
+  const toast =
+    document.getElementById("toast");
 
   toast.textContent = message;
+
   toast.classList.add("show");
 
-  clearTimeout(window.toastTimer);
+  clearTimeout(
+    window.toastTimer
+  );
 
-  window.toastTimer = setTimeout(()=>{
-    toast.classList.remove("show");
-  },2200);
+  window.toastTimer =
+    setTimeout(()=>{
+
+      toast.classList.remove("show");
+
+    },2200);
+
 }
 
 
-/* =========================================================
-   FREQUENCY
-========================================================= */
+/* ================================
+   FRÉQUENCES
+================================ */
 
 function frequencyLabel(habit){
 
@@ -1698,19 +2274,25 @@ function frequencyLabel(habit){
   }
 
   if(habit.frequency === "weekly"){
+
     return habit.target === 1
       ? "1 fois par semaine"
       : `${habit.target} fois par semaine`;
+
   }
 
   if(habit.frequency === "monthly"){
+
     return habit.target === 1
       ? "1 fois par mois"
       : `${habit.target} fois par mois`;
+
   }
 
   return "";
+
 }
+
 
 function getHabitTarget(habit){
 
@@ -1718,8 +2300,12 @@ function getHabitTarget(habit){
     return 7;
   }
 
-  return Number(habit.target || 1);
+  return Number(
+    habit.target || 1
+  );
+
 }
+
 
 function getHabitCount(habit,date){
 
@@ -1727,214 +2313,363 @@ function getHabitCount(habit,date){
     habit.completions = {};
   }
 
+
   if(habit.frequency === "daily"){
 
     let count = 0;
-    const weekStart = startOfWeek(date);
+
+    const weekStart =
+      startOfWeek(date);
 
     for(let i=0;i<7;i++){
 
-      const d = new Date(weekStart);
-      d.setDate(d.getDate()+i);
+      const d =
+        new Date(weekStart);
 
-      if(habit.completions[dateKey(d)]){
+      d.setDate(
+        d.getDate()+i
+      );
+
+      if(
+        habit.completions[
+          dateKey(d)
+        ]
+      ){
         count++;
       }
+
     }
 
     return count;
+
   }
+
 
   if(habit.frequency === "weekly"){
 
     let count = 0;
-    const start = startOfWeek(date);
-    const end = endOfWeek(date);
 
-    Object.keys(habit.completions).forEach(key=>{
+    const start =
+      startOfWeek(date);
 
-      const d = parseKey(key);
+    const end =
+      endOfWeek(date);
 
-      if(d >= start && d <= end){
+    Object.keys(
+      habit.completions
+    ).forEach(key=>{
+
+      const d =
+        parseKey(key);
+
+      if(
+        d >= start &&
+        d <= end
+      ){
         count++;
       }
 
     });
 
     return count;
+
   }
+
 
   if(habit.frequency === "monthly"){
 
     let count = 0;
-    const start = startOfMonth(date);
-    const end = endOfMonth(date);
 
-    Object.keys(habit.completions).forEach(key=>{
+    const start =
+      startOfMonth(date);
 
-      const d = parseKey(key);
+    const end =
+      endOfMonth(date);
 
-      if(d >= start && d <= end){
+    Object.keys(
+      habit.completions
+    ).forEach(key=>{
+
+      const d =
+        parseKey(key);
+
+      if(
+        d >= start &&
+        d <= end
+      ){
         count++;
       }
 
     });
 
     return count;
+
   }
 
   return 0;
+
 }
+
 
 function getHabitProgress(habit,date){
 
-  const target = getHabitTarget(habit);
-  const count = getHabitCount(habit,date);
+  const target =
+    getHabitTarget(habit);
 
-  return Math.min(100,(count/target)*100);
+  const count =
+    getHabitCount(
+      habit,
+      date
+    );
+
+  return Math.min(
+    100,
+    (count/target)*100
+  );
+
 }
+
 
 function getHabitPeriodText(habit,date){
 
-  const count = getHabitCount(habit,date);
-  const target = getHabitTarget(habit);
+  const count =
+    getHabitCount(
+      habit,
+      date
+    );
+
+  const target =
+    getHabitTarget(habit);
+
 
   if(habit.frequency === "daily"){
     return `${count}/7 cette semaine`;
   }
 
+
   if(habit.frequency === "weekly"){
     return `${count}/${target} cette semaine`;
   }
+
 
   if(habit.frequency === "monthly"){
     return `${count}/${target} ce mois`;
   }
 
+
   return "";
+
 }
 
 
-/* =========================================================
+/* ================================
    NAVIGATION
-========================================================= */
+================================ */
 
 function goToPage(page){
 
-  document.querySelectorAll(".page").forEach(el=>{
-    el.classList.remove("active");
-  });
+  document
+    .querySelectorAll(".page")
+    .forEach(el=>{
+      el.classList.remove("active");
+    });
 
-  const target = document.getElementById(`page-${page}`);
+
+  const target =
+    document.getElementById(
+      `page-${page}`
+    );
+
 
   if(target){
     target.classList.add("active");
   }
 
-  document.querySelectorAll("[data-page]").forEach(btn=>{
-    btn.classList.toggle(
-      "active",
-      btn.dataset.page === page
-    );
-  });
+
+  document
+    .querySelectorAll("[data-page]")
+    .forEach(btn=>{
+
+      btn.classList.toggle(
+        "active",
+        btn.dataset.page === page
+      );
+
+    });
+
 
   window.scrollTo({
     top:0,
     behavior:"smooth"
   });
 
+
   renderAll();
+
 }
 
-document.querySelectorAll("[data-page]").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    goToPage(btn.dataset.page);
+
+document
+  .querySelectorAll("[data-page]")
+  .forEach(btn=>{
+
+    btn.addEventListener(
+      "click",
+      ()=>{
+        goToPage(
+          btn.dataset.page
+        );
+      }
+    );
+
   });
-});
-
-document.getElementById("goHabits").addEventListener("click",()=>{
-  goToPage("habits");
-});
 
 
-/* =========================================================
-   TODAY
-========================================================= */
+document
+  .getElementById("goHabits")
+  .addEventListener(
+    "click",
+    ()=>{
+      goToPage("habits");
+    }
+  );
+
+
+/* ================================
+   AUJOURD'HUI
+================================ */
 
 function renderToday(){
 
-  document.getElementById("todayDate").textContent =
-    capitalize(formatDate(currentDate));
+  document
+    .getElementById("todayDate")
+    .textContent =
+      capitalize(
+        formatDate(currentDate)
+      );
 
-  const key = dateKey(currentDate);
 
-  const dayTasks = tasks.filter(t=>t.date === key);
+  const key =
+    dateKey(currentDate);
+
+
+  const dayTasks =
+    tasks.filter(
+      t=>t.date === key
+    );
+
 
   const completedTasks =
-    dayTasks.filter(t=>t.completed).length;
+    dayTasks.filter(
+      t=>t.completed
+    ).length;
 
-  let relevantHabits = habits;
 
   let completedHabits = 0;
 
-  relevantHabits.forEach(habit=>{
+
+  habits.forEach(habit=>{
+
     if(
       habit.frequency === "daily" &&
       habit.completions &&
       habit.completions[key]
     ){
+
       completedHabits++;
+
     }
+
 
     if(
       habit.frequency !== "daily" &&
-      getHabitProgress(habit,currentDate) >= 100
+      getHabitProgress(
+        habit,
+        currentDate
+      ) >= 100
     ){
+
       completedHabits++;
+
     }
+
   });
 
+
   const total =
-    relevantHabits.length + dayTasks.length;
+    habits.length +
+    dayTasks.length;
+
 
   const completed =
-    completedHabits + completedTasks;
+    completedHabits +
+    completedTasks;
+
 
   const percent =
     total === 0
       ? 0
-      : Math.round((completed/total)*100);
+      : Math.round(
+          (completed/total)*100
+        );
 
-  document.getElementById("progressText").textContent =
-    `${percent}%`;
 
-  document.getElementById("progressNumber").textContent =
-    `${percent}%`;
+  document
+    .getElementById("progressText")
+    .textContent =
+      `${percent}%`;
 
-  document.getElementById("progressRing")
-    .style.setProperty("--progress",`${percent}%`);
 
-  document.getElementById("progressSub").textContent =
-    total === 0
-      ? "Commence ta journée."
-      : `${completed} sur ${total} terminés`;
+  document
+    .getElementById("progressNumber")
+    .textContent =
+      `${percent}%`;
 
-  document.getElementById("todayHabitsCount").textContent =
-    habits.length;
 
-  document.getElementById("todayTasksCount").textContent =
-    dayTasks.length;
+  document
+    .getElementById("progressRing")
+    .style
+    .setProperty(
+      "--progress",
+      `${percent}%`
+    );
+
+
+  document
+    .getElementById("progressSub")
+    .textContent =
+      total === 0
+        ? "Commence ta journée."
+        : `${completed} sur ${total} terminés`;
+
+
+  document
+    .getElementById("todayHabitsCount")
+    .textContent =
+      habits.length;
+
+
+  document
+    .getElementById("todayTasksCount")
+    .textContent =
+      dayTasks.length;
+
 
   renderTodayHabits();
   renderTodayTasks();
+
 }
+
 
 function renderTodayHabits(){
 
   const container =
-    document.getElementById("todayHabits");
+    document.getElementById(
+      "todayHabits"
+    );
 
   container.innerHTML = "";
+
 
   if(habits.length === 0){
 
@@ -1946,25 +2681,34 @@ function renderTodayHabits(){
     `;
 
     return;
+
   }
+
 
   habits.forEach(habit=>{
 
-    const key = dateKey(currentDate);
+    const key =
+      dateKey(currentDate);
+
 
     const checked =
       habit.completions &&
       habit.completions[key];
 
-    const div = document.createElement("div");
+
+    const div =
+      document.createElement("div");
+
 
     div.className = "item";
 
+
     div.innerHTML = `
+
       <button
         class="check ${checked ? "done" : ""}"
-        data-habit="${habit.id}"
-      ></button>
+        data-habit="${habit.id}">
+      </button>
 
       <div class="itemContent">
 
@@ -1974,33 +2718,61 @@ function renderTodayHabits(){
 
         <div class="itemMeta">
           ${escapeHtml(habit.category)}
-          · ${escapeHtml(frequencyLabel(habit))}
-          · ${escapeHtml(getHabitPeriodText(habit,currentDate))}
+          ·
+          ${escapeHtml(frequencyLabel(habit))}
+          ·
+          ${escapeHtml(
+            getHabitPeriodText(
+              habit,
+              currentDate
+            )
+          )}
         </div>
 
       </div>
+
     `;
 
-    div.querySelector(".check")
-      .addEventListener("click",()=>{
-        toggleHabit(habit.id,currentDate);
-      });
+
+    div
+      .querySelector(".check")
+      .addEventListener(
+        "click",
+        ()=>{
+          toggleHabit(
+            habit.id,
+            currentDate
+          );
+        }
+      );
+
 
     container.appendChild(div);
+
   });
+
 }
+
 
 function renderTodayTasks(){
 
   const container =
-    document.getElementById("todayTasks");
+    document.getElementById(
+      "todayTasks"
+    );
 
   container.innerHTML = "";
 
-  const key = dateKey(currentDate);
+
+  const key =
+    dateKey(currentDate);
+
 
   const dayTasks =
-    tasks.filter(t=>t.date === key);
+    tasks.filter(
+      t=>t.date === key
+    );
+
 
   if(dayTasks.length === 0){
 
@@ -2011,20 +2783,27 @@ function renderTodayTasks(){
     `;
 
     return;
+
   }
+
 
   dayTasks.forEach(task=>{
 
-    const div = document.createElement("div");
+    const div =
+      document.createElement("div");
+
 
     div.className = "item";
 
+
     div.innerHTML = `
+
       <button
-        class="check ${task.completed ? "done" : ""}"
-      ></button>
+        class="check ${task.completed ? "done" : ""}">
+      </button>
 
       <div class="itemContent">
+
         <div class="itemName">
           ${escapeHtml(task.name)}
         </div>
@@ -2032,89 +2811,155 @@ function renderTodayTasks(){
         <div class="itemMeta">
           ${escapeHtml(task.category)}
         </div>
+
       </div>
 
-      <button class="moreBtn">⋯</button>
+      <button class="moreBtn">
+        ⋯
+      </button>
+
     `;
 
-    div.querySelector(".check")
-      .addEventListener("click",()=>{
-        task.completed = !task.completed;
-        saveData();
-        renderAll();
-      });
 
-    div.querySelector(".moreBtn")
-      .addEventListener("click",()=>{
-        if(confirm("Supprimer cette tâche ?")){
-          tasks = tasks.filter(t=>t.id !== task.id);
+    div
+      .querySelector(".check")
+      .addEventListener(
+        "click",
+        ()=>{
+
+          task.completed =
+            !task.completed;
+
           saveData();
           renderAll();
-          showToast("Tâche supprimée");
+
         }
-      });
+      );
+
+
+    div
+      .querySelector(".moreBtn")
+      .addEventListener(
+        "click",
+        ()=>{
+
+          if(
+            confirm(
+              "Supprimer cette tâche ?"
+            )
+          ){
+
+            tasks =
+              tasks.filter(
+                t=>t.id !== task.id
+              );
+
+            saveData();
+            renderAll();
+
+            showToast(
+              "Tâche supprimée"
+            );
+
+          }
+
+        }
+      );
+
 
     container.appendChild(div);
+
   });
+
 }
+
 
 function toggleHabit(id,date){
 
-  const habit = habits.find(h=>h.id === id);
+  const habit =
+    habits.find(
+      h=>h.id === id
+    );
+
 
   if(!habit) return;
+
 
   if(!habit.completions){
     habit.completions = {};
   }
 
-  const key = dateKey(date);
+
+  const key =
+    dateKey(date);
+
 
   habit.completions[key] =
     !habit.completions[key];
 
+
   saveData();
   renderAll();
+
 }
 
 
-/* =========================================================
-   HABITS PAGE
-========================================================= */
+/* ================================
+   PAGE HABITUDES
+================================ */
 
 function renderHabits(){
 
   const container =
-    document.getElementById("habitsList");
+    document.getElementById(
+      "habitsList"
+    );
 
   container.innerHTML = "";
+
 
   if(habits.length === 0){
 
     container.innerHTML = `
-      <div class="card empty" style="grid-column:1/-1">
+      <div
+        class="card empty"
+        style="grid-column:1/-1">
+
         Tu n’as encore aucune habitude.<br>
         Clique sur « + Habitude » pour commencer.
+
       </div>
     `;
 
     return;
+
   }
+
 
   habits.forEach(habit=>{
 
     const progress =
-      getHabitProgress(habit,currentDate);
+      getHabitProgress(
+        habit,
+        currentDate
+      );
 
-    const div = document.createElement("div");
 
-    div.className = "card habitCard";
+    const div =
+      document.createElement("div");
+
+
+    div.className =
+      "card habitCard";
+
 
     div.innerHTML = `
 
       <div class="habitTop">
 
-        <div class="habitIcon">✓</div>
+        <div class="habitIcon">
+          ✓
+        </div>
 
         <div class="habitInfo">
 
@@ -2123,435 +2968,774 @@ function renderHabits(){
           </div>
 
           <div class="habitFrequency">
-            ${escapeHtml(frequencyLabel(habit))}
-            · ${escapeHtml(habit.category)}
+
+            ${escapeHtml(
+              frequencyLabel(habit)
+            )}
+
+            ·
+
+            ${escapeHtml(
+              habit.category
+            )}
+
           </div>
 
         </div>
 
       </div>
 
+
       <div class="habitProgress">
 
         <div class="progressBar">
-          <div style="width:${progress}%"></div>
+
+          <div
+            style="width:${progress}%">
+          </div>
+
         </div>
 
+
         <div class="progressLine">
+
           <span>
-            ${escapeHtml(getHabitPeriodText(habit,currentDate))}
+            ${escapeHtml(
+              getHabitPeriodText(
+                habit,
+                currentDate
+              )
+            )}
           </span>
 
           <span>
             ${Math.round(progress)}%
           </span>
+
         </div>
 
       </div>
 
+
       <div class="habitActions">
 
-        <button
-          class="smallBtn editHabit"
-        >
+        <button class="smallBtn editHabit">
           Modifier
         </button>
 
-        <button
-          class="smallDanger deleteHabit"
-        >
+        <button class="smallDanger deleteHabit">
           Supprimer
         </button>
 
       </div>
+
     `;
 
-    div.querySelector(".editHabit")
-      .addEventListener("click",()=>{
-        openHabitModal(habit.id);
-      });
 
-    div.querySelector(".deleteHabit")
-      .addEventListener("click",()=>{
-
-        if(confirm(`Supprimer « ${habit.name} » ?`)){
-
-          habits =
-            habits.filter(h=>h.id !== habit.id);
-
-          saveData();
-          renderAll();
-
-          showToast("Habitude supprimée");
+    div
+      .querySelector(".editHabit")
+      .addEventListener(
+        "click",
+        ()=>{
+          openHabitModal(
+            habit.id
+          );
         }
+      );
 
-      });
+
+    div
+      .querySelector(".deleteHabit")
+      .addEventListener(
+        "click",
+        ()=>{
+
+          if(
+            confirm(
+              `Supprimer « ${habit.name} » ?`
+            )
+          ){
+
+            habits =
+              habits.filter(
+                h=>h.id !== habit.id
+              );
+
+            saveData();
+            renderAll();
+
+            showToast(
+              "Habitude supprimée"
+            );
+
+          }
+
+        }
+      );
+
 
     container.appendChild(div);
+
   });
+
 }
 
 
-/* =========================================================
-   HABIT MODAL
-========================================================= */
+/* ================================
+   MODAL HABITUDE
+================================ */
 
 const habitModal =
-  document.getElementById("habitModal");
+  document.getElementById(
+    "habitModal"
+  );
 
 const habitName =
-  document.getElementById("habitName");
+  document.getElementById(
+    "habitName"
+  );
 
 const habitCategory =
-  document.getElementById("habitCategory");
+  document.getElementById(
+    "habitCategory"
+  );
 
 const weeklyTarget =
-  document.getElementById("weeklyTarget");
+  document.getElementById(
+    "weeklyTarget"
+  );
 
 const monthlyTarget =
-  document.getElementById("monthlyTarget");
+  document.getElementById(
+    "monthlyTarget"
+  );
 
 const weeklyExtra =
-  document.getElementById("weeklyExtra");
+  document.getElementById(
+    "weeklyExtra"
+  );
 
 const monthlyExtra =
-  document.getElementById("monthlyExtra");
+  document.getElementById(
+    "monthlyExtra"
+  );
 
-let selectedFrequency = "daily";
+
+let selectedFrequency =
+  "daily";
+
 
 document
-  .querySelectorAll(".frequencyChoice")
+  .querySelectorAll(
+    ".frequencyChoice"
+  )
   .forEach(btn=>{
 
-    btn.addEventListener("click",()=>{
+    btn.addEventListener(
+      "click",
+      ()=>{
 
-      document
-        .querySelectorAll(".frequencyChoice")
-        .forEach(b=>{
-          b.classList.remove("active");
-        });
+        document
+          .querySelectorAll(
+            ".frequencyChoice"
+          )
+          .forEach(b=>{
+            b.classList.remove(
+              "active"
+            );
+          });
 
-      btn.classList.add("active");
 
-      selectedFrequency =
-        btn.dataset.frequency;
+        btn.classList.add(
+          "active"
+        );
 
-      weeklyExtra.classList.toggle(
-        "show",
-        selectedFrequency === "weekly"
-      );
 
-      monthlyExtra.classList.toggle(
-        "show",
-        selectedFrequency === "monthly"
-      );
+        selectedFrequency =
+          btn.dataset.frequency;
 
-    });
+
+        weeklyExtra
+          .classList.toggle(
+            "show",
+            selectedFrequency ===
+              "weekly"
+          );
+
+
+        monthlyExtra
+          .classList.toggle(
+            "show",
+            selectedFrequency ===
+              "monthly"
+          );
+
+      }
+    );
 
   });
 
 
 function openHabitModal(id=null){
 
-  document.getElementById("habitEditId").value =
-    id || "";
+  document
+    .getElementById(
+      "habitEditId"
+    )
+    .value =
+      id || "";
+
 
   document
-    .querySelectorAll(".frequencyChoice")
+    .querySelectorAll(
+      ".frequencyChoice"
+    )
     .forEach(btn=>{
-      btn.classList.remove("active");
+      btn.classList.remove(
+        "active"
+      );
     });
 
-  document
-    .querySelector('[data-frequency="daily"]')
-    .classList.add("active");
-
-  selectedFrequency = "daily";
-
-  weeklyExtra.classList.remove("show");
-  monthlyExtra.classList.remove("show");
 
   document
-    .querySelectorAll(".dayChoice")
+    .querySelector(
+      '[data-frequency="daily"]'
+    )
+    .classList.add(
+      "active"
+    );
+
+
+  selectedFrequency =
+    "daily";
+
+
+  weeklyExtra
+    .classList.remove("show");
+
+  monthlyExtra
+    .classList.remove("show");
+
+
+  document
+    .querySelectorAll(
+      ".dayChoice"
+    )
     .forEach(btn=>{
-      btn.classList.remove("active");
+      btn.classList.remove(
+        "active"
+      );
     });
+
 
   if(id){
 
     const habit =
-      habits.find(h=>h.id === id);
+      habits.find(
+        h=>h.id === id
+      );
+
 
     if(!habit) return;
 
-    document.getElementById("habitModalTitle")
-      .textContent = "Modifier l’habitude";
-
-    habitName.value = habit.name;
-    habitCategory.value = habit.category || "Autre";
-
-    selectedFrequency =
-      habit.frequency || "daily";
 
     document
-      .querySelectorAll(".frequencyChoice")
+      .getElementById(
+        "habitModalTitle"
+      )
+      .textContent =
+        "Modifier l’habitude";
+
+
+    habitName.value =
+      habit.name;
+
+
+    habitCategory.value =
+      habit.category ||
+      "Autre";
+
+
+    selectedFrequency =
+      habit.frequency ||
+      "daily";
+
+
+    document
+      .querySelectorAll(
+        ".frequencyChoice"
+      )
       .forEach(btn=>{
+
         btn.classList.toggle(
           "active",
-          btn.dataset.frequency === selectedFrequency
+          btn.dataset.frequency ===
+            selectedFrequency
         );
+
       });
 
-    if(selectedFrequency === "weekly"){
 
-      weeklyExtra.classList.add("show");
+    if(
+      selectedFrequency ===
+      "weekly"
+    ){
+
+      weeklyExtra
+        .classList.add("show");
 
       weeklyTarget.value =
         habit.target || 1;
 
     }
 
-    if(selectedFrequency === "monthly"){
 
-      monthlyExtra.classList.add("show");
+    if(
+      selectedFrequency ===
+      "monthly"
+    ){
+
+      monthlyExtra
+        .classList.add("show");
 
       monthlyTarget.value =
         habit.target || 1;
 
     }
 
-    if(habit.recommendedDays){
 
-      habit.recommendedDays.forEach(day=>{
+    if(
+      habit.recommendedDays
+    ){
 
-        const btn =
-          document.querySelector(
-            `.dayChoice[data-day="${day}"]`
-          );
+      habit
+        .recommendedDays
+        .forEach(day=>{
 
-        if(btn){
-          btn.classList.add("active");
-        }
+          const btn =
+            document.querySelector(
+              `.dayChoice[data-day="${day}"]`
+            );
 
-      });
+          if(btn){
+            btn.classList.add(
+              "active"
+            );
+          }
+
+        });
 
     }
 
   }else{
 
-    document.getElementById("habitModalTitle")
-      .textContent = "Nouvelle habitude";
+    document
+      .getElementById(
+        "habitModalTitle"
+      )
+      .textContent =
+        "Nouvelle habitude";
+
 
     habitName.value = "";
-    habitCategory.value = "Sport";
+
+    habitCategory.value =
+      "Sport";
 
     weeklyTarget.value = 2;
+
     monthlyTarget.value = 5;
 
   }
 
-  habitModal.classList.add("show");
-  setTimeout(()=>habitName.focus(),100);
+
+  habitModal
+    .classList.add("show");
+
+
+  setTimeout(
+    ()=>{
+      habitName.focus();
+    },
+    100
+  );
+
 }
+
 
 function closeHabitModal(){
-  habitModal.classList.remove("show");
+
+  habitModal
+    .classList.remove("show");
+
 }
 
-document
-  .getElementById("newHabitBtn")
-  .addEventListener("click",()=>{
-    openHabitModal();
-  });
 
 document
-  .getElementById("closeHabitModal")
-  .addEventListener("click",closeHabitModal);
-
-document
-  .getElementById("cancelHabit")
-  .addEventListener("click",closeHabitModal);
-
-habitModal.addEventListener("click",e=>{
-  if(e.target === habitModal){
-    closeHabitModal();
-  }
-});
+  .getElementById(
+    "newHabitBtn"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
+      openHabitModal();
+    }
+  );
 
 
 document
-  .querySelectorAll(".dayChoice")
+  .getElementById(
+    "closeHabitModal"
+  )
+  .addEventListener(
+    "click",
+    closeHabitModal
+  );
+
+
+document
+  .getElementById(
+    "cancelHabit"
+  )
+  .addEventListener(
+    "click",
+    closeHabitModal
+  );
+
+
+habitModal
+  .addEventListener(
+    "click",
+    e=>{
+
+      if(e.target === habitModal){
+        closeHabitModal();
+      }
+
+    }
+  );
+
+
+document
+  .querySelectorAll(
+    ".dayChoice"
+  )
   .forEach(btn=>{
 
-    btn.addEventListener("click",()=>{
+    btn.addEventListener(
+      "click",
+      ()=>{
 
-      btn.classList.toggle("active");
+        btn.classList.toggle(
+          "active"
+        );
 
-    });
+      }
+    );
 
   });
 
 
 document
-  .getElementById("saveHabit")
-  .addEventListener("click",()=>{
+  .getElementById(
+    "saveHabit"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
 
-    const name =
-      habitName.value.trim();
+      const name =
+        habitName.value.trim();
 
-    if(!name){
 
-      showToast("Donne un nom à ton habitude.");
-      return;
+      if(!name){
 
-    }
+        showToast(
+          "Donne un nom à ton habitude."
+        );
 
-    let target = 1;
-
-    if(selectedFrequency === "weekly"){
-      target = Number(weeklyTarget.value);
-    }
-
-    if(selectedFrequency === "monthly"){
-      target = Number(monthlyTarget.value);
-    }
-
-    const recommendedDays =
-      [...document.querySelectorAll(".dayChoice.active")]
-        .map(btn=>Number(btn.dataset.day));
-
-    const editId =
-      document.getElementById("habitEditId").value;
-
-    if(editId){
-
-      const habit =
-        habits.find(h=>h.id === editId);
-
-      if(habit){
-
-        habit.name = name;
-        habit.category = habitCategory.value;
-        habit.frequency = selectedFrequency;
-        habit.target = target;
-        habit.recommendedDays = recommendedDays;
+        return;
 
       }
 
-      showToast("Habitude modifiée.");
 
-    }else{
+      let target = 1;
 
-      habits.push({
+
+      if(
+        selectedFrequency ===
+        "weekly"
+      ){
+
+        target =
+          Number(
+            weeklyTarget.value
+          );
+
+      }
+
+
+      if(
+        selectedFrequency ===
+        "monthly"
+      ){
+
+        target =
+          Number(
+            monthlyTarget.value
+          );
+
+      }
+
+
+      const recommendedDays =
+        [
+          ...document
+            .querySelectorAll(
+              ".dayChoice.active"
+            )
+        ]
+        .map(
+          btn=>Number(
+            btn.dataset.day
+          )
+        );
+
+
+      const editId =
+        document
+          .getElementById(
+            "habitEditId"
+          )
+          .value;
+
+
+      if(editId){
+
+        const habit =
+          habits.find(
+            h=>h.id === editId
+          );
+
+
+        if(habit){
+
+          habit.name =
+            name;
+
+          habit.category =
+            habitCategory.value;
+
+          habit.frequency =
+            selectedFrequency;
+
+          habit.target =
+            target;
+
+          habit.recommendedDays =
+            recommendedDays;
+
+        }
+
+
+        showToast(
+          "Habitude modifiée."
+        );
+
+      }else{
+
+        habits.push({
+
+          id:uid(),
+
+          name:name,
+
+          category:
+            habitCategory.value,
+
+          frequency:
+            selectedFrequency,
+
+          target:target,
+
+          recommendedDays:
+            recommendedDays,
+
+          completions:{}
+
+        });
+
+
+        showToast(
+          "Habitude créée."
+        );
+
+      }
+
+
+      saveData();
+
+      closeHabitModal();
+
+      renderAll();
+
+    }
+  );
+
+
+/* ================================
+   MODAL TÂCHE
+================================ */
+
+const taskModal =
+  document.getElementById(
+    "taskModal"
+  );
+
+
+document
+  .getElementById(
+    "addTaskBtn"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
+
+      document
+        .getElementById(
+          "taskName"
+        )
+        .value = "";
+
+
+      taskModal
+        .classList.add("show");
+
+
+      setTimeout(
+        ()=>{
+          document
+            .getElementById(
+              "taskName"
+            )
+            .focus();
+        },
+        100
+      );
+
+    }
+  );
+
+
+function closeTaskModal(){
+
+  taskModal
+    .classList.remove("show");
+
+}
+
+
+document
+  .getElementById(
+    "closeTaskModal"
+  )
+  .addEventListener(
+    "click",
+    closeTaskModal
+  );
+
+
+document
+  .getElementById(
+    "cancelTask"
+  )
+  .addEventListener(
+    "click",
+    closeTaskModal
+  );
+
+
+taskModal
+  .addEventListener(
+    "click",
+    e=>{
+
+      if(e.target === taskModal){
+        closeTaskModal();
+      }
+
+    }
+  );
+
+
+document
+  .getElementById(
+    "saveTask"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
+
+      const name =
+        document
+          .getElementById(
+            "taskName"
+          )
+          .value
+          .trim();
+
+
+      if(!name){
+
+        showToast(
+          "Donne un nom à ta tâche."
+        );
+
+        return;
+
+      }
+
+
+      tasks.push({
 
         id:uid(),
 
-        name,
+        name:name,
 
-        category:habitCategory.value,
+        category:
+          document
+            .getElementById(
+              "taskCategory"
+            )
+            .value,
 
-        frequency:selectedFrequency,
+        date:
+          dateKey(
+            currentDate
+          ),
 
-        target,
-
-        recommendedDays,
-
-        completions:{}
+        completed:false
 
       });
 
-      showToast("Habitude créée.");
+
+      saveData();
+
+      closeTaskModal();
+
+      renderAll();
+
+      showToast(
+        "Tâche ajoutée."
+      );
 
     }
-
-    saveData();
-    closeHabitModal();
-    renderAll();
-
-  });
+  );
 
 
-/* =========================================================
-   TASK MODAL
-========================================================= */
-
-const taskModal =
-  document.getElementById("taskModal");
-
-document
-  .getElementById("addTaskBtn")
-  .addEventListener("click",()=>{
-
-    document.getElementById("taskName").value = "";
-
-    taskModal.classList.add("show");
-
-    setTimeout(()=>{
-      document.getElementById("taskName").focus();
-    },100);
-
-  });
-
-function closeTaskModal(){
-  taskModal.classList.remove("show");
-}
-
-document
-  .getElementById("closeTaskModal")
-  .addEventListener("click",closeTaskModal);
-
-document
-  .getElementById("cancelTask")
-  .addEventListener("click",closeTaskModal);
-
-taskModal.addEventListener("click",e=>{
-  if(e.target === taskModal){
-    closeTaskModal();
-  }
-});
-
-document
-  .getElementById("saveTask")
-  .addEventListener("click",()=>{
-
-    const name =
-      document.getElementById("taskName")
-        .value.trim();
-
-    if(!name){
-
-      showToast("Donne un nom à ta tâche.");
-      return;
-
-    }
-
-    tasks.push({
-
-      id:uid(),
-
-      name,
-
-      category:
-        document.getElementById("taskCategory").value,
-
-      date:dateKey(currentDate),
-
-      completed:false
-
-    });
-
-    saveData();
-    closeTaskModal();
-    renderAll();
-
-    showToast("Tâche ajoutée.");
-
-  });
-
-
-/* =========================================================
-   CALENDAR
-========================================================= */
+/* ================================
+   CALENDRIER
+================================ */
 
 function renderCalendar(){
 
@@ -2561,109 +3745,197 @@ function renderCalendar(){
   const month =
     calendarDate.getMonth();
 
-  document.getElementById("calendarMonth")
+
+  document
+    .getElementById(
+      "calendarMonth"
+    )
     .textContent =
-      calendarDate.toLocaleDateString(
-        "fr-BE",
-        {
-          month:"long",
-          year:"numeric"
-        }
-      )
-      .replace(/^./,c=>c.toUpperCase());
+      calendarDate
+        .toLocaleDateString(
+          "fr-BE",
+          {
+            month:"long",
+            year:"numeric"
+          }
+        )
+        .replace(
+          /^./,
+          c=>c.toUpperCase()
+        );
+
 
   const grid =
-    document.getElementById("calendarGrid");
+    document.getElementById(
+      "calendarGrid"
+    );
+
 
   grid.innerHTML = "";
 
+
   const first =
-    new Date(year,month,1);
+    new Date(
+      year,
+      month,
+      1
+    );
+
 
   const last =
-    new Date(year,month+1,0);
+    new Date(
+      year,
+      month+1,
+      0
+    );
+
 
   let firstDay =
     first.getDay();
 
+
   firstDay =
-    firstDay === 0 ? 6 : firstDay-1;
+    firstDay === 0
+      ? 6
+      : firstDay-1;
+
 
   const daysInMonth =
     last.getDate();
 
-  const previousLast =
-    new Date(year,month,0).getDate();
 
-  for(let i=0;i<firstDay;i++){
+  const previousLast =
+    new Date(
+      year,
+      month,
+      0
+    ).getDate();
+
+
+  for(
+    let i=0;
+    i<firstDay;
+    i++
+  ){
 
     const d =
-      previousLast-firstDay+i+1;
+      previousLast -
+      firstDay +
+      i +
+      1;
 
-    const div =
+
+    grid.appendChild(
       createCalendarDay(
-        new Date(year,month-1,d),
+        new Date(
+          year,
+          month-1,
+          d
+        ),
         true
-      );
-
-    grid.appendChild(div);
+      )
+    );
 
   }
 
-  for(let d=1;d<=daysInMonth;d++){
 
-    const div =
+  for(
+    let d=1;
+    d<=daysInMonth;
+    d++
+  ){
+
+    grid.appendChild(
       createCalendarDay(
-        new Date(year,month,d),
+        new Date(
+          year,
+          month,
+          d
+        ),
         false
-      );
-
-    grid.appendChild(div);
+      )
+    );
 
   }
+
 
   const totalCells =
-    Math.ceil(grid.children.length/7)*7;
+    Math.ceil(
+      grid.children.length/7
+    )*7;
+
 
   let nextDay = 1;
 
-  while(grid.children.length < totalCells){
 
-    const div =
+  while(
+    grid.children.length <
+    totalCells
+  ){
+
+    grid.appendChild(
       createCalendarDay(
-        new Date(year,month+1,nextDay++),
+        new Date(
+          year,
+          month+1,
+          nextDay++
+        ),
         true
-      );
-
-    grid.appendChild(div);
+      )
+    );
 
   }
 
 }
 
-function createCalendarDay(date,muted){
+
+function createCalendarDay(
+  date,
+  muted
+){
 
   const div =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
+
 
   div.className =
-    "day" + (muted ? " muted" : "");
+    "day" +
+    (muted ? " muted" : "");
 
-  if(isSameDay(date,new Date())){
-    div.classList.add("today");
+
+  if(
+    isSameDay(
+      date,
+      new Date()
+    )
+  ){
+
+    div.classList.add(
+      "today"
+    );
+
   }
+
 
   const key =
     dateKey(date);
 
+
   const dayTasks =
-    tasks.filter(t=>t.date === key);
+    tasks.filter(
+      t=>t.date === key
+    );
+
 
   const completedHabits =
-    habits.filter(h=>
-      h.completions &&
-      h.completions[key]
+    habits.filter(
+      h=>
+        h.completions &&
+        h.completions[key]
     );
+
 
   div.innerHTML = `
 
@@ -2674,312 +3946,512 @@ function createCalendarDay(date,muted){
     <div class="dayDots">
 
       ${completedHabits
-        .map(()=>`<span class="dot"></span>`)
+        .map(
+          ()=>`<span class="dot"></span>`
+        )
         .join("")}
 
       ${dayTasks
-        .filter(t=>t.completed)
-        .map(()=>`<span class="dot task"></span>`)
+        .filter(
+          t=>t.completed
+        )
+        .map(
+          ()=>`<span class="dot task"></span>`
+        )
         .join("")}
 
     </div>
+
   `;
 
-  div.addEventListener("click",()=>{
 
-    currentDate = new Date(date);
+  div.addEventListener(
+    "click",
+    ()=>{
 
-    goToPage("today");
+      currentDate =
+        new Date(date);
 
-  });
+      goToPage("today");
+
+    }
+  );
+
 
   return div;
+
 }
 
-document
-  .getElementById("prevMonth")
-  .addEventListener("click",()=>{
-
-    calendarDate.setMonth(
-      calendarDate.getMonth()-1
-    );
-
-    renderCalendar();
-
-  });
 
 document
-  .getElementById("nextMonth")
-  .addEventListener("click",()=>{
+  .getElementById(
+    "prevMonth"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
 
-    calendarDate.setMonth(
-      calendarDate.getMonth()+1
-    );
+      calendarDate.setMonth(
+        calendarDate.getMonth()-1
+      );
 
-    renderCalendar();
+      renderCalendar();
 
-  });
+    }
+  );
+
 
 document
-  .getElementById("todayMonth")
-  .addEventListener("click",()=>{
+  .getElementById(
+    "nextMonth"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
 
-    calendarDate = new Date();
+      calendarDate.setMonth(
+        calendarDate.getMonth()+1
+      );
 
-    currentDate = new Date();
+      renderCalendar();
 
-    renderCalendar();
-
-    goToPage("today");
-
-  });
+    }
+  );
 
 
-/* =========================================================
-   STATS
-========================================================= */
+document
+  .getElementById(
+    "todayMonth"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
+
+      calendarDate =
+        new Date();
+
+      currentDate =
+        new Date();
+
+      renderCalendar();
+
+      goToPage("today");
+
+    }
+  );
+
+
+/* ================================
+   STATISTIQUES
+================================ */
 
 function renderStats(){
 
   let total = 0;
   let completed = 0;
 
-  tasks.forEach(task=>{
 
-    total++;
+  tasks.forEach(
+    task=>{
 
-    if(task.completed){
-      completed++;
+      total++;
+
+      if(task.completed){
+        completed++;
+      }
+
     }
+  );
 
-  });
 
-  habits.forEach(habit=>{
+  habits.forEach(
+    habit=>{
 
-    if(!habit.completions) return;
+      if(!habit.completions){
+        return;
+      }
 
-    Object.values(habit.completions)
-      .forEach(value=>{
 
-        total++;
+      Object
+        .values(
+          habit.completions
+        )
+        .forEach(
+          value=>{
 
-        if(value){
-          completed++;
-        }
+            total++;
 
-      });
+            if(value){
+              completed++;
+            }
 
-  });
+          }
+        );
+
+    }
+  );
+
 
   const completion =
     total === 0
       ? 0
-      : Math.round((completed/total)*100);
+      : Math.round(
+          (completed/total)*100
+        );
 
-  document.getElementById("statCompletion")
-    .textContent = `${completion}%`;
 
-  document.getElementById("statHabits")
-    .textContent = habits.length;
-
-  document.getElementById("statTasks")
+  document
+    .getElementById(
+      "statCompletion"
+    )
     .textContent =
-      tasks.filter(t=>t.completed).length;
+      `${completion}%`;
+
+
+  document
+    .getElementById(
+      "statHabits"
+    )
+    .textContent =
+      habits.length;
+
+
+  document
+    .getElementById(
+      "statTasks"
+    )
+    .textContent =
+      tasks.filter(
+        t=>t.completed
+      ).length;
+
 
   renderWeeklyChart();
   renderCategoryStats();
 
 }
 
+
 function renderWeeklyChart(){
 
   const container =
-    document.getElementById("weeklyChart");
+    document.getElementById(
+      "weeklyChart"
+    );
+
 
   container.innerHTML = "";
 
+
   const days = [];
 
-  for(let i=6;i>=0;i--){
 
-    const d = new Date();
+  for(
+    let i=6;
+    i>=0;
+    i--
+  ){
 
-    d.setDate(d.getDate()-i);
+    const d =
+      new Date();
+
+    d.setDate(
+      d.getDate()-i
+    );
 
     days.push(d);
 
   }
 
+
   const values =
-    days.map(d=>{
+    days.map(
+      d=>{
 
-      const key = dateKey(d);
+        const key =
+          dateKey(d);
 
-      const habitCount =
-        habits.reduce((sum,h)=>{
 
-          return sum +
-            (h.completions &&
-             h.completions[key]
-              ? 1
-              : 0);
+        const habitCount =
+          habits.reduce(
+            (sum,h)=>{
 
-        },0);
+              return sum +
+                (
+                  h.completions &&
+                  h.completions[key]
+                    ? 1
+                    : 0
+                );
 
-      const taskCount =
-        tasks.filter(
-          t=>t.date===key && t.completed
-        ).length;
+            },
+            0
+          );
 
-      return habitCount+taskCount;
 
-    });
+        const taskCount =
+          tasks.filter(
+            t=>
+              t.date === key &&
+              t.completed
+          ).length;
+
+
+        return (
+          habitCount +
+          taskCount
+        );
+
+      }
+    );
+
 
   const max =
-    Math.max(...values,1);
+    Math.max(
+      ...values,
+      1
+    );
 
-  values.forEach((value,index)=>{
 
-    const wrap =
-      document.createElement("div");
+  values.forEach(
+    (value,index)=>{
 
-    wrap.className = "barWrap";
+      const wrap =
+        document.createElement(
+          "div"
+        );
 
-    const bar =
-      document.createElement("div");
+      wrap.className =
+        "barWrap";
 
-    bar.className = "bar";
 
-    bar.style.height =
-      `${Math.max(5,(value/max)*170)}px`;
+      const bar =
+        document.createElement(
+          "div"
+        );
 
-    const label =
-      document.createElement("div");
+      bar.className =
+        "bar";
 
-    label.className = "barLabel";
 
-    label.textContent =
-      days[index].toLocaleDateString(
-        "fr-BE",
-        {weekday:"short"}
-      ).replace(".","");
+      bar.style.height =
+        `${Math.max(
+          5,
+          (value/max)*170
+        )}px`;
 
-    wrap.appendChild(bar);
-    wrap.appendChild(label);
 
-    container.appendChild(wrap);
+      const label =
+        document.createElement(
+          "div"
+        );
 
-  });
+      label.className =
+        "barLabel";
+
+
+      label.textContent =
+        days[index]
+          .toLocaleDateString(
+            "fr-BE",
+            {
+              weekday:"short"
+            }
+          )
+          .replace(
+            ".",
+            ""
+          );
+
+
+      wrap.appendChild(bar);
+      wrap.appendChild(label);
+
+      container.appendChild(wrap);
+
+    }
+  );
 
 }
+
 
 function renderCategoryStats(){
 
   const container =
-    document.getElementById("categoryStats");
+    document.getElementById(
+      "categoryStats"
+    );
+
 
   container.innerHTML = "";
 
+
   const categories = {};
 
-  tasks.forEach(task=>{
 
-    if(!task.completed) return;
+  tasks.forEach(
+    task=>{
 
-    categories[task.category] =
-      (categories[task.category] || 0)+1;
+      if(!task.completed){
+        return;
+      }
 
-  });
 
-  habits.forEach(habit=>{
-
-    const count =
-      habit.completions
-        ? Object.values(habit.completions)
-            .filter(Boolean).length
-        : 0;
-
-    if(count){
-
-      categories[habit.category] =
-        (categories[habit.category] || 0)+count;
+      categories[
+        task.category
+      ] =
+        (
+          categories[
+            task.category
+          ] || 0
+        ) + 1;
 
     }
+  );
 
-  });
+
+  habits.forEach(
+    habit=>{
+
+      const count =
+        habit.completions
+          ? Object
+              .values(
+                habit.completions
+              )
+              .filter(Boolean)
+              .length
+          : 0;
+
+
+      if(count){
+
+        categories[
+          habit.category
+        ] =
+          (
+            categories[
+              habit.category
+            ] || 0
+          ) + count;
+
+      }
+
+    }
+  );
+
 
   const entries =
-    Object.entries(categories);
+    Object.entries(
+      categories
+    );
+
 
   if(entries.length === 0){
 
     container.innerHTML = `
-      <div class="empty" style="margin-top:15px">
+      <div
+        class="empty"
+        style="margin-top:15px">
+
         Pas encore assez de données.
+
       </div>
     `;
 
     return;
+
   }
 
+
   const max =
-    Math.max(...entries.map(e=>e[1]));
+    Math.max(
+      ...entries.map(
+        e=>e[1]
+      )
+    );
+
 
   entries
-    .sort((a,b)=>b[1]-a[1])
-    .forEach(([category,count])=>{
+    .sort(
+      (a,b)=>b[1]-a[1]
+    )
+    .forEach(
+      ([category,count])=>{
 
-      const row =
-        document.createElement("div");
+        const row =
+          document.createElement(
+            "div"
+          );
 
-      row.className = "categoryRow";
 
-      row.innerHTML = `
+        row.className =
+          "categoryRow";
 
-        <div class="categoryTop">
 
-          <span>${escapeHtml(category)}</span>
+        row.innerHTML = `
 
-          <strong>${count}</strong>
+          <div class="categoryTop">
 
-        </div>
+            <span>
+              ${escapeHtml(category)}
+            </span>
 
-        <div class="categoryBar">
-          <div
-            style="width:${(count/max)*100}%"
-          ></div>
-        </div>
+            <strong>
+              ${count}
+            </strong>
 
-      `;
+          </div>
 
-      container.appendChild(row);
+          <div class="categoryBar">
 
-    });
+            <div
+              style="width:${(count/max)*100}%">
+            </div>
+
+          </div>
+
+        `;
+
+
+        container.appendChild(
+          row
+        );
+
+      }
+    );
 
 }
 
 
-/* =========================================================
-   THEMES
-========================================================= */
+/* ================================
+   THÈMES
+================================ */
 
 function applyTheme(theme){
 
   document.body.className =
     `theme-${theme}`;
 
+
   localStorage.setItem(
     THEME_KEY,
     theme
   );
 
+
   const data =
-    themes.find(t=>t[0]===theme);
+    themes.find(
+      t=>t[0] === theme
+    );
+
 
   if(data){
 
     document
-      .querySelector('meta[name="theme-color"]')
+      .querySelector(
+        'meta[name="theme-color"]'
+      )
       .setAttribute(
         "content",
         data[3]
@@ -2987,173 +4459,269 @@ function applyTheme(theme){
 
   }
 
+
   renderThemes();
 
 }
+
 
 function renderThemes(){
 
   const container =
-    document.getElementById("themeGrid");
+    document.getElementById(
+      "themeGrid"
+    );
+
 
   container.innerHTML = "";
 
+
   const current =
-    localStorage.getItem(THEME_KEY) || "sage";
+    localStorage.getItem(
+      THEME_KEY
+    ) || "sage";
 
-  themes.forEach(theme=>{
 
-    const [id,name,bg,primary] = theme;
+  themes.forEach(
+    theme=>{
 
-    const button =
-      document.createElement("button");
+      const [
+        id,
+        name,
+        bg,
+        primary
+      ] = theme;
 
-    button.className =
-      "themeOption" +
-      (id===current ? " active" : "");
 
-    button.innerHTML = `
+      const button =
+        document.createElement(
+          "button"
+        );
 
-      <div
-        class="themePreview"
-        style="
-          background:${bg};
-          border:1px solid ${primary}55;
-          position:relative;
-        "
-      >
+
+      button.className =
+        "themeOption" +
+        (
+          id === current
+            ? " active"
+            : ""
+        );
+
+
+      button.innerHTML = `
+
         <div
+          class="themePreview"
           style="
-            position:absolute;
-            width:45%;
-            height:10px;
-            border-radius:10px;
-            background:${primary};
-            left:14%;
-            top:38%;
+            background:${bg};
+            border:1px solid ${primary}55;
+            position:relative;
           "
-        ></div>
-      </div>
+        >
 
-      <div class="themeName">
-        ${name}
-      </div>
-    `;
+          <div
+            style="
+              position:absolute;
+              width:45%;
+              height:10px;
+              border-radius:10px;
+              background:${primary};
+              left:14%;
+              top:38%;
+            "
+          ></div>
 
-    button.addEventListener("click",()=>{
-      applyTheme(id);
-      showToast(`Thème ${name} appliqué.`);
-    });
+        </div>
 
-    container.appendChild(button);
+        <div class="themeName">
+          ${name}
+        </div>
 
-  });
+      `;
+
+
+      button.addEventListener(
+        "click",
+        ()=>{
+
+          applyTheme(id);
+
+          showToast(
+            `Thème ${name} appliqué.`
+          );
+
+        }
+      );
+
+
+      container.appendChild(
+        button
+      );
+
+    }
+  );
 
 }
 
 
-/* =========================================================
-   SETTINGS
-========================================================= */
+/* ================================
+   RÉGLAGES
+================================ */
 
 document
-  .getElementById("settingsToday")
-  .addEventListener("click",()=>{
+  .getElementById(
+    "settingsToday"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
 
-    currentDate = new Date();
-    calendarDate = new Date();
+      currentDate =
+        new Date();
 
-    goToPage("today");
+      calendarDate =
+        new Date();
 
-  });
+      goToPage("today");
+
+    }
+  );
+
 
 document
-  .getElementById("resetData")
-  .addEventListener("click",()=>{
+  .getElementById(
+    "resetData"
+  )
+  .addEventListener(
+    "click",
+    ()=>{
 
-    const confirmed =
-      confirm(
-        "Supprimer toutes tes habitudes et toutes tes tâches ?"
+      const confirmed =
+        confirm(
+          "Supprimer toutes tes habitudes et toutes tes tâches ?"
+        );
+
+
+      if(!confirmed){
+        return;
+      }
+
+
+      tasks = [];
+      habits = [];
+
+
+      saveData();
+
+      renderAll();
+
+
+      showToast(
+        "Données réinitialisées."
       );
 
-    if(!confirmed) return;
-
-    tasks = [];
-    habits = [];
-
-    saveData();
-    renderAll();
-
-    showToast("Données réinitialisées.");
-
-  });
+    }
+  );
 
 
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
+/* ================================
+   SÉCURITÉ HTML
+================================ */
 
 function escapeHtml(value){
 
   return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+    .replaceAll(
+      "&",
+      "&amp;"
+    )
+    .replaceAll(
+      "<",
+      "&lt;"
+    )
+    .replaceAll(
+      ">",
+      "&gt;"
+    )
+    .replaceAll(
+      '"',
+      "&quot;"
+    )
+    .replaceAll(
+      "'",
+      "&#039;"
+    );
 
 }
 
 
-/* =========================================================
-   RENDER ALL
-========================================================= */
+/* ================================
+   RENDU
+================================ */
 
 function renderAll(){
 
   renderToday();
+
   renderHabits();
+
   renderCalendar();
+
   renderStats();
+
   renderThemes();
 
 }
 
 
-/* =========================================================
-   INIT
-========================================================= */
+/* ================================
+   INITIALISATION
+================================ */
 
 const savedTheme =
-  localStorage.getItem(THEME_KEY) || "sage";
+  localStorage.getItem(
+    THEME_KEY
+  ) || "sage";
 
-applyTheme(savedTheme);
+
+applyTheme(
+  savedTheme
+);
+
 
 renderAll();
 
 
-/* =========================================================
-   SERVICE WORKER / PWA
-========================================================= */
+/* ================================
+   PWA
+================================ */
 
-if("serviceWorker" in navigator){
+if(
+  "serviceWorker" in navigator
+){
 
-  window.addEventListener("load",()=>{
+  window.addEventListener(
+    "load",
+    ()=>{
 
-    navigator.serviceWorker
-      .register("./sw.js")
-      .catch(error=>{
+      navigator.serviceWorker
+        .register("./sw.js")
+        .catch(
+          error=>{
 
-        console.log(
-          "Service Worker non disponible:",
-          error
+            console.log(
+              "Service Worker non disponible:",
+              error
+            );
+
+          }
         );
 
-      });
-
-  });
+    }
+  );
 
 }
+
 </script>
 
 </body>
