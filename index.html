@@ -4,4736 +4,3915 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<meta name="theme-color" content="#B8DCC7">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Habits.">
+<title>HABITS.</title>
 
-<title>Habits.</title>
+<meta name="theme-color" content="#101613">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="HABITS.">
 
 <link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon.svg">
-<link rel="apple-touch-icon" href="icon.svg">
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
+
+/* =========================================================
+   HABITS. — PREMIUM UI
+   ========================================================= */
 
 :root{
-  --bg:#f4f8f5;
-  --surface:#ffffff;
-  --surface2:#edf5ef;
-  --text:#203128;
-  --muted:#718078;
-  --primary:#5f9675;
-  --primary2:#8fc3a4;
-  --border:#dfe9e2;
-  --danger:#d96b6b;
-  --shadow:0 10px 30px rgba(39,72,53,.08);
-  --radius:22px;
+    --bg:#f4f7f5;
+    --surface:rgba(255,255,255,.82);
+    --surface-solid:#ffffff;
+    --surface-2:#edf3ef;
+
+    --text:#18231d;
+    --muted:#758078;
+
+    --primary:#5d9674;
+    --primary-strong:#44785a;
+    --primary-soft:rgba(93,150,116,.13);
+
+    --border:rgba(24,35,29,.08);
+    --shadow:0 18px 50px rgba(26,45,34,.08);
+
+    --nav-bg:rgba(255,255,255,.72);
+
+    --radius:24px;
+    --radius-small:17px;
+
+    --transition:.25s cubic-bezier(.22,.8,.22,1);
+
+    --glow:rgba(93,150,116,.18);
+}
+
+/* =========================================================
+   THEMES
+   ========================================================= */
+
+/* LIGHT */
+
+body.theme-sage{
+    --bg:#f4f8f5;
+    --surface:rgba(255,255,255,.82);
+    --surface-solid:#fff;
+    --surface-2:#edf5ef;
+    --text:#203128;
+    --muted:#718078;
+    --primary:#5f9675;
+    --primary-strong:#477b5d;
+    --primary-soft:rgba(95,150,117,.13);
+    --glow:rgba(95,150,117,.18);
+}
+
+body.theme-sakura{
+    --bg:#fff4f7;
+    --surface:rgba(255,250,252,.78);
+    --surface-solid:#fffafd;
+    --surface-2:#fbe7ed;
+    --text:#39242c;
+    --muted:#94747e;
+    --primary:#e786a5;
+    --primary-strong:#cf6488;
+    --primary-soft:rgba(231,134,165,.15);
+    --glow:rgba(231,134,165,.25);
+}
+
+body.theme-ocean{
+    --bg:#eef8fb;
+    --surface:rgba(255,255,255,.78);
+    --surface-solid:#fff;
+    --surface-2:#e0f2f6;
+    --text:#18333a;
+    --muted:#718c94;
+    --primary:#4d9eb0;
+    --primary-strong:#347d91;
+    --primary-soft:rgba(77,158,176,.14);
+    --glow:rgba(77,158,176,.22);
+}
+
+body.theme-lavender{
+    --bg:#f6f2fc;
+    --surface:rgba(255,255,255,.8);
+    --surface-solid:#fff;
+    --surface-2:#ece5f8;
+    --text:#2d263a;
+    --muted:#82758f;
+    --primary:#9279c4;
+    --primary-strong:#755ba8;
+    --primary-soft:rgba(146,121,196,.14);
+    --glow:rgba(146,121,196,.22);
+}
+
+body.theme-sunset{
+    --bg:#fff5ed;
+    --surface:rgba(255,251,247,.8);
+    --surface-solid:#fff;
+    --surface-2:#fae7d9;
+    --text:#392820;
+    --muted:#957c6e;
+    --primary:#df8964;
+    --primary-strong:#bd6846;
+    --primary-soft:rgba(223,137,100,.15);
+    --glow:rgba(223,137,100,.23);
+}
+
+body.theme-sage-dark{
+    --bg:#101813;
+    --surface:rgba(25,34,28,.78);
+    --surface-solid:#19221c;
+    --surface-2:#202d25;
+    --text:#edf6ef;
+    --muted:#9aaa9f;
+    --primary:#83c79c;
+    --primary-strong:#a2d9b5;
+    --primary-soft:rgba(131,199,156,.13);
+    --glow:rgba(131,199,156,.2);
+}
+
+/* SPECIAL DARK */
+
+body.theme-midnight{
+    --bg:#080c16;
+    --surface:rgba(17,23,37,.78);
+    --surface-solid:#111725;
+    --surface-2:#192135;
+    --text:#edf2ff;
+    --muted:#8e9ab3;
+    --primary:#87a9ff;
+    --primary-strong:#a8c1ff;
+    --primary-soft:rgba(135,169,255,.13);
+    --glow:rgba(100,140,255,.25);
+}
+
+body.theme-aurora{
+    --bg:#071412;
+    --surface:rgba(14,29,27,.75);
+    --surface-solid:#10201e;
+    --surface-2:#19322d;
+    --text:#effff8;
+    --muted:#91aaa1;
+    --primary:#70e0b0;
+    --primary-strong:#98f0c8;
+    --primary-soft:rgba(112,224,176,.13);
+    --glow:rgba(75,255,177,.25);
+}
+
+body.theme-cyber{
+    --bg:#0c0714;
+    --surface:rgba(23,14,36,.76);
+    --surface-solid:#171024;
+    --surface-2:#241638;
+    --text:#f8f0ff;
+    --muted:#a894b7;
+    --primary:#c084ff;
+    --primary-strong:#d6a8ff;
+    --primary-soft:rgba(192,132,255,.14);
+    --glow:rgba(192,80,255,.3);
+}
+
+body.theme-ocean-dark{
+    --bg:#061218;
+    --surface:rgba(12,28,37,.78);
+    --surface-solid:#0d1d27;
+    --surface-2:#15313e;
+    --text:#ecfbff;
+    --muted:#88a6b0;
+    --primary:#4fd0e8;
+    --primary-strong:#83e5f4;
+    --primary-soft:rgba(79,208,232,.13);
+    --glow:rgba(79,208,232,.25);
+}
+
+body.theme-coffee{
+    --bg:#17110e;
+    --surface:rgba(34,25,20,.8);
+    --surface-solid:#241a15;
+    --surface-2:#30231c;
+    --text:#fff5ec;
+    --muted:#ae9787;
+    --primary:#d79a6d;
+    --primary-strong:#e8b18b;
+    --primary-soft:rgba(215,154,109,.14);
+    --glow:rgba(215,154,109,.2);
+}
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
 }
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  padding-bottom:30px;
-  transition:background .25s,color .25s;
+    margin:0;
+    min-height:100vh;
+
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        Segoe UI,
+        sans-serif;
+
+    color:var(--text);
+    background:var(--bg);
+
+    transition:
+        background .4s ease,
+        color .3s ease;
 }
 
-button,input,select{
-  font:inherit;
+button,
+input,
+select,
+textarea{
+    font:inherit;
 }
 
 button{
-  cursor:pointer;
+    border:0;
+    cursor:pointer;
+    color:inherit;
 }
 
+button:active{
+    transform:scale(.97);
+}
+
+/* =========================================================
+   SPECIAL BACKGROUNDS
+   ========================================================= */
+
+body::before,
+body::after{
+    content:"";
+    position:fixed;
+    pointer-events:none;
+    z-index:-5;
+    transition:opacity .5s ease;
+}
+
+body::before{
+    width:650px;
+    height:650px;
+
+    left:-250px;
+    top:-250px;
+
+    border-radius:50%;
+
+    background:radial-gradient(
+        circle,
+        var(--glow),
+        transparent 68%
+    );
+
+    filter:blur(20px);
+}
+
+body::after{
+    width:550px;
+    height:550px;
+
+    right:-250px;
+    bottom:-250px;
+
+    border-radius:50%;
+
+    background:radial-gradient(
+        circle,
+        var(--glow),
+        transparent 68%
+    );
+
+    filter:blur(25px);
+}
+
+/* =========================================================
+   SAKURA PETALS
+   ========================================================= */
+
+.sakura-petals{
+    position:fixed;
+    inset:0;
+    overflow:hidden;
+    pointer-events:none;
+    z-index:-2;
+    display:none;
+}
+
+.theme-sakura .sakura-petals{
+    display:block;
+}
+
+.petal{
+    position:absolute;
+
+    width:13px;
+    height:18px;
+
+    background:linear-gradient(
+        135deg,
+        #ffc1d4,
+        #ed7fa2
+    );
+
+    border-radius:80% 20% 80% 20%;
+
+    opacity:.7;
+
+    filter:drop-shadow(
+        0 3px 5px rgba(212,89,126,.15)
+    );
+
+    animation:
+        petalFall linear infinite,
+        petalRotate ease-in-out infinite;
+}
+
+.petal:nth-child(1){left:4%;animation-duration:11s;animation-delay:-2s}
+.petal:nth-child(2){left:14%;animation-duration:14s;animation-delay:-8s}
+.petal:nth-child(3){left:25%;animation-duration:10s;animation-delay:-4s}
+.petal:nth-child(4){left:36%;animation-duration:16s;animation-delay:-12s}
+.petal:nth-child(5){left:48%;animation-duration:12s;animation-delay:-6s}
+.petal:nth-child(6){left:58%;animation-duration:15s;animation-delay:-10s}
+.petal:nth-child(7){left:69%;animation-duration:11s;animation-delay:-7s}
+.petal:nth-child(8){left:80%;animation-duration:17s;animation-delay:-13s}
+.petal:nth-child(9){left:91%;animation-duration:13s;animation-delay:-5s}
+.petal:nth-child(10){left:45%;animation-duration:18s;animation-delay:-15s}
+
+@keyframes petalFall{
+    from{
+        transform:translateY(-10vh) translateX(0);
+    }
+    to{
+        transform:translateY(115vh) translateX(100px);
+    }
+}
+
+@keyframes petalRotate{
+    0%,100%{
+        rotate:0deg;
+    }
+    50%{
+        rotate:180deg;
+    }
+}
+
+/* =========================================================
+   AURORA
+   ========================================================= */
+
+.aurora{
+    display:none;
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-3;
+    overflow:hidden;
+}
+
+.theme-aurora .aurora{
+    display:block;
+}
+
+.aurora::before,
+.aurora::after{
+    content:"";
+    position:absolute;
+
+    width:70vw;
+    height:45vh;
+
+    border-radius:50%;
+
+    filter:blur(70px);
+
+    opacity:.18;
+}
+
+.aurora::before{
+    left:-10%;
+    top:0;
+
+    background:#28e79a;
+
+    transform:rotate(-15deg);
+
+    animation:auroraMove 10s ease-in-out infinite alternate;
+}
+
+.aurora::after{
+    right:-10%;
+    top:15%;
+
+    background:#65a8ff;
+
+    animation:auroraMove 14s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes auroraMove{
+    from{
+        transform:translateY(-30px) rotate(-15deg);
+    }
+    to{
+        transform:translateY(80px) rotate(18deg);
+    }
+}
+
+/* =========================================================
+   STARS
+   ========================================================= */
+
+.stars{
+    display:none;
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-3;
+}
+
+.theme-midnight .stars{
+    display:block;
+}
+
+.star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:white;
+    border-radius:50%;
+    opacity:.5;
+    animation:twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle{
+    from{opacity:.15}
+    to{opacity:.8}
+}
+
+/* =========================================================
+   APP
+   ========================================================= */
+
+.app{
+    width:100%;
+    min-height:100vh;
+}
+
+.shell{
+    width:min(1180px, calc(100% - 36px));
+    margin:auto;
+    padding-bottom:120px;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
 .header{
-  position:relative !important;
-  top:auto !important;
-  bottom:auto !important;
-  z-index:1;
-  width:100%;
-  padding:24px 5%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:25px;
+    position:relative !important;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:30px 0 22px;
+
+    z-index:1;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
 .logo{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:23px;
-  font-weight:800;
-  letter-spacing:-.5px;
+    width:44px;
+    height:44px;
+
+    border-radius:15px;
+
+    display:grid;
+    place-items:center;
+
+    background:
+        linear-gradient(
+            145deg,
+            var(--primary),
+            var(--primary-strong)
+        );
+
+    color:white;
+
+    font-size:17px;
+    font-weight:900;
+
+    box-shadow:
+        0 10px 25px var(--glow);
 }
 
-.logo-mark{
-  width:38px;
-  height:38px;
-  border-radius:13px;
-  background:var(--primary);
-  color:white;
-  display:grid;
-  place-items:center;
-  font-weight:900;
-  box-shadow:0 7px 18px rgba(95,150,117,.25);
+.brand-name{
+    font-size:20px;
+    font-weight:850;
+    letter-spacing:-.6px;
 }
 
-.desktop-nav{
-  display:flex;
-  gap:6px;
-  flex-wrap:wrap;
-  justify-content:flex-end;
+.brand-dot{
+    color:var(--primary);
 }
 
-.nav-btn{
-  border:0;
-  background:transparent;
-  color:var(--muted);
-  padding:10px 14px;
-  border-radius:13px;
-  font-weight:650;
-  transition:.2s;
+.header-actions{
+    display:flex;
+    gap:9px;
 }
 
-.nav-btn:hover{
-  background:var(--surface2);
-  color:var(--text);
+.icon-button{
+    width:42px;
+    height:42px;
+
+    border-radius:14px;
+
+    display:grid;
+    place-items:center;
+
+    background:var(--surface);
+    border:1px solid var(--border);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+
+    box-shadow:0 7px 22px rgba(0,0,0,.04);
+
+    transition:var(--transition);
 }
 
-.nav-btn.active{
-  background:var(--surface);
-  color:var(--primary);
-  box-shadow:var(--shadow);
+.icon-button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 28px var(--glow);
 }
 
-.container{
-  width:min(1200px,90%);
-  margin:0 auto;
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+main{
+    animation:pageEnter .35s ease;
 }
 
-.page{
-  display:none;
-  animation:fadeIn .25s ease;
+@keyframes pageEnter{
+    from{
+        opacity:0;
+        transform:translateY(7px);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
 }
 
-.page.active{
-  display:block;
+.page-heading{
+    margin:18px 0 26px;
 }
 
-@keyframes fadeIn{
-  from{
-    opacity:0;
-    transform:translateY(5px);
-  }
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+.page-heading h1{
+    margin:0;
+
+    font-size:clamp(30px,5vw,46px);
+    letter-spacing:-1.8px;
+    line-height:1.05;
 }
 
-.page-title{
-  margin:10px 0 24px;
+.page-heading p{
+    margin:9px 0 0;
+
+    color:var(--muted);
+    font-size:14px;
 }
 
-.page-title h1{
-  font-size:34px;
-  letter-spacing:-1px;
-}
-
-.page-title p{
-  margin-top:6px;
-  color:var(--muted);
-}
+/* =========================================================
+   CARDS
+   ========================================================= */
 
 .card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+
+    backdrop-filter:blur(22px);
+    -webkit-backdrop-filter:blur(22px);
+
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        background .3s ease;
+}
+
+.card:hover{
+    box-shadow:
+        0 22px 55px rgba(0,0,0,.08),
+        0 0 30px var(--glow);
+}
+
+.card-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:20px 22px 10px;
+}
+
+.card-title{
+    font-weight:800;
+    font-size:15px;
+}
+
+.card-body{
+    padding:14px 22px 22px;
+}
+
+/* =========================================================
+   TODAY
+   ========================================================= */
+
+.today-layout{
+    display:grid;
+    grid-template-columns:1.35fr .65fr;
+    gap:20px;
 }
 
 .progress-card{
-  padding:25px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:25px;
-  margin-bottom:18px;
+    padding:25px;
 }
 
-.progress-info h2{
-  font-size:25px;
-  margin-bottom:7px;
+.progress-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
-.progress-info p{
-  color:var(--muted);
+.progress-label{
+    color:var(--muted);
+    font-size:13px;
 }
 
-.progress-ring{
-  width:95px;
-  height:95px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:conic-gradient(var(--primary) 0deg,var(--surface2) 0deg);
-  flex:none;
-}
-
-.progress-ring-inner{
-  width:75px;
-  height:75px;
-  background:var(--surface);
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  font-weight:800;
-  font-size:18px;
-}
-
-.summary-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-  margin-bottom:25px;
-}
-
-.summary-card{
-  padding:20px;
-}
-
-.summary-number{
-  font-size:29px;
-  font-weight:800;
-}
-
-.summary-label{
-  color:var(--muted);
-  margin-top:4px;
-  font-size:14px;
-}
-
-.section-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  margin:30px 0 14px;
-}
-
-.section-header h2{
-  font-size:21px;
-}
-
-.btn{
-  border:0;
-  border-radius:13px;
-  padding:10px 15px;
-  font-weight:700;
-  transition:.2s;
-}
-
-.btn-primary{
-  background:var(--primary);
-  color:white;
-}
-
-.btn-primary:hover{
-  filter:brightness(.95);
-  transform:translateY(-1px);
-}
-
-.btn-secondary{
-  background:var(--surface2);
-  color:var(--text);
-}
-
-.btn-danger{
-  background:#fff0f0;
-  color:var(--danger);
-}
-
-.habits-list,
-.tasks-list{
-  display:grid;
-  gap:12px;
-}
-
-.habit-item,
-.task-item{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:17px;
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-
-.check-btn{
-  width:38px;
-  height:38px;
-  border-radius:50%;
-  border:2px solid var(--border);
-  background:transparent;
-  display:grid;
-  place-items:center;
-  color:transparent;
-  flex:none;
-  transition:.2s;
-}
-
-.check-btn.done{
-  background:var(--primary);
-  border-color:var(--primary);
-  color:white;
-}
-
-.item-main{
-  min-width:0;
-  flex:1;
-}
-
-.item-name{
-  font-weight:750;
-  word-break:break-word;
-}
-
-.item-meta{
-  font-size:13px;
-  color:var(--muted);
-  margin-top:4px;
-}
-
-.item-actions{
-  display:flex;
-  gap:7px;
-}
-
-.icon-btn{
-  width:35px;
-  height:35px;
-  border:0;
-  border-radius:11px;
-  background:var(--surface2);
-  color:var(--muted);
-}
-
-.progress-wrap{
-  margin-top:9px;
+.progress-number{
+    font-size:34px;
+    font-weight:850;
+    letter-spacing:-1px;
 }
 
 .progress-track{
-  width:100%;
-  height:7px;
-  background:var(--surface2);
-  border-radius:99px;
-  overflow:hidden;
+    height:10px;
+
+    margin-top:20px;
+
+    background:var(--surface-2);
+
+    border-radius:100px;
+
+    overflow:hidden;
 }
 
 .progress-bar{
-  height:100%;
-  background:var(--primary);
-  border-radius:99px;
-  transition:.3s;
+    height:100%;
+    width:0;
+
+    border-radius:inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--primary),
+            var(--primary-strong)
+        );
+
+    box-shadow:0 0 18px var(--glow);
+
+    transition:width .5s ease;
 }
 
-.progress-text{
-  font-size:12px;
-  color:var(--muted);
-  margin-top:5px;
+/* =========================================================
+   HABIT ROWS
+   ========================================================= */
+
+.habit-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
 }
 
-.empty{
-  padding:35px 20px;
-  text-align:center;
-  color:var(--muted);
-  background:var(--surface);
-  border:1px dashed var(--border);
-  border-radius:18px;
+.habit-row{
+    display:flex;
+    align-items:center;
+    gap:14px;
+
+    padding:15px;
+
+    border-radius:18px;
+
+    background:rgba(127,127,127,.045);
+
+    border:1px solid transparent;
+
+    transition:var(--transition);
 }
 
-/* CALENDAR */
+.habit-row:hover{
+    background:var(--primary-soft);
+    border-color:var(--border);
+    transform:translateX(3px);
+}
+
+/* ROUND CHECKBOX */
+
+.check{
+    width:25px;
+    height:25px;
+
+    flex:0 0 25px;
+
+    border-radius:50%;
+
+    border:2px solid var(--muted);
+
+    background:transparent;
+
+    display:grid;
+    place-items:center;
+
+    transition:
+        background .2s ease,
+        border .2s ease,
+        transform .2s ease;
+}
+
+.check:hover{
+    border-color:var(--primary);
+    transform:scale(1.08);
+}
+
+.check.done{
+    border-color:var(--primary);
+    background:var(--primary);
+    color:white;
+}
+
+.check.done::after{
+    content:"✓";
+    font-size:14px;
+    font-weight:900;
+}
+
+.habit-info{
+    min-width:0;
+    flex:1;
+}
+
+.habit-name{
+    font-weight:700;
+    font-size:14px;
+}
+
+.habit-meta{
+    margin-top:3px;
+    color:var(--muted);
+    font-size:12px;
+}
+
+.category-pill{
+    padding:6px 9px;
+
+    border-radius:999px;
+
+    background:var(--primary-soft);
+    color:var(--primary-strong);
+
+    font-size:10px;
+    font-weight:750;
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.primary-button{
+    min-height:44px;
+
+    padding:0 17px;
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary-strong)
+        );
+
+    color:white;
+
+    font-weight:750;
+
+    box-shadow:
+        0 9px 24px var(--glow);
+
+    transition:var(--transition);
+}
+
+.primary-button:hover{
+    transform:translateY(-2px);
+    box-shadow:
+        0 14px 32px var(--glow);
+}
+
+.secondary-button{
+    min-height:44px;
+
+    padding:0 17px;
+
+    border-radius:15px;
+
+    background:var(--surface-2);
+
+    color:var(--text);
+
+    font-weight:700;
+
+    border:1px solid var(--border);
+}
+
+/* =========================================================
+   CALENDAR
+   ========================================================= */
 
 .calendar-card{
-  padding:22px;
+    padding:22px;
 }
 
-.calendar-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:20px;
+.calendar-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:20px;
 }
 
-.calendar-title{
-  font-size:22px;
-  font-weight:800;
+.calendar-month{
+    font-size:18px;
+    font-weight:800;
 }
 
-.calendar-nav{
-  display:flex;
-  gap:7px;
+.calendar-arrows{
+    display:flex;
+    gap:7px;
 }
 
-.calendar-nav button{
-  width:38px;
-  height:38px;
-  border:0;
-  border-radius:12px;
-  background:var(--surface2);
-  color:var(--text);
-}
-
-.calendar-weekdays,
 .calendar-grid{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:7px;
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:7px;
 }
 
-.calendar-weekdays div{
-  text-align:center;
-  font-size:12px;
-  color:var(--muted);
-  font-weight:700;
-  padding:6px 0;
+.weekday{
+    text-align:center;
+    color:var(--muted);
+    font-size:11px;
+    font-weight:750;
+    padding-bottom:5px;
 }
 
-.calendar-day{
-  min-height:75px;
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:9px;
-  background:var(--surface);
-  cursor:pointer;
-  transition:.15s;
+.day{
+    min-height:54px;
+
+    border-radius:16px;
+
+    background:transparent;
+
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:13px;
+    font-weight:650;
+
+    transition:var(--transition);
 }
 
-.calendar-day:hover{
-  transform:translateY(-1px);
-  border-color:var(--primary2);
+.day:hover{
+    background:var(--primary-soft);
 }
 
-.calendar-day.muted{
-  opacity:.4;
+.day.selected{
+    background:var(--primary);
+    color:white;
+
+    box-shadow:
+        0 8px 22px var(--glow);
 }
 
-.calendar-day.today{
-  border:2px solid var(--primary);
-}
+.day.today:not(.selected)::after{
+    content:"";
 
-.day-number{
-  font-size:13px;
-  font-weight:800;
+    position:absolute;
+
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:var(--primary);
+
+    bottom:7px;
 }
 
 .day-dots{
-  display:flex;
-  flex-wrap:wrap;
-  gap:4px;
-  margin-top:12px;
+    position:absolute;
+
+    bottom:5px;
+
+    display:flex;
+    gap:3px;
 }
 
-.dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:var(--primary);
+.day-dot{
+    width:4px;
+    height:4px;
+
+    border-radius:50%;
+
+    background:var(--primary);
 }
 
-.dot.task{
-  background:var(--primary2);
+.selected .day-dot{
+    background:white;
 }
 
-/* HABITS */
+/* =========================================================
+   HABITS PAGE
+   ========================================================= */
 
 .habits-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:15px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
 }
 
 .habit-card{
-  padding:20px;
+    padding:20px;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.habit-card::before{
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+    height:120px;
+
+    right:-55px;
+    top:-55px;
+
+    border-radius:50%;
+
+    background:var(--glow);
 }
 
 .habit-card-top{
-  display:flex;
-  align-items:flex-start;
-  justify-content:space-between;
-  gap:12px;
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+
+    gap:15px;
 }
 
-.habit-card-name{
-  font-size:18px;
-  font-weight:800;
+.habit-card h3{
+    margin:0;
+    font-size:16px;
 }
 
-.badge{
-  display:inline-flex;
-  align-items:center;
-  padding:5px 9px;
-  border-radius:999px;
-  background:var(--surface2);
-  color:var(--primary);
-  font-size:11px;
-  font-weight:750;
-  margin-top:7px;
+.habit-card p{
+    margin:7px 0 0;
+
+    color:var(--muted);
+    font-size:12px;
 }
 
-.habit-card-actions{
-  display:flex;
-  gap:6px;
+.habit-actions{
+    display:flex;
+    gap:6px;
 }
 
-.habit-card-actions button{
-  border:0;
-  background:var(--surface2);
-  border-radius:10px;
-  padding:7px 9px;
-  font-size:12px;
-  color:var(--muted);
+.small-icon{
+    width:34px;
+    height:34px;
+
+    border-radius:11px;
+
+    background:var(--surface-2);
+
+    display:grid;
+    place-items:center;
+
+    border:1px solid var(--border);
 }
 
-.habit-card .progress-wrap{
-  margin-top:20px;
-}
-
-/* STATS */
+/* =========================================================
+   STATS
+   ========================================================= */
 
 .stats-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-  margin-bottom:18px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
 }
 
 .stat-card{
-  padding:20px;
-}
-
-.stat-value{
-  font-size:30px;
-  font-weight:850;
+    padding:22px;
 }
 
 .stat-label{
-  color:var(--muted);
-  margin-top:5px;
-  font-size:13px;
+    color:var(--muted);
+    font-size:12px;
 }
 
-.chart-card{
-  padding:22px;
-  margin-bottom:18px;
+.stat-value{
+    margin-top:8px;
+
+    font-size:30px;
+    font-weight:850;
 }
 
 .chart{
-  height:220px;
-  display:flex;
-  align-items:flex-end;
-  gap:10px;
-  margin-top:25px;
+    height:190px;
+
+    display:flex;
+    align-items:flex-end;
+
+    gap:10px;
+
+    padding:15px 4px 0;
 }
 
 .chart-column{
-  flex:1;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  align-items:center;
-  gap:8px;
-}
+    flex:1;
 
-.chart-value{
-  font-size:11px;
-  color:var(--muted);
+    height:100%;
+
+    display:flex;
+    align-items:flex-end;
 }
 
 .chart-bar{
-  width:100%;
-  max-width:48px;
-  min-height:4px;
-  background:var(--primary);
-  border-radius:10px 10px 4px 4px;
+    width:100%;
+
+    min-height:5px;
+
+    border-radius:9px 9px 4px 4px;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--primary),
+            var(--primary-strong)
+        );
+
+    box-shadow:0 4px 16px var(--glow);
+
+    transition:height .5s ease;
 }
 
-.chart-label{
-  font-size:11px;
-  color:var(--muted);
+/* =========================================================
+   SETTINGS / HELP
+   ========================================================= */
+
+.settings-list,
+.help-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
 }
 
-.category-list{
-  display:grid;
-  gap:12px;
-  margin-top:20px;
+.setting-row,
+.help-row{
+    padding:17px 18px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:15px;
+
+    background:rgba(127,127,127,.045);
+
+    border-radius:18px;
+
+    border:1px solid var(--border);
 }
 
-.category-row{
-  display:grid;
-  grid-template-columns:110px 1fr 45px;
-  align-items:center;
-  gap:12px;
+.setting-title,
+.help-title{
+    font-weight:750;
 }
 
-.category-name{
-  font-size:13px;
-  font-weight:700;
+.setting-description,
+.help-description{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:4px;
+    line-height:1.5;
 }
 
-.category-track{
-  height:8px;
-  background:var(--surface2);
-  border-radius:99px;
-  overflow:hidden;
-}
+/* =========================================================
+   THEME SELECTOR
+   ========================================================= */
 
-.category-fill{
-  height:100%;
-  background:var(--primary);
-  border-radius:99px;
-}
-
-.category-number{
-  text-align:right;
-  font-size:13px;
-  color:var(--muted);
-}
-
-/* SETTINGS */
-
-.settings-section{
-  margin-bottom:35px;
-}
-
-.settings-section h2{
-  font-size:20px;
-  margin-bottom:6px;
-}
-
-.settings-section > p{
-  color:var(--muted);
-  font-size:14px;
-  margin-bottom:15px;
-}
-
-.theme-section-title{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  margin-bottom:14px;
-}
-
-.theme-section-title span{
-  background:var(--surface2);
-  color:var(--primary);
-  padding:5px 9px;
-  border-radius:999px;
-  font-size:11px;
-  font-weight:800;
-}
-
-.theme-grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:12px;
-}
-
-.theme-option{
-  padding:12px;
-  border-radius:17px;
-  border:2px solid transparent;
-  background:var(--surface);
-  cursor:pointer;
-  box-shadow:var(--shadow);
-  color:var(--text);
-  text-align:left;
-  transition:.2s;
-}
-
-.theme-option:hover{
-  transform:translateY(-2px);
-}
-
-.theme-option.active{
-  border-color:var(--primary);
+.themes-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
 }
 
 .theme-preview{
-  height:62px;
-  border-radius:11px;
-  margin-bottom:9px;
-  position:relative;
-  overflow:hidden;
+    min-height:105px;
+
+    border-radius:19px;
+
+    position:relative;
+    overflow:hidden;
+
+    cursor:pointer;
+
+    border:2px solid transparent;
+
+    transition:var(--transition);
 }
 
-.theme-preview::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:var(--preview-pattern,none);
+.theme-preview:hover{
+    transform:translateY(-4px);
 }
 
-.theme-preview-line{
-  position:absolute;
-  width:45%;
-  height:10px;
-  margin:12px;
-  border-radius:99px;
-  background:var(--preview-primary);
-  z-index:2;
+.theme-preview.active{
+    border-color:var(--primary);
+
+    box-shadow:
+        0 0 0 4px var(--primary-soft),
+        0 14px 35px var(--glow);
 }
 
-.theme-name{
-  font-size:12px;
-  font-weight:750;
+.theme-preview span{
+    position:absolute;
+
+    left:12px;
+    bottom:10px;
+
+    color:white;
+
+    font-size:11px;
+    font-weight:800;
+
+    text-shadow:0 2px 8px rgba(0,0,0,.45);
 }
 
-.premium-note{
-  padding:13px 15px;
-  border-radius:15px;
-  background:var(--surface2);
-  color:var(--muted);
-  font-size:13px;
-  margin-bottom:16px;
+.preview-sage{
+    background:linear-gradient(135deg,#dff2e4,#6eae83);
 }
 
-/* HELP */
-
-.help-intro{
-  padding:25px;
-  margin-bottom:18px;
+.preview-sakura{
+    background:
+        radial-gradient(circle at 20% 25%,#ffc3d7 0 5%,transparent 6%),
+        radial-gradient(circle at 75% 35%,#f08cab 0 4%,transparent 5%),
+        linear-gradient(135deg,#fff0f5,#d96d90);
 }
 
-.help-intro h2{
-  font-size:24px;
-  margin-bottom:7px;
+.preview-ocean{
+    background:linear-gradient(135deg,#d7f3f8,#398fa4);
 }
 
-.help-intro p{
-  color:var(--muted);
-  line-height:1.6;
+.preview-lavender{
+    background:linear-gradient(135deg,#eee5ff,#8464b7);
 }
 
-.help-categories{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
+.preview-sunset{
+    background:linear-gradient(135deg,#ffd5b9,#dc7150);
 }
 
-.help-category{
-  border:1px solid var(--border);
-  background:var(--surface);
-  border-radius:20px;
-  padding:22px;
-  cursor:pointer;
-  text-align:left;
-  box-shadow:var(--shadow);
-  transition:.2s;
-  color:var(--text);
+.preview-midnight{
+    background:
+        radial-gradient(circle at 20% 30%,white 0 1px,transparent 2px),
+        radial-gradient(circle at 75% 60%,white 0 1px,transparent 2px),
+        linear-gradient(135deg,#101a35,#050813);
 }
 
-.help-category:hover{
-  transform:translateY(-3px);
-  border-color:var(--primary2);
+.preview-aurora{
+    background:
+        radial-gradient(circle at 30% 30%,#37e99f,transparent 30%),
+        radial-gradient(circle at 75% 65%,#477cff,transparent 30%),
+        #071412;
 }
 
-.help-category-icon{
-  width:52px;
-  height:52px;
-  border-radius:16px;
-  background:var(--surface2);
-  display:grid;
-  place-items:center;
-  font-size:25px;
-  margin-bottom:15px;
+.preview-cyber{
+    background:
+        radial-gradient(circle,#c060ff,transparent 35%),
+        linear-gradient(135deg,#090412,#2b1045);
 }
 
-.help-category h3{
-  font-size:19px;
-  margin-bottom:6px;
+.preview-ocean-dark{
+    background:linear-gradient(135deg,#09212c,#27aac4);
 }
 
-.help-category p{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.5;
+.preview-coffee{
+    background:linear-gradient(135deg,#39261b,#9a6040);
 }
 
-.help-page-header{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  margin-bottom:22px;
+.preview-sage-dark{
+    background:linear-gradient(135deg,#14231a,#548765);
 }
 
-.help-back{
-  width:42px;
-  height:42px;
-  border:0;
-  border-radius:13px;
-  background:var(--surface2);
-  color:var(--text);
-  font-size:20px;
-  flex:none;
+/* =========================================================
+   HELP
+   ========================================================= */
+
+.help-tabs{
+    display:flex;
+    gap:7px;
+
+    overflow-x:auto;
+
+    padding-bottom:4px;
+
+    scrollbar-width:none;
 }
 
-.help-page-header h2{
-  font-size:26px;
+.help-tabs::-webkit-scrollbar{
+    display:none;
 }
 
-.help-page-header p{
-  color:var(--muted);
-  font-size:13px;
-  margin-top:3px;
+.help-tab{
+    flex:0 0 auto;
+
+    padding:10px 14px;
+
+    border-radius:13px;
+
+    background:var(--surface-2);
+
+    color:var(--muted);
+
+    font-size:12px;
+    font-weight:750;
 }
 
-.help-subnav{
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-bottom:20px;
+.help-tab.active{
+    background:var(--primary);
+    color:white;
 }
 
-.help-subnav button{
-  border:1px solid var(--border);
-  background:var(--surface);
-  color:var(--muted);
-  padding:9px 13px;
-  border-radius:12px;
-  font-size:13px;
-  font-weight:700;
+.help-content{
+    margin-top:15px;
 }
 
-.help-subnav button.active{
-  background:var(--primary);
-  color:white;
-  border-color:var(--primary);
+.help-section{
+    padding:22px;
 }
 
-.help-topic{
-  display:none;
+.help-section h2{
+    margin:0 0 8px;
+
+    font-size:21px;
 }
 
-.help-topic.active{
-  display:block;
-}
-
-.help-cards{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:14px;
-}
-
-.help-card{
-  background:var(--surface);
-  border:1px solid var(--border);
-  border-radius:20px;
-  padding:20px;
-  box-shadow:var(--shadow);
-}
-
-.help-card.full{
-  grid-column:1/-1;
-}
-
-.help-card-icon{
-  width:40px;
-  height:40px;
-  border-radius:12px;
-  background:var(--surface2);
-  display:grid;
-  place-items:center;
-  margin-bottom:12px;
-  font-size:19px;
-}
-
-.help-card h3{
-  font-size:17px;
-  margin-bottom:8px;
-}
-
-.help-card p{
-  color:var(--muted);
-  line-height:1.65;
-  font-size:14px;
-}
-
-.help-card ul{
-  margin:10px 0 0 19px;
-  color:var(--muted);
-  line-height:1.7;
-  font-size:14px;
+.help-section > p{
+    color:var(--muted);
+    line-height:1.6;
+    font-size:13px;
 }
 
 .technique{
-  margin-top:10px;
-  padding:13px;
-  border-radius:13px;
-  background:var(--surface2);
+    margin-top:12px;
+
+    padding:16px;
+
+    border-radius:17px;
+
+    background:rgba(127,127,127,.045);
+
+    border:1px solid var(--border);
 }
 
 .technique strong{
-  color:var(--text);
+    display:block;
+    margin-bottom:5px;
 }
 
 .technique p{
-  margin-top:4px;
+    margin:0;
+
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.6;
 }
 
 .help-link{
-  display:inline-flex;
-  margin-top:12px;
-  border:0;
-  background:var(--surface2);
-  color:var(--primary);
-  padding:9px 12px;
-  border-radius:10px;
-  font-weight:750;
-  font-size:12px;
+    margin-top:12px;
+
+    color:var(--primary);
+    background:none;
+
+    font-weight:750;
+    font-size:13px;
 }
 
-/* MODAL */
+/* =========================================================
+   MODAL
+   ========================================================= */
 
 .modal-overlay{
-  position:fixed;
-  inset:0;
-  background:rgba(20,30,24,.45);
-  backdrop-filter:blur(8px);
-  display:none;
-  align-items:center;
-  justify-content:center;
-  z-index:100;
-  padding:20px;
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.42);
+
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+
+    display:none;
+    align-items:center;
+    justify-content:center;
+
+    padding:18px;
+
+    z-index:100;
 }
 
 .modal-overlay.open{
-  display:flex;
+    display:flex;
 }
 
 .modal{
-  width:min(520px,100%);
-  max-height:90vh;
-  overflow:auto;
-  background:var(--surface);
-  border-radius:25px;
-  padding:25px;
-  box-shadow:0 25px 70px rgba(0,0,0,.2);
+    width:min(520px,100%);
+    max-height:90vh;
+    overflow:auto;
+
+    padding:24px;
+
+    border-radius:28px;
+
+    background:var(--surface-solid);
+
+    border:1px solid var(--border);
+
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.25);
+
+    animation:modalIn .25s ease;
 }
 
-.modal-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  margin-bottom:22px;
+@keyframes modalIn{
+    from{
+        opacity:0;
+        transform:translateY(15px) scale(.97);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
 }
 
-.modal-header h2{
-  font-size:23px;
-}
-
-.close-btn{
-  width:35px;
-  height:35px;
-  border:0;
-  border-radius:11px;
-  background:var(--surface2);
-  color:var(--muted);
+.modal h2{
+    margin:0 0 20px;
 }
 
 .form-group{
-  margin-bottom:17px;
+    margin-bottom:15px;
 }
 
 .form-group label{
-  display:block;
-  margin-bottom:7px;
-  font-size:13px;
-  font-weight:750;
+    display:block;
+
+    margin-bottom:7px;
+
+    color:var(--muted);
+
+    font-size:12px;
+    font-weight:700;
 }
 
-.form-input{
-  width:100%;
-  border:1px solid var(--border);
-  background:var(--surface);
-  color:var(--text);
-  border-radius:13px;
-  padding:12px 13px;
-  outline:none;
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+
+    border:1px solid var(--border);
+
+    border-radius:15px;
+
+    background:var(--surface-2);
+
+    color:var(--text);
+
+    padding:13px 14px;
+
+    outline:none;
 }
 
-.form-input:focus{
-  border-color:var(--primary);
-}
-
-.frequency-options{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:7px;
-}
-
-.frequency-btn{
-  border:1px solid var(--border);
-  background:var(--surface);
-  color:var(--muted);
-  border-radius:12px;
-  padding:10px 6px;
-  font-size:12px;
-  font-weight:700;
-}
-
-.frequency-btn.active{
-  background:var(--primary);
-  color:white;
-  border-color:var(--primary);
-}
-
-.extra-frequency{
-  display:none;
-  margin-top:12px;
-}
-
-.extra-frequency.show{
-  display:block;
-}
-
-.days-grid{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:5px;
-}
-
-.day-btn{
-  border:1px solid var(--border);
-  background:var(--surface);
-  color:var(--muted);
-  border-radius:10px;
-  padding:8px 3px;
-  font-size:11px;
-  font-weight:700;
-}
-
-.day-btn.active{
-  background:var(--primary);
-  color:white;
-  border-color:var(--primary);
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+    border-color:var(--primary);
+    box-shadow:0 0 0 4px var(--primary-soft);
 }
 
 .modal-actions{
-  display:flex;
-  justify-content:flex-end;
-  gap:8px;
-  margin-top:24px;
+    display:flex;
+    justify-content:flex-end;
+    gap:9px;
+
+    margin-top:20px;
 }
 
-/* TOAST */
+/* =========================================================
+   PREMIUM BOTTOM NAV
+   ========================================================= */
+
+.bottom-nav{
+    position:fixed;
+
+    left:50%;
+
+    bottom:
+        calc(
+            14px + env(safe-area-inset-bottom)
+        );
+
+    transform:translateX(-50%);
+
+    width:min(
+        760px,
+        calc(100% - 24px)
+    );
+
+    min-height:70px;
+
+    padding:7px;
+
+    display:flex;
+    align-items:center;
+
+    gap:4px;
+
+    background:var(--nav-bg);
+
+    border:1px solid rgba(255,255,255,.16);
+
+    border-radius:27px;
+
+    box-shadow:
+        0 18px 55px rgba(0,0,0,.14),
+        0 3px 12px rgba(0,0,0,.06);
+
+    backdrop-filter:blur(28px) saturate(150%);
+    -webkit-backdrop-filter:blur(28px) saturate(150%);
+
+    z-index:90;
+}
+
+.bottom-nav::before{
+    content:"";
+
+    position:absolute;
+    inset:0;
+
+    border-radius:inherit;
+
+    pointer-events:none;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.16),
+            transparent 45%
+        );
+}
+
+.nav-item{
+    position:relative;
+
+    flex:1;
+
+    min-width:0;
+
+    height:56px;
+
+    border-radius:20px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:7px;
+
+    background:transparent;
+
+    color:var(--muted);
+
+    transition:
+        color .25s ease,
+        background .25s ease,
+        transform .25s ease;
+}
+
+.nav-icon{
+    width:21px;
+    height:21px;
+
+    display:grid;
+    place-items:center;
+
+    transition:
+        transform .3s cubic-bezier(.2,.8,.2,1);
+}
+
+.nav-icon svg{
+    width:20px;
+    height:20px;
+
+    stroke:currentColor;
+
+    stroke-width:1.8;
+
+    fill:none;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.nav-label{
+    max-width:0;
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    font-size:11px;
+    font-weight:800;
+
+    opacity:0;
+
+    transition:
+        max-width .3s ease,
+        opacity .2s ease;
+}
+
+.nav-item.active{
+    color:var(--primary-strong);
+
+    background:var(--primary-soft);
+}
+
+.nav-item.active .nav-icon{
+    transform:translateY(-1px);
+}
+
+.nav-item.active .nav-label{
+    max-width:80px;
+    opacity:1;
+}
+
+.nav-item:hover{
+    color:var(--primary);
+}
+
+.nav-item:active{
+    transform:scale(.95);
+}
+
+/* =========================================================
+   TOAST
+   ========================================================= */
 
 .toast{
-  position:fixed;
-  left:50%;
-  bottom:95px;
-  transform:translate(-50%,20px);
-  background:var(--text);
-  color:white;
-  padding:12px 17px;
-  border-radius:13px;
-  opacity:0;
-  pointer-events:none;
-  transition:.25s;
-  z-index:200;
-  font-size:13px;
-  box-shadow:0 10px 30px rgba(0,0,0,.2);
+    position:fixed;
+
+    left:50%;
+    bottom:105px;
+
+    transform:
+        translate(-50%,20px)
+        scale(.95);
+
+    padding:12px 17px;
+
+    border-radius:15px;
+
+    background:var(--surface-solid);
+
+    border:1px solid var(--border);
+
+    box-shadow:0 15px 45px rgba(0,0,0,.15);
+
+    font-size:12px;
+    font-weight:750;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.25s ease;
+
+    z-index:200;
 }
 
 .toast.show{
-  opacity:1;
-  transform:translate(-50%,0);
+    opacity:1;
+
+    transform:
+        translate(-50%,0)
+        scale(1);
 }
 
-/* MOBILE NAV */
+/* =========================================================
+   EMPTY
+   ========================================================= */
 
-.mobile-nav{
-  display:none;
-}
+.empty{
+    padding:35px 20px;
 
-.mobile-nav-icon{
-  display:block;
-  font-size:23px;
-  line-height:1;
-  margin-bottom:4px;
-}
+    text-align:center;
 
-.mobile-nav-label{
-  display:block;
-  font-size:9px;
-  line-height:1;
-}
-
-@media(max-width:900px){
-
-  .header{
-    padding:18px 4%;
-  }
-
-  .desktop-nav{
-    display:none;
-  }
-
-  .container{
-    width:92%;
-  }
-
-  .theme-grid{
-    grid-template-columns:repeat(4,1fr);
-  }
-
-  .mobile-nav{
-    display:grid;
-    grid-template-columns:repeat(6,1fr);
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    z-index:90;
-    padding:9px 7px calc(9px + env(safe-area-inset-bottom));
-    background:color-mix(in srgb,var(--surface) 94%,transparent);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-    border-top:1px solid var(--border);
-  }
-
-  .mobile-nav button{
-    border:0;
-    background:transparent;
     color:var(--muted);
-    padding:6px 1px;
-    border-radius:13px;
-    font-weight:700;
-    min-width:0;
-  }
 
-  .mobile-nav button.active{
-    color:var(--primary);
-    background:var(--surface2);
-  }
-
-  body{
-    padding-bottom:105px;
-  }
-
-  .help-categories{
-    grid-template-columns:1fr;
-  }
+    font-size:13px;
 }
+
+.empty-icon{
+    width:52px;
+    height:52px;
+
+    margin:0 auto 12px;
+
+    border-radius:18px;
+
+    display:grid;
+    place-items:center;
+
+    background:var(--primary-soft);
+
+    color:var(--primary);
+
+    font-size:22px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
 
 @media(max-width:800px){
 
-  .summary-grid,
-  .stats-grid{
-    grid-template-columns:1fr;
-  }
+    .shell{
+        width:min(100% - 24px, 650px);
+        padding-bottom:125px;
+    }
 
-  .habits-grid,
-  .help-cards{
-    grid-template-columns:1fr;
-  }
+    .header{
+        padding-top:18px;
+    }
 
-  .help-card.full{
-    grid-column:auto;
-  }
+    .today-layout{
+        grid-template-columns:1fr;
+    }
 
-  .theme-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
+    .habits-grid{
+        grid-template-columns:1fr;
+    }
 
-  .category-row{
-    grid-template-columns:85px 1fr 35px;
-  }
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
+    }
 
-  .calendar-day{
-    min-height:60px;
-    padding:7px;
-  }
+    .themes-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .bottom-nav{
+        width:calc(100% - 18px);
+        min-height:68px;
+        bottom:calc(8px + env(safe-area-inset-bottom));
+    }
+
+    .nav-item{
+        height:54px;
+    }
+
+    .nav-label{
+        display:none;
+    }
+
+    .nav-item.active .nav-label{
+        display:none;
+    }
+
+    .nav-item.active{
+        background:var(--primary-soft);
+    }
+
+    .nav-item.active .nav-icon{
+        transform:scale(1.08);
+    }
+
+    .calendar-grid{
+        gap:4px;
+    }
+
+    .day{
+        min-height:47px;
+        border-radius:13px;
+    }
 }
 
-@media(max-width:480px){
+@media(max-width:500px){
 
-  .page-title h1{
-    font-size:28px;
-  }
+    .page-heading{
+        margin-top:10px;
+    }
 
-  .progress-card{
-    padding:19px;
-  }
+    .page-heading h1{
+        font-size:32px;
+    }
 
-  .progress-ring{
-    width:78px;
-    height:78px;
-  }
+    .stats-grid{
+        grid-template-columns:1fr;
+    }
 
-  .progress-ring-inner{
-    width:62px;
-    height:62px;
-    font-size:15px;
-  }
+    .themes-grid{
+        grid-template-columns:1fr 1fr;
+    }
 
-  .frequency-options{
-    grid-template-columns:1fr;
-  }
+    .progress-card,
+    .calendar-card,
+    .help-section{
+        padding:18px;
+    }
 
-  .calendar-weekdays,
-  .calendar-grid{
-    gap:4px;
-  }
+    .card-header{
+        padding:17px 18px 8px;
+    }
 
-  .calendar-day{
-    min-height:52px;
-    border-radius:10px;
-  }
+    .card-body{
+        padding:10px 18px 18px;
+    }
 
-  .day-dots{
-    margin-top:8px;
-  }
-
-  .mobile-nav-icon{
-    font-size:21px;
-  }
-
-  .mobile-nav-label{
-    font-size:8px;
-  }
-
-  .help-page-header h2{
-    font-size:22px;
-  }
+    .bottom-nav{
+        border-radius:24px;
+    }
 }
 
-/* =========================
-   ANCIENS THEMES PREMIUM
-   ========================= */
+/* =========================================================
+   DESKTOP NAV LABELS
+   ========================================================= */
 
-.theme-sage{
-  --bg:#f4f8f5;
-  --surface:#ffffff;
-  --surface2:#edf5ef;
-  --text:#203128;
-  --muted:#718078;
-  --primary:#5f9675;
-  --primary2:#8fc3a4;
-  --border:#dfe9e2;
+@media(min-width:801px){
+
+    .nav-label{
+        max-width:100px;
+        opacity:1;
+    }
+
+    .bottom-nav{
+        min-height:68px;
+    }
 }
 
-.theme-mint{
-  --bg:#f2faf7;
-  --surface:#ffffff;
-  --surface2:#e8f6f0;
-  --text:#18342c;
-  --muted:#6f847d;
-  --primary:#48a889;
-  --primary2:#82cbb4;
-  --border:#d9eee5;
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.01ms !important;
+    }
 }
 
-.theme-ocean{
-  --bg:#f2f8fb;
-  --surface:#ffffff;
-  --surface2:#e7f2f7;
-  --text:#19313b;
-  --muted:#6d8189;
-  --primary:#428ca7;
-  --primary2:#7dbbd0;
-  --border:#d7e8ef;
-}
-
-.theme-lavender{
-  --bg:#f7f5fb;
-  --surface:#ffffff;
-  --surface2:#eeeafb;
-  --text:#2c2740;
-  --muted:#7c758d;
-  --primary:#8068bd;
-  --primary2:#aa98d4;
-  --border:#e4def2;
-}
-
-.theme-rose{
-  --bg:#fcf5f7;
-  --surface:#ffffff;
-  --surface2:#f8e9ed;
-  --text:#3c2930;
-  --muted:#8a747b;
-  --primary:#c8758a;
-  --primary2:#dda2b1;
-  --border:#f0dce2;
-}
-
-.theme-amber{
-  --bg:#fcf8ef;
-  --surface:#ffffff;
-  --surface2:#f7efdc;
-  --text:#3b3020;
-  --muted:#887c67;
-  --primary:#c6943d;
-  --primary2:#dfbd77;
-  --border:#eee1c3;
-}
-
-.theme-forest{
-  --bg:#f1f7f3;
-  --surface:#ffffff;
-  --surface2:#e1eee5;
-  --text:#193126;
-  --muted:#687c70;
-  --primary:#3e805d;
-  --primary2:#78ad8d;
-  --border:#d4e6da;
-}
-
-.theme-sky{
-  --bg:#f1f8fc;
-  --surface:#ffffff;
-  --surface2:#e3f1f8;
-  --text:#18303d;
-  --muted:#6e818d;
-  --primary:#4c9bc0;
-  --primary2:#85c1dc;
-  --border:#d5e8f1;
-}
-
-.theme-coffee{
-  --bg:#f8f5f1;
-  --surface:#ffffff;
-  --surface2:#eee8e0;
-  --text:#35291f;
-  --muted:#807267;
-  --primary:#9a7150;
-  --primary2:#c3a183;
-  --border:#e4dbd0;
-}
-
-.theme-glacier{
-  --bg:#f3f8fa;
-  --surface:#ffffff;
-  --surface2:#e7f1f4;
-  --text:#21333a;
-  --muted:#72848a;
-  --primary:#5d99a9;
-  --primary2:#91c1cc;
-  --border:#d9e8ec;
-}
-
-.theme-midnight{
-  --bg:#11151d;
-  --surface:#191f29;
-  --surface2:#222a36;
-  --text:#edf3f7;
-  --muted:#8d99a5;
-  --primary:#78a9e8;
-  --primary2:#9cc1ed;
-  --border:#2b3543;
-  --shadow:0 10px 30px rgba(0,0,0,.25);
-}
-
-.theme-graphite{
-  --bg:#111111;
-  --surface:#1b1b1b;
-  --surface2:#262626;
-  --text:#f0f0f0;
-  --muted:#929292;
-  --primary:#b0b0b0;
-  --primary2:#d0d0d0;
-  --border:#303030;
-  --shadow:0 10px 30px rgba(0,0,0,.3);
-}
-
-.theme-darkforest{
-  --bg:#0e1712;
-  --surface:#15231a;
-  --surface2:#203227;
-  --text:#edf7f0;
-  --muted:#91a69a;
-  --primary:#70bd8d;
-  --primary2:#99d1ad;
-  --border:#294034;
-  --shadow:0 10px 30px rgba(0,0,0,.3);
-}
-
-.theme-deepocean{
-  --bg:#0c151c;
-  --surface:#13212b;
-  --surface2:#1d303c;
-  --text:#edf8ff;
-  --muted:#8da3ae;
-  --primary:#58a8ca;
-  --primary2:#82c1d9;
-  --border:#28404d;
-  --shadow:0 10px 30px rgba(0,0,0,.3);
-}
-
-.theme-darklavender{
-  --bg:#14111b;
-  --surface:#1e1928;
-  --surface2:#2b2438;
-  --text:#f4effc;
-  --muted:#9d92aa;
-  --primary:#9b7bd0;
-  --primary2:#b99ee1;
-  --border:#3b304d;
-  --shadow:0 10px 30px rgba(0,0,0,.3);
-}
-
-.theme-burgundy{
-  --bg:#190f13;
-  --surface:#25151b;
-  --surface2:#362029;
-  --text:#fff0f3;
-  --muted:#ad8993;
-  --primary:#c96b80;
-  --primary2:#e09baa;
-  --border:#4b2b35;
-  --shadow:0 10px 30px rgba(0,0,0,.3);
-}
-
-.theme-darkblue{
-  --bg:#0c111c;
-  --surface:#141c2b;
-  --surface2:#202b40;
-  --text:#edf3ff;
-  --muted:#8c9ab1;
-  --primary:#648fd8;
-  --primary2:#91afe4;
-  --border:#293850;
-  --shadow:0 10px 30px rgba(0,0,0,.3);
-}
-
-.theme-cyberpurple{
-  --bg:#120d1a;
-  --surface:#1d1428;
-  --surface2:#2b1d3b;
-  --text:#f7efff;
-  --muted:#a292b3;
-  --primary:#a86ee0;
-  --primary2:#c08eeb;
-  --border:#402c54;
-  --shadow:0 10px 30px rgba(0,0,0,.3);
-}
-
-.theme-darkcoffee{
-  --bg:#17110d;
-  --surface:#241a14;
-  --surface2:#33251c;
-  --text:#fff5ec;
-  --muted:#a99587;
-  --primary:#bd8658;
-  --primary2:#d3a37f;
-  --border:#493326;
-  --shadow:0 10px 30px rgba(0,0,0,.3);
-}
-
-.theme-obsidian{
-  --bg:#0b0c0d;
-  --surface:#151719;
-  --surface2:#222427;
-  --text:#f2f3f4;
-  --muted:#909397;
-  --primary:#d0d3d5;
-  --primary2:#e4e6e8;
-  --border:#2d3033;
-  --shadow:0 10px 30px rgba(0,0,0,.35);
-}
-
-/* =========================
-   NOUVEAUX THEMES ORIGINAUX
-   ========================= */
-
-.theme-aurora{
-  --bg:#071614;
-  --surface:#10231f;
-  --surface2:#17362e;
-  --text:#edfff8;
-  --muted:#91b9ac;
-  --primary:#59d6aa;
-  --primary2:#8ce8c8;
-  --border:#285044;
-  --shadow:0 10px 35px rgba(0,0,0,.3);
-  background-image:
-    radial-gradient(circle at 15% 20%,rgba(89,214,170,.16),transparent 28%),
-    radial-gradient(circle at 80% 10%,rgba(75,180,255,.13),transparent 25%),
-    radial-gradient(circle at 60% 90%,rgba(158,93,255,.12),transparent 30%);
-}
-
-.theme-waves{
-  --bg:#eef8fc;
-  --surface:rgba(255,255,255,.92);
-  --surface2:#dff1f7;
-  --text:#17323e;
-  --muted:#6d8792;
-  --primary:#3199bd;
-  --primary2:#74c4dc;
-  --border:#cfe6ef;
-  --shadow:0 10px 30px rgba(42,111,135,.09);
-  background-image:
-    repeating-radial-gradient(
-      ellipse at 0 0,
-      transparent 0,
-      transparent 18px,
-      rgba(49,153,189,.045) 19px,
-      rgba(49,153,189,.045) 21px
-    );
-}
-
-.theme-sakura{
-  --bg:#fff5f8;
-  --surface:rgba(255,255,255,.94);
-  --surface2:#fde8ef;
-  --text:#412c35;
-  --muted:#91747f;
-  --primary:#d66e96;
-  --primary2:#ed9fba;
-  --border:#f1d5e0;
-  --shadow:0 10px 30px rgba(155,72,105,.08);
-  background-image:
-    radial-gradient(circle at 12% 20%,rgba(214,110,150,.09) 0 4px,transparent 5px),
-    radial-gradient(circle at 70% 35%,rgba(214,110,150,.07) 0 3px,transparent 4px),
-    radial-gradient(circle at 40% 80%,rgba(214,110,150,.06) 0 5px,transparent 6px);
-}
-
-.theme-night{
-  --bg:#080b18;
-  --surface:#11162a;
-  --surface2:#1a2140;
-  --text:#f2f4ff;
-  --muted:#929ab9;
-  --primary:#849cff;
-  --primary2:#a9b8ff;
-  --border:#293252;
-  --shadow:0 10px 35px rgba(0,0,0,.35);
-  background-image:
-    radial-gradient(circle at 15% 15%,rgba(255,255,255,.55) 0 1px,transparent 2px),
-    radial-gradient(circle at 75% 25%,rgba(255,255,255,.4) 0 1px,transparent 2px),
-    radial-gradient(circle at 40% 65%,rgba(255,255,255,.35) 0 1px,transparent 2px),
-    radial-gradient(circle at 88% 82%,rgba(255,255,255,.5) 0 1px,transparent 2px);
-  background-size:130px 130px,180px 180px,210px 210px,160px 160px;
-}
-
-.theme-botanical{
-  --bg:#f2f8ee;
-  --surface:rgba(255,255,255,.94);
-  --surface2:#e5f0df;
-  --text:#263729;
-  --muted:#70806f;
-  --primary:#5b9b68;
-  --primary2:#8bbc94;
-  --border:#d5e4d0;
-  --shadow:0 10px 30px rgba(63,104,63,.08);
-  background-image:
-    radial-gradient(ellipse at 15% 15%,rgba(91,155,104,.09),transparent 20%),
-    radial-gradient(ellipse at 85% 70%,rgba(91,155,104,.08),transparent 25%);
-}
-
-.theme-nebula{
-  --bg:#0f0b1c;
-  --surface:#1a1430;
-  --surface2:#281d45;
-  --text:#f7f0ff;
-  --muted:#a99bbb;
-  --primary:#b27cff;
-  --primary2:#d09eff;
-  --border:#45336a;
-  --shadow:0 10px 40px rgba(0,0,0,.4);
-  background-image:
-    radial-gradient(circle at 20% 30%,rgba(255,72,182,.15),transparent 25%),
-    radial-gradient(circle at 80% 20%,rgba(76,125,255,.16),transparent 25%),
-    radial-gradient(circle at 50% 90%,rgba(161,72,255,.13),transparent 30%);
-}
-
-.theme-crystal{
-  --bg:#eef5ff;
-  --surface:rgba(255,255,255,.92);
-  --surface2:#e0ebfa;
-  --text:#233448;
-  --muted:#718196;
-  --primary:#668fd1;
-  --primary2:#93b2e2;
-  --border:#d2e0f3;
-  --shadow:0 10px 30px rgba(70,106,154,.09);
-  background-image:
-    linear-gradient(135deg,rgba(102,143,209,.05) 25%,transparent 25%),
-    linear-gradient(315deg,rgba(102,143,209,.05) 25%,transparent 25%);
-  background-size:55px 55px;
-}
-
-.theme-sunset{
-  --bg:#fff3ea;
-  --surface:rgba(255,255,255,.94);
-  --surface2:#fde4d3;
-  --text:#3d2a26;
-  --muted:#8b7068;
-  --primary:#e87552;
-  --primary2:#f1a078;
-  --border:#f1d3c2;
-  --shadow:0 10px 30px rgba(189,91,55,.09);
-  background-image:
-    radial-gradient(circle at 15% 90%,rgba(232,117,82,.11),transparent 28%),
-    radial-gradient(circle at 90% 10%,rgba(245,184,72,.13),transparent 25%);
-}
-
-.theme-holographic{
-  --bg:#f4f0ff;
-  --surface:rgba(255,255,255,.9);
-  --surface2:#eee8fc;
-  --text:#2d2940;
-  --muted:#79738e;
-  --primary:#8769ce;
-  --primary2:#aa91e0;
-  --border:#dfd7f2;
-  --shadow:0 10px 35px rgba(108,77,157,.1);
-  background-image:
-    linear-gradient(
-      115deg,
-      rgba(255,125,180,.08),
-      rgba(92,200,255,.08),
-      rgba(154,108,255,.08),
-      rgba(255,214,98,.08)
-    );
-}
-
-.theme-paper{
-  --bg:#f5f0e6;
-  --surface:#fffdf7;
-  --surface2:#eee8da;
-  --text:#39352c;
-  --muted:#817b6d;
-  --primary:#81765a;
-  --primary2:#aaa083;
-  --border:#ddd5c5;
-  --shadow:0 8px 25px rgba(76,68,50,.08);
-  background-image:
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 28px,
-      rgba(100,90,65,.035) 29px
-    );
-}
-
-/* DARK MOBILE NAV */
-
-.theme-midnight .mobile-nav,
-.theme-graphite .mobile-nav,
-.theme-darkforest .mobile-nav,
-.theme-deepocean .mobile-nav,
-.theme-darklavender .mobile-nav,
-.theme-burgundy .mobile-nav,
-.theme-darkblue .mobile-nav,
-.theme-cyberpurple .mobile-nav,
-.theme-darkcoffee .mobile-nav,
-.theme-obsidian .mobile-nav,
-.theme-aurora .mobile-nav,
-.theme-night .mobile-nav,
-.theme-nebula .mobile-nav{
-  background:rgba(15,17,22,.94);
-}
-
-.theme-midnight .btn-danger,
-.theme-graphite .btn-danger,
-.theme-darkforest .btn-danger,
-.theme-deepocean .btn-danger,
-.theme-darklavender .btn-danger,
-.theme-burgundy .btn-danger,
-.theme-darkblue .btn-danger,
-.theme-cyberpurple .btn-danger,
-.theme-darkcoffee .btn-danger,
-.theme-obsidian .btn-danger,
-.theme-aurora .btn-danger,
-.theme-night .btn-danger,
-.theme-nebula .btn-danger{
-  background:#3b2024;
-  color:#ff9d9d;
-}
 </style>
 </head>
 
 <body class="theme-sage">
 
+<!-- SPECIAL EFFECTS -->
+
+<div class="sakura-petals">
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+    <span class="petal"></span>
+</div>
+
+<div class="aurora"></div>
+
+<div class="stars">
+    <span class="star" style="left:8%;top:15%"></span>
+    <span class="star" style="left:18%;top:33%"></span>
+    <span class="star" style="left:31%;top:11%"></span>
+    <span class="star" style="left:45%;top:24%"></span>
+    <span class="star" style="left:57%;top:9%"></span>
+    <span class="star" style="left:69%;top:31%"></span>
+    <span class="star" style="left:78%;top:17%"></span>
+    <span class="star" style="left:89%;top:38%"></span>
+    <span class="star" style="left:35%;top:55%"></span>
+    <span class="star" style="left:62%;top:63%"></span>
+</div>
+
+<div class="app">
+
+<div class="shell">
+
 <header class="header">
 
-  <div class="logo">
-    <div class="logo-mark">H</div>
-    <span>Habits.</span>
-  </div>
+    <div class="brand">
 
-  <nav class="desktop-nav">
+        <div class="logo">
+            H.
+        </div>
 
-    <button class="nav-btn active" data-page="today">
-      Aujourd’hui
-    </button>
+        <div class="brand-name">
+            HABITS<span class="brand-dot">.</span>
+        </div>
 
-    <button class="nav-btn" data-page="calendar">
-      Calendrier
-    </button>
+    </div>
 
-    <button class="nav-btn" data-page="habits">
-      Habitudes
-    </button>
+    <div class="header-actions">
 
-    <button class="nav-btn" data-page="stats">
-      Statistiques
-    </button>
+        <button
+            class="icon-button"
+            id="quickAdd"
+            aria-label="Ajouter"
+        >
+            +
+        </button>
 
-    <button class="nav-btn" data-page="help">
-      Help
-    </button>
-
-    <button class="nav-btn" data-page="settings">
-      Réglages
-    </button>
-
-  </nav>
+    </div>
 
 </header>
 
-<main class="container">
+<main id="app"></main>
 
-<!-- TODAY -->
+</div>
 
-<section id="page-today" class="page active">
+<!-- PREMIUM NAVIGATION -->
 
-  <div class="page-title">
-    <h1 id="todayTitle">Aujourd’hui</h1>
-    <p id="todaySubtitle"></p>
-  </div>
+<nav class="bottom-nav">
 
-  <div class="progress-card card">
+    <button
+        class="nav-item active"
+        data-page="today"
+    >
 
-    <div class="progress-info">
-      <h2 id="progressTitle">Ta journée</h2>
-      <p id="progressSubtitle">Continue comme ça.</p>
-    </div>
+        <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+                <rect x="3" y="4" width="18" height="17" rx="3"/>
+                <path d="M8 2v4M16 2v4M3 9h18"/>
+            </svg>
+        </span>
 
-    <div class="progress-ring" id="progressRing">
-      <div class="progress-ring-inner" id="progressPercent">0%</div>
-    </div>
-
-  </div>
-
-  <div class="summary-grid">
-
-    <div class="summary-card card">
-      <div class="summary-number" id="summaryHabits">0</div>
-      <div class="summary-label">Habitudes terminées</div>
-    </div>
-
-    <div class="summary-card card">
-      <div class="summary-number" id="summaryTasks">0</div>
-      <div class="summary-label">Tâches terminées</div>
-    </div>
-
-    <div class="summary-card card">
-      <div class="summary-number" id="summaryTotal">0</div>
-      <div class="summary-label">Éléments aujourd’hui</div>
-    </div>
-
-  </div>
-
-  <div class="section-header">
-    <h2>Habitudes</h2>
-    <button class="btn btn-primary" id="goHabits">+ Habitude</button>
-  </div>
-
-  <div class="habits-list" id="todayHabits"></div>
-
-  <div class="section-header">
-    <h2>Tâches</h2>
-    <button class="btn btn-primary" id="addTaskBtn">+ Tâche</button>
-  </div>
-
-  <div class="tasks-list" id="todayTasks"></div>
-
-</section>
-
-<!-- CALENDAR -->
-
-<section id="page-calendar" class="page">
-
-  <div class="page-title">
-    <h1>Calendrier</h1>
-    <p>Visualise tes habitudes et tes tâches.</p>
-  </div>
-
-  <div class="calendar-card card">
-
-    <div class="calendar-top">
-
-      <div class="calendar-title" id="calendarTitle"></div>
-
-      <div class="calendar-nav">
-        <button id="prevMonth">‹</button>
-        <button id="calendarToday">Aujourd’hui</button>
-        <button id="nextMonth">›</button>
-      </div>
-
-    </div>
-
-    <div class="calendar-weekdays">
-      <div>Lun</div>
-      <div>Mar</div>
-      <div>Mer</div>
-      <div>Jeu</div>
-      <div>Ven</div>
-      <div>Sam</div>
-      <div>Dim</div>
-    </div>
-
-    <div class="calendar-grid" id="calendarGrid"></div>
-
-  </div>
-
-</section>
-
-<!-- HABITS -->
-
-<section id="page-habits" class="page">
-
-  <div class="page-title">
-    <h1>Habitudes</h1>
-    <p>Construis des habitudes régulières et durables.</p>
-  </div>
-
-  <div class="section-header">
-    <h2>Mes habitudes</h2>
-    <button class="btn btn-primary" id="addHabitBtn">+ Habitude</button>
-  </div>
-
-  <div class="habits-grid" id="habitsGrid"></div>
-
-</section>
-
-<!-- STATS -->
-
-<section id="page-stats" class="page">
-
-  <div class="page-title">
-    <h1>Statistiques</h1>
-    <p>Observe ton évolution au fil du temps.</p>
-  </div>
-
-  <div class="stats-grid">
-
-    <div class="stat-card card">
-      <div class="stat-value" id="statCompletion">0%</div>
-      <div class="stat-label">Complétion</div>
-    </div>
-
-    <div class="stat-card card">
-      <div class="stat-value" id="statHabits">0</div>
-      <div class="stat-label">Habitudes actives</div>
-    </div>
-
-    <div class="stat-card card">
-      <div class="stat-value" id="statTasks">0</div>
-      <div class="stat-label">Tâches terminées</div>
-    </div>
-
-  </div>
-
-  <div class="chart-card card">
-
-    <div class="section-header" style="margin-top:0">
-      <h2>Les 7 derniers jours</h2>
-    </div>
-
-    <div class="chart" id="weeklyChart"></div>
-
-  </div>
-
-  <div class="chart-card card">
-
-    <div class="section-header" style="margin-top:0">
-      <h2>Catégories</h2>
-    </div>
-
-    <div class="category-list" id="categoryStats"></div>
-
-  </div>
-
-</section>
-
-<!-- HELP HOME -->
-
-<section id="page-help" class="page">
-
-  <div class="page-title">
-    <h1>Help</h1>
-    <p>Des techniques simples pour mieux gérer ton quotidien.</p>
-  </div>
-
-  <div class="help-intro card">
-
-    <h2>De quoi as-tu besoin ?</h2>
-
-    <p>
-      Choisis une catégorie pour ouvrir une page dédiée
-      avec des conseils et des techniques concrètes.
-    </p>
-
-  </div>
-
-  <div class="help-categories">
-
-    <button class="help-category" data-help-page="stress">
-
-      <div class="help-category-icon">🧠</div>
-
-      <h3>Stress</h3>
-
-      <p>
-        Respiration, retour au calme et gestion des moments stressants.
-      </p>
+        <span class="nav-label">
+            Aujourd’hui
+        </span>
 
     </button>
 
-    <button class="help-category" data-help-page="sleep">
 
-      <div class="help-category-icon">😴</div>
+    <button
+        class="nav-item"
+        data-page="calendar"
+    >
 
-      <h3>Sommeil</h3>
+        <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+                <rect x="3" y="4" width="18" height="17" rx="3"/>
+                <path d="M8 2v4M16 2v4M3 9h18"/>
+                <path d="M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01"/>
+            </svg>
+        </span>
 
-      <p>
-        Récupération, routine du soir et environnement favorable.
-      </p>
-
-    </button>
-
-    <button class="help-category" data-help-page="study">
-
-      <div class="help-category-icon">📚</div>
-
-      <h3>Études</h3>
-
-      <p>
-        Méthodes de travail adaptées à chaque matière.
-      </p>
+        <span class="nav-label">
+            Calendrier
+        </span>
 
     </button>
 
-  </div>
 
-</section>
-
-<!-- STRESS PAGE -->
-
-<section id="page-help-stress" class="page">
-
-  <div class="help-page-header">
-
-    <button class="help-back" data-help-back="help">‹</button>
-
-    <div>
-      <h2>Stress</h2>
-      <p>Techniques pour retrouver progressivement ton calme.</p>
-    </div>
-
-  </div>
-
-  <div class="help-cards">
-
-    <div class="help-card">
-
-      <div class="help-card-icon">🌬️</div>
-
-      <h3>Respiration 4–6</h3>
-
-      <p>
-        Inspire doucement pendant environ 4 secondes,
-        puis expire pendant environ 6 secondes.
-      </p>
-
-      <div class="technique">
-        <strong>Comment faire</strong>
-        <p>
-          Répète pendant 2 à 5 minutes et garde une respiration confortable.
-        </p>
-      </div>
-
-    </div>
-
-    <div class="help-card">
-
-      <div class="help-card-icon">⬛</div>
-
-      <h3>Respiration carrée</h3>
-
-      <p>
-        Une méthode simple pour donner un rythme régulier
-        à ta respiration.
-      </p>
-
-      <div class="technique">
-        <strong>4 étapes</strong>
-        <p>
-          Inspire 4 s → bloque 4 s → expire 4 s → bloque 4 s.
-        </p>
-      </div>
-
-    </div>
-
-    <div class="help-card">
-
-      <div class="help-card-icon">👀</div>
-
-      <h3>Technique 5–4–3–2–1</h3>
-
-      <p>
-        Une technique d'ancrage qui permet de ramener ton attention
-        vers ce qui t'entoure.
-      </p>
-
-      <ul>
-        <li>5 choses que tu vois</li>
-        <li>4 choses que tu peux toucher</li>
-        <li>3 sons que tu entends</li>
-        <li>2 odeurs que tu remarques</li>
-        <li>1 chose que tu peux goûter ou imaginer</li>
-      </ul>
-
-    </div>
-
-    <div class="help-card">
-
-      <div class="help-card-icon">💪</div>
-
-      <h3>Relâchement musculaire</h3>
-
-      <p>
-        Contracte doucement un groupe musculaire quelques secondes,
-        puis relâche complètement.
-      </p>
-
-      <div class="technique">
-        <strong>Commence par</strong>
-        <p>
-          Poings → épaules → visage → jambes.
-        </p>
-      </div>
-
-    </div>
-
-    <div class="help-card full">
-
-      <div class="help-card-icon">🎯</div>
-
-      <h3>Avant un contrôle</h3>
-
-      <ul>
-        <li>Prépare ce qui peut l'être à l'avance.</li>
-        <li>Évite les révisions frénétiques dans les dernières minutes.</li>
-        <li>Fais quelques respirations lentes.</li>
-        <li>Concentre-toi sur la prochaine action.</li>
-        <li>Si tu bloques, passe temporairement à autre chose.</li>
-      </ul>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- SLEEP PAGE -->
-
-<section id="page-help-sleep" class="page">
-
-  <div class="help-page-header">
-
-    <button class="help-back" data-help-back="help">‹</button>
-
-    <div>
-      <h2>Sommeil</h2>
-      <p>Construire de meilleures conditions pour récupérer.</p>
-    </div>
-
-  </div>
-
-  <div class="help-cards">
-
-    <div class="help-card">
-
-      <div class="help-card-icon">🕐</div>
-
-      <h3>Garde un rythme régulier</h3>
-
-      <p>
-        Essaie de garder des horaires de coucher et surtout de lever
-        relativement réguliers.
-      </p>
-
-    </div>
-
-    <div class="help-card">
-
-      <div class="help-card-icon">📱</div>
-
-      <h3>Prépare la transition vers la nuit</h3>
-
-      <p>
-        Évite de passer directement d'une activité très stimulante
-        au lit. Une période plus calme peut faciliter la transition.
-      </p>
-
-    </div>
-
-    <div class="help-card">
-
-      <div class="help-card-icon">🌙</div>
-
-      <h3>Crée un environnement favorable</h3>
-
-      <ul>
-        <li>Pièce suffisamment sombre</li>
-        <li>Température confortable</li>
-        <li>Le moins de bruit possible</li>
-        <li>Lit principalement associé au repos</li>
-      </ul>
-
-    </div>
-
-    <div class="help-card">
-
-      <div class="help-card-icon">☕</div>
-
-      <h3>Attention aux stimulants</h3>
-
-      <p>
-        La caféine peut rester active plusieurs heures.
-        Évite d'en consommer tard si elle perturbe ton endormissement.
-      </p>
-
-    </div>
-
-    <div class="help-card full">
-
-      <div class="help-card-icon">🧘</div>
-
-      <h3>Si tu n'arrives pas à t'endormir</h3>
-
-      <p>
-        Évite de regarder constamment l'heure. Essaie plutôt une activité
-        calme et peu stimulante, puis retourne au lit lorsque la somnolence revient.
-      </p>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- STUDIES PAGE -->
-
-<section id="page-help-study" class="page">
-
-  <div class="help-page-header">
-
-    <button class="help-back" data-help-back="help">‹</button>
-
-    <div>
-      <h2>Études</h2>
-      <p>Choisis une matière pour voir les techniques adaptées.</p>
-    </div>
-
-  </div>
-
-  <div class="help-subnav">
-
-    <button class="active" data-study-topic="general">Général</button>
-    <button data-study-topic="math">Mathématiques</button>
-    <button data-study-topic="physics">Physique</button>
-    <button data-study-topic="science">Sciences</button>
-    <button data-study-topic="history">Histoire</button>
-    <button data-study-topic="french">Français</button>
-    <button data-study-topic="dutch">Néerlandais</button>
-    <button data-study-topic="english">Anglais</button>
-    <button data-study-topic="computer">Informatique</button>
-    <button data-study-topic="other">Autres</button>
-
-  </div>
-
-  <!-- GENERAL -->
-
-  <div class="help-topic active" id="study-general">
-
-    <div class="help-cards">
-
-      <div class="help-card">
-
-        <div class="help-card-icon">📅</div>
-
-        <h3>Sois régulier</h3>
-
-        <p>
-          Travailler régulièrement permet généralement de mieux répartir
-          l'effort plutôt que de tout concentrer avant une évaluation.
-        </p>
-
-        <div class="technique">
-          <strong>Conseil</strong>
-          <p>
-            Même une courte session peut être utile lorsqu'elle est répétée régulièrement.
-          </p>
-        </div>
-
-      </div>
-
-      <div class="help-card">
-
-        <div class="help-card-icon">🌙</div>
-
-        <h3>Prends soin de ta récupération</h3>
-
-        <p>
-          La récupération et le sommeil jouent un rôle important dans
-          la consolidation des apprentissages. Travailler davantage
-          en supprimant systématiquement du sommeil n'est donc pas durable.
-        </p>
-
-        <button class="help-link" data-help-page="sleep">
-          → Voir les conseils sur le sommeil
-        </button>
-
-      </div>
-
-      <div class="help-card">
-
-        <div class="help-card-icon">🧠</div>
-
-        <h3>Rappel actif</h3>
-
-        <p>
-          Ferme ton cours et essaie de retrouver les informations
-          de mémoire avant de vérifier.
-        </p>
-
-        <div class="technique">
-          <strong>Méthode</strong>
-          <p>
-            Question → réponse de mémoire → vérification → correction.
-          </p>
-        </div>
-
-      </div>
-
-      <div class="help-card">
-
-        <div class="help-card-icon">⏱️</div>
-
-        <h3>Travaille par blocs</h3>
-
-        <p>
-          Organise ton travail en périodes de concentration
-          séparées par de vraies pauses.
-        </p>
-
-        <div class="technique">
-          <strong>Exemple</strong>
-          <p>
-            25–50 minutes de travail puis 5–10 minutes de pause.
-          </p>
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- MATH -->
-
-  <div class="help-topic" id="study-math">
-
-    <div class="help-cards">
-
-      <div class="help-card">
-
-        <div class="help-card-icon">📄</div>
-
-        <h3>Feuille blanche</h3>
-
-        <p>
-          Sans regarder ton cours, écris tout ce que tu sais :
-          formules, définitions, méthodes et étapes.
-        </p>
-
-        <div class="technique">
-          <strong>Ensuite</strong>
-          <p>
-            Compare avec ton cours et repère précisément les éléments oubliés.
-          </p>
-        </div>
-
-      </div>
-
-      <div class="help-card">
-
-        <div class="help-card-icon">✏️</div>
-
-        <h3>Exercices sans correction</h3>
-
-        <p>
-          Fais les exercices sans regarder directement la solution.
-          En mathématiques, savoir appliquer une méthode est essentiel.
-        </p>
-
-      </div>
-
-      <div class="help-card">
-
-        <div class="help-card-icon">🔎</div>
-
-        <h3>Analyse tes erreurs</h3>
-
-        <p>
-          Identifie l'étape exacte où ton raisonnement a dévié
-          au lieu de simplement regarder la bonne réponse.
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- PHYSICS -->
-
-  <div class="help-topic" id="study-physics">
-
-    <div class="help-cards">
-
-      <div class="help-card">
-
-        <div class="help-card-icon">🧑‍🏫</div>
-
-        <h3>Technique de Feynman</h3>
-
-        <p>
-          Explique une notion avec des mots simples,
-          comme si tu devais l'enseigner à quelqu'un.
-        </p>
-
-        <div class="technique">
-          <strong>Étapes</strong>
-          <p>
-            Explique → repère les trous → retourne au cours → recommence.
-          </p>
-        </div>
-
-      </div>
-
-      <div class="help-card">
-
-        <div class="help-card-icon">📄</div>
-
-        <h3>Feuille blanche</h3>
-
-        <p>
-          Sans regarder ton cours, écris les lois, unités,
-          relations et concepts dont tu te souviens.
-        </p>
-
-      </div>
-
-      <div class="help-card">
-
-        <div class="help-card-icon">🧮</div>
-
-        <h3>Exercices progressifs</h3>
-
-        <p>
-          Commence par un exercice simple puis augmente progressivement
-          la difficulté.
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- SCIENCE -->
-
-  <div class="help-topic" id="study-science">
-
-    <div class="help-cards">
-
-      <div class="help-card">
-
-        <div class="help-card-icon">🧑‍🏫</div>
-
-        <h3>Feynman</h3>
-
-        <p>
-          Explique le phénomène avec des mots simples sans réciter ton cours.
-        </p>
-
-      </div>
-
-      <div class="help-card">
-
-        <div class="help-card-icon">📄</div>
-
-        <h3>Feuille blanche</h3>
-
-        <p>
-          Reproduis de mémoire les schémas, étapes,
-          définitions et mécanismes importants.
-        </p>
-
-      </div>
-
-      <div class="help-card">
-
-        <div class="help-card-icon">❓</div>
-
-        <h3>Questions-réponses</h3>
-
-        <p>
-          Transforme ton cours en questions puis réponds-y sans regarder.
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- HISTORY -->
-
-  <div class="help-topic" id="study-history">
-
-    <div class="help-cards">
-
-      <div class="help-card">
-
-        <div class="help-card-icon">🧠</div>
-
-        <h3>Blurting</h3>
-
-        <p>
-          Lis une partie du cours, ferme-la puis écris tout ce dont
-          tu te souviens sans regarder tes notes.
-        </p>
-
-        <div class="technique">
-          <strong>Correction</strong>
-          <p>
-            Compare ensuite avec le cours et complète uniquement ce qui manque.
-          </p>
-        </div>
-
-      </div>
-
-      <div class="help-card">
-
-        <div class="help-card-icon">🗓️</div>
-
-        <h3>Chronologie</h3>
-
-        <p>
-          Construis une ligne du temps avec les dates et événements importants.
-        </p>
-
-      </div>
-
-      <div class="help-card">
-
-        <div class="help-card-icon">🔗</div>
-
-        <h3>Causes et conséquences</h3>
-
-        <p>
-          Pour chaque événement, demande-toi pourquoi il est arrivé
-          et quelles ont été ses conséquences.
-        </p>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- FRENCH -->
-
-  <div class="help-topic" id="study-french">
-
-    <div class="help-cards">
-
-      <div class="help-card">
-        <div class="help-card-icon">📝</div>
-        <h3>Plans de rédaction</h3>
-        <p>
-          Construis ton plan avant de rédiger et associe
-          chaque idée à ses arguments ou exemples.
-        </p>
-      </div>
-
-      <div class="help-card">
-        <div class="help-card-icon">🧠</div>
-        <h3>Rappel actif</h3>
-        <p>
-          Ferme ton cours et retrouve les notions,
-          définitions et procédés étudiés.
-        </p>
-      </div>
-
-      <div class="help-card">
-        <div class="help-card-icon">🔎</div>
-        <h3>Analyse de textes</h3>
-        <p>
-          Identifie l'idée principale, les procédés utilisés
-          et leur effet plutôt que de simplement relire l'analyse.
-        </p>
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- DUTCH -->
-
-  <div class="help-topic" id="study-dutch">
-
-    <div class="help-cards">
-
-      <div class="help-card">
-        <div class="help-card-icon">🔁</div>
-        <h3>Répétition espacée</h3>
-        <p>
-          Revois le vocabulaire plusieurs fois en espaçant progressivement
-          les révisions.
-        </p>
-      </div>
-
-      <div class="help-card">
-        <div class="help-card-icon">🗣️</div>
-        <h3>Récupération active</h3>
-        <p>
-          Cache la traduction et retrouve le mot.
-          Utilise-le ensuite dans une phrase.
-        </p>
-      </div>
-
-      <div class="help-card">
-        <div class="help-card-icon">💬</div>
-        <h3>Travaille en phrases</h3>
-        <p>
-          Crée des phrases avec le vocabulaire appris
-          plutôt que de mémoriser uniquement des listes.
-        </p>
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- ENGLISH -->
-
-  <div class="help-topic" id="study-english">
-
-    <div class="help-cards">
-
-      <div class="help-card">
-        <div class="help-card-icon">🔁</div>
-        <h3>Répétition espacée</h3>
-        <p>
-          Revois régulièrement le vocabulaire et les structures grammaticales.
-        </p>
-      </div>
-
-      <div class="help-card">
-        <div class="help-card-icon">🗣️</div>
-        <h3>Active ton vocabulaire</h3>
-        <p>
-          Essaie de retrouver les mots puis de les utiliser
-          dans une phrase.
-        </p>
-      </div>
-
-      <div class="help-card">
-        <div class="help-card-icon">🎧</div>
-        <h3>Compréhension</h3>
-        <p>
-          Écoute de courts contenus adaptés à ton niveau
-          et résume ce que tu as compris.
-        </p>
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- COMPUTER -->
-
-  <div class="help-topic" id="study-computer">
-
-    <div class="help-cards">
-
-      <div class="help-card">
-        <div class="help-card-icon">💻</div>
-        <h3>Apprends en codant</h3>
-        <p>
-          Écris toi-même de petits programmes.
-          La pratique complète la lecture du code.
-        </p>
-      </div>
-
-      <div class="help-card">
-        <div class="help-card-icon">🧑‍🏫</div>
-        <h3>Explique ton code</h3>
-        <p>
-          Explique chaque partie avec tes propres mots.
-          Si tu bloques, revois la notion concernée.
-        </p>
-      </div>
-
-      <div class="help-card">
-        <div class="help-card-icon">🧩</div>
-        <h3>Découpe les problèmes</h3>
-        <p>
-          Transforme un gros problème en plusieurs petites étapes.
-        </p>
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- OTHER -->
-
-  <div class="help-topic" id="study-other">
-
-    <div class="help-cards">
-
-      <div class="help-card">
-        <div class="help-card-icon">📄</div>
-        <h3>Feuille blanche</h3>
-        <p>
-          Ferme ton cours et écris tout ce que tu connais sur le sujet.
-        </p>
-      </div>
-
-      <div class="help-card">
-        <div class="help-card-icon">🧠</div>
-        <h3>Rappel actif</h3>
-        <p>
-          Transforme tes notes en questions et réponds sans regarder.
-        </p>
-      </div>
-
-      <div class="help-card">
-        <div class="help-card-icon">🧑‍🏫</div>
-        <h3>Feynman</h3>
-        <p>
-          Explique la notion simplement comme si tu devais l'enseigner.
-        </p>
-      </div>
-
-      <div class="help-card">
-        <div class="help-card-icon">🔁</div>
-        <h3>Répétition espacée</h3>
-        <p>
-          Reviens plusieurs fois sur la matière avec des intervalles
-          de plus en plus longs.
-        </p>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- SETTINGS -->
-
-<section id="page-settings" class="page">
-
-  <div class="page-title">
-    <h1>Réglages</h1>
-    <p>Personnalise ton expérience.</p>
-  </div>
-
-  <div class="settings-section">
-
-    <div class="theme-section-title">
-      <h2>Thèmes originaux</h2>
-      <span>NOUVEAUX</span>
-    </div>
-
-    <p>
-      Des apparences plus originales avec motifs et ambiances.
-    </p>
-
-    <div class="theme-grid" id="originalThemes"></div>
-
-  </div>
-
-  <div class="settings-section">
-
-    <div class="theme-section-title">
-      <h2>Thèmes Premium</h2>
-      <span>CLASSIQUES</span>
-    </div>
-
-    <div class="premium-note">
-      Les anciens thèmes sont conservés ici.
-      Tu peux toujours les utiliser comme avant.
-    </div>
-
-    <div class="theme-grid" id="premiumLightThemes"></div>
-
-    <div style="height:15px"></div>
-
-    <div class="theme-grid" id="premiumDarkThemes"></div>
-
-  </div>
-
-  <div class="settings-section">
-
-    <h2>Actions</h2>
-    <p>Quelques actions rapides.</p>
-
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-
-      <button class="btn btn-secondary" id="settingsToday">
-        Revenir à aujourd’hui
-      </button>
-
-      <button class="btn btn-danger" id="resetData">
-        Réinitialiser les données
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-</main>
-
-<!-- MOBILE NAV -->
-
-<nav class="mobile-nav">
-
-  <button class="active" data-page="today">
-    <span class="mobile-nav-icon">⌂</span>
-    <span class="mobile-nav-label">Aujourd’hui</span>
-  </button>
-
-  <button data-page="calendar">
-    <span class="mobile-nav-icon">▦</span>
-    <span class="mobile-nav-label">Calendrier</span>
-  </button>
-
-  <button data-page="habits">
-    <span class="mobile-nav-icon">✓</span>
-    <span class="mobile-nav-label">Habitudes</span>
-  </button>
-
-  <button data-page="stats">
-    <span class="mobile-nav-icon">▥</span>
-    <span class="mobile-nav-label">Stats</span>
-  </button>
-
-  <button data-page="help">
-    <span class="mobile-nav-icon">?</span>
-    <span class="mobile-nav-label">Help</span>
-  </button>
-
-  <button data-page="settings">
-    <span class="mobile-nav-icon">⚙</span>
-    <span class="mobile-nav-label">Réglages</span>
-  </button>
+    <button
+        class="nav-item"
+        data-page="habits"
+    >
+
+        <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="8.5"/>
+                <path d="m8 12 2.5 2.5L16.5 8.5"/>
+            </svg>
+        </span>
+
+        <span class="nav-label">
+            Habitudes
+        </span>
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        data-page="stats"
+    >
+
+        <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+                <path d="M4 19V9"/>
+                <path d="M10 19V5"/>
+                <path d="M16 19v-7"/>
+                <path d="M22 19V3"/>
+            </svg>
+        </span>
+
+        <span class="nav-label">
+            Stats
+        </span>
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        data-page="help"
+    >
+
+        <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M9.7 9a2.5 2.5 0 0 1 4.8 1c0 1.7-2.5 2-2.5 3.5"/>
+                <path d="M12 17h.01"/>
+            </svg>
+        </span>
+
+        <span class="nav-label">
+            Help
+        </span>
+
+    </button>
+
+
+    <button
+        class="nav-item"
+        data-page="settings"
+    >
+
+        <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.8 1.8-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V20h-2.55v-.1a1.7 1.7 0 0 0-1.03-1.56 1.7 1.7 0 0 0-1.88.34l-.06.06-1.8-1.8.06-.06A1.7 1.7 0 0 0 8.1 15a1.7 1.7 0 0 0-1.56-1.03H6v-2.55h.1A1.7 1.7 0 0 0 7.66 10a1.7 1.7 0 0 0-.34-1.88l-.06-.06 1.8-1.8.06.06A1.7 1.7 0 0 0 11 6.1 1.7 1.7 0 0 0 12.03 4.5V4h2.55v.1A1.7 1.7 0 0 0 15.6 5.66a1.7 1.7 0 0 0 1.88-.34l.06-.06 1.8 1.8-.06.06A1.7 1.7 0 0 0 18.94 9c.43.62.99 1.03 1.56 1.03h.1v2.55h-.1A1.7 1.7 0 0 0 19.4 15z"/>
+            </svg>
+        </span>
+
+        <span class="nav-label">
+            Réglages
+        </span>
+
+    </button>
 
 </nav>
 
-<!-- HABIT MODAL -->
+</div>
 
-<div class="modal-overlay" id="habitModal">
 
-  <div class="modal">
+<!-- MODAL -->
 
-    <div class="modal-header">
-      <h2 id="habitModalTitle">Nouvelle habitude</h2>
-      <button class="close-btn" id="closeHabitModal">×</button>
-    </div>
+<div
+    class="modal-overlay"
+    id="modalOverlay"
+>
 
-    <div class="form-group">
+    <div class="modal">
 
-      <label for="habitName">Nom</label>
+        <h2 id="modalTitle">
+            Nouvelle habitude
+        </h2>
 
-      <input
-        class="form-input"
-        id="habitName"
-        placeholder="Ex. Faire du sport"
-      >
+        <form id="habitForm">
 
-    </div>
+            <div class="form-group">
 
-    <div class="form-group">
+                <label>
+                    Nom
+                </label>
 
-      <label for="habitCategory">Catégorie</label>
+                <input
+                    id="habitName"
+                    required
+                    placeholder="Ex. Lire 20 minutes"
+                >
 
-      <select class="form-input" id="habitCategory">
-        <option>Sport</option>
-        <option>Études</option>
-        <option>Santé</option>
-        <option>Maison</option>
-        <option>Personnel</option>
-        <option>Autre</option>
-      </select>
+            </div>
 
-    </div>
+            <div class="form-group">
 
-    <div class="form-group">
+                <label>
+                    Catégorie
+                </label>
 
-      <label>Fréquence</label>
+                <select id="habitCategory">
 
-      <div class="frequency-options">
+                    <option>Sport</option>
+                    <option>Études</option>
+                    <option>Santé</option>
+                    <option>Sommeil</option>
+                    <option>Personnel</option>
+                    <option>Autre</option>
 
-        <button class="frequency-btn active" data-frequency="daily">
-          Tous les jours
-        </button>
+                </select>
 
-        <button class="frequency-btn" data-frequency="weekly">
-          Par semaine
-        </button>
+            </div>
 
-        <button class="frequency-btn" data-frequency="monthly">
-          Par mois
-        </button>
+            <div class="form-group">
 
-      </div>
+                <label>
+                    Combien de fois par semaine ?
+                </label>
 
-    </div>
+                <input
+                    id="habitFrequency"
+                    type="number"
+                    min="1"
+                    max="7"
+                    value="3"
+                >
 
-    <div class="extra-frequency" id="weeklyExtra">
+            </div>
 
-      <div class="form-group">
+            <div class="modal-actions">
 
-        <label for="weeklyTarget">
-          Combien de fois par semaine ?
-        </label>
+                <button
+                    type="button"
+                    class="secondary-button"
+                    id="cancelModal"
+                >
+                    Annuler
+                </button>
 
-        <input
-          class="form-input"
-          id="weeklyTarget"
-          type="number"
-          min="1"
-          max="7"
-          value="2"
-        >
+                <button
+                    type="submit"
+                    class="primary-button"
+                >
+                    Créer
+                </button>
 
-      </div>
+            </div>
 
-    </div>
-
-    <div class="extra-frequency" id="monthlyExtra">
-
-      <div class="form-group">
-
-        <label for="monthlyTarget">
-          Combien de fois par mois ?
-        </label>
-
-        <input
-          class="form-input"
-          id="monthlyTarget"
-          type="number"
-          min="1"
-          max="31"
-          value="5"
-        >
-
-      </div>
+        </form>
 
     </div>
-
-    <div class="form-group">
-
-      <label>Jours recommandés</label>
-
-      <div class="days-grid">
-
-        <button class="day-btn" data-day="1">Lun</button>
-        <button class="day-btn" data-day="2">Mar</button>
-        <button class="day-btn" data-day="3">Mer</button>
-        <button class="day-btn" data-day="4">Jeu</button>
-        <button class="day-btn" data-day="5">Ven</button>
-        <button class="day-btn" data-day="6">Sam</button>
-        <button class="day-btn" data-day="0">Dim</button>
-
-      </div>
-
-    </div>
-
-    <div class="modal-actions">
-
-      <button class="btn btn-secondary" id="cancelHabit">
-        Annuler
-      </button>
-
-      <button class="btn btn-primary" id="saveHabit">
-        Enregistrer
-      </button>
-
-    </div>
-
-  </div>
 
 </div>
 
-<!-- TASK MODAL -->
-
-<div class="modal-overlay" id="taskModal">
-
-  <div class="modal">
-
-    <div class="modal-header">
-      <h2>Nouvelle tâche</h2>
-      <button class="close-btn" id="closeTaskModal">×</button>
-    </div>
-
-    <div class="form-group">
-
-      <label for="taskName">Tâche</label>
-
-      <input
-        class="form-input"
-        id="taskName"
-        placeholder="Ex. Faire mes devoirs"
-      >
-
-    </div>
-
-    <div class="form-group">
-
-      <label for="taskCategory">Catégorie</label>
-
-      <select class="form-input" id="taskCategory">
-        <option>Études</option>
-        <option>Sport</option>
-        <option>Santé</option>
-        <option>Maison</option>
-        <option>Personnel</option>
-        <option>Autre</option>
-      </select>
-
-    </div>
-
-    <div class="modal-actions">
-
-      <button class="btn btn-secondary" id="cancelTask">
-        Annuler
-      </button>
-
-      <button class="btn btn-primary" id="saveTask">
-        Ajouter
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
 
 <div class="toast" id="toast"></div>
 
+
 <script>
 
-const TASKS_KEY = "habitsV8Tasks";
-const HABITS_KEY = "habitsV8Habits";
-const THEME_KEY = "habitsV8Theme";
+/* =========================================================
+   STORAGE
+   ========================================================= */
 
-let tasks = JSON.parse(localStorage.getItem(TASKS_KEY) || "[]");
-let habits = JSON.parse(localStorage.getItem(HABITS_KEY) || "[]");
+const HABITS_KEY = "habitsPremiumHabits";
+const THEME_KEY = "habitsPremiumTheme";
+
+let habits = JSON.parse(
+    localStorage.getItem(HABITS_KEY) || "[]"
+);
+
+let currentPage = "today";
 
 let currentDate = new Date();
-let calendarDate = new Date();
 
-let editingHabitId = null;
-let selectedFrequency = "daily";
-let selectedDays = [];
-
-/* =========================
-   THEMES
-   ========================= */
-
-const premiumThemes = [
-
-  {id:"sage",name:"Sauge",type:"light",bg:"#f4f8f5",surface:"#fff",primary:"#5f9675"},
-  {id:"mint",name:"Menthe",type:"light",bg:"#f2faf7",surface:"#fff",primary:"#48a889"},
-  {id:"ocean",name:"Océan",type:"light",bg:"#f2f8fb",surface:"#fff",primary:"#428ca7"},
-  {id:"lavender",name:"Lavande",type:"light",bg:"#f7f5fb",surface:"#fff",primary:"#8068bd"},
-  {id:"rose",name:"Rose",type:"light",bg:"#fcf5f7",surface:"#fff",primary:"#c8758a"},
-  {id:"amber",name:"Ambre",type:"light",bg:"#fcf8ef",surface:"#fff",primary:"#c6943d"},
-  {id:"forest",name:"Forêt",type:"light",bg:"#f1f7f3",surface:"#fff",primary:"#3e805d"},
-  {id:"sky",name:"Ciel",type:"light",bg:"#f1f8fc",surface:"#fff",primary:"#4c9bc0"},
-  {id:"coffee",name:"Café",type:"light",bg:"#f8f5f1",surface:"#fff",primary:"#9a7150"},
-  {id:"glacier",name:"Glacier",type:"light",bg:"#f3f8fa",surface:"#fff",primary:"#5d99a9"},
-
-  {id:"midnight",name:"Minuit",type:"dark",bg:"#11151d",surface:"#191f29",primary:"#78a9e8"},
-  {id:"graphite",name:"Graphite",type:"dark",bg:"#111",surface:"#1b1b1b",primary:"#b0b0b0"},
-  {id:"darkforest",name:"Forêt sombre",type:"dark",bg:"#0e1712",surface:"#15231a",primary:"#70bd8d"},
-  {id:"deepocean",name:"Océan profond",type:"dark",bg:"#0c151c",surface:"#13212b",primary:"#58a8ca"},
-  {id:"darklavender",name:"Lavande sombre",type:"dark",bg:"#14111b",surface:"#1e1928",primary:"#9b7bd0"},
-  {id:"burgundy",name:"Bordeaux",type:"dark",bg:"#190f13",surface:"#25151b",primary:"#c96b80"},
-  {id:"darkblue",name:"Bleu nuit",type:"dark",bg:"#0c111c",surface:"#141c2b",primary:"#648fd8"},
-  {id:"cyberpurple",name:"Cyber",type:"dark",bg:"#120d1a",surface:"#1d1428",primary:"#a86ee0"},
-  {id:"darkcoffee",name:"Café sombre",type:"dark",bg:"#17110d",surface:"#241a14",primary:"#bd8658"},
-  {id:"obsidian",name:"Obsidienne",type:"dark",bg:"#0b0c0d",surface:"#151719",primary:"#d0d3d5"}
-
-];
-
-const originalThemes = [
-
-  {
-    id:"aurora",
-    name:"Aurora",
-    type:"dark",
-    bg:"#071614",
-    surface:"#10231f",
-    primary:"#59d6aa"
-  },
-
-  {
-    id:"waves",
-    name:"Waves",
-    type:"light",
-    bg:"#eef8fc",
-    surface:"#ffffff",
-    primary:"#3199bd"
-  },
-
-  {
-    id:"sakura",
-    name:"Sakura",
-    type:"light",
-    bg:"#fff5f8",
-    surface:"#ffffff",
-    primary:"#d66e96"
-  },
-
-  {
-    id:"night",
-    name:"Night Sky",
-    type:"dark",
-    bg:"#080b18",
-    surface:"#11162a",
-    primary:"#849cff"
-  },
-
-  {
-    id:"botanical",
-    name:"Botanical",
-    type:"light",
-    bg:"#f2f8ee",
-    surface:"#ffffff",
-    primary:"#5b9b68"
-  },
-
-  {
-    id:"nebula",
-    name:"Nebula",
-    type:"dark",
-    bg:"#0f0b1c",
-    surface:"#1a1430",
-    primary:"#b27cff"
-  },
-
-  {
-    id:"crystal",
-    name:"Crystal",
-    type:"light",
-    bg:"#eef5ff",
-    surface:"#ffffff",
-    primary:"#668fd1"
-  },
-
-  {
-    id:"sunset",
-    name:"Sunset",
-    type:"light",
-    bg:"#fff3ea",
-    surface:"#ffffff",
-    primary:"#e87552"
-  },
-
-  {
-    id:"holographic",
-    name:"Holographic",
-    type:"light",
-    bg:"#f4f0ff",
-    surface:"#ffffff",
-    primary:"#8769ce"
-  },
-
-  {
-    id:"paper",
-    name:"Paper",
-    type:"light",
-    bg:"#f5f0e6",
-    surface:"#fffdf7",
-    primary:"#81765a"
-  }
-
-];
-
-const themes = [...premiumThemes,...originalThemes];
-
-/* =========================
-   UTILS
-   ========================= */
-
-function saveData(){
-
-  localStorage.setItem(TASKS_KEY,JSON.stringify(tasks));
-  localStorage.setItem(HABITS_KEY,JSON.stringify(habits));
-
-}
-
-function dateKey(date){
-
-  const y = date.getFullYear();
-  const m = String(date.getMonth()+1).padStart(2,"0");
-  const d = String(date.getDate()).padStart(2,"0");
-
-  return `${y}-${m}-${d}`;
-
-}
-
-function parseKey(key){
-
-  const [y,m,d] = key.split("-").map(Number);
-
-  return new Date(y,m-1,d);
-
-}
-
-function isSameDay(a,b){
-
-  return dateKey(a)===dateKey(b);
-
-}
-
-function startOfWeek(date){
-
-  const d = new Date(date);
-  const day = d.getDay();
-
-  const diff = day===0 ? -6 : 1-day;
-
-  d.setDate(d.getDate()+diff);
-  d.setHours(0,0,0,0);
-
-  return d;
-
-}
-
-function endOfWeek(date){
-
-  const d = startOfWeek(date);
-
-  d.setDate(d.getDate()+6);
-  d.setHours(23,59,59,999);
-
-  return d;
-
-}
-
-function startOfMonth(date){
-
-  return new Date(
-    date.getFullYear(),
-    date.getMonth(),
+let calendarDate = new Date(
+    currentDate.getFullYear(),
+    currentDate.getMonth(),
     1
-  );
+);
+
+let selectedTheme =
+    localStorage.getItem(THEME_KEY) || "sage";
+
+
+/* =========================================================
+   HELPERS
+   ========================================================= */
+
+function saveHabits(){
+
+    localStorage.setItem(
+        HABITS_KEY,
+        JSON.stringify(habits)
+    );
 
 }
 
-function endOfMonth(date){
+function saveTheme(){
 
-  return new Date(
-    date.getFullYear(),
-    date.getMonth()+1,
-    0,
-    23,59,59,999
-  );
-
-}
-
-function formatDate(date){
-
-  return date.toLocaleDateString("fr-FR",{
-    weekday:"long",
-    day:"numeric",
-    month:"long",
-    year:"numeric"
-  });
-
-}
-
-function capitalize(str){
-
-  return str.charAt(0).toUpperCase()+str.slice(1);
+    localStorage.setItem(
+        THEME_KEY,
+        selectedTheme
+    );
 
 }
 
 function uid(){
 
-  return Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+    return Date.now().toString(36) +
+        Math.random().toString(36).slice(2);
 
 }
 
-function escapeHtml(str){
+function sameDay(a,b){
 
-  return String(str)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+    return (
+        a.getFullYear() === b.getFullYear() &&
+        a.getMonth() === b.getMonth() &&
+        a.getDate() === b.getDate()
+    );
+
+}
+
+function dateKey(date){
+
+    const y = date.getFullYear();
+
+    const m = String(
+        date.getMonth()+1
+    ).padStart(2,"0");
+
+    const d = String(
+        date.getDate()
+    ).padStart(2,"0");
+
+    return `${y}-${m}-${d}`;
+
+}
+
+function capitalize(str){
+
+    return str.charAt(0).toUpperCase() + str.slice(1);
+
+}
+
+function formatDate(date){
+
+    return new Intl.DateTimeFormat(
+        "fr-BE",
+        {
+            weekday:"long",
+            day:"numeric",
+            month:"long"
+        }
+    ).format(date);
+
+}
+
+function monthName(date){
+
+    return capitalize(
+        new Intl.DateTimeFormat(
+            "fr-BE",
+            {
+                month:"long",
+                year:"numeric"
+            }
+        ).format(date)
+    );
 
 }
 
 function showToast(message){
 
-  const toast = document.getElementById("toast");
+    const toast =
+        document.getElementById("toast");
 
-  toast.textContent = message;
+    toast.textContent = message;
 
-  toast.classList.add("show");
+    toast.classList.add("show");
 
-  setTimeout(()=>{
-    toast.classList.remove("show");
-  },2200);
+    clearTimeout(window.toastTimer);
 
-}
-
-/* =========================
-   FREQUENCY
-   ========================= */
-
-function frequencyLabel(habit){
-
-  if(habit.frequency==="daily"){
-    return "Tous les jours";
-  }
-
-  if(habit.frequency==="weekly"){
-    return habit.target===1
-      ? "1 fois par semaine"
-      : `${habit.target} fois par semaine`;
-  }
-
-  if(habit.frequency==="monthly"){
-    return habit.target===1
-      ? "1 fois par mois"
-      : `${habit.target} fois par mois`;
-  }
-
-  return "";
+    window.toastTimer = setTimeout(()=>{
+        toast.classList.remove("show");
+    },2200);
 
 }
 
-function getHabitTarget(habit){
 
-  if(habit.frequency==="daily"){
-    return 7;
-  }
+/* =========================================================
+   THEME
+   ========================================================= */
 
-  return Number(habit.target||1);
+function applyTheme(){
 
-}
+    document.body.className =
+        "theme-" + selectedTheme;
 
-function getHabitCount(habit,date){
-
-  const start =
-    habit.frequency==="monthly"
-      ? startOfMonth(date)
-      : startOfWeek(date);
-
-  const end =
-    habit.frequency==="monthly"
-      ? endOfMonth(date)
-      : endOfWeek(date);
-
-  let count=0;
-
-  Object.keys(habit.completions||{}).forEach(key=>{
-
-    const d=parseKey(key);
-
-    if(d>=start && d<=end && habit.completions[key]){
-      count++;
-    }
-
-  });
-
-  return count;
+    saveTheme();
 
 }
 
-function getHabitProgress(habit,date){
+applyTheme();
 
-  const target=getHabitTarget(habit);
-  const count=getHabitCount(habit,date);
 
-  return Math.min(100,(count/target)*100);
-
-}
-
-function getHabitPeriodText(habit,date){
-
-  const count=getHabitCount(habit,date);
-  const target=getHabitTarget(habit);
-
-  if(habit.frequency==="daily"){
-    return `${count}/7 cette semaine`;
-  }
-
-  if(habit.frequency==="weekly"){
-    return `${count}/${target} cette semaine`;
-  }
-
-  return `${count}/${target} ce mois`;
-
-}
-
-/* =========================
+/* =========================================================
    NAVIGATION
-   ========================= */
+   ========================================================= */
 
-function goToPage(page){
+document
+    .querySelectorAll(".nav-item")
+    .forEach(button => {
 
-  document.querySelectorAll(".page").forEach(el=>{
-    el.classList.remove("active");
-  });
+        button.addEventListener("click",()=>{
 
-  const target=document.getElementById(`page-${page}`);
+            currentPage =
+                button.dataset.page;
 
-  if(target){
-    target.classList.add("active");
-  }
+            document
+                .querySelectorAll(".nav-item")
+                .forEach(item =>
+                    item.classList.toggle(
+                        "active",
+                        item === button
+                    )
+                );
 
-  document.querySelectorAll("[data-page]").forEach(btn=>{
-    btn.classList.toggle(
-      "active",
-      btn.dataset.page===page
-    );
-  });
+            render();
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
 
-  renderAll();
-
-}
-
-document.querySelectorAll("[data-page]").forEach(btn=>{
-
-  btn.addEventListener("click",()=>{
-    goToPage(btn.dataset.page);
-  });
-
-});
-
-document.getElementById("goHabits").addEventListener("click",()=>{
-  goToPage("habits");
-});
-
-/* =========================
-   TODAY
-   ========================= */
-
-function renderToday(){
-
-  const today=new Date();
-
-  const isToday=isSameDay(currentDate,today);
-
-  document.getElementById("todayTitle").textContent=
-    isToday
-      ? "Aujourd’hui"
-      : capitalize(formatDate(currentDate));
-
-  document.getElementById("todaySubtitle").textContent=
-    isToday
-      ? capitalize(formatDate(currentDate))
-      : "Journée sélectionnée";
-
-  document.getElementById("progressTitle").textContent=
-    isToday
-      ? "Ta journée"
-      : "Cette journée";
-
-  const key=dateKey(currentDate);
-
-  const dayTasks=tasks.filter(task=>task.date===key);
-
-  const completedTasks=
-    dayTasks.filter(task=>task.completed).length;
-
-  let completedHabits=0;
-
-  habits.forEach(habit=>{
-
-    if(
-      habit.frequency==="daily" &&
-      habit.completions &&
-      habit.completions[key]
-    ){
-      completedHabits++;
-    }
-
-  });
-
-  const total=habits.length+dayTasks.length;
-  const completed=completedHabits+completedTasks;
-
-  const percent=
-    total
-      ? Math.round((completed/total)*100)
-      : 0;
-
-  document.getElementById("summaryHabits").textContent=
-    completedHabits;
-
-  document.getElementById("summaryTasks").textContent=
-    completedTasks;
-
-  document.getElementById("summaryTotal").textContent=
-    total;
-
-  document.getElementById("progressPercent").textContent=
-    `${percent}%`;
-
-  document.getElementById("progressRing").style.background=
-    `conic-gradient(var(--primary) ${percent*3.6}deg,var(--surface2) 0deg)`;
-
-  document.getElementById("progressSubtitle").textContent=
-    percent===100
-      ? "Tout est terminé. Bravo !"
-      : percent===0
-        ? "Commence par une petite action."
-        : "Continue comme ça.";
-
-  renderTodayHabits();
-  renderTodayTasks();
-
-}
-
-function renderTodayHabits(){
-
-  const container=document.getElementById("todayHabits");
-
-  if(!habits.length){
-
-    container.innerHTML=
-      `<div class="empty">Aucune habitude pour le moment.</div>`;
-
-    return;
-
-  }
-
-  const key=dateKey(currentDate);
-
-  container.innerHTML=habits.map(habit=>{
-
-    const done=
-      !!(habit.completions && habit.completions[key]);
-
-    const progress=
-      getHabitProgress(habit,currentDate);
-
-    return `
-
-      <div class="habit-item">
-
-        <button
-          class="check-btn ${done?"done":""}"
-          onclick="toggleHabit('${habit.id}','${key}')"
-        >
-          ✓
-        </button>
-
-        <div class="item-main">
-
-          <div class="item-name">
-            ${escapeHtml(habit.name)}
-          </div>
-
-          <div class="item-meta">
-            ${escapeHtml(habit.category)} ·
-            ${escapeHtml(frequencyLabel(habit))}
-          </div>
-
-          <div class="progress-wrap">
-
-            <div class="progress-track">
-              <div
-                class="progress-bar"
-                style="width:${progress}%"
-              ></div>
-            </div>
-
-            <div class="progress-text">
-              ${getHabitPeriodText(habit,currentDate)}
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }).join("");
-
-}
-
-function toggleHabit(id,key){
-
-  const habit=habits.find(h=>h.id===id);
-
-  if(!habit)return;
-
-  if(!habit.completions){
-    habit.completions={};
-  }
-
-  habit.completions[key]=!habit.completions[key];
-
-  saveData();
-  renderAll();
-
-}
-
-function renderTodayTasks(){
-
-  const container=document.getElementById("todayTasks");
-
-  const key=dateKey(currentDate);
-
-  const dayTasks=tasks.filter(task=>task.date===key);
-
-  if(!dayTasks.length){
-
-    container.innerHTML=
-      `<div class="empty">Aucune tâche pour cette journée.</div>`;
-
-    return;
-
-  }
-
-  container.innerHTML=dayTasks.map(task=>`
-
-    <div class="task-item">
-
-      <button
-        class="check-btn ${task.completed?"done":""}"
-        onclick="toggleTask('${task.id}')"
-      >
-        ✓
-      </button>
-
-      <div class="item-main">
-
-        <div
-          class="item-name"
-          style="${task.completed?"text-decoration:line-through;opacity:.55":""}"
-        >
-          ${escapeHtml(task.name)}
-        </div>
-
-        <div class="item-meta">
-          ${escapeHtml(task.category)}
-        </div>
-
-      </div>
-
-      <div class="item-actions">
-
-        <button
-          class="icon-btn"
-          onclick="deleteTask('${task.id}')"
-        >
-          ×
-        </button>
-
-      </div>
-
-    </div>
-
-  `).join("");
-
-}
-
-function toggleTask(id){
-
-  const task=tasks.find(t=>t.id===id);
-
-  if(!task)return;
-
-  task.completed=!task.completed;
-
-  saveData();
-  renderAll();
-
-}
-
-function deleteTask(id){
-
-  tasks=tasks.filter(task=>task.id!==id);
-
-  saveData();
-  renderAll();
-
-}
-
-/* =========================
-   HABITS
-   ========================= */
-
-function renderHabits(){
-
-  const container=document.getElementById("habitsGrid");
-
-  if(!habits.length){
-
-    container.innerHTML=
-      `<div class="empty" style="grid-column:1/-1">
-        Aucune habitude créée pour le moment.
-      </div>`;
-
-    return;
-
-  }
-
-  container.innerHTML=habits.map(habit=>{
-
-    const progress=
-      getHabitProgress(habit,currentDate);
-
-    return `
-
-      <div class="habit-card card">
-
-        <div class="habit-card-top">
-
-          <div>
-
-            <div class="habit-card-name">
-              ${escapeHtml(habit.name)}
-            </div>
-
-            <div class="badge">
-              ${escapeHtml(habit.category)}
-            </div>
-
-          </div>
-
-          <div class="habit-card-actions">
-
-            <button onclick="openHabitModal('${habit.id}')">
-              Modifier
-            </button>
-
-            <button onclick="deleteHabit('${habit.id}')">
-              Supprimer
-            </button>
-
-          </div>
-
-        </div>
-
-        <div class="item-meta" style="margin-top:13px">
-          ${escapeHtml(frequencyLabel(habit))}
-        </div>
-
-        <div class="progress-wrap">
-
-          <div class="progress-track">
-
-            <div
-              class="progress-bar"
-              style="width:${progress}%"
-            ></div>
-
-          </div>
-
-          <div class="progress-text">
-            ${getHabitPeriodText(habit,currentDate)}
-          </div>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }).join("");
-
-}
-
-function deleteHabit(id){
-
-  if(!confirm("Supprimer cette habitude ?")){
-    return;
-  }
-
-  habits=habits.filter(h=>h.id!==id);
-
-  saveData();
-  renderAll();
-
-}
-
-/* =========================
-   HABIT MODAL
-   ========================= */
-
-const habitModal=
-  document.getElementById("habitModal");
-
-function updateFrequencyUI(){
-
-  document.querySelectorAll(".frequency-btn").forEach(btn=>{
-
-    btn.classList.toggle(
-      "active",
-      btn.dataset.frequency===selectedFrequency
-    );
-
-  });
-
-  document.getElementById("weeklyExtra")
-    .classList.toggle(
-      "show",
-      selectedFrequency==="weekly"
-    );
-
-  document.getElementById("monthlyExtra")
-    .classList.toggle(
-      "show",
-      selectedFrequency==="monthly"
-    );
-
-}
-
-document.querySelectorAll(".frequency-btn").forEach(btn=>{
-
-  btn.addEventListener("click",()=>{
-
-    selectedFrequency=btn.dataset.frequency;
-
-    updateFrequencyUI();
-
-  });
-
-});
-
-document.querySelectorAll(".day-btn").forEach(btn=>{
-
-  btn.addEventListener("click",()=>{
-
-    const day=Number(btn.dataset.day);
-
-    if(selectedDays.includes(day)){
-
-      selectedDays=
-        selectedDays.filter(d=>d!==day);
-
-    }else{
-
-      selectedDays.push(day);
-
-    }
-
-    btn.classList.toggle(
-      "active",
-      selectedDays.includes(day)
-    );
-
-  });
-
-});
-
-function openHabitModal(id=null){
-
-  editingHabitId=id;
-
-  selectedFrequency="daily";
-  selectedDays=[];
-
-  document.getElementById("habitName").value="";
-  document.getElementById("habitCategory").value="Sport";
-  document.getElementById("weeklyTarget").value=2;
-  document.getElementById("monthlyTarget").value=5;
-
-  document.querySelectorAll(".day-btn").forEach(btn=>{
-    btn.classList.remove("active");
-  });
-
-  if(id){
-
-    const habit=habits.find(h=>h.id===id);
-
-    if(!habit)return;
-
-    document.getElementById("habitModalTitle").textContent=
-      "Modifier l’habitude";
-
-    document.getElementById("habitName").value=habit.name;
-    document.getElementById("habitCategory").value=habit.category;
-
-    selectedFrequency=habit.frequency||"daily";
-
-    if(selectedFrequency==="weekly"){
-      document.getElementById("weeklyTarget").value=
-        habit.target||1;
-    }
-
-    if(selectedFrequency==="monthly"){
-      document.getElementById("monthlyTarget").value=
-        habit.target||1;
-    }
-
-    selectedDays=[...(habit.recommendedDays||[])];
-
-    document.querySelectorAll(".day-btn").forEach(btn=>{
-
-      btn.classList.toggle(
-        "active",
-        selectedDays.includes(Number(btn.dataset.day))
-      );
+        });
 
     });
 
-  }else{
 
-    document.getElementById("habitModalTitle").textContent=
-      "Nouvelle habitude";
+function goToPage(page){
 
-  }
+    currentPage = page;
 
-  updateFrequencyUI();
+    document
+        .querySelectorAll(".nav-item")
+        .forEach(item => {
 
-  habitModal.classList.add("open");
+            item.classList.toggle(
+                "active",
+                item.dataset.page === page
+            );
+
+        });
+
+    render();
+
+}
+
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+
+function render(){
+
+    const app =
+        document.getElementById("app");
+
+    if(currentPage === "today")
+        app.innerHTML = renderToday();
+
+    if(currentPage === "calendar")
+        app.innerHTML = renderCalendar();
+
+    if(currentPage === "habits")
+        app.innerHTML = renderHabits();
+
+    if(currentPage === "stats")
+        app.innerHTML = renderStats();
+
+    if(currentPage === "settings")
+        app.innerHTML = renderSettings();
+
+    if(currentPage === "help")
+        app.innerHTML = renderHelp();
+
+    attachEvents();
+
+}
+
+
+/* =========================================================
+   TODAY
+   ========================================================= */
+
+function renderToday(){
+
+    const today = new Date();
+
+    const isToday =
+        sameDay(currentDate,today);
+
+    const completed =
+        habits.filter(h =>
+            h.completions?.includes(
+                dateKey(currentDate)
+            )
+        ).length;
+
+    const total = habits.length;
+
+    const percentage =
+        total ?
+        Math.round((completed / total)*100)
+        : 0;
+
+    const title =
+        isToday
+        ? "Aujourd’hui"
+        : capitalize(formatDate(currentDate));
+
+    const subtitle =
+        isToday
+        ? capitalize(formatDate(currentDate))
+        : "Journée sélectionnée";
+
+    return `
+
+        <div class="page-heading">
+
+            <h1>
+                ${title}
+            </h1>
+
+            <p>
+                ${subtitle}
+            </p>
+
+        </div>
+
+
+        <div class="today-layout">
+
+            <section class="card progress-card">
+
+                <div class="progress-top">
+
+                    <div>
+
+                        <div class="progress-label">
+                            Progression
+                        </div>
+
+                        <div class="progress-number">
+                            ${percentage}%
+                        </div>
+
+                    </div>
+
+                    <div class="category-pill">
+                        ${completed}/${total}
+                    </div>
+
+                </div>
+
+                <div class="progress-track">
+
+                    <div
+                        class="progress-bar"
+                        style="width:${percentage}%"
+                    ></div>
+
+                </div>
+
+            </section>
+
+
+            <section class="card">
+
+                <div class="card-header">
+
+                    <span class="card-title">
+                        Résumé
+                    </span>
+
+                </div>
+
+                <div class="card-body">
+
+                    <div class="setting-row">
+
+                        <div>
+                            <div class="setting-title">
+                                ${total}
+                            </div>
+                            <div class="setting-description">
+                                habitudes
+                            </div>
+                        </div>
+
+                        <span>
+                            ✦
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <div style="height:18px"></div>
+
+
+        <section class="card">
+
+            <div class="card-header">
+
+                <span class="card-title">
+                    Tes habitudes
+                </span>
+
+                <button
+                    class="primary-button"
+                    id="addHabitButton"
+                >
+                    + Ajouter
+                </button>
+
+            </div>
+
+            <div class="card-body">
+
+                ${
+                    habits.length
+                    ?
+                    `<div class="habit-list">
+
+                        ${habits.map(h => {
+
+                            const done =
+                                h.completions?.includes(
+                                    dateKey(currentDate)
+                                );
+
+                            return `
+
+                            <div class="habit-row">
+
+                                <button
+                                    class="check ${done ? "done" : ""}"
+                                    data-toggle="${h.id}"
+                                ></button>
+
+                                <div class="habit-info">
+
+                                    <div class="habit-name">
+                                        ${escapeHtml(h.name)}
+                                    </div>
+
+                                    <div class="habit-meta">
+                                        ${h.frequency} fois / semaine
+                                    </div>
+
+                                </div>
+
+                                <span class="category-pill">
+                                    ${escapeHtml(h.category)}
+                                </span>
+
+                            </div>
+
+                            `;
+
+                        }).join("")}
+
+                    </div>`
+                    :
+                    `
+
+                    <div class="empty">
+
+                        <div class="empty-icon">
+                            ○
+                        </div>
+
+                        <div>
+                            Aucune habitude pour le moment.
+                        </div>
+
+                    </div>
+
+                    `
+                }
+
+            </div>
+
+        </section>
+
+    `;
+
+}
+
+
+/* =========================================================
+   CALENDAR
+   ========================================================= */
+
+function renderCalendar(){
+
+    const year =
+        calendarDate.getFullYear();
+
+    const month =
+        calendarDate.getMonth();
+
+    const first =
+        new Date(year,month,1);
+
+    const last =
+        new Date(year,month+1,0);
+
+    let start =
+        first.getDay();
+
+    start =
+        start === 0 ? 6 : start - 1;
+
+    let cells = "";
+
+    const days = [
+        "L","M","M","J","V","S","D"
+    ];
+
+    cells += days.map(day =>
+        `<div class="weekday">${day}</div>`
+    ).join("");
+
+    for(let i=0;i<start;i++){
+
+        cells += `<div></div>`;
+
+    }
+
+    for(let d=1;d<=last.getDate();d++){
+
+        const date =
+            new Date(year,month,d);
+
+        const selected =
+            sameDay(date,currentDate);
+
+        const today =
+            sameDay(date,new Date());
+
+        const key =
+            dateKey(date);
+
+        const completed =
+            habits.some(h =>
+                h.completions?.includes(key)
+            );
+
+        cells += `
+
+            <button
+                class="day
+                    ${selected ? "selected" : ""}
+                    ${today ? "today" : ""}
+                "
+                data-date="${key}"
+            >
+
+                ${d}
+
+                ${
+                    completed
+                    ?
+                    `<span class="day-dots">
+                        <span class="day-dot"></span>
+                    </span>`
+                    :
+                    ""
+                }
+
+            </button>
+
+        `;
+
+    }
+
+    return `
+
+        <div class="page-heading">
+
+            <h1>
+                Calendrier
+            </h1>
+
+            <p>
+                Visualise ta régularité.
+            </p>
+
+        </div>
+
+
+        <section class="card calendar-card">
+
+            <div class="calendar-head">
+
+                <button
+                    class="secondary-button"
+                    id="prevMonth"
+                >
+                    ‹
+                </button>
+
+                <div class="calendar-month">
+                    ${monthName(calendarDate)}
+                </div>
+
+                <button
+                    class="secondary-button"
+                    id="nextMonth"
+                >
+                    ›
+                </button>
+
+            </div>
+
+            <div class="calendar-grid">
+
+                ${cells}
+
+            </div>
+
+        </section>
+
+    `;
+
+}
+
+
+/* =========================================================
+   HABITS
+   ========================================================= */
+
+function renderHabits(){
+
+    return `
+
+        <div class="page-heading">
+
+            <h1>
+                Habitudes
+            </h1>
+
+            <p>
+                Construis ta routine, une action à la fois.
+            </p>
+
+        </div>
+
+
+        <div style="
+            display:flex;
+            justify-content:flex-end;
+            margin-bottom:15px;
+        ">
+
+            <button
+                class="primary-button"
+                id="addHabitButton"
+            >
+                + Nouvelle habitude
+            </button>
+
+        </div>
+
+
+        ${
+            habits.length
+            ?
+            `<div class="habits-grid">
+
+                ${habits.map(h => `
+
+                    <article class="card habit-card">
+
+                        <div class="habit-card-top">
+
+                            <div>
+
+                                <h3>
+                                    ${escapeHtml(h.name)}
+                                </h3>
+
+                                <p>
+                                    ${escapeHtml(h.category)}
+                                    · ${h.frequency} fois / semaine
+                                </p>
+
+                            </div>
+
+                            <div class="habit-actions">
+
+                                <button
+                                    class="small-icon"
+                                    data-delete="${h.id}"
+                                >
+                                    ×
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                `).join("")}
+
+            </div>`
+            :
+            `
+
+            <section class="card">
+
+                <div class="empty">
+
+                    <div class="empty-icon">
+                        +
+                    </div>
+
+                    <div>
+                        Crée ta première habitude.
+                    </div>
+
+                </div>
+
+            </section>
+
+            `
+        }
+
+    `;
+
+}
+
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+function renderStats(){
+
+    const totalCompletions =
+        habits.reduce(
+            (sum,h) =>
+                sum + (h.completions?.length || 0),
+            0
+        );
+
+    const active =
+        habits.length;
+
+    const last7 = [];
+
+    for(let i=6;i>=0;i--){
+
+        const d = new Date();
+
+        d.setDate(
+            d.getDate()-i
+        );
+
+        const key =
+            dateKey(d);
+
+        const count =
+            habits.filter(h =>
+                h.completions?.includes(key)
+            ).length;
+
+        last7.push({
+            date:d,
+            count
+        });
+
+    }
+
+    const max =
+        Math.max(
+            1,
+            ...last7.map(x=>x.count)
+        );
+
+    return `
+
+        <div class="page-heading">
+
+            <h1>
+                Statistiques
+            </h1>
+
+            <p>
+                Comprends ta régularité.
+            </p>
+
+        </div>
+
+
+        <div class="stats-grid">
+
+            <section class="card stat-card">
+
+                <div class="stat-label">
+                    Habitudes actives
+                </div>
+
+                <div class="stat-value">
+                    ${active}
+                </div>
+
+            </section>
+
+
+            <section class="card stat-card">
+
+                <div class="stat-label">
+                    Complétions
+                </div>
+
+                <div class="stat-value">
+                    ${totalCompletions}
+                </div>
+
+            </section>
+
+
+            <section class="card stat-card">
+
+                <div class="stat-label">
+                    Jours suivis
+                </div>
+
+                <div class="stat-value">
+                    ${new Set(
+                        habits.flatMap(
+                            h => h.completions || []
+                        )
+                    ).size}
+                </div>
+
+            </section>
+
+        </div>
+
+
+        <div style="height:15px"></div>
+
+
+        <section class="card">
+
+            <div class="card-header">
+
+                <span class="card-title">
+                    7 derniers jours
+                </span>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="chart">
+
+                    ${last7.map(x => `
+
+                        <div class="chart-column">
+
+                            <div
+                                class="chart-bar"
+                                style="
+                                    height:${Math.max(
+                                        5,
+                                        (x.count/max)*100
+                                    )}%;
+                                "
+                            ></div>
+
+                        </div>
+
+                    `).join("")}
+
+                </div>
+
+            </div>
+
+        </section>
+
+    `;
+
+}
+
+
+/* =========================================================
+   SETTINGS
+   ========================================================= */
+
+function renderSettings(){
+
+    const themes = [
+
+        ["sage","Sage","preview-sage"],
+        ["sakura","Sakura","preview-sakura"],
+        ["ocean","Ocean","preview-ocean"],
+        ["lavender","Lavender","preview-lavender"],
+        ["sunset","Sunset","preview-sunset"],
+
+        ["sage-dark","Forest Dark","preview-sage-dark"],
+        ["midnight","Midnight","preview-midnight"],
+        ["aurora","Aurora","preview-aurora"],
+        ["cyber","Cyber","preview-cyber"],
+        ["ocean-dark","Deep Ocean","preview-ocean-dark"],
+        ["coffee","Coffee","preview-coffee"]
+
+    ];
+
+    return `
+
+        <div class="page-heading">
+
+            <h1>
+                Réglages
+            </h1>
+
+            <p>
+                Personnalise ton expérience.
+            </p>
+
+        </div>
+
+
+        <section class="card">
+
+            <div class="card-header">
+
+                <span class="card-title">
+                    Apparence
+                </span>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="themes-grid">
+
+                    ${themes.map(
+                        ([id,name,cls]) => `
+
+                        <button
+                            class="
+                                theme-preview
+                                ${cls}
+                                ${selectedTheme === id ? "active" : ""}
+                            "
+                            data-theme="${id}"
+                        >
+
+                            <span>
+                                ${name}
+                            </span>
+
+                        </button>
+
+                    `).join("")}
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <div style="height:15px"></div>
+
+
+        <section class="card">
+
+            <div class="card-header">
+
+                <span class="card-title">
+                    Application
+                </span>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="settings-list">
+
+                    <div class="setting-row">
+
+                        <div>
+
+                            <div class="setting-title">
+                                HABITS.
+                            </div>
+
+                            <div class="setting-description">
+                                Ton espace personnel pour construire de meilleures habitudes.
+                            </div>
+
+                        </div>
+
+                        <span>
+                            ✦
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    `;
+
+}
+
+
+/* =========================================================
+   HELP
+   ========================================================= */
+
+function renderHelp(){
+
+    return `
+
+        <div class="page-heading">
+
+            <h1>
+                Help
+            </h1>
+
+            <p>
+                Des techniques simples pour mieux gérer ton quotidien.
+            </p>
+
+        </div>
+
+
+        <div class="help-tabs">
+
+            <button
+                class="help-tab active"
+                data-help="general"
+            >
+                Général
+            </button>
+
+            <button
+                class="help-tab"
+                data-help="stress"
+            >
+                Stress
+            </button>
+
+            <button
+                class="help-tab"
+                data-help="sleep"
+            >
+                Sommeil
+            </button>
+
+            <button
+                class="help-tab"
+                data-help="studies"
+            >
+                Études
+            </button>
+
+        </div>
+
+
+        <div
+            class="help-content"
+            id="helpContent"
+        ></div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   HELP CONTENT
+   ========================================================= */
+
+function helpContent(type){
+
+    if(type === "stress"){
+
+        return `
+
+        <section class="card help-section">
+
+            <h2>
+                Gérer le stress
+            </h2>
+
+            <p>
+                L'objectif n'est pas forcément de supprimer le stress,
+                mais de faire redescendre suffisamment son niveau pour
+                pouvoir réfléchir et agir correctement.
+            </p>
+
+            <div class="technique">
+
+                <strong>
+                    Respiration 4–6
+                </strong>
+
+                <p>
+                    Inspire pendant environ 4 secondes puis expire
+                    pendant environ 6 secondes. Répète pendant quelques
+                    minutes en gardant une respiration confortable.
+                </p>
+
+            </div>
+
+            <div class="technique">
+
+                <strong>
+                    Respiration carrée
+                </strong>
+
+                <p>
+                    Inspire, bloque, expire puis bloque à nouveau,
+                    chacun pendant environ 4 secondes.
+                </p>
+
+            </div>
+
+            <div class="technique">
+
+                <strong>
+                    Méthode 5–4–3–2–1
+                </strong>
+
+                <p>
+                    Identifie 5 choses que tu vois, 4 que tu peux toucher,
+                    3 que tu entends, 2 que tu sens et 1 que tu peux goûter.
+                </p>
+
+            </div>
+
+            <div class="technique">
+
+                <strong>
+                    Avant une évaluation
+                </strong>
+
+                <p>
+                    Évite de relire frénétiquement tout le cours dans les
+                    dernières minutes. Respire, relis les notions essentielles
+                    et commence par ce que tu maîtrises.
+                </p>
+
+            </div>
+
+        </section>
+
+        `;
+
+    }
+
+
+    if(type === "sleep"){
+
+        return `
+
+        <section class="card help-section">
+
+            <h2>
+                Mieux dormir
+            </h2>
+
+            <p>
+                Le sommeil participe directement à la récupération et à
+                la consolidation de la mémoire.
+            </p>
+
+            <div class="technique">
+
+                <strong>
+                    Garde un rythme régulier
+                </strong>
+
+                <p>
+                    Essaie de conserver des horaires de sommeil relativement
+                    réguliers, y compris lorsque ton emploi du temps change.
+                </p>
+
+            </div>
+
+            <div class="technique">
+
+                <strong>
+                    Crée une transition
+                </strong>
+
+                <p>
+                    Les 30 à 60 dernières minutes avant de dormir peuvent
+                    être consacrées à des activités calmes et moins stimulantes.
+                </p>
+
+            </div>
+
+            <div class="technique">
+
+                <strong>
+                    Chambre adaptée
+                </strong>
+
+                <p>
+                    Une chambre sombre, calme et plutôt fraîche peut faciliter
+                    l'endormissement.
+                </p>
+
+            </div>
+
+            <div class="technique">
+
+                <strong>
+                    Si tu ne t'endors pas
+                </strong>
+
+                <p>
+                    Évite de rester longtemps à lutter contre le sommeil.
+                    Fais quelque chose de calme avec une lumière faible puis
+                    retourne te coucher lorsque tu somnoles.
+                </p>
+
+            </div>
+
+        </section>
+
+        `;
+
+    }
+
+
+    if(type === "studies"){
+
+        return `
+
+        <section class="card help-section">
+
+            <h2>
+                Études
+            </h2>
+
+            <p>
+                La régularité compte davantage que les grosses sessions
+                occasionnelles. Le sommeil et la récupération jouent également
+                un rôle important dans l'apprentissage.
+            </p>
+
+            <button
+                class="help-link"
+                data-open-help="sleep"
+            >
+                → Voir les conseils sur le sommeil
+            </button>
+
+
+            <div class="technique">
+
+                <strong>
+                    Feuille blanche
+                </strong>
+
+                <p>
+                    Ferme ton cours et écris tout ce dont tu te souviens.
+                    Compare ensuite avec ton cours pour identifier les lacunes.
+                </p>
+
+            </div>
+
+
+            <div class="technique">
+
+                <strong>
+                    Blurting
+                </strong>
+
+                <p>
+                    Lis une partie du cours, ferme-la, puis restitue rapidement
+                    les informations essentielles sans regarder tes notes.
+                </p>
+
+            </div>
+
+
+            <div class="technique">
+
+                <strong>
+                    Méthode Feynman
+                </strong>
+
+                <p>
+                    Explique une notion avec des mots simples, comme si tu
+                    devais l'expliquer à quelqu'un qui ne la connaît pas.
+                </p>
+
+            </div>
+
+
+            <div class="technique">
+
+                <strong>
+                    Active recall
+                </strong>
+
+                <p>
+                    Transforme ton cours en questions et essaie d'y répondre
+                    sans regarder la réponse.
+                </p>
+
+            </div>
+
+
+            <div class="technique">
+
+                <strong>
+                    Répétition espacée
+                </strong>
+
+                <p>
+                    Revois les notions plusieurs fois en espaçant progressivement
+                    les séances plutôt que de tout apprendre en une seule fois.
+                </p>
+
+            </div>
+
+        </section>
+
+        `;
+
+    }
+
+
+    return `
+
+        <section class="card help-section">
+
+            <h2>
+                Bien utiliser HABITS.
+            </h2>
+
+            <p>
+                Une bonne habitude fonctionne mieux lorsqu'elle est simple,
+                précise et suffisamment régulière.
+            </p>
+
+            <div class="technique">
+
+                <strong>
+                    Commence petit
+                </strong>
+
+                <p>
+                    Une habitude facile à maintenir est généralement plus
+                    simple à transformer en routine.
+                </p>
+
+            </div>
+
+            <div class="technique">
+
+                <strong>
+                    Sois régulier
+                </strong>
+
+                <p>
+                    La régularité permet de construire progressivement
+                    une routine durable.
+                </p>
+
+            </div>
+
+            <div class="technique">
+
+                <strong>
+                    Ne cherche pas la perfection
+                </strong>
+
+                <p>
+                    Une journée ratée ne signifie pas que ta routine est
+                    abandonnée. Reprends simplement le lendemain.
+                </p>
+
+            </div>
+
+        </section>
+
+    `;
+
+}
+
+
+/* =========================================================
+   ESCAPE
+   ========================================================= */
+
+function escapeHtml(value){
+
+    return String(value)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+
+/* =========================================================
+   EVENTS
+   ========================================================= */
+
+function attachEvents(){
+
+    /* ADD */
+
+    document
+        .querySelectorAll("#addHabitButton")
+        .forEach(button => {
+
+            button.onclick =
+                openHabitModal;
+
+        });
+
+
+    /* CHECK */
+
+    document
+        .querySelectorAll("[data-toggle]")
+        .forEach(button => {
+
+            button.onclick = () => {
+
+                const id =
+                    button.dataset.toggle;
+
+                const habit =
+                    habits.find(h =>
+                        h.id === id
+                    );
+
+                if(!habit) return;
+
+                if(!habit.completions)
+                    habit.completions = [];
+
+                const key =
+                    dateKey(currentDate);
+
+                if(
+                    habit.completions
+                        .includes(key)
+                ){
+
+                    habit.completions =
+                        habit.completions
+                            .filter(x => x !== key);
+
+                }else{
+
+                    habit.completions.push(key);
+
+                }
+
+                saveHabits();
+
+                render();
+
+            };
+
+        });
+
+
+    /* DELETE */
+
+    document
+        .querySelectorAll("[data-delete]")
+        .forEach(button => {
+
+            button.onclick = () => {
+
+                const id =
+                    button.dataset.delete;
+
+                habits =
+                    habits.filter(
+                        h => h.id !== id
+                    );
+
+                saveHabits();
+
+                render();
+
+                showToast(
+                    "Habitude supprimée"
+                );
+
+            };
+
+        });
+
+
+    /* CALENDAR */
+
+    document
+        .querySelectorAll("[data-date]")
+        .forEach(button => {
+
+            button.onclick = () => {
+
+                const [y,m,d] =
+                    button.dataset.date
+                        .split("-")
+                        .map(Number);
+
+                currentDate =
+                    new Date(y,m-1,d);
+
+                calendarDate =
+                    new Date(y,m-1,1);
+
+                goToPage("today");
+
+            };
+
+        });
+
+
+    const previous =
+        document.getElementById("prevMonth");
+
+    if(previous){
+
+        previous.onclick = () => {
+
+            calendarDate =
+                new Date(
+                    calendarDate.getFullYear(),
+                    calendarDate.getMonth()-1,
+                    1
+                );
+
+            render();
+
+        };
+
+    }
+
+
+    const next =
+        document.getElementById("nextMonth");
+
+    if(next){
+
+        next.onclick = () => {
+
+            calendarDate =
+                new Date(
+                    calendarDate.getFullYear(),
+                    calendarDate.getMonth()+1,
+                    1
+                );
+
+            render();
+
+        };
+
+    }
+
+
+    /* THEMES */
+
+    document
+        .querySelectorAll("[data-theme]")
+        .forEach(button => {
+
+            button.onclick = () => {
+
+                selectedTheme =
+                    button.dataset.theme;
+
+                applyTheme();
+
+                render();
+
+                showToast(
+                    "Thème appliqué"
+                );
+
+            };
+
+        });
+
+
+    /* HELP */
+
+    document
+        .querySelectorAll("[data-help]")
+        .forEach(button => {
+
+            button.onclick = () => {
+
+                document
+                    .querySelectorAll("[data-help]")
+                    .forEach(x =>
+                        x.classList.remove("active")
+                    );
+
+                button.classList.add("active");
+
+                document
+                    .getElementById("helpContent")
+                    .innerHTML =
+                    helpContent(
+                        button.dataset.help
+                    );
+
+                attachHelpEvents();
+
+            };
+
+        });
+
+
+    if(
+        document.getElementById("helpContent")
+    ){
+
+        document
+            .getElementById("helpContent")
+            .innerHTML =
+            helpContent("general");
+
+        attachHelpEvents();
+
+    }
+
+}
+
+
+/* =========================================================
+   HELP EVENTS
+   ========================================================= */
+
+function attachHelpEvents(){
+
+    document
+        .querySelectorAll("[data-open-help]")
+        .forEach(button => {
+
+            button.onclick = () => {
+
+                const target =
+                    button.dataset.openHelp;
+
+                document
+                    .querySelectorAll("[data-help]")
+                    .forEach(x => {
+
+                        x.classList.toggle(
+                            "active",
+                            x.dataset.help === target
+                        );
+
+                    });
+
+                document
+                    .getElementById("helpContent")
+                    .innerHTML =
+                    helpContent(target);
+
+                attachHelpEvents();
+
+            };
+
+        });
+
+}
+
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+
+const overlay =
+    document.getElementById("modalOverlay");
+
+function openHabitModal(){
+
+    overlay.classList.add("open");
+
+    document
+        .getElementById("habitName")
+        .focus();
 
 }
 
 function closeHabitModal(){
 
-  habitModal.classList.remove("open");
+    overlay.classList.remove("open");
 
 }
 
-document.getElementById("addHabitBtn")
-  .addEventListener("click",()=>openHabitModal());
+document
+    .getElementById("cancelModal")
+    .onclick =
+    closeHabitModal;
 
-document.getElementById("closeHabitModal")
-  .addEventListener("click",closeHabitModal);
 
-document.getElementById("cancelHabit")
-  .addEventListener("click",closeHabitModal);
+overlay.addEventListener(
+    "click",
+    event => {
 
-document.getElementById("saveHabit")
-  .addEventListener("click",()=>{
+        if(
+            event.target === overlay
+        ){
 
-    const name=
-      document.getElementById("habitName").value.trim();
+            closeHabitModal();
 
-    if(!name){
-
-      showToast("Donne un nom à ton habitude.");
-      return;
+        }
 
     }
+);
 
-    let target=1;
 
-    if(selectedFrequency==="weekly"){
+/* =========================================================
+   CREATE HABIT
+   ========================================================= */
 
-      target=Math.max(
-        1,
-        Math.min(
-          7,
-          Number(
-            document.getElementById("weeklyTarget").value||1
-          )
-        )
-      );
+document
+    .getElementById("habitForm")
+    .addEventListener(
+        "submit",
+        event => {
 
-    }
+            event.preventDefault();
 
-    if(selectedFrequency==="monthly"){
+            const name =
+                document
+                    .getElementById("habitName")
+                    .value
+                    .trim();
 
-      target=Math.max(
-        1,
-        Math.min(
-          31,
-          Number(
-            document.getElementById("monthlyTarget").value||1
-          )
-        )
-      );
+            const category =
+                document
+                    .getElementById("habitCategory")
+                    .value;
 
-    }
+            const frequency =
+                Math.max(
+                    1,
+                    Math.min(
+                        7,
+                        Number(
+                            document
+                                .getElementById(
+                                    "habitFrequency"
+                                )
+                                .value
+                        )
+                    )
+                );
 
-    if(editingHabitId){
+            if(!name)
+                return;
 
-      const habit=
-        habits.find(h=>h.id===editingHabitId);
+            habits.push({
 
-      if(habit){
+                id:uid(),
 
-        habit.name=name;
+                name,
 
-        habit.category=
-          document.getElementById("habitCategory").value;
+                category,
 
-        habit.frequency=selectedFrequency;
-        habit.target=target;
-        habit.recommendedDays=selectedDays;
+                frequency,
 
-      }
+                completions:[]
 
-    }else{
+            });
 
-      habits.push({
+            saveHabits();
 
-        id:uid(),
-        name,
+            closeHabitModal();
 
-        category:
-          document.getElementById("habitCategory").value,
+            event.target.reset();
 
-        frequency:selectedFrequency,
-        target,
+            document
+                .getElementById(
+                    "habitFrequency"
+                )
+                .value = 3;
 
-        recommendedDays:selectedDays,
+            render();
 
-        completions:{}
+            showToast(
+                "Habitude créée"
+            );
 
-      });
-
-    }
-
-    saveData();
-    closeHabitModal();
-    renderAll();
-
-    showToast(
-      editingHabitId
-        ? "Habitude modifiée."
-        : "Habitude créée."
+        }
     );
 
-  });
 
-/* =========================
-   TASK MODAL
-   ========================= */
+/* =========================================================
+   QUICK ADD
+   ========================================================= */
 
-const taskModal=
-  document.getElementById("taskModal");
+document
+    .getElementById("quickAdd")
+    .onclick =
+    openHabitModal;
 
-document.getElementById("addTaskBtn")
-  .addEventListener("click",()=>{
 
-    document.getElementById("taskName").value="";
+/* =========================================================
+   INITIAL
+   ========================================================= */
 
-    taskModal.classList.add("open");
+render();
 
-  });
 
-function closeTaskModal(){
-
-  taskModal.classList.remove("open");
-
-}
-
-document.getElementById("closeTaskModal")
-  .addEventListener("click",closeTaskModal);
-
-document.getElementById("cancelTask")
-  .addEventListener("click",closeTaskModal);
-
-document.getElementById("saveTask")
-  .addEventListener("click",()=>{
-
-    const name=
-      document.getElementById("taskName").value.trim();
-
-    if(!name){
-
-      showToast("Donne un nom à ta tâche.");
-      return;
-
-    }
-
-    tasks.push({
-
-      id:uid(),
-      name,
-
-      category:
-        document.getElementById("taskCategory").value,
-
-      date:dateKey(currentDate),
-
-      completed:false
-
-    });
-
-    saveData();
-    closeTaskModal();
-    renderAll();
-
-    showToast("Tâche ajoutée.");
-
-  });
-
-/* =========================
-   CALENDAR
-   ========================= */
-
-function renderCalendar(){
-
-  const year=calendarDate.getFullYear();
-  const month=calendarDate.getMonth();
-
-  document.getElementById("calendarTitle").textContent=
-    capitalize(
-      calendarDate.toLocaleDateString("fr-FR",{
-        month:"long",
-        year:"numeric"
-      })
-    );
-
-  const grid=document.getElementById("calendarGrid");
-
-  grid.innerHTML="";
-
-  const first=new Date(year,month,1);
-
-  const firstDay=
-    first.getDay()===0
-      ? 6
-      : first.getDay()-1;
-
-  const daysInMonth=
-    new Date(year,month+1,0).getDate();
-
-  const previousMonthDays=
-    new Date(year,month,0).getDate();
-
-  const totalCells=
-    Math.ceil((firstDay+daysInMonth)/7)*7;
-
-  for(let i=0;i<totalCells;i++){
-
-    let dayNumber;
-    let date;
-    let muted=false;
-
-    if(i<firstDay){
-
-      dayNumber=
-        previousMonthDays-firstDay+i+1;
-
-      date=
-        new Date(year,month-1,dayNumber);
-
-      muted=true;
-
-    }else if(i>=firstDay+daysInMonth){
-
-      dayNumber=
-        i-(firstDay+daysInMonth)+1;
-
-      date=
-        new Date(year,month+1,dayNumber);
-
-      muted=true;
-
-    }else{
-
-      dayNumber=i-firstDay+1;
-
-      date=
-        new Date(year,month,dayNumber);
-
-    }
-
-    grid.appendChild(
-      createCalendarDay(date,muted)
-    );
-
-  }
-
-}
-
-function createCalendarDay(date,muted){
-
-  const div=document.createElement("div");
-
-  div.className=
-    `calendar-day ${muted?"muted":""} ${
-      isSameDay(date,new Date())?"today":""
-    }`;
-
-  const key=dateKey(date);
-
-  const completedHabits=
-    habits.filter(h=>
-      h.completions &&
-      h.completions[key]
-    ).length;
-
-  const completedTasks=
-    tasks.filter(t=>
-      t.date===key &&
-      t.completed
-    ).length;
-
-  let dots="";
-
-  for(
-    let i=0;
-    i<Math.min(completedHabits,5);
-    i++
-  ){
-    dots+=`<span class="dot"></span>`;
-  }
-
-  for(
-    let i=0;
-    i<Math.min(completedTasks,5);
-    i++
-  ){
-    dots+=`<span class="dot task"></span>`;
-  }
-
-  div.innerHTML=`
-
-    <div class="day-number">
-      ${date.getDate()}
-    </div>
-
-    <div class="day-dots">
-      ${dots}
-    </div>
-
-  `;
-
-  div.addEventListener("click",()=>{
-
-    currentDate=new Date(date);
-
-    calendarDate=
-      new Date(
-        date.getFullYear(),
-        date.getMonth(),
-        1
-      );
-
-    goToPage("today");
-
-  });
-
-  return div;
-
-}
-
-document.getElementById("prevMonth")
-  .addEventListener("click",()=>{
-
-    calendarDate.setMonth(
-      calendarDate.getMonth()-1
-    );
-
-    renderCalendar();
-
-  });
-
-document.getElementById("nextMonth")
-  .addEventListener("click",()=>{
-
-    calendarDate.setMonth(
-      calendarDate.getMonth()+1
-    );
-
-    renderCalendar();
-
-  });
-
-document.getElementById("calendarToday")
-  .addEventListener("click",()=>{
-
-    currentDate=new Date();
-    calendarDate=new Date();
-
-    renderCalendar();
-    goToPage("today");
-
-  });
-
-/* =========================
-   STATS
-   ========================= */
-
-function renderStats(){
-
-  const completedTaskCount=
-    tasks.filter(t=>t.completed).length;
-
-  let completionCount=0;
-
-  habits.forEach(habit=>{
-
-    completionCount+=
-      Object.values(habit.completions||{})
-        .filter(Boolean).length;
-
-  });
-
-  const total=
-    tasks.length+completionCount;
-
-  const completed=
-    completedTaskCount+completionCount;
-
-  const completion=
-    total
-      ? Math.round((completed/total)*100)
-      : 0;
-
-  document.getElementById("statCompletion")
-    .textContent=`${completion}%`;
-
-  document.getElementById("statHabits")
-    .textContent=habits.length;
-
-  document.getElementById("statTasks")
-    .textContent=completedTaskCount;
-
-  renderWeeklyChart();
-  renderCategoryStats();
-
-}
-
-function renderWeeklyChart(){
-
-  const container=
-    document.getElementById("weeklyChart");
-
-  const days=[];
-
-  for(let i=6;i>=0;i--){
-
-    const d=new Date();
-
-    d.setHours(0,0,0,0);
-    d.setDate(d.getDate()-i);
-
-    days.push(d);
-
-  }
-
-  const values=days.map(day=>{
-
-    const key=dateKey(day);
-
-    const habitsDone=
-      habits.filter(h=>
-        h.completions &&
-        h.completions[key]
-      ).length;
-
-    const tasksDone=
-      tasks.filter(t=>
-        t.date===key &&
-        t.completed
-      ).length;
-
-    return habitsDone+tasksDone;
-
-  });
-
-  const max=Math.max(...values,1);
-
-  container.innerHTML=
-    days.map((day,i)=>{
-
-      const value=values[i];
-
-      const height=
-        value===0
-          ? 4
-          : Math.max(10,(value/max)*160);
-
-      return `
-
-        <div class="chart-column">
-
-          <div class="chart-value">
-            ${value}
-          </div>
-
-          <div
-            class="chart-bar"
-            style="height:${height}px"
-          ></div>
-
-          <div class="chart-label">
-            ${day.toLocaleDateString("fr-FR",{
-              weekday:"short"
-            }).replace(".","")}
-          </div>
-
-        </div>
-
-      `;
-
-    }).join("");
-
-}
-
-function renderCategoryStats(){
-
-  const container=
-    document.getElementById("categoryStats");
-
-  const categories={};
-
-  tasks.forEach(task=>{
-
-    if(!task.completed)return;
-
-    categories[task.category]=
-      (categories[task.category]||0)+1;
-
-  });
-
-  habits.forEach(habit=>{
-
-    const count=
-      Object.values(habit.completions||{})
-        .filter(Boolean).length;
-
-    if(count>0){
-
-      categories[habit.category]=
-        (categories[habit.category]||0)+count;
-
-    }
-
-  });
-
-  const entries=
-    Object.entries(categories)
-      .sort((a,b)=>b[1]-a[1]);
-
-  if(!entries.length){
-
-    container.innerHTML=
-      `<div class="empty">Pas encore assez de données.</div>`;
-
-    return;
-
-  }
-
-  const max=
-    Math.max(...entries.map(e=>e[1]),1);
-
-  container.innerHTML=
-    entries.map(([name,value])=>`
-
-      <div class="category-row">
-
-        <div class="category-name">
-          ${escapeHtml(name)}
-        </div>
-
-        <div class="category-track">
-
-          <div
-            class="category-fill"
-            style="width:${(value/max)*100}%"
-          ></div>
-
-        </div>
-
-        <div class="category-number">
-          ${value}
-        </div>
-
-      </div>
-
-    `).join("");
-
-}
-
-/* =========================
-   HELP NAVIGATION
-   ========================= */
-
-/*
-  Depuis la page Help :
-  Stress / Sommeil / Études
-  ouvrent maintenant une vraie page.
-*/
-
-document.querySelectorAll("[data-help-page]")
-  .forEach(button=>{
-
-    button.addEventListener("click",()=>{
-
-      const page=button.dataset.helpPage;
-
-      goToPage(`help-${page}`);
-
-    });
-
-  });
-
-/*
-  Retour vers la page principale Help.
-*/
-
-document.querySelectorAll("[data-help-back]")
-  .forEach(button=>{
-
-    button.addEventListener("click",()=>{
-
-      goToPage(button.dataset.helpBack);
-
-    });
-
-  });
-
-/*
-  Lien Études → Sommeil.
-*/
-
-document.querySelectorAll("[data-help-page]")
-  .forEach(button=>{
-
-    button.addEventListener("click",()=>{
-
-      if(button.dataset.helpPage==="sleep"){
-        goToPage("help-sleep");
-      }
-
-    });
-
-  });
-
-/*
-  Navigation entre les matières.
-*/
-
-document.querySelectorAll("[data-study-topic]")
-  .forEach(button=>{
-
-    button.addEventListener("click",()=>{
-
-      const topic=
-        button.dataset.studyTopic;
-
-      document.querySelectorAll("[data-study-topic]")
-        .forEach(btn=>{
-
-          btn.classList.toggle(
-            "active",
-            btn===button
-          );
-
-        });
-
-      document.querySelectorAll(".help-topic")
-        .forEach(topicElement=>{
-
-          topicElement.classList.remove("active");
-
-        });
-
-      const target=
-        document.getElementById(`study-${topic}`);
-
-      if(target){
-        target.classList.add("active");
-      }
-
-      window.scrollTo({
-        top:0,
-        behavior:"smooth"
-      });
-
-    });
-
-  });
-
-/* =========================
-   THEMES
-   ========================= */
-
-function getThemePattern(id){
-
-  const patterns={
-
-    aurora:
-      "radial-gradient(circle at 20% 20%,rgba(89,214,170,.35),transparent 35%),radial-gradient(circle at 80% 20%,rgba(75,180,255,.3),transparent 35%)",
-
-    waves:
-      "repeating-radial-gradient(ellipse at 0 0,transparent 0,transparent 10px,rgba(49,153,189,.08) 11px,rgba(49,153,189,.08) 13px)",
-
-    sakura:
-      "radial-gradient(circle at 20% 25%,rgba(214,110,150,.22) 0 3px,transparent 4px),radial-gradient(circle at 75% 65%,rgba(214,110,150,.18) 0 4px,transparent 5px)",
-
-    night:
-      "radial-gradient(circle at 15% 20%,rgba(255,255,255,.75) 0 1px,transparent 2px),radial-gradient(circle at 75% 35%,rgba(255,255,255,.55) 0 1px,transparent 2px),radial-gradient(circle at 50% 80%,rgba(255,255,255,.45) 0 1px,transparent 2px)",
-
-    botanical:
-      "radial-gradient(ellipse at 20% 20%,rgba(91,155,104,.15),transparent 35%),radial-gradient(ellipse at 80% 80%,rgba(91,155,104,.12),transparent 35%)",
-
-    nebula:
-      "radial-gradient(circle at 20% 30%,rgba(255,72,182,.3),transparent 35%),radial-gradient(circle at 80% 20%,rgba(76,125,255,.3),transparent 35%)",
-
-    crystal:
-      "linear-gradient(135deg,rgba(102,143,209,.12) 25%,transparent 25%),linear-gradient(315deg,rgba(102,143,209,.12) 25%,transparent 25%)",
-
-    sunset:
-      "radial-gradient(circle at 15% 90%,rgba(232,117,82,.2),transparent 35%),radial-gradient(circle at 90% 10%,rgba(245,184,72,.2),transparent 35%)",
-
-    holographic:
-      "linear-gradient(115deg,rgba(255,125,180,.18),rgba(92,200,255,.18),rgba(154,108,255,.18),rgba(255,214,98,.18))",
-
-    paper:
-      "repeating-linear-gradient(0deg,transparent,transparent 12px,rgba(100,90,65,.08) 13px)"
-
-  };
-
-  return patterns[id]||"none";
-
-}
-
-function applyTheme(theme){
-
-  document.body.className=`theme-${theme}`;
-
-  localStorage.setItem(
-    THEME_KEY,
-    theme
-  );
-
-  const selected=
-    themes.find(t=>t.id===theme);
-
-  if(selected){
-
-    document.querySelector(
-      'meta[name="theme-color"]'
-    ).setAttribute(
-      "content",
-      selected.bg
-    );
-
-  }
-
-  renderThemes();
-
-}
-
-function createThemeButton(theme,current){
-
-  const pattern=getThemePattern(theme.id);
-
-  return `
-
-    <button
-      class="theme-option ${theme.id===current?"active":""}"
-      onclick="applyTheme('${theme.id}')"
-    >
-
-      <div
-        class="theme-preview"
-        style="
-          background:${theme.bg};
-          border:1px solid ${theme.primary};
-          --preview-pattern:${pattern};
-        "
-      >
-
-        <div
-          class="theme-preview-line"
-          style="--preview-primary:${theme.primary}"
-        ></div>
-
-      </div>
-
-      <div class="theme-name">
-        ${escapeHtml(theme.name)}
-      </div>
-
-    </button>
-
-  `;
-
-}
-
-function renderThemes(){
-
-  const original=
-    document.getElementById("originalThemes");
-
-  const premiumLight=
-    document.getElementById("premiumLightThemes");
-
-  const premiumDark=
-    document.getElementById("premiumDarkThemes");
-
-  if(
-    !original ||
-    !premiumLight ||
-    !premiumDark
-  ){
-    return;
-  }
-
-  const current=
-    localStorage.getItem(THEME_KEY)||"sage";
-
-  original.innerHTML=
-    originalThemes
-      .map(theme=>
-        createThemeButton(theme,current)
-      )
-      .join("");
-
-  premiumLight.innerHTML=
-    premiumThemes
-      .filter(theme=>theme.type==="light")
-      .map(theme=>
-        createThemeButton(theme,current)
-      )
-      .join("");
-
-  premiumDark.innerHTML=
-    premiumThemes
-      .filter(theme=>theme.type==="dark")
-      .map(theme=>
-        createThemeButton(theme,current)
-      )
-      .join("");
-
-}
-
-/* =========================
-   SETTINGS
-   ========================= */
-
-document.getElementById("settingsToday")
-  .addEventListener("click",()=>{
-
-    currentDate=new Date();
-    calendarDate=new Date();
-
-    goToPage("today");
-
-  });
-
-document.getElementById("resetData")
-  .addEventListener("click",()=>{
-
-    if(!confirm(
-      "Supprimer toutes tes habitudes et toutes tes tâches ?"
-    )){
-      return;
-    }
-
-    tasks=[];
-    habits=[];
-
-    saveData();
-    renderAll();
-
-    showToast("Données réinitialisées.");
-
-  });
-
-/* =========================
-   RENDER
-   ========================= */
-
-function renderAll(){
-
-  renderToday();
-  renderCalendar();
-  renderHabits();
-  renderStats();
-  renderThemes();
-
-}
-
-/* =========================
-   INITIALISATION
-   ========================= */
-
-const savedTheme=
-  localStorage.getItem(THEME_KEY)||"sage";
-
-applyTheme(savedTheme);
-
-renderAll();
-
-/* =========================
+/* =========================================================
    SERVICE WORKER
-   ========================= */
+   ========================================================= */
 
 if("serviceWorker" in navigator){
 
-  window.addEventListener("load",()=>{
+    window.addEventListener(
+        "load",
+        () => {
 
-    navigator.serviceWorker
-      .register("./sw.js")
-      .catch(error=>{
+            navigator.serviceWorker
+                .register("./sw.js")
+                .catch(
+                    error =>
+                        console.log(
+                            "Service Worker error:",
+                            error
+                        )
+                );
 
-        console.log(
-          "Service Worker error:",
-          error
-        );
-
-      });
-
-  });
+        }
+    );
 
 }
 
