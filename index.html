@@ -16,6 +16,11 @@
 <link rel="apple-touch-icon" href="icon.svg">
 
 <style>
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
 :root{
   --bg:#f4f8f5;
   --surface:#ffffff;
@@ -30,6 +35,10 @@
   --radius:22px;
 }
 
+/* =========================================================
+   BASE
+========================================================= */
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -41,12 +50,23 @@ html{
 }
 
 body{
-  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "Segoe UI",
+    sans-serif;
+
   background:var(--bg);
   color:var(--text);
+
   min-height:100vh;
+
   padding-bottom:90px;
-  transition:background .25s,color .25s;
+
+  transition:
+    background .25s,
+    color .25s;
 }
 
 button,
@@ -62,24 +82,23 @@ button{
 
 /* =========================================================
    HEADER
-   IMPORTANT : LE HEADER N'EST PAS FIXE
+   IMPORTANT : PAS STICKY / PAS FIXED
 ========================================================= */
 
 .header{
   width:100%;
   height:78px;
+
   padding:0 5%;
 
   display:flex;
   align-items:center;
   justify-content:space-between;
 
-  background:rgba(255,255,255,.88);
-  backdrop-filter:blur(18px);
+  background:var(--surface);
 
   border-bottom:1px solid var(--border);
 
-  /* Aucun sticky/fixed ici */
   position:relative !important;
   top:auto !important;
   bottom:auto !important;
@@ -111,7 +130,9 @@ button{
   font-size:20px;
   font-weight:900;
 
-  box-shadow:0 6px 15px rgba(95,150,117,.22);
+  box-shadow:
+    0 6px 15px
+    rgba(0,0,0,.10);
 }
 
 .desktopNav{
@@ -124,9 +145,11 @@ button{
   color:var(--muted);
 
   padding:10px 14px;
+
   border-radius:12px;
 
   font-weight:650;
+
   transition:.2s;
 }
 
@@ -146,7 +169,9 @@ button{
 
 .container{
   width:min(1120px,92%);
+
   margin:0 auto;
+
   padding:35px 0 40px;
 }
 
@@ -175,6 +200,7 @@ button{
   font-size:32px;
   font-weight:850;
   letter-spacing:-1px;
+
   margin-bottom:7px;
 }
 
@@ -189,19 +215,30 @@ button{
 }
 
 .grid2{
-  grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-columns:
+    repeat(2,minmax(0,1fr));
 }
 
 .grid3{
-  grid-template-columns:repeat(3,minmax(0,1fr));
+  grid-template-columns:
+    repeat(3,minmax(0,1fr));
 }
 
 .card{
   background:var(--surface);
+
   border:1px solid var(--border);
+
   border-radius:var(--radius);
+
   padding:22px;
+
   box-shadow:var(--shadow);
+
+  transition:
+    background .25s,
+    border .25s,
+    box-shadow .25s;
 }
 
 .cardTitle{
@@ -224,9 +261,11 @@ button{
   color:white;
 
   padding:11px 16px;
+
   border-radius:13px;
 
   font-weight:750;
+
   transition:.2s;
 }
 
@@ -239,6 +278,7 @@ button{
   color:var(--primary);
 
   padding:11px 15px;
+
   border-radius:13px;
 
   font-weight:750;
@@ -249,6 +289,7 @@ button{
   color:var(--danger);
 
   padding:11px 15px;
+
   border-radius:13px;
 
   font-weight:750;
@@ -260,7 +301,10 @@ button{
 
 .todayTop{
   display:grid;
-  grid-template-columns:1.35fr .65fr;
+
+  grid-template-columns:
+    1.35fr .65fr;
+
   gap:18px;
 
   margin-bottom:18px;
@@ -268,6 +312,7 @@ button{
 
 .progressCard{
   display:flex;
+
   align-items:center;
   justify-content:space-between;
 
@@ -291,7 +336,8 @@ button{
 
   background:
     conic-gradient(
-      var(--primary) var(--progress,0%),
+      var(--primary)
+      var(--progress,0%),
       var(--surface2) 0
     );
 
@@ -299,6 +345,7 @@ button{
   place-items:center;
 
   position:relative;
+
   flex-shrink:0;
 }
 
@@ -317,6 +364,7 @@ button{
 
 .progressRing span{
   position:relative;
+
   z-index:2;
 
   font-size:25px;
@@ -325,6 +373,7 @@ button{
 
 .sectionHeader{
   display:flex;
+
   align-items:center;
   justify-content:space-between;
 
@@ -343,13 +392,17 @@ button{
 
 .item{
   display:flex;
+
   align-items:center;
+
   gap:14px;
 
   padding:15px;
 
   background:var(--surface);
+
   border:1px solid var(--border);
+
   border-radius:17px;
 
   transition:.2s;
@@ -357,7 +410,10 @@ button{
 
 .item:hover{
   transform:translateY(-1px);
-  box-shadow:0 6px 20px rgba(39,72,53,.06);
+
+  box-shadow:
+    0 6px 20px
+    rgba(0,0,0,.06);
 }
 
 .check{
@@ -365,6 +421,7 @@ button{
   height:24px;
 
   border:2px solid var(--primary2);
+
   border-radius:8px;
 
   background:transparent;
@@ -383,6 +440,7 @@ button{
 
 .check.done::after{
   content:"✓";
+
   font-size:14px;
   font-weight:900;
 }
@@ -394,13 +452,16 @@ button{
 
 .itemName{
   font-weight:750;
+
   overflow:hidden;
   text-overflow:ellipsis;
 }
 
 .itemMeta{
   color:var(--muted);
+
   font-size:12px;
+
   margin-top:3px;
 }
 
@@ -422,6 +483,7 @@ button{
   color:var(--muted);
 
   border:1px dashed var(--border);
+
   border-radius:17px;
 }
 
@@ -437,6 +499,7 @@ button{
 .habitTop{
   display:flex;
   align-items:center;
+
   gap:14px;
 }
 
@@ -465,7 +528,9 @@ button{
 
 .habitFrequency{
   color:var(--muted);
+
   font-size:13px;
+
   margin-top:3px;
 }
 
@@ -479,6 +544,7 @@ button{
   background:var(--surface2);
 
   border-radius:999px;
+
   overflow:hidden;
 }
 
@@ -495,6 +561,7 @@ button{
 
 .progressLine{
   display:flex;
+
   justify-content:space-between;
 
   color:var(--muted);
@@ -517,6 +584,7 @@ button{
   border-radius:10px;
 
   background:var(--surface2);
+
   color:var(--primary);
 
   font-weight:700;
@@ -529,6 +597,7 @@ button{
   border-radius:10px;
 
   background:#fff0f0;
+
   color:var(--danger);
 
   font-weight:700;
@@ -541,6 +610,7 @@ button{
 
 .calendarHeader{
   display:flex;
+
   align-items:center;
   justify-content:space-between;
 
@@ -573,6 +643,7 @@ button{
   background:var(--surface);
 
   border:1px solid var(--border);
+
   border-radius:var(--radius);
 
   padding:15px;
@@ -583,7 +654,10 @@ button{
 .weekdays,
 .calendarGrid{
   display:grid;
-  grid-template-columns:repeat(7,1fr);
+
+  grid-template-columns:
+    repeat(7,1fr);
+
   gap:6px;
 }
 
@@ -604,6 +678,7 @@ button{
   border-radius:14px;
 
   background:var(--surface);
+
   border:1px solid transparent;
 
   padding:9px;
@@ -632,7 +707,9 @@ button{
 
 .dayDots{
   display:flex;
+
   gap:3px;
+
   flex-wrap:wrap;
 
   margin-top:12px;
@@ -652,7 +729,7 @@ button{
 }
 
 /* =========================================================
-   STATISTIQUES
+   STATS
 ========================================================= */
 
 .statValue{
@@ -671,6 +748,7 @@ button{
   height:210px;
 
   display:flex;
+
   align-items:flex-end;
 
   gap:10px;
@@ -680,9 +758,11 @@ button{
 
 .barWrap{
   flex:1;
+
   height:100%;
 
   display:flex;
+
   align-items:flex-end;
   justify-content:center;
 
@@ -695,16 +775,19 @@ button{
 
   min-height:4px;
 
-  border-radius:8px 8px 4px 4px;
+  border-radius:
+    8px 8px 4px 4px;
 
   background:var(--primary);
 }
 
 .barLabel{
   position:absolute;
+
   bottom:-22px;
 
   font-size:11px;
+
   color:var(--muted);
 }
 
@@ -714,6 +797,7 @@ button{
 
 .categoryTop{
   display:flex;
+
   justify-content:space-between;
 
   margin-bottom:7px;
@@ -733,6 +817,7 @@ button{
 
 .categoryBar div{
   height:100%;
+
   background:var(--primary);
 }
 
@@ -742,6 +827,7 @@ button{
 
 .settingRow{
   display:flex;
+
   align-items:center;
   justify-content:space-between;
 
@@ -749,7 +835,8 @@ button{
 
   padding:17px 0;
 
-  border-bottom:1px solid var(--border);
+  border-bottom:
+    1px solid var(--border);
 }
 
 .settingRow:last-child{
@@ -766,17 +853,39 @@ button{
 
 .settingDesc{
   color:var(--muted);
+
   font-size:13px;
+
   margin-top:4px;
+}
+
+/* =========================================================
+   THEMES
+========================================================= */
+
+.themeSectionTitle{
+  margin-top:28px;
+
+  margin-bottom:12px;
+
+  font-size:15px;
+
+  font-weight:800;
+
+  color:var(--text);
+}
+
+.themeSectionTitle:first-child{
+  margin-top:20px;
 }
 
 .themeGrid{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
+
+  grid-template-columns:
+    repeat(5,1fr);
 
   gap:12px;
-
-  margin-top:16px;
 }
 
 .themeOption{
@@ -789,23 +898,66 @@ button{
   padding:8px;
 
   cursor:pointer;
+
+  color:var(--text);
+
+  transition:.2s;
+}
+
+.themeOption:hover{
+  transform:translateY(-2px);
 }
 
 .themeOption.active{
   border-color:var(--primary);
+
+  box-shadow:
+    0 0 0 2px
+    var(--primary2);
 }
 
 .themePreview{
-  height:55px;
+  height:65px;
 
   border-radius:10px;
 
   margin-bottom:7px;
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+.themePreviewBar{
+  position:absolute;
+
+  width:48%;
+  height:10px;
+
+  border-radius:10px;
+
+  left:14%;
+  top:38%;
+}
+
+.themePreviewCircle{
+  position:absolute;
+
+  width:18px;
+  height:18px;
+
+  border-radius:50%;
+
+  right:14%;
+  top:24%;
 }
 
 .themeName{
   font-size:11px;
+
   font-weight:750;
+
+  text-align:center;
 }
 
 /* =========================================================
@@ -817,7 +969,8 @@ button{
 
   inset:0;
 
-  background:rgba(15,25,20,.38);
+  background:
+    rgba(15,25,20,.38);
 
   backdrop-filter:blur(6px);
 
@@ -837,6 +990,7 @@ button{
 
 .modal{
   width:min(540px,100%);
+
   max-height:90vh;
 
   overflow:auto;
@@ -847,7 +1001,9 @@ button{
 
   padding:24px;
 
-  box-shadow:0 25px 70px rgba(0,0,0,.18);
+  box-shadow:
+    0 25px 70px
+    rgba(0,0,0,.18);
 
   animation:modalIn .2s ease;
 }
@@ -855,7 +1011,9 @@ button{
 @keyframes modalIn{
   from{
     opacity:0;
-    transform:translateY(12px) scale(.98);
+    transform:
+      translateY(12px)
+      scale(.98);
   }
 
   to{
@@ -866,6 +1024,7 @@ button{
 
 .modalHeader{
   display:flex;
+
   align-items:center;
   justify-content:space-between;
 
@@ -883,6 +1042,8 @@ button{
   border-radius:11px;
 
   background:var(--surface2);
+
+  color:var(--text);
 }
 
 .formGroup{
@@ -893,6 +1054,7 @@ button{
   display:block;
 
   font-size:13px;
+
   font-weight:750;
 
   margin-bottom:8px;
@@ -909,6 +1071,7 @@ button{
   border:1px solid var(--border);
 
   background:var(--bg);
+
   color:var(--text);
 
   outline:none;
@@ -921,7 +1084,9 @@ button{
 
 .frequencyChoices{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
+
+  grid-template-columns:
+    repeat(3,1fr);
 
   gap:8px;
 }
@@ -934,6 +1099,7 @@ button{
   border:1px solid var(--border);
 
   background:var(--bg);
+
   color:var(--muted);
 
   font-weight:700;
@@ -959,7 +1125,9 @@ button{
 
 .daysGrid{
   display:grid;
-  grid-template-columns:repeat(7,1fr);
+
+  grid-template-columns:
+    repeat(7,1fr);
 
   gap:6px;
 }
@@ -970,9 +1138,11 @@ button{
   border-radius:10px;
 
   background:var(--bg);
+
   color:var(--muted);
 
   font-size:12px;
+
   font-weight:750;
 }
 
@@ -983,6 +1153,7 @@ button{
 
 .modalActions{
   display:flex;
+
   gap:9px;
 
   margin-top:22px;
@@ -1000,6 +1171,7 @@ button{
   position:fixed;
 
   left:50%;
+
   bottom:90px;
 
   transform:
@@ -1007,6 +1179,7 @@ button{
     translateY(15px);
 
   background:#1e2b24;
+
   color:white;
 
   padding:12px 17px;
@@ -1035,7 +1208,6 @@ button{
 
 /* =========================================================
    MOBILE NAV
-   CELLE-CI RESTE FIXE VOLONTAIREMENT
 ========================================================= */
 
 .mobileNav{
@@ -1049,15 +1221,17 @@ button{
 
   height:72px;
 
-  background:rgba(255,255,255,.92);
+  background:var(--surface);
 
   backdrop-filter:blur(18px);
 
-  border-top:1px solid var(--border);
+  border-top:
+    1px solid var(--border);
 
   z-index:80;
 
-  padding-bottom:env(safe-area-inset-bottom);
+  padding-bottom:
+    env(safe-area-inset-bottom);
 }
 
 .mobileNavInner{
@@ -1065,7 +1239,8 @@ button{
 
   display:grid;
 
-  grid-template-columns:repeat(5,1fr);
+  grid-template-columns:
+    repeat(5,1fr);
 }
 
 .mobileNav button{
@@ -1074,9 +1249,11 @@ button{
   color:var(--muted);
 
   font-size:10px;
+
   font-weight:700;
 
   display:flex;
+
   flex-direction:column;
 
   align-items:center;
@@ -1094,138 +1271,299 @@ button{
 }
 
 /* =========================================================
-   THEMES
+   10 THÈMES CLAIRS
 ========================================================= */
 
 body.theme-sage{
   --bg:#f4f8f5;
-  --surface:#fff;
+  --surface:#ffffff;
   --surface2:#edf5ef;
   --text:#203128;
   --muted:#718078;
   --primary:#5f9675;
   --primary2:#8fc3a4;
   --border:#dfe9e2;
+  --shadow:0 10px 30px rgba(39,72,53,.08);
 }
 
 body.theme-mint{
   --bg:#effaf5;
-  --surface:#fff;
+  --surface:#ffffff;
   --surface2:#e3f5ed;
   --text:#17372b;
   --muted:#6c8178;
   --primary:#35a87b;
   --primary2:#76cba9;
   --border:#d7ece2;
+  --shadow:0 10px 30px rgba(31,126,91,.08);
 }
 
 body.theme-ocean{
   --bg:#f1f8fb;
-  --surface:#fff;
+  --surface:#ffffff;
   --surface2:#e3f1f6;
   --text:#19333d;
   --muted:#70838b;
   --primary:#428eaa;
   --primary2:#82bdcf;
   --border:#d8e8ee;
+  --shadow:0 10px 30px rgba(48,116,143,.08);
 }
 
 body.theme-lavender{
   --bg:#f7f4fb;
-  --surface:#fff;
+  --surface:#ffffff;
   --surface2:#eee8f7;
   --text:#302640;
   --muted:#80778d;
   --primary:#8566a8;
   --primary2:#b19ac9;
   --border:#e4dced;
+  --shadow:0 10px 30px rgba(111,80,143,.08);
 }
 
 body.theme-rose{
   --bg:#fff5f6;
-  --surface:#fff;
+  --surface:#ffffff;
   --surface2:#f9e8eb;
   --text:#40272d;
   --muted:#8b747a;
   --primary:#bd6878;
   --primary2:#dc9aa7;
   --border:#efdde1;
+  --shadow:0 10px 30px rgba(164,74,92,.08);
 }
 
 body.theme-amber{
   --bg:#fffaf0;
-  --surface:#fff;
+  --surface:#ffffff;
   --surface2:#f8edd7;
   --text:#40321e;
   --muted:#8a7a60;
   --primary:#c58a2d;
   --primary2:#dfb45f;
   --border:#eee1c7;
+  --shadow:0 10px 30px rgba(160,107,24,.08);
 }
 
 body.theme-forest{
   --bg:#eef5ef;
-  --surface:#fff;
+  --surface:#ffffff;
   --surface2:#deecdf;
   --text:#1e3325;
   --muted:#718073;
   --primary:#386b48;
   --primary2:#76a781;
   --border:#d7e5d9;
-}
-
-body.theme-midnight{
-  --bg:#101514;
-  --surface:#18201e;
-  --surface2:#202c28;
-  --text:#edf6f0;
-  --muted:#9caaa3;
-  --primary:#79c39a;
-  --primary2:#a2d6b8;
-  --border:#2d3a35;
-}
-
-body.theme-graphite{
-  --bg:#17181a;
-  --surface:#202225;
-  --surface2:#292b2f;
-  --text:#f2f3f4;
-  --muted:#a5a8ad;
-  --primary:#b8bcc4;
-  --primary2:#d1d4d9;
-  --border:#34363a;
+  --shadow:0 10px 30px rgba(45,91,57,.09);
 }
 
 body.theme-sky{
   --bg:#f1f7ff;
-  --surface:#fff;
+  --surface:#ffffff;
   --surface2:#e4f0ff;
   --text:#1d3044;
   --muted:#73859a;
   --primary:#4e8fd1;
   --primary2:#88b5e2;
   --border:#dbe8f5;
+  --shadow:0 10px 30px rgba(48,112,180,.08);
 }
 
 body.theme-coffee{
   --bg:#f8f4ef;
-  --surface:#fff;
+  --surface:#ffffff;
   --surface2:#eee5db;
   --text:#382b22;
   --muted:#85776b;
   --primary:#90694f;
   --primary2:#bd9b82;
   --border:#e7ddd2;
+  --shadow:0 10px 30px rgba(111,78,51,.08);
+}
+
+body.theme-glacier{
+  --bg:#f1f9fa;
+  --surface:#ffffff;
+  --surface2:#e1f1f3;
+  --text:#18363b;
+  --muted:#71898d;
+  --primary:#4d9da7;
+  --primary2:#8bcbd0;
+  --border:#d6e9eb;
+  --shadow:0 10px 30px rgba(54,128,139,.08);
+}
+
+/* =========================================================
+   10 THÈMES FONCÉS
+========================================================= */
+
+body.theme-midnight{
+  --bg:#0f1513;
+  --surface:#171f1c;
+  --surface2:#202b27;
+  --text:#edf6f0;
+  --muted:#9baaa2;
+  --primary:#79c39a;
+  --primary2:#a2d6b8;
+  --border:#2d3934;
+  --shadow:0 10px 35px rgba(0,0,0,.28);
+}
+
+body.theme-graphite{
+  --bg:#141517;
+  --surface:#1e2023;
+  --surface2:#292b2f;
+  --text:#f2f3f4;
+  --muted:#a5a8ad;
+  --primary:#b8bcc4;
+  --primary2:#d1d4d9;
+  --border:#34363a;
+  --shadow:0 10px 35px rgba(0,0,0,.3);
+}
+
+body.theme-darkforest{
+  --bg:#0d1711;
+  --surface:#142219;
+  --surface2:#1d3024;
+  --text:#eaf5ec;
+  --muted:#94a99a;
+  --primary:#70b887;
+  --primary2:#9bd0aa;
+  --border:#294332;
+  --shadow:0 10px 35px rgba(0,0,0,.3);
+}
+
+body.theme-deepocean{
+  --bg:#0b151b;
+  --surface:#12232c;
+  --surface2:#1b323e;
+  --text:#e8f5fa;
+  --muted:#91aab5;
+  --primary:#55a9c7;
+  --primary2:#89cce0;
+  --border:#294552;
+  --shadow:0 10px 35px rgba(0,0,0,.3);
+}
+
+body.theme-darklavender{
+  --bg:#15111b;
+  --surface:#211a29;
+  --surface2:#30243b;
+  --text:#f4eef9;
+  --muted:#a99db2;
+  --primary:#a87dcc;
+  --primary2:#c39de0;
+  --border:#443451;
+  --shadow:0 10px 35px rgba(0,0,0,.3);
+}
+
+body.theme-burgundy{
+  --bg:#180d11;
+  --surface:#251318;
+  --surface2:#381c24;
+  --text:#faedf0;
+  --muted:#b39aa0;
+  --primary:#c85d72;
+  --primary2:#e08a9a;
+  --border:#512936;
+  --shadow:0 10px 35px rgba(0,0,0,.3);
+}
+
+body.theme-darkblue{
+  --bg:#0b111c;
+  --surface:#131c2b;
+  --surface2:#1c2a3e;
+  --text:#edf4ff;
+  --muted:#93a5bc;
+  --primary:#5d91d5;
+  --primary2:#8db5e5;
+  --border:#2b3d56;
+  --shadow:0 10px 35px rgba(0,0,0,.3);
+}
+
+body.theme-cyberpurple{
+  --bg:#110d19;
+  --surface:#1b1428;
+  --surface2:#29203c;
+  --text:#f5efff;
+  --muted:#a79bb9;
+  --primary:#a56bea;
+  --primary2:#c394f2;
+  --border:#40305c;
+  --shadow:0 10px 35px rgba(0,0,0,.32);
+}
+
+body.theme-darkcoffee{
+  --bg:#15100d;
+  --surface:#211914;
+  --surface2:#30241d;
+  --text:#f7eee7;
+  --muted:#aa978a;
+  --primary:#bd8964;
+  --primary2:#d6a88a;
+  --border:#46362b;
+  --shadow:0 10px 35px rgba(0,0,0,.3);
+}
+
+body.theme-obsidian{
+  --bg:#090a0c;
+  --surface:#131519;
+  --surface2:#1d2025;
+  --text:#f4f5f7;
+  --muted:#969ba3;
+  --primary:#8f98a6;
+  --primary2:#c0c6cf;
+  --border:#2c3037;
+  --shadow:0 10px 35px rgba(0,0,0,.38);
+}
+
+/* =========================================================
+   DARK THEME FIXES
+========================================================= */
+
+body.theme-midnight .dangerBtn,
+body.theme-graphite .dangerBtn,
+body.theme-darkforest .dangerBtn,
+body.theme-deepocean .dangerBtn,
+body.theme-darklavender .dangerBtn,
+body.theme-burgundy .dangerBtn,
+body.theme-darkblue .dangerBtn,
+body.theme-cyberpurple .dangerBtn,
+body.theme-darkcoffee .dangerBtn,
+body.theme-obsidian .dangerBtn,
+body.theme-midnight .smallDanger,
+body.theme-graphite .smallDanger,
+body.theme-darkforest .smallDanger,
+body.theme-deepocean .smallDanger,
+body.theme-darklavender .smallDanger,
+body.theme-burgundy .smallDanger,
+body.theme-darkblue .smallDanger,
+body.theme-cyberpurple .smallDanger,
+body.theme-darkcoffee .smallDanger,
+body.theme-obsidian .smallDanger{
+  background:#301c20;
+  color:#f08b8b;
 }
 
 /* =========================================================
    RESPONSIVE
 ========================================================= */
 
+@media(max-width:900px){
+
+  .themeGrid{
+    grid-template-columns:
+      repeat(4,1fr);
+  }
+
+}
+
 @media(max-width:800px){
 
   .header{
     height:68px;
+
     padding:0 4%;
 
     position:relative !important;
@@ -1273,7 +1611,8 @@ body.theme-coffee{
   }
 
   .themeGrid{
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:
+      repeat(2,1fr);
   }
 
   .calendar{
@@ -1288,6 +1627,7 @@ body.theme-coffee{
   .dayDots{
     margin-top:9px;
   }
+
 }
 
 @media(max-width:480px){
@@ -1334,6 +1674,7 @@ body.theme-coffee{
   }
 
 }
+
 </style>
 </head>
 
@@ -1387,7 +1728,6 @@ body.theme-coffee{
 
   <p class="pageSubtitle" id="todayDate"></p>
 
-
   <div class="todayTop">
 
     <div class="card progressCard">
@@ -1403,7 +1743,6 @@ body.theme-coffee{
         </p>
 
       </div>
-
 
       <div
         class="progressRing"
@@ -1428,7 +1767,6 @@ body.theme-coffee{
         Ton activité aujourd’hui
       </div>
 
-
       <div style="margin-top:20px">
 
         <strong id="todayHabitsCount">
@@ -1440,7 +1778,6 @@ body.theme-coffee{
         </span>
 
       </div>
-
 
       <div style="margin-top:12px">
 
@@ -1526,7 +1863,6 @@ body.theme-coffee{
         class="monthTitle"
         id="calendarMonth">
       </div>
-
 
       <div class="calendarControls">
 
@@ -1765,9 +2101,23 @@ body.theme-coffee{
     </div>
 
 
+    <div class="themeSectionTitle">
+      Thèmes clairs
+    </div>
+
     <div
       class="themeGrid"
-      id="themeGrid">
+      id="lightThemes">
+    </div>
+
+
+    <div class="themeSectionTitle">
+      Thèmes foncés
+    </div>
+
+    <div
+      class="themeGrid"
+      id="darkThemes">
     </div>
 
   </div>
@@ -1836,7 +2186,7 @@ body.theme-coffee{
 
 
 <!-- =====================================================
-     NAVIGATION MOBILE
+     MOBILE NAV
 ===================================================== -->
 
 <nav class="mobileNav">
@@ -1852,14 +2202,12 @@ body.theme-coffee{
 
     </button>
 
-
     <button data-page="calendar">
 
       <span class="mobileIcon">□</span>
       Calendrier
 
     </button>
-
 
     <button data-page="habits">
 
@@ -1868,14 +2216,12 @@ body.theme-coffee{
 
     </button>
 
-
     <button data-page="stats">
 
       <span class="mobileIcon">▥</span>
       Stats
 
     </button>
-
 
     <button data-page="settings">
 
@@ -2083,7 +2429,6 @@ body.theme-coffee{
         Jours recommandés
       </label>
 
-
       <div
         class="daysGrid"
         id="recommendedDays">
@@ -2282,37 +2627,227 @@ body.theme-coffee{
    DONNÉES
 ========================================================= */
 
-const TASKS_KEY = "habitsV8Tasks";
-const HABITS_KEY = "habitsV8Habits";
-const THEME_KEY = "habitsV8Theme";
+const TASKS_KEY =
+  "habitsV8Tasks";
+
+const HABITS_KEY =
+  "habitsV8Habits";
+
+const THEME_KEY =
+  "habitsV8Theme";
+
 
 let tasks =
   JSON.parse(
-    localStorage.getItem(TASKS_KEY) || "[]"
+    localStorage.getItem(
+      TASKS_KEY
+    ) || "[]"
   );
+
 
 let habits =
   JSON.parse(
-    localStorage.getItem(HABITS_KEY) || "[]"
+    localStorage.getItem(
+      HABITS_KEY
+    ) || "[]"
   );
 
-let currentDate = new Date();
-let calendarDate = new Date();
 
+let currentDate =
+  new Date();
+
+
+let calendarDate =
+  new Date();
+
+
+/* =========================================================
+   THÈMES
+   10 CLAIRS + 10 FONCÉS
+========================================================= */
 
 const themes = [
 
-  ["sage","Sauge","#f4f8f5","#5f9675"],
-  ["mint","Menthe","#effaf5","#35a87b"],
-  ["ocean","Océan","#f1f8fb","#428eaa"],
-  ["lavender","Lavande","#f7f4fb","#8566a8"],
-  ["rose","Rose","#fff5f6","#bd6878"],
-  ["amber","Ambre","#fffaf0","#c58a2d"],
-  ["forest","Forêt","#eef5ef","#386b48"],
-  ["midnight","Midnight","#101514","#79c39a"],
-  ["graphite","Graphite","#17181a","#b8bcc4"],
-  ["sky","Ciel","#f1f7ff","#4e8fd1"],
-  ["coffee","Café","#f8f4ef","#90694f"]
+  {
+    id:"sage",
+    name:"Sauge",
+    type:"light",
+    bg:"#f4f8f5",
+    surface:"#ffffff",
+    primary:"#5f9675"
+  },
+
+  {
+    id:"mint",
+    name:"Menthe",
+    type:"light",
+    bg:"#effaf5",
+    surface:"#ffffff",
+    primary:"#35a87b"
+  },
+
+  {
+    id:"ocean",
+    name:"Océan",
+    type:"light",
+    bg:"#f1f8fb",
+    surface:"#ffffff",
+    primary:"#428eaa"
+  },
+
+  {
+    id:"lavender",
+    name:"Lavande",
+    type:"light",
+    bg:"#f7f4fb",
+    surface:"#ffffff",
+    primary:"#8566a8"
+  },
+
+  {
+    id:"rose",
+    name:"Rose",
+    type:"light",
+    bg:"#fff5f6",
+    surface:"#ffffff",
+    primary:"#bd6878"
+  },
+
+  {
+    id:"amber",
+    name:"Ambre",
+    type:"light",
+    bg:"#fffaf0",
+    surface:"#ffffff",
+    primary:"#c58a2d"
+  },
+
+  {
+    id:"forest",
+    name:"Forêt",
+    type:"light",
+    bg:"#eef5ef",
+    surface:"#ffffff",
+    primary:"#386b48"
+  },
+
+  {
+    id:"sky",
+    name:"Ciel",
+    type:"light",
+    bg:"#f1f7ff",
+    surface:"#ffffff",
+    primary:"#4e8fd1"
+  },
+
+  {
+    id:"coffee",
+    name:"Café",
+    type:"light",
+    bg:"#f8f4ef",
+    surface:"#ffffff",
+    primary:"#90694f"
+  },
+
+  {
+    id:"glacier",
+    name:"Glacier",
+    type:"light",
+    bg:"#f1f9fa",
+    surface:"#ffffff",
+    primary:"#4d9da7"
+  },
+
+
+  {
+    id:"midnight",
+    name:"Midnight",
+    type:"dark",
+    bg:"#0f1513",
+    surface:"#171f1c",
+    primary:"#79c39a"
+  },
+
+  {
+    id:"graphite",
+    name:"Graphite",
+    type:"dark",
+    bg:"#141517",
+    surface:"#1e2023",
+    primary:"#b8bcc4"
+  },
+
+  {
+    id:"darkforest",
+    name:"Dark Forest",
+    type:"dark",
+    bg:"#0d1711",
+    surface:"#142219",
+    primary:"#70b887"
+  },
+
+  {
+    id:"deepocean",
+    name:"Deep Ocean",
+    type:"dark",
+    bg:"#0b151b",
+    surface:"#12232c",
+    primary:"#55a9c7"
+  },
+
+  {
+    id:"darklavender",
+    name:"Dark Lavender",
+    type:"dark",
+    bg:"#15111b",
+    surface:"#211a29",
+    primary:"#a87dcc"
+  },
+
+  {
+    id:"burgundy",
+    name:"Burgundy",
+    type:"dark",
+    bg:"#180d11",
+    surface:"#251318",
+    primary:"#c85d72"
+  },
+
+  {
+    id:"darkblue",
+    name:"Dark Blue",
+    type:"dark",
+    bg:"#0b111c",
+    surface:"#131c2b",
+    primary:"#5d91d5"
+  },
+
+  {
+    id:"cyberpurple",
+    name:"Cyber Purple",
+    type:"dark",
+    bg:"#110d19",
+    surface:"#1b1428",
+    primary:"#a56bea"
+  },
+
+  {
+    id:"darkcoffee",
+    name:"Dark Coffee",
+    type:"dark",
+    bg:"#15100d",
+    surface:"#211914",
+    primary:"#bd8964"
+  },
+
+  {
+    id:"obsidian",
+    name:"Obsidian",
+    type:"dark",
+    bg:"#090a0c",
+    surface:"#131519",
+    primary:"#8f98a6"
+  }
 
 ];
 
@@ -2342,12 +2877,14 @@ function dateKey(date){
     date.getFullYear();
 
   const m =
-    String(date.getMonth()+1)
-      .padStart(2,"0");
+    String(
+      date.getMonth()+1
+    ).padStart(2,"0");
 
   const d =
-    String(date.getDate())
-      .padStart(2,"0");
+    String(
+      date.getDate()
+    ).padStart(2,"0");
 
   return `${y}-${m}-${d}`;
 
@@ -2359,23 +2896,30 @@ function parseKey(key){
   const [y,m,d] =
     key.split("-").map(Number);
 
-  return new Date(y,m-1,d);
+  return new Date(
+    y,
+    m-1,
+    d
+  );
 
 }
 
 
 function isSameDay(a,b){
 
-  return dateKey(a) === dateKey(b);
+  return dateKey(a) ===
+    dateKey(b);
 
 }
 
 
 function startOfWeek(date){
 
-  const d = new Date(date);
+  const d =
+    new Date(date);
 
-  const day = d.getDay();
+  const day =
+    d.getDay();
 
   const diff =
     day === 0
@@ -2386,7 +2930,9 @@ function startOfWeek(date){
     d.getDate()+diff
   );
 
-  d.setHours(0,0,0,0);
+  d.setHours(
+    0,0,0,0
+  );
 
   return d;
 
@@ -2445,15 +2991,18 @@ function formatDate(date){
 
 function capitalize(str){
 
-  return str.charAt(0).toUpperCase()+str.slice(1);
+  return str.charAt(0).toUpperCase()
+    + str.slice(1);
 
 }
 
 
 function uid(){
 
-  return Date.now().toString(36)
-    + Math.random()
+  return Date.now()
+    .toString(36)
+    +
+    Math.random()
       .toString(36)
       .slice(2);
 
@@ -2475,18 +3024,27 @@ function escapeHtml(value){
 function showToast(message){
 
   const toast =
-    document.getElementById("toast");
+    document.getElementById(
+      "toast"
+    );
 
-  toast.textContent = message;
+  toast.textContent =
+    message;
 
-  toast.classList.add("show");
+  toast.classList.add(
+    "show"
+  );
 
-  clearTimeout(window.toastTimer);
+  clearTimeout(
+    window.toastTimer
+  );
 
   window.toastTimer =
     setTimeout(
       ()=>{
-        toast.classList.remove("show");
+        toast.classList.remove(
+          "show"
+        );
       },
       2200
     );
@@ -2500,11 +3058,15 @@ function showToast(message){
 
 function frequencyLabel(habit){
 
-  if(habit.frequency === "daily"){
+  if(
+    habit.frequency === "daily"
+  ){
     return "Tous les jours";
   }
 
-  if(habit.frequency === "weekly"){
+  if(
+    habit.frequency === "weekly"
+  ){
 
     return habit.target === 1
       ? "1 fois par semaine"
@@ -2512,7 +3074,9 @@ function frequencyLabel(habit){
 
   }
 
-  if(habit.frequency === "monthly"){
+  if(
+    habit.frequency === "monthly"
+  ){
 
     return habit.target === 1
       ? "1 fois par mois"
@@ -2527,37 +3091,54 @@ function frequencyLabel(habit){
 
 function getHabitTarget(habit){
 
-  if(habit.frequency === "daily"){
+  if(
+    habit.frequency === "daily"
+  ){
     return 7;
   }
 
-  return Number(habit.target || 1);
+  return Number(
+    habit.target || 1
+  );
 
 }
 
 
-function getHabitCount(habit,date){
+function getHabitCount(
+  habit,
+  date
+){
 
   if(!habit.completions){
     habit.completions = {};
   }
 
 
-  if(habit.frequency === "daily"){
+  if(
+    habit.frequency === "daily"
+  ){
 
     let count = 0;
 
     const weekStart =
       startOfWeek(date);
 
-    for(let i=0;i<7;i++){
+
+    for(
+      let i=0;
+      i<7;
+      i++
+    ){
 
       const d =
-        new Date(weekStart);
+        new Date(
+          weekStart
+        );
 
       d.setDate(
         d.getDate()+i
       );
+
 
       if(
         habit.completions[
@@ -2569,12 +3150,15 @@ function getHabitCount(habit,date){
 
     }
 
+
     return count;
 
   }
 
 
-  if(habit.frequency === "weekly"){
+  if(
+    habit.frequency === "weekly"
+  ){
 
     let count = 0;
 
@@ -2584,28 +3168,36 @@ function getHabitCount(habit,date){
     const end =
       endOfWeek(date);
 
-    Object.keys(
-      habit.completions
-    ).forEach(key=>{
 
-      const d =
-        parseKey(key);
+    Object
+      .keys(
+        habit.completions
+      )
+      .forEach(
+        key=>{
 
-      if(
-        d >= start &&
-        d <= end
-      ){
-        count++;
-      }
+          const d =
+            parseKey(key);
 
-    });
+          if(
+            d >= start &&
+            d <= end
+          ){
+            count++;
+          }
+
+        }
+      );
+
 
     return count;
 
   }
 
 
-  if(habit.frequency === "monthly"){
+  if(
+    habit.frequency === "monthly"
+  ){
 
     let count = 0;
 
@@ -2615,21 +3207,27 @@ function getHabitCount(habit,date){
     const end =
       endOfMonth(date);
 
-    Object.keys(
-      habit.completions
-    ).forEach(key=>{
 
-      const d =
-        parseKey(key);
+    Object
+      .keys(
+        habit.completions
+      )
+      .forEach(
+        key=>{
 
-      if(
-        d >= start &&
-        d <= end
-      ){
-        count++;
-      }
+          const d =
+            parseKey(key);
 
-    });
+          if(
+            d >= start &&
+            d <= end
+          ){
+            count++;
+          }
+
+        }
+      );
+
 
     return count;
 
@@ -2641,7 +3239,10 @@ function getHabitCount(habit,date){
 }
 
 
-function getHabitProgress(habit,date){
+function getHabitProgress(
+  habit,
+  date
+){
 
   const target =
     getHabitTarget(habit);
@@ -2651,6 +3252,7 @@ function getHabitProgress(habit,date){
       habit,
       date
     );
+
 
   return Math.min(
     100,
@@ -2660,7 +3262,10 @@ function getHabitProgress(habit,date){
 }
 
 
-function getHabitPeriodText(habit,date){
+function getHabitPeriodText(
+  habit,
+  date
+){
 
   const count =
     getHabitCount(
@@ -2672,17 +3277,26 @@ function getHabitPeriodText(habit,date){
     getHabitTarget(habit);
 
 
-  if(habit.frequency === "daily"){
+  if(
+    habit.frequency === "daily"
+  ){
     return `${count}/7 cette semaine`;
   }
 
-  if(habit.frequency === "weekly"){
+
+  if(
+    habit.frequency === "weekly"
+  ){
     return `${count}/${target} cette semaine`;
   }
 
-  if(habit.frequency === "monthly"){
+
+  if(
+    habit.frequency === "monthly"
+  ){
     return `${count}/${target} ce mois`;
   }
+
 
   return "";
 
@@ -2699,7 +3313,9 @@ function goToPage(page){
     .querySelectorAll(".page")
     .forEach(
       el=>{
-        el.classList.remove("active");
+        el.classList.remove(
+          "active"
+        );
       }
     );
 
@@ -2711,12 +3327,16 @@ function goToPage(page){
 
 
   if(target){
-    target.classList.add("active");
+    target.classList.add(
+      "active"
+    );
   }
 
 
   document
-    .querySelectorAll("[data-page]")
+    .querySelectorAll(
+      "[data-page]"
+    )
     .forEach(
       btn=>{
         btn.classList.toggle(
@@ -2739,7 +3359,9 @@ function goToPage(page){
 
 
 document
-  .querySelectorAll("[data-page]")
+  .querySelectorAll(
+    "[data-page]"
+  )
   .forEach(
     btn=>{
       btn.addEventListener(
@@ -2771,10 +3393,14 @@ document
 function renderToday(){
 
   document
-    .getElementById("todayDate")
+    .getElementById(
+      "todayDate"
+    )
     .textContent =
       capitalize(
-        formatDate(currentDate)
+        formatDate(
+          currentDate
+        )
       );
 
 
@@ -2797,32 +3423,30 @@ function renderToday(){
   let completedHabits = 0;
 
 
-  habits.forEach(habit=>{
+  habits.forEach(
+    habit=>{
 
-    if(
-      habit.frequency === "daily" &&
-      habit.completions &&
-      habit.completions[key]
-    ){
+      if(
+        habit.frequency === "daily" &&
+        habit.completions &&
+        habit.completions[key]
+      ){
+        completedHabits++;
+      }
 
-      completedHabits++;
+
+      if(
+        habit.frequency !== "daily" &&
+        getHabitProgress(
+          habit,
+          currentDate
+        ) >= 100
+      ){
+        completedHabits++;
+      }
 
     }
-
-
-    if(
-      habit.frequency !== "daily" &&
-      getHabitProgress(
-        habit,
-        currentDate
-      ) >= 100
-    ){
-
-      completedHabits++;
-
-    }
-
-  });
+  );
 
 
   const total =
@@ -2844,19 +3468,25 @@ function renderToday(){
 
 
   document
-    .getElementById("progressText")
+    .getElementById(
+      "progressText"
+    )
     .textContent =
       `${percent}%`;
 
 
   document
-    .getElementById("progressNumber")
+    .getElementById(
+      "progressNumber"
+    )
     .textContent =
       `${percent}%`;
 
 
   document
-    .getElementById("progressRing")
+    .getElementById(
+      "progressRing"
+    )
     .style
     .setProperty(
       "--progress",
@@ -2865,7 +3495,9 @@ function renderToday(){
 
 
   document
-    .getElementById("progressSub")
+    .getElementById(
+      "progressSub"
+    )
     .textContent =
       total === 0
         ? "Commence ta journée."
@@ -2873,13 +3505,17 @@ function renderToday(){
 
 
   document
-    .getElementById("todayHabitsCount")
+    .getElementById(
+      "todayHabitsCount"
+    )
     .textContent =
       habits.length;
 
 
   document
-    .getElementById("todayTasksCount")
+    .getElementById(
+      "todayTasksCount"
+    )
     .textContent =
       dayTasks.length;
 
@@ -2900,7 +3536,9 @@ function renderTodayHabits(){
   container.innerHTML = "";
 
 
-  if(habits.length === 0){
+  if(
+    habits.length === 0
+  ){
 
     container.innerHTML = `
       <div class="empty">
@@ -2914,73 +3552,84 @@ function renderTodayHabits(){
   }
 
 
-  habits.forEach(habit=>{
+  habits.forEach(
+    habit=>{
 
-    const key =
-      dateKey(currentDate);
-
-
-    const checked =
-      habit.completions &&
-      habit.completions[key];
+      const key =
+        dateKey(currentDate);
 
 
-    const div =
-      document.createElement("div");
+      const checked =
+        habit.completions &&
+        habit.completions[key];
 
 
-    div.className = "item";
+      const div =
+        document.createElement(
+          "div"
+        );
 
 
-    div.innerHTML = `
+      div.className =
+        "item";
 
-      <button
-        class="check ${checked ? "done" : ""}"
-        data-habit="${habit.id}">
-      </button>
 
-      <div class="itemContent">
+      div.innerHTML = `
 
-        <div class="itemName">
-          ${escapeHtml(habit.name)}
+        <button
+          class="check ${checked ? "done" : ""}"
+          data-habit="${habit.id}">
+        </button>
+
+        <div class="itemContent">
+
+          <div class="itemName">
+            ${escapeHtml(habit.name)}
+          </div>
+
+          <div class="itemMeta">
+
+            ${escapeHtml(habit.category)}
+            ·
+            ${escapeHtml(
+              frequencyLabel(habit)
+            )}
+            ·
+            ${escapeHtml(
+              getHabitPeriodText(
+                habit,
+                currentDate
+              )
+            )}
+
+          </div>
+
         </div>
 
-        <div class="itemMeta">
+      `;
 
-          ${escapeHtml(habit.category)}
-          ·
-          ${escapeHtml(frequencyLabel(habit))}
-          ·
-          ${escapeHtml(
-            getHabitPeriodText(
-              habit,
+
+      div
+        .querySelector(
+          ".check"
+        )
+        .addEventListener(
+          "click",
+          ()=>{
+            toggleHabit(
+              habit.id,
               currentDate
-            )
-          )}
-
-        </div>
-
-      </div>
-
-    `;
+            );
+          }
+        );
 
 
-    div
-      .querySelector(".check")
-      .addEventListener(
-        "click",
-        ()=>{
-          toggleHabit(
-            habit.id,
-            currentDate
-          );
-        }
+      container.appendChild(
+        div
       );
 
-
-    container.appendChild(div);
-
-  });
+    }
+  );
 
 }
 
@@ -3005,7 +3654,9 @@ function renderTodayTasks(){
     );
 
 
-  if(dayTasks.length === 0){
+  if(
+    dayTasks.length === 0
+  ){
 
     container.innerHTML = `
       <div class="empty">
@@ -3018,94 +3669,109 @@ function renderTodayTasks(){
   }
 
 
-  dayTasks.forEach(task=>{
+  dayTasks.forEach(
+    task=>{
 
-    const div =
-      document.createElement("div");
+      const div =
+        document.createElement(
+          "div"
+        );
 
 
-    div.className = "item";
+      div.className =
+        "item";
 
 
-    div.innerHTML = `
+      div.innerHTML = `
 
-      <button
-        class="check ${task.completed ? "done" : ""}">
-      </button>
+        <button
+          class="check ${task.completed ? "done" : ""}">
+        </button>
 
-      <div class="itemContent">
+        <div class="itemContent">
 
-        <div class="itemName">
-          ${escapeHtml(task.name)}
+          <div class="itemName">
+            ${escapeHtml(task.name)}
+          </div>
+
+          <div class="itemMeta">
+            ${escapeHtml(task.category)}
+          </div>
+
         </div>
 
-        <div class="itemMeta">
-          ${escapeHtml(task.category)}
-        </div>
+        <button class="moreBtn">
+          ⋯
+        </button>
 
-      </div>
-
-      <button class="moreBtn">
-        ⋯
-      </button>
-
-    `;
+      `;
 
 
-    div
-      .querySelector(".check")
-      .addEventListener(
-        "click",
-        ()=>{
+      div
+        .querySelector(
+          ".check"
+        )
+        .addEventListener(
+          "click",
+          ()=>{
 
-          task.completed =
-            !task.completed;
-
-          saveData();
-          renderAll();
-
-        }
-      );
-
-
-    div
-      .querySelector(".moreBtn")
-      .addEventListener(
-        "click",
-        ()=>{
-
-          if(
-            confirm(
-              "Supprimer cette tâche ?"
-            )
-          ){
-
-            tasks =
-              tasks.filter(
-                t=>t.id !== task.id
-              );
+            task.completed =
+              !task.completed;
 
             saveData();
             renderAll();
 
-            showToast(
-              "Tâche supprimée"
-            );
+          }
+        );
+
+
+      div
+        .querySelector(
+          ".moreBtn"
+        )
+        .addEventListener(
+          "click",
+          ()=>{
+
+            if(
+              confirm(
+                "Supprimer cette tâche ?"
+              )
+            ){
+
+              tasks =
+                tasks.filter(
+                  t=>
+                    t.id !== task.id
+                );
+
+              saveData();
+              renderAll();
+
+              showToast(
+                "Tâche supprimée"
+              );
+
+            }
 
           }
+        );
 
-        }
+
+      container.appendChild(
+        div
       );
 
-
-    container.appendChild(div);
-
-  });
+    }
+  );
 
 }
 
 
-function toggleHabit(id,date){
+function toggleHabit(
+  id,
+  date
+){
 
   const habit =
     habits.find(
@@ -3151,7 +3817,9 @@ function renderHabits(){
   container.innerHTML = "";
 
 
-  if(habits.length === 0){
+  if(
+    habits.length === 0
+  ){
 
     container.innerHTML = `
       <div
@@ -3169,147 +3837,158 @@ function renderHabits(){
   }
 
 
-  habits.forEach(habit=>{
+  habits.forEach(
+    habit=>{
 
-    const progress =
-      getHabitProgress(
-        habit,
-        currentDate
-      );
-
-
-    const div =
-      document.createElement("div");
+      const progress =
+        getHabitProgress(
+          habit,
+          currentDate
+        );
 
 
-    div.className =
-      "card habitCard";
+      const div =
+        document.createElement(
+          "div"
+        );
 
 
-    div.innerHTML = `
+      div.className =
+        "card habitCard";
 
-      <div class="habitTop">
 
-        <div class="habitIcon">
-          ✓
-        </div>
+      div.innerHTML = `
 
-        <div class="habitInfo">
+        <div class="habitTop">
 
-          <div class="habitName">
-            ${escapeHtml(habit.name)}
+          <div class="habitIcon">
+            ✓
           </div>
 
-          <div class="habitFrequency">
+          <div class="habitInfo">
 
-            ${escapeHtml(
-              frequencyLabel(habit)
-            )}
+            <div class="habitName">
+              ${escapeHtml(habit.name)}
+            </div>
 
-            ·
+            <div class="habitFrequency">
 
-            ${escapeHtml(
-              habit.category
-            )}
+              ${escapeHtml(
+                frequencyLabel(habit)
+              )}
 
-          </div>
+              ·
 
-        </div>
+              ${escapeHtml(
+                habit.category
+              )}
 
-      </div>
+            </div>
 
-
-      <div class="habitProgress">
-
-        <div class="progressBar">
-
-          <div
-            style="width:${progress}%">
           </div>
 
         </div>
 
 
-        <div class="progressLine">
+        <div class="habitProgress">
 
-          <span>
-            ${escapeHtml(
-              getHabitPeriodText(
-                habit,
-                currentDate
+          <div class="progressBar">
+
+            <div
+              style="width:${progress}%">
+            </div>
+
+          </div>
+
+
+          <div class="progressLine">
+
+            <span>
+              ${escapeHtml(
+                getHabitPeriodText(
+                  habit,
+                  currentDate
+                )
+              )}
+            </span>
+
+            <span>
+              ${Math.round(progress)}%
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="habitActions">
+
+          <button class="smallBtn editHabit">
+            Modifier
+          </button>
+
+          <button class="smallDanger deleteHabit">
+            Supprimer
+          </button>
+
+        </div>
+
+      `;
+
+
+      div
+        .querySelector(
+          ".editHabit"
+        )
+        .addEventListener(
+          "click",
+          ()=>{
+            openHabitModal(
+              habit.id
+            );
+          }
+        );
+
+
+      div
+        .querySelector(
+          ".deleteHabit"
+        )
+        .addEventListener(
+          "click",
+          ()=>{
+
+            if(
+              confirm(
+                `Supprimer « ${habit.name} » ?`
               )
-            )}
-          </span>
+            ){
 
-          <span>
-            ${Math.round(progress)}%
-          </span>
+              habits =
+                habits.filter(
+                  h=>
+                    h.id !== habit.id
+                );
 
-        </div>
+              saveData();
+              renderAll();
 
-      </div>
-
-
-      <div class="habitActions">
-
-        <button class="smallBtn editHabit">
-          Modifier
-        </button>
-
-        <button class="smallDanger deleteHabit">
-          Supprimer
-        </button>
-
-      </div>
-
-    `;
-
-
-    div
-      .querySelector(".editHabit")
-      .addEventListener(
-        "click",
-        ()=>{
-          openHabitModal(
-            habit.id
-          );
-        }
-      );
-
-
-    div
-      .querySelector(".deleteHabit")
-      .addEventListener(
-        "click",
-        ()=>{
-
-          if(
-            confirm(
-              `Supprimer « ${habit.name} » ?`
-            )
-          ){
-
-            habits =
-              habits.filter(
-                h=>h.id !== habit.id
+              showToast(
+                "Habitude supprimée"
               );
 
-            saveData();
-            renderAll();
-
-            showToast(
-              "Habitude supprimée"
-            );
+            }
 
           }
+        );
 
-        }
+
+      container.appendChild(
+        div
       );
 
-
-    container.appendChild(div);
-
-  });
+    }
+  );
 
 }
 
@@ -3359,7 +4038,9 @@ let selectedFrequency =
 
 
 document
-  .querySelectorAll(".frequencyChoice")
+  .querySelectorAll(
+    ".frequencyChoice"
+  )
   .forEach(
     btn=>{
 
@@ -3411,7 +4092,9 @@ document
   );
 
 
-function openHabitModal(id=null){
+function openHabitModal(
+  id=null
+){
 
   document
     .getElementById(
@@ -3448,10 +4131,14 @@ function openHabitModal(id=null){
 
 
   weeklyExtra
-    .classList.remove("show");
+    .classList.remove(
+      "show"
+    );
 
   monthlyExtra
-    .classList.remove("show");
+    .classList.remove(
+      "show"
+    );
 
 
   document
@@ -3493,11 +4180,13 @@ function openHabitModal(id=null){
 
 
     habitCategory.value =
-      habit.category || "Autre";
+      habit.category ||
+      "Autre";
 
 
     selectedFrequency =
-      habit.frequency || "daily";
+      habit.frequency ||
+      "daily";
 
 
     document
@@ -3516,11 +4205,14 @@ function openHabitModal(id=null){
 
 
     if(
-      selectedFrequency === "weekly"
+      selectedFrequency ===
+      "weekly"
     ){
 
       weeklyExtra
-        .classList.add("show");
+        .classList.add(
+          "show"
+        );
 
       weeklyTarget.value =
         habit.target || 1;
@@ -3529,11 +4221,14 @@ function openHabitModal(id=null){
 
 
     if(
-      selectedFrequency === "monthly"
+      selectedFrequency ===
+      "monthly"
     ){
 
       monthlyExtra
-        .classList.add("show");
+        .classList.add(
+          "show"
+        );
 
       monthlyTarget.value =
         habit.target || 1;
@@ -3541,7 +4236,9 @@ function openHabitModal(id=null){
     }
 
 
-    if(habit.recommendedDays){
+    if(
+      habit.recommendedDays
+    ){
 
       habit.recommendedDays
         .forEach(
@@ -3573,19 +4270,25 @@ function openHabitModal(id=null){
         "Nouvelle habitude";
 
 
-    habitName.value = "";
+    habitName.value =
+      "";
 
-    habitCategory.value = "Sport";
+    habitCategory.value =
+      "Sport";
 
-    weeklyTarget.value = 2;
+    weeklyTarget.value =
+      2;
 
-    monthlyTarget.value = 5;
+    monthlyTarget.value =
+      5;
 
   }
 
 
   habitModal
-    .classList.add("show");
+    .classList.add(
+      "show"
+    );
 
 
   setTimeout(
@@ -3601,13 +4304,17 @@ function openHabitModal(id=null){
 function closeHabitModal(){
 
   habitModal
-    .classList.remove("show");
+    .classList.remove(
+      "show"
+    );
 
 }
 
 
 document
-  .getElementById("newHabitBtn")
+  .getElementById(
+    "newHabitBtn"
+  )
   .addEventListener(
     "click",
     ()=>{
@@ -3617,7 +4324,9 @@ document
 
 
 document
-  .getElementById("closeHabitModal")
+  .getElementById(
+    "closeHabitModal"
+  )
   .addEventListener(
     "click",
     closeHabitModal
@@ -3625,7 +4334,9 @@ document
 
 
 document
-  .getElementById("cancelHabit")
+  .getElementById(
+    "cancelHabit"
+  )
   .addEventListener(
     "click",
     closeHabitModal
@@ -3635,7 +4346,10 @@ document
 habitModal.addEventListener(
   "click",
   e=>{
-    if(e.target === habitModal){
+    if(
+      e.target ===
+      habitModal
+    ){
       closeHabitModal();
     }
   }
@@ -3643,7 +4357,9 @@ habitModal.addEventListener(
 
 
 document
-  .querySelectorAll(".dayChoice")
+  .querySelectorAll(
+    ".dayChoice"
+  )
   .forEach(
     btn=>{
 
@@ -3661,7 +4377,9 @@ document
 
 
 document
-  .getElementById("saveHabit")
+  .getElementById(
+    "saveHabit"
+  )
   .addEventListener(
     "click",
     ()=>{
@@ -3685,7 +4403,8 @@ document
 
 
       if(
-        selectedFrequency === "weekly"
+        selectedFrequency ===
+        "weekly"
       ){
 
         target =
@@ -3697,7 +4416,8 @@ document
 
 
       if(
-        selectedFrequency === "monthly"
+        selectedFrequency ===
+        "monthly"
       ){
 
         target =
@@ -3805,7 +4525,7 @@ document
 
 
 /* =========================================================
-   MODAL TÂCHE
+   TÂCHES
 ========================================================= */
 
 const taskModal =
@@ -3815,18 +4535,24 @@ const taskModal =
 
 
 document
-  .getElementById("addTaskBtn")
+  .getElementById(
+    "addTaskBtn"
+  )
   .addEventListener(
     "click",
     ()=>{
 
       document
-        .getElementById("taskName")
+        .getElementById(
+          "taskName"
+        )
         .value = "";
 
 
       taskModal
-        .classList.add("show");
+        .classList.add(
+          "show"
+        );
 
 
       setTimeout(
@@ -3847,13 +4573,17 @@ document
 function closeTaskModal(){
 
   taskModal
-    .classList.remove("show");
+    .classList.remove(
+      "show"
+    );
 
 }
 
 
 document
-  .getElementById("closeTaskModal")
+  .getElementById(
+    "closeTaskModal"
+  )
   .addEventListener(
     "click",
     closeTaskModal
@@ -3861,7 +4591,9 @@ document
 
 
 document
-  .getElementById("cancelTask")
+  .getElementById(
+    "cancelTask"
+  )
   .addEventListener(
     "click",
     closeTaskModal
@@ -3871,7 +4603,10 @@ document
 taskModal.addEventListener(
   "click",
   e=>{
-    if(e.target === taskModal){
+    if(
+      e.target ===
+      taskModal
+    ){
       closeTaskModal();
     }
   }
@@ -3879,14 +4614,18 @@ taskModal.addEventListener(
 
 
 document
-  .getElementById("saveTask")
+  .getElementById(
+    "saveTask"
+  )
   .addEventListener(
     "click",
     ()=>{
 
       const name =
         document
-          .getElementById("taskName")
+          .getElementById(
+            "taskName"
+          )
           .value
           .trim();
 
@@ -4067,7 +4806,8 @@ function renderCalendar(){
 
   const totalCells =
     Math.ceil(
-      grid.children.length / 7
+      grid.children.length /
+      7
     ) * 7;
 
 
@@ -4095,15 +4835,24 @@ function renderCalendar(){
 }
 
 
-function createCalendarDay(date,muted){
+function createCalendarDay(
+  date,
+  muted
+){
 
   const div =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
 
   div.className =
     "day" +
-    (muted ? " muted" : "");
+    (
+      muted
+        ? " muted"
+        : ""
+    );
 
 
   if(
@@ -4148,7 +4897,9 @@ function createCalendarDay(date,muted){
 
       ${completedHabits
         .map(
-          ()=>`<span class="dot"></span>`
+          ()=>`
+            <span class="dot"></span>
+          `
         )
         .join("")}
 
@@ -4157,7 +4908,9 @@ function createCalendarDay(date,muted){
           t=>t.completed
         )
         .map(
-          ()=>`<span class="dot task"></span>`
+          ()=>`
+            <span class="dot task"></span>
+          `
         )
         .join("")}
 
@@ -4173,7 +4926,9 @@ function createCalendarDay(date,muted){
       currentDate =
         new Date(date);
 
-      goToPage("today");
+      goToPage(
+        "today"
+      );
 
     }
   );
@@ -4185,7 +4940,9 @@ function createCalendarDay(date,muted){
 
 
 document
-  .getElementById("prevMonth")
+  .getElementById(
+    "prevMonth"
+  )
   .addEventListener(
     "click",
     ()=>{
@@ -4201,7 +4958,9 @@ document
 
 
 document
-  .getElementById("nextMonth")
+  .getElementById(
+    "nextMonth"
+  )
   .addEventListener(
     "click",
     ()=>{
@@ -4217,7 +4976,9 @@ document
 
 
 document
-  .getElementById("todayMonth")
+  .getElementById(
+    "todayMonth"
+  )
   .addEventListener(
     "click",
     ()=>{
@@ -4230,7 +4991,9 @@ document
 
       renderCalendar();
 
-      goToPage("today");
+      goToPage(
+        "today"
+      );
 
     }
   );
@@ -4243,6 +5006,7 @@ document
 function renderStats(){
 
   let total = 0;
+
   let completed = 0;
 
 
@@ -4251,7 +5015,9 @@ function renderStats(){
 
       total++;
 
-      if(task.completed){
+      if(
+        task.completed
+      ){
         completed++;
       }
 
@@ -4262,7 +5028,9 @@ function renderStats(){
   habits.forEach(
     habit=>{
 
-      if(!habit.completions){
+      if(
+        !habit.completions
+      ){
         return;
       }
 
@@ -4296,19 +5064,25 @@ function renderStats(){
 
 
   document
-    .getElementById("statCompletion")
+    .getElementById(
+      "statCompletion"
+    )
     .textContent =
       `${completion}%`;
 
 
   document
-    .getElementById("statHabits")
+    .getElementById(
+      "statHabits"
+    )
     .textContent =
       habits.length;
 
 
   document
-    .getElementById("statTasks")
+    .getElementById(
+      "statTasks"
+    )
     .textContent =
       tasks.filter(
         t=>t.completed
@@ -4316,6 +5090,7 @@ function renderStats(){
 
 
   renderWeeklyChart();
+
   renderCategoryStats();
 
 }
@@ -4335,7 +5110,11 @@ function renderWeeklyChart(){
   const days = [];
 
 
-  for(let i=6;i>=0;i--){
+  for(
+    let i=6;
+    i>=0;
+    i--
+  ){
 
     const d =
       new Date();
@@ -4382,7 +5161,10 @@ function renderWeeklyChart(){
           ).length;
 
 
-        return habitCount + taskCount;
+        return (
+          habitCount +
+          taskCount
+        );
 
       }
     );
@@ -4446,10 +5228,17 @@ function renderWeeklyChart(){
           );
 
 
-      wrap.appendChild(bar);
-      wrap.appendChild(label);
+      wrap.appendChild(
+        bar
+      );
 
-      container.appendChild(wrap);
+      wrap.appendChild(
+        label
+      );
+
+      container.appendChild(
+        wrap
+      );
 
     }
   );
@@ -4474,7 +5263,9 @@ function renderCategoryStats(){
   tasks.forEach(
     task=>{
 
-      if(!task.completed){
+      if(
+        !task.completed
+      ){
         return;
       }
 
@@ -4529,7 +5320,9 @@ function renderCategoryStats(){
     );
 
 
-  if(entries.length === 0){
+  if(
+    entries.length === 0
+  ){
 
     container.innerHTML = `
       <div
@@ -4588,7 +5381,9 @@ function renderCategoryStats(){
           <div class="categoryBar">
 
             <div
-              style="width:${(count/max)*100}%">
+              style="
+                width:${(count/max)*100}%
+              ">
             </div>
 
           </div>
@@ -4596,7 +5391,9 @@ function renderCategoryStats(){
         `;
 
 
-        container.appendChild(row);
+        container.appendChild(
+          row
+        );
 
       }
     );
@@ -4622,7 +5419,7 @@ function applyTheme(theme){
 
   const data =
     themes.find(
-      t=>t[0] === theme
+      t=>t.id === theme
     );
 
 
@@ -4634,7 +5431,7 @@ function applyTheme(theme){
       )
       .setAttribute(
         "content",
-        data[3]
+        data.primary
       );
 
   }
@@ -4645,16 +5442,9 @@ function applyTheme(theme){
 }
 
 
-function renderThemes(){
-
-  const container =
-    document.getElementById(
-      "themeGrid"
-    );
-
-
-  container.innerHTML = "";
-
+function createThemeButton(
+  theme
+){
 
   const current =
     localStorage.getItem(
@@ -4662,82 +5452,121 @@ function renderThemes(){
     ) || "sage";
 
 
-  themes.forEach(
-    theme=>{
-
-      const [
-        id,
-        name,
-        bg,
-        primary
-      ] = theme;
+  const button =
+    document.createElement(
+      "button"
+    );
 
 
-      const button =
-        document.createElement(
-          "button"
-        );
+  button.className =
+    "themeOption" +
+    (
+      theme.id === current
+        ? " active"
+        : ""
+    );
 
 
-      button.className =
-        "themeOption" +
-        (
-          id === current
-            ? " active"
-            : ""
-        );
+  button.innerHTML = `
+
+    <div
+      class="themePreview"
+      style="
+        background:${theme.bg};
+        border:1px solid ${theme.primary}55;
+      "
+    >
+
+      <div
+        class="themePreviewBar"
+        style="
+          background:${theme.primary};
+        "
+      ></div>
+
+      <div
+        class="themePreviewCircle"
+        style="
+          background:${theme.primary};
+        "
+      ></div>
+
+    </div>
+
+    <div class="themeName">
+      ${theme.name}
+    </div>
+
+  `;
 
 
-      button.innerHTML = `
+  button.addEventListener(
+    "click",
+    ()=>{
 
-        <div
-          class="themePreview"
-          style="
-            background:${bg};
-            border:1px solid ${primary}55;
-            position:relative;
-          "
-        >
-
-          <div
-            style="
-              position:absolute;
-              width:45%;
-              height:10px;
-              border-radius:10px;
-              background:${primary};
-              left:14%;
-              top:38%;
-            "
-          ></div>
-
-        </div>
-
-        <div class="themeName">
-          ${name}
-        </div>
-
-      `;
-
-
-      button.addEventListener(
-        "click",
-        ()=>{
-
-          applyTheme(id);
-
-          showToast(
-            `Thème ${name} appliqué.`
-          );
-
-        }
+      applyTheme(
+        theme.id
       );
 
-
-      container.appendChild(button);
+      showToast(
+        `Thème ${theme.name} appliqué.`
+      );
 
     }
   );
+
+
+  return button;
+
+}
+
+
+function renderThemes(){
+
+  const light =
+    document.getElementById(
+      "lightThemes"
+    );
+
+  const dark =
+    document.getElementById(
+      "darkThemes"
+    );
+
+
+  light.innerHTML = "";
+
+  dark.innerHTML = "";
+
+
+  themes
+    .filter(
+      t=>t.type === "light"
+    )
+    .forEach(
+      theme=>{
+        light.appendChild(
+          createThemeButton(
+            theme
+          )
+        );
+      }
+    );
+
+
+  themes
+    .filter(
+      t=>t.type === "dark"
+    )
+    .forEach(
+      theme=>{
+        dark.appendChild(
+          createThemeButton(
+            theme
+          )
+        );
+      }
+    );
 
 }
 
@@ -4747,7 +5576,9 @@ function renderThemes(){
 ========================================================= */
 
 document
-  .getElementById("settingsToday")
+  .getElementById(
+    "settingsToday"
+  )
   .addEventListener(
     "click",
     ()=>{
@@ -4758,14 +5589,18 @@ document
       calendarDate =
         new Date();
 
-      goToPage("today");
+      goToPage(
+        "today"
+      );
 
     }
   );
 
 
 document
-  .getElementById("resetData")
+  .getElementById(
+    "resetData"
+  )
   .addEventListener(
     "click",
     ()=>{
@@ -4782,6 +5617,7 @@ document
 
 
       tasks = [];
+
       habits = [];
 
 
@@ -4805,9 +5641,13 @@ document
 function renderAll(){
 
   renderToday();
+
   renderHabits();
+
   renderCalendar();
+
   renderStats();
+
   renderThemes();
 
 }
@@ -4823,9 +5663,8 @@ const savedTheme =
   ) || "sage";
 
 
-applyTheme(
-  savedTheme
-);
+document.body.className =
+  `theme-${savedTheme}`;
 
 
 renderAll();
