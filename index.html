@@ -2,216 +2,151 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f5f7f6">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="HABITS">
-<link rel="manifest" href="manifest.json">
-
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#0f1117">
 <title>HABITS.</title>
 
 <style>
 /* =========================================================
-   HABITS. — V2.1
+   HABITS. — COMPLETE APP
    ========================================================= */
 
 :root{
-  --bg:#f4f7f5;
-  --bg2:#ffffff;
-  --card:#ffffff;
-  --card2:#f0f4f1;
-  --text:#17201b;
-  --muted:#78837d;
-  --line:rgba(20,35,27,.09);
-  --accent:#6f9a7d;
-  --accent2:#9dbca7;
-  --accentSoft:rgba(111,154,125,.14);
-  --danger:#df6868;
-  --shadow:0 12px 35px rgba(20,35,27,.07);
-  --radius:24px;
-  --navH:78px;
-  --font:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --bg:#f5f6f8;
+    --surface:#ffffff;
+    --surface2:#f0f2f5;
+    --text:#15171c;
+    --muted:#747985;
+    --border:rgba(20,25,35,.08);
+    --accent:#607d68;
+    --accent2:#8da995;
+    --accent-soft:rgba(96,125,104,.12);
+    --danger:#ef5350;
+    --warning:#e7a52b;
+    --shadow:0 12px 40px rgba(20,25,35,.08);
+    --radius:22px;
+    --nav-height:76px;
+    --transition:.25s ease;
 }
 
 *{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
 }
 
 html{
-  scroll-behavior:smooth;
+    scroll-behavior:smooth;
 }
 
 body{
-  margin:0;
-  font-family:var(--font);
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  overflow-x:hidden;
-  transition:
-    background .5s ease,
-    color .5s ease;
+    margin:0;
+    min-height:100vh;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    transition:
+        background .45s ease,
+        color .35s ease;
+    overflow-x:hidden;
 }
 
 button,
 input,
-select,
-textarea{
-  font:inherit;
+textarea,
+select{
+    font:inherit;
 }
 
 button{
-  border:0;
-  cursor:pointer;
-  color:inherit;
+    border:0;
+    cursor:pointer;
 }
-
-button:active{
-  transform:scale(.97);
-}
-
-input,
-select,
-textarea{
-  width:100%;
-  border:1px solid var(--line);
-  background:var(--card2);
-  color:var(--text);
-  border-radius:15px;
-  padding:13px 15px;
-  outline:none;
-  transition:.2s;
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-  border-color:var(--accent);
-  box-shadow:0 0 0 4px var(--accentSoft);
-}
-
-textarea{
-  resize:vertical;
-  min-height:90px;
-}
-
-::-webkit-scrollbar{
-  width:8px;
-}
-
-::-webkit-scrollbar-thumb{
-  background:var(--accent);
-  border-radius:20px;
-}
-
-/* =========================================================
-   APP
-   ========================================================= */
 
 .app{
-  min-height:100vh;
-  position:relative;
+    min-height:100vh;
+    position:relative;
 }
 
-.background-effects{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-1;
-  overflow:hidden;
+main{
+    width:min(1180px,100%);
+    margin:auto;
+    padding:
+        max(24px,env(safe-area-inset-top))
+        18px
+        calc(var(--nav-height) + 35px + env(safe-area-inset-bottom));
 }
 
 .page{
-  display:none;
-  width:min(1100px,100%);
-  margin:auto;
-  padding:30px 20px calc(var(--navH) + 45px);
-  animation:pageIn .3s ease;
+    display:none;
+    animation:pageIn .28s ease;
 }
 
 .page.active{
-  display:block;
+    display:block;
 }
 
 @keyframes pageIn{
-  from{
-    opacity:0;
-    transform:translateY(8px);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
+    from{
+        opacity:0;
+        transform:translateY(8px);
+    }
+    to{
+        opacity:1;
+        transform:none;
+    }
 }
 
-.page-header{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:20px;
-  margin-bottom:26px;
+h1,h2,h3,h4,p{
+    margin-top:0;
 }
 
-.page-title{
-  margin:0;
-  font-size:clamp(30px,6vw,45px);
-  line-height:1;
-  font-weight:850;
-  letter-spacing:-1.8px;
+h1{
+    font-size:clamp(30px,6vw,44px);
+    letter-spacing:-1.8px;
+    margin-bottom:8px;
 }
 
-.page-subtitle{
-  margin:10px 0 0;
-  color:var(--muted);
-  font-size:14px;
+h2{
+    font-size:25px;
+    letter-spacing:-.8px;
 }
 
-.section-title{
-  font-size:18px;
-  font-weight:800;
-  margin:28px 0 13px;
+h3{
+    font-size:18px;
 }
 
-/* =========================================================
-   TOP HEADER
-   ========================================================= */
+p{
+    line-height:1.55;
+}
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:11px;
+.muted{
+    color:var(--muted);
+}
+
+.small{
+    font-size:13px;
+}
+
+.app-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:15px;
+    margin-bottom:26px;
 }
 
 .logo{
-  width:43px;
-  height:43px;
-  border-radius:14px;
-  display:grid;
-  place-items:center;
-  color:white;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
-  box-shadow:0 9px 25px color-mix(in srgb,var(--accent) 28%,transparent);
-  font-weight:900;
-  font-size:16px;
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:-1.2px;
 }
 
-.brand-name{
-  font-size:18px;
-  font-weight:900;
-  letter-spacing:-.7px;
-}
-
-.header-action{
-  width:44px;
-  height:44px;
-  border-radius:15px;
-  background:var(--card);
-  border:1px solid var(--line);
-  display:grid;
-  place-items:center;
-  box-shadow:var(--shadow);
+.header-date{
+    font-size:13px;
+    color:var(--muted);
+    margin-top:4px;
 }
 
 /* =========================================================
@@ -219,372 +154,468 @@ textarea{
    ========================================================= */
 
 .card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-  transition:
-    transform .25s ease,
-    box-shadow .25s ease,
-    background .4s ease;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition),
+        background var(--transition);
 }
 
-.card:hover{
-  transform:translateY(-2px);
+.card:not(.no-hover):hover{
+    transform:translateY(-2px);
 }
 
 .card-pad{
-  padding:20px;
+    padding:20px;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin:30px 0 13px;
+}
+
+.section-title h2,
+.section-title h3{
+    margin:0;
+}
+
+.badge{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    padding:6px 10px;
+    border-radius:999px;
+    background:var(--accent-soft);
+    color:var(--accent);
+    font-size:12px;
+    font-weight:750;
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.btn{
+    display:inline-flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    min-height:42px;
+    padding:0 16px;
+    border-radius:14px;
+    background:var(--surface2);
+    color:var(--text);
+    font-weight:700;
+    transition:.2s ease;
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn:active{
+    transform:scale(.97);
+}
+
+.btn.primary{
+    background:var(--accent);
+    color:#fff;
+}
+
+.btn.danger{
+    background:rgba(239,83,80,.11);
+    color:var(--danger);
+}
+
+.btn.small-btn{
+    min-height:36px;
+    padding:0 12px;
+    font-size:13px;
+}
+
+.icon-btn{
+    width:42px;
+    height:42px;
+    border-radius:14px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--surface2);
+    color:var(--text);
+    font-size:18px;
+}
+
+.icon-btn:active{
+    transform:scale(.94);
 }
 
 /* =========================================================
    TODAY
    ========================================================= */
 
-.today-progress{
-  padding:23px;
-  position:relative;
-  overflow:hidden;
-  background:
-    radial-gradient(circle at 100% 0,
-      color-mix(in srgb,var(--accent) 17%,transparent),
-      transparent 45%),
-    var(--card);
+.progress-card{
+    padding:22px;
+    position:relative;
+    overflow:hidden;
 }
 
 .progress-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
 }
 
 .progress-number{
-  font-size:36px;
-  font-weight:900;
-  letter-spacing:-2px;
+    font-size:43px;
+    font-weight:900;
+    letter-spacing:-2px;
 }
 
-.progress-label{
-  color:var(--muted);
-  font-size:13px;
+.progress-ring{
+    width:74px;
+    height:74px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    position:relative;
+    background:
+        conic-gradient(
+            var(--accent) calc(var(--progress)*1%),
+            var(--surface2) 0
+        );
 }
 
-.progress-track{
-  margin-top:18px;
-  height:10px;
-  border-radius:99px;
-  background:var(--card2);
-  overflow:hidden;
+.progress-ring::after{
+    content:"";
+    position:absolute;
+    inset:7px;
+    border-radius:50%;
+    background:var(--surface);
 }
 
-.progress-fill{
-  height:100%;
-  width:0;
-  border-radius:inherit;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  transition:width .5s cubic-bezier(.2,.8,.2,1);
+.progress-ring span{
+    position:relative;
+    z-index:2;
+    font-size:14px;
+    font-weight:850;
 }
 
-.habit-list{
-  display:grid;
-  gap:12px;
+.progress-bar{
+    height:8px;
+    background:var(--surface2);
+    border-radius:999px;
+    overflow:hidden;
+    margin-top:18px;
 }
 
-.habit-card{
-  padding:17px;
-  display:flex;
-  align-items:center;
-  gap:13px;
-  min-width:0;
+.progress-bar div{
+    height:100%;
+    width:0;
+    border-radius:inherit;
+    background:var(--accent);
+    transition:.4s ease;
 }
 
-.habit-icon{
-  width:45px;
-  height:45px;
-  flex:0 0 45px;
-  border-radius:15px;
-  background:var(--accentSoft);
-  display:grid;
-  place-items:center;
-  font-size:19px;
+.task-list{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
 }
 
-.habit-info{
-  flex:1;
-  min-width:0;
+.task-row{
+    display:flex;
+    align-items:center;
+    gap:13px;
+    padding:14px;
+    border-radius:17px;
+    background:var(--surface2);
+    border:1px solid transparent;
+    transition:.2s ease;
 }
 
-.habit-name{
-  font-weight:800;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
+.task-row:hover{
+    border-color:var(--border);
 }
 
-.habit-meta{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  margin-top:5px;
+.task-check{
+    width:24px;
+    height:24px;
+    flex:none;
+    border-radius:8px;
+    border:2px solid var(--muted);
+    display:grid;
+    place-items:center;
+    background:transparent;
+    color:#fff;
+    font-size:14px;
+    transition:.2s ease;
 }
 
-.badge{
-  display:inline-flex;
-  align-items:center;
-  padding:5px 8px;
-  border-radius:8px;
-  background:var(--card2);
-  color:var(--muted);
-  font-size:10px;
-  font-weight:750;
+.task-check.done{
+    background:var(--accent);
+    border-color:var(--accent);
 }
 
-.check-btn{
-  width:44px;
-  height:44px;
-  border-radius:15px;
-  border:2px solid var(--line);
-  background:var(--card2);
-  display:grid;
-  place-items:center;
-  flex:0 0 44px;
-  transition:.25s;
+.task-row.done .task-title{
+    text-decoration:line-through;
+    opacity:.55;
 }
 
-.check-btn.done{
-  background:var(--accent);
-  color:white;
-  border-color:var(--accent);
-  box-shadow:0 7px 20px color-mix(in srgb,var(--accent) 30%,transparent);
+.task-content{
+    min-width:0;
+    flex:1;
 }
 
-.check{
-  font-size:20px;
-  font-weight:900;
+.task-title{
+    font-weight:750;
+    margin-bottom:3px;
 }
 
-.counter{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  flex:0 0 auto;
+.task-meta{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    font-size:12px;
+    color:var(--muted);
 }
 
-.counter button{
-  width:34px;
-  height:34px;
-  border-radius:11px;
-  background:var(--card2);
-  color:var(--text);
-  font-size:20px;
-  font-weight:700;
-}
-
-.counter-value{
-  min-width:52px;
-  text-align:center;
-  font-size:13px;
-  font-weight:900;
+.task-delete{
+    opacity:.55;
 }
 
 /* =========================================================
-   EMPTY
+   HABITS
    ========================================================= */
 
-.empty{
-  text-align:center;
-  padding:45px 20px;
-  color:var(--muted);
+.habit-list{
+    display:flex;
+    flex-direction:column;
+    gap:11px;
 }
 
-.empty-icon{
-  width:65px;
-  height:65px;
-  margin:0 auto 14px;
-  border-radius:21px;
-  background:var(--accentSoft);
-  display:grid;
-  place-items:center;
-  font-size:27px;
+.habit-card{
+    padding:17px;
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.habit-main{
+    flex:1;
+    min-width:0;
+}
+
+.habit-name{
+    font-weight:800;
+    margin-bottom:4px;
+}
+
+.habit-note{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.habit-category{
+    font-size:11px;
+    display:inline-flex;
+    margin-top:7px;
+    padding:4px 8px;
+    border-radius:999px;
+    background:var(--accent-soft);
+    color:var(--accent);
+    font-weight:750;
+}
+
+.habit-check{
+    width:45px;
+    height:45px;
+    flex:none;
+    border-radius:15px;
+    background:var(--surface2);
+    color:transparent;
+    display:grid;
+    place-items:center;
+    font-size:20px;
+    transition:.2s ease;
+}
+
+.habit-check.done{
+    background:var(--accent);
+    color:#fff;
+}
+
+.counter{
+    display:flex;
+    align-items:center;
+    gap:9px;
+}
+
+.counter button{
+    width:35px;
+    height:35px;
+    border-radius:11px;
+    background:var(--surface2);
+    color:var(--text);
+    font-size:19px;
+}
+
+.counter-value{
+    min-width:58px;
+    text-align:center;
+    font-size:15px;
+    font-weight:850;
 }
 
 /* =========================================================
    CALENDAR
    ========================================================= */
 
-.calendar-card{
-  overflow:hidden;
+.calendar-shell{
+    overflow:hidden;
+    padding:20px;
 }
 
-.calendar-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:18px 20px;
+.calendar-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:22px;
 }
 
-.month-title{
-  font-size:17px;
-  font-weight:850;
+.calendar-month{
+    text-align:center;
+    flex:1;
 }
 
-.month-actions{
-  display:flex;
-  gap:7px;
+.calendar-month strong{
+    display:block;
+    font-size:20px;
+    letter-spacing:-.5px;
 }
 
-.icon-btn{
-  width:36px;
-  height:36px;
-  border-radius:11px;
-  background:var(--card2);
-  display:grid;
-  place-items:center;
+.calendar-month span{
+    color:var(--muted);
+    font-size:12px;
 }
 
-.weekdays,
-.calendar-grid{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
+.calendar-actions{
+    display:flex;
+    gap:8px;
+}
+
+.month-days{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:4px;
 }
 
 .weekday{
-  text-align:center;
-  padding:10px 2px;
-  color:var(--muted);
-  font-size:10px;
-  font-weight:800;
-  text-transform:uppercase;
+    text-align:center;
+    color:var(--muted);
+    font-size:11px;
+    font-weight:800;
+    text-transform:uppercase;
+    padding-bottom:10px;
 }
 
-.day{
-  min-height:72px;
-  border-top:1px solid var(--line);
-  border-right:1px solid var(--line);
-  padding:7px;
-  position:relative;
-  cursor:pointer;
-  transition:.2s;
+.calendar-day{
+    min-height:74px;
+    position:relative;
+    border-radius:20px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding-top:8px;
+    background:transparent;
+    transition:.2s ease;
 }
 
-.day:hover{
-  background:var(--accentSoft);
+.calendar-day:hover{
+    background:var(--surface2);
 }
 
-.day:nth-child(7n){
-  border-right:0;
+.calendar-day.empty{
+    pointer-events:none;
 }
 
 .day-number{
-  width:27px;
-  height:27px;
-  border-radius:9px;
-  display:grid;
-  place-items:center;
-  font-size:11px;
-  font-weight:750;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    font-size:14px;
+    font-weight:750;
+    transition:.2s ease;
 }
 
-.day.today .day-number{
-  background:var(--accent);
-  color:white;
+.calendar-day.today .day-number{
+    outline:2px solid var(--accent);
+    outline-offset:2px;
 }
 
-.day.selected{
-  background:var(--accentSoft);
-}
-
-.day.other{
-  opacity:.3;
+.calendar-day.selected .day-number{
+    background:var(--accent);
+    color:#fff;
+    box-shadow:0 6px 18px color-mix(in srgb,var(--accent) 30%,transparent);
 }
 
 .day-dots{
-  display:flex;
-  gap:3px;
-  flex-wrap:wrap;
-  margin-top:7px;
+    display:flex;
+    gap:3px;
+    min-height:8px;
+    margin-top:6px;
 }
 
 .day-dot{
-  width:5px;
-  height:5px;
-  border-radius:50%;
-  background:var(--accent);
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:var(--accent);
 }
 
-/* =========================================================
-   EVENTS
-   ========================================================= */
-
-.event-list{
-  display:grid;
-  gap:10px;
+.day-dot.task{
+    background:var(--warning);
 }
 
-.event{
-  padding:15px;
-  display:flex;
-  align-items:center;
-  gap:13px;
+.day-count{
+    font-size:9px;
+    color:var(--muted);
+    margin-top:3px;
 }
 
-.event-time{
-  width:50px;
-  color:var(--accent);
-  font-weight:900;
-  font-size:12px;
+.selected-day-panel{
+    margin-top:18px;
+    padding:18px;
+    border-radius:20px;
+    background:var(--surface2);
 }
 
-.event-info{
-  flex:1;
+.selected-day-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:13px;
 }
 
-.event-name{
-  font-weight:800;
+.selected-day-head strong{
+    font-size:16px;
 }
 
-.event-date{
-  color:var(--muted);
-  font-size:11px;
-  margin-top:3px;
-}
-
-/* =========================================================
-   HABITS PAGE
-   ========================================================= */
-
-.habit-management{
-  display:grid;
-  gap:11px;
-}
-
-.management-card{
-  padding:18px;
-  display:flex;
-  align-items:center;
-  gap:13px;
-}
-
-.management-card .habit-info{
-  flex:1;
-}
-
-.management-actions{
-  display:flex;
-  gap:7px;
-}
-
-.small-btn{
-  width:36px;
-  height:36px;
-  border-radius:11px;
-  background:var(--card2);
-  display:grid;
-  place-items:center;
-}
-
-.small-btn.delete{
-  color:var(--danger);
+.calendar-task-empty{
+    padding:18px 10px;
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
 }
 
 /* =========================================================
@@ -592,96 +623,99 @@ textarea{
    ========================================================= */
 
 .stats-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:12px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
 }
 
-.stat{
-  padding:18px;
+.stat-card{
+    padding:18px;
 }
 
 .stat-value{
-  font-size:27px;
-  font-weight:900;
-  letter-spacing:-1px;
+    font-size:29px;
+    font-weight:900;
+    letter-spacing:-1px;
 }
 
 .stat-label{
-  color:var(--muted);
-  font-size:11px;
-  margin-top:5px;
-}
-
-.chart-card{
-  padding:20px;
+    color:var(--muted);
+    font-size:12px;
+    margin-top:4px;
 }
 
 .chart{
-  height:190px;
-  display:flex;
-  align-items:flex-end;
-  gap:10px;
-  margin-top:25px;
+    padding:20px;
 }
 
-.chart-column{
-  flex:1;
-  height:100%;
-  display:flex;
-  flex-direction:column;
-  justify-content:flex-end;
-  align-items:center;
-  gap:8px;
+.bar-chart{
+    height:210px;
+    display:flex;
+    align-items:flex-end;
+    gap:10px;
+    padding-top:20px;
 }
 
-.chart-bar{
-  width:min(35px,75%);
-  min-height:4px;
-  border-radius:9px 9px 5px 5px;
-  background:linear-gradient(180deg,var(--accent2),var(--accent));
-  transition:height .5s;
+.bar{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    align-items:center;
+    gap:7px;
+    min-width:0;
 }
 
-.chart-day{
-  font-size:10px;
-  color:var(--muted);
+.bar-fill{
+    width:min(32px,70%);
+    border-radius:9px 9px 4px 4px;
+    background:var(--accent);
+    min-height:3px;
+    transition:height .5s ease;
+}
+
+.bar-label{
+    color:var(--muted);
+    font-size:10px;
 }
 
 .category-list{
-  display:grid;
-  gap:11px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
 }
 
 .category-row{
-  display:grid;
-  grid-template-columns:95px 1fr 45px;
-  align-items:center;
-  gap:10px;
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
 .category-name{
-  font-size:12px;
-  font-weight:750;
+    width:90px;
+    font-size:13px;
+    font-weight:700;
 }
 
-.category-track{
-  height:8px;
-  background:var(--card2);
-  border-radius:99px;
-  overflow:hidden;
+.category-progress{
+    flex:1;
+    height:8px;
+    background:var(--surface2);
+    border-radius:99px;
+    overflow:hidden;
 }
 
-.category-fill{
-  height:100%;
-  background:var(--accent);
-  border-radius:inherit;
+.category-progress div{
+    height:100%;
+    background:var(--accent);
+    border-radius:inherit;
 }
 
-.category-value{
-  font-size:11px;
-  color:var(--muted);
-  text-align:right;
+.category-number{
+    width:35px;
+    text-align:right;
+    font-size:12px;
+    color:var(--muted);
 }
 
 /* =========================================================
@@ -689,869 +723,1272 @@ textarea{
    ========================================================= */
 
 .help-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
 }
 
 .help-card{
-  padding:21px;
-  cursor:pointer;
-  position:relative;
-  overflow:hidden;
+    padding:21px;
+    min-height:180px;
+    cursor:pointer;
 }
 
-.help-card-icon{
-  width:50px;
-  height:50px;
-  border-radius:17px;
-  background:var(--accentSoft);
-  display:grid;
-  place-items:center;
-  font-size:22px;
-  margin-bottom:20px;
+.help-icon{
+    width:46px;
+    height:46px;
+    display:grid;
+    place-items:center;
+    border-radius:15px;
+    background:var(--accent-soft);
+    font-size:22px;
+    margin-bottom:18px;
 }
 
 .help-card h3{
-  margin:0;
-  font-size:17px;
+    margin-bottom:7px;
 }
 
 .help-card p{
-  color:var(--muted);
-  font-size:12px;
-  line-height:1.6;
-  margin:7px 0 0;
+    color:var(--muted);
+    font-size:13px;
 }
 
-.help-arrow{
-  position:absolute;
-  right:18px;
-  bottom:18px;
-  width:31px;
-  height:31px;
-  border-radius:10px;
-  background:var(--card2);
-  display:grid;
-  place-items:center;
+/* =========================================================
+   TECHNIQUES
+   ========================================================= */
+
+.tech-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:13px;
 }
 
-.topic-header{
-  display:flex;
-  align-items:center;
-  gap:13px;
-  margin-bottom:22px;
+.tech-card{
+    padding:20px;
+    cursor:pointer;
 }
 
-.back-btn{
-  width:42px;
-  height:42px;
-  border-radius:14px;
-  background:var(--card);
-  border:1px solid var(--line);
-  box-shadow:var(--shadow);
+.tech-top{
+    display:flex;
+    align-items:flex-start;
+    gap:13px;
 }
 
-.help-content{
-  display:grid;
-  gap:12px;
+.tech-icon{
+    width:44px;
+    height:44px;
+    flex:none;
+    display:grid;
+    place-items:center;
+    border-radius:14px;
+    background:var(--accent-soft);
+    font-size:20px;
 }
 
-.advice-card{
-  padding:19px;
+.tech-card h3{
+    margin:0 0 5px;
 }
 
-.advice-card h3{
-  margin:0 0 7px;
-  font-size:15px;
+.tech-card p{
+    color:var(--muted);
+    font-size:13px;
+    margin:0;
 }
 
-.advice-card p,
-.advice-card li{
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.65;
+.tech-page{
+    max-width:850px;
+    margin:auto;
 }
+
+.tech-steps{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-top:16px;
+}
+
+.tech-step{
+    display:flex;
+    gap:13px;
+    padding:15px;
+    border-radius:16px;
+    background:var(--surface2);
+}
+
+.step-number{
+    width:28px;
+    height:28px;
+    flex:none;
+    border-radius:50%;
+    background:var(--accent);
+    color:#fff;
+    display:grid;
+    place-items:center;
+    font-size:12px;
+    font-weight:800;
+}
+
+/* =========================================================
+   SUBJECTS
+   ========================================================= */
 
 .subject-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:11px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
 }
 
 .subject-card{
-  padding:17px;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  gap:12px;
+    padding:18px;
+    cursor:pointer;
+    min-height:120px;
 }
 
-.subject-icon{
-  width:43px;
-  height:43px;
-  border-radius:14px;
-  background:var(--accentSoft);
-  display:grid;
-  place-items:center;
-  font-size:18px;
+.subject-card .subject-icon{
+    font-size:25px;
+    margin-bottom:13px;
 }
 
-.subject-name{
-  font-weight:800;
+.subject-card strong{
+    display:block;
 }
 
-.subject-description{
-  color:var(--muted);
-  font-size:11px;
-  margin-top:3px;
+.subject-card span{
+    display:block;
+    color:var(--muted);
+    font-size:11px;
+    margin-top:4px;
 }
 
 /* =========================================================
    SETTINGS
    ========================================================= */
 
-.settings-section{
-  margin-bottom:27px;
+.settings-list{
+    display:flex;
+    flex-direction:column;
+    gap:11px;
 }
 
-.theme-section-title{
-  margin:20px 0 11px;
-  color:var(--muted);
-  font-size:11px;
-  text-transform:uppercase;
-  letter-spacing:1px;
-  font-weight:900;
+.setting-row{
+    padding:17px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.setting-info{
+    min-width:0;
+}
+
+.setting-info strong{
+    display:block;
+    margin-bottom:3px;
+}
+
+.setting-info span{
+    color:var(--muted);
+    font-size:12px;
+}
+
+.theme-groups{
+    display:flex;
+    flex-direction:column;
+    gap:26px;
 }
 
 .theme-grid{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:10px;
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
 }
 
-.theme{
-  min-width:0;
-  padding:7px;
-  background:var(--card);
-  border:2px solid transparent;
-  border-radius:17px;
-  cursor:pointer;
-  transition:.25s;
+.theme-card{
+    position:relative;
+    aspect-ratio:1.15;
+    border-radius:18px;
+    overflow:hidden;
+    cursor:pointer;
+    border:2px solid transparent;
+    transition:.2s ease;
+    background:#222;
 }
 
-.theme.active{
-  border-color:var(--accent);
+.theme-card.active{
+    border-color:var(--accent);
+    transform:translateY(-2px);
+}
+
+.theme-card::after{
+    content:"✓";
+    position:absolute;
+    top:7px;
+    right:7px;
+    width:23px;
+    height:23px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    background:#fff;
+    color:#111;
+    font-size:11px;
+    font-weight:900;
+    opacity:0;
+}
+
+.theme-card.active::after{
+    opacity:1;
+}
+
+.theme-label{
+    position:absolute;
+    left:10px;
+    bottom:8px;
+    color:#fff;
+    font-size:10px;
+    font-weight:800;
+    text-shadow:0 1px 4px #000;
+    z-index:5;
 }
 
 .theme-preview{
-  height:65px;
-  border-radius:11px;
-  position:relative;
-  overflow:hidden;
-}
-
-.theme-preview::after{
-  content:"";
-  position:absolute;
-  width:35px;
-  height:35px;
-  border-radius:50%;
-  background:var(--preview-accent);
-  right:-5px;
-  bottom:-10px;
-  filter:blur(5px);
-}
-
-.theme-name{
-  font-size:10px;
-  font-weight:800;
-  text-align:center;
-  margin-top:7px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.premium-theme{
-  position:relative;
-}
-
-.premium-badge{
-  position:absolute;
-  z-index:3;
-  top:12px;
-  right:12px;
-  padding:4px 7px;
-  border-radius:8px;
-  font-size:8px;
-  font-weight:900;
-  background:rgba(255,255,255,.16);
-  color:white;
-  backdrop-filter:blur(8px);
-}
-
-.settings-list{
-  display:grid;
-  gap:10px;
-}
-
-.settings-button{
-  width:100%;
-  padding:17px;
-  border-radius:17px;
-  background:var(--card);
-  border:1px solid var(--line);
-  box-shadow:var(--shadow);
-  text-align:left;
-  display:flex;
-  align-items:center;
-  gap:13px;
-}
-
-.settings-button .settings-icon{
-  width:40px;
-  height:40px;
-  border-radius:13px;
-  background:var(--card2);
-  display:grid;
-  place-items:center;
-}
-
-.settings-button span:last-child{
-  margin-left:auto;
-  color:var(--muted);
-}
-
-/* =========================================================
-   FLOATING ADD BUTTON
-   ========================================================= */
-
-.fab{
-  position:fixed;
-  right:20px;
-  bottom:calc(var(--navH) + 20px);
-  width:57px;
-  height:57px;
-  border-radius:19px;
-  background:var(--accent);
-  color:white;
-  font-size:27px;
-  box-shadow:
-    0 13px 35px color-mix(in srgb,var(--accent) 35%,transparent),
-    0 0 0 5px color-mix(in srgb,var(--accent) 10%,transparent);
-  z-index:90;
-  transition:.3s;
-}
-
-.fab:hover{
-  transform:translateY(-4px) rotate(90deg);
-}
-
-/* =========================================================
-   BOTTOM NAVIGATION
-   ========================================================= */
-
-.bottom-nav-wrap{
-  position:fixed;
-  z-index:100;
-  left:0;
-  right:0;
-  bottom:0;
-  display:flex;
-  justify-content:center;
-  padding:
-    8px
-    14px
-    max(8px,env(safe-area-inset-bottom));
-  pointer-events:none;
-}
-
-.bottom-nav{
-  pointer-events:auto;
-  width:min(760px,100%);
-  height:var(--navH);
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  align-items:center;
-  padding:7px;
-  border:1px solid var(--line);
-  border-radius:25px;
-  background:color-mix(in srgb,var(--card) 86%,transparent);
-  backdrop-filter:blur(22px) saturate(1.5);
-  -webkit-backdrop-filter:blur(22px) saturate(1.5);
-  box-shadow:
-    0 18px 50px rgba(0,0,0,.13),
-    0 2px 7px rgba(0,0,0,.05);
-}
-
-.nav-item{
-  height:100%;
-  position:relative;
-  border-radius:19px;
-  background:transparent;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  gap:4px;
-  color:var(--muted);
-  transition:.25s;
-}
-
-.nav-icon{
-  width:32px;
-  height:32px;
-  border-radius:11px;
-  display:grid;
-  place-items:center;
-  font-size:17px;
-  transition:.25s;
-}
-
-.nav-label{
-  font-size:9px;
-  font-weight:750;
-  transition:.25s;
-}
-
-.nav-item.active{
-  color:var(--accent);
-}
-
-.nav-item.active .nav-icon{
-  background:var(--accentSoft);
-  transform:translateY(-2px);
-}
-
-.nav-item.active::after{
-  content:"";
-  position:absolute;
-  bottom:3px;
-  width:18px;
-  height:3px;
-  border-radius:99px;
-  background:var(--accent);
-  animation:navIndicator .25s ease;
-}
-
-@keyframes navIndicator{
-  from{
-    width:0;
-    opacity:0;
-  }
-  to{
-    width:18px;
-    opacity:1;
-  }
+    position:absolute;
+    inset:0;
 }
 
 /* =========================================================
    MODALS
    ========================================================= */
 
-.modal-layer{
-  position:fixed;
-  inset:0;
-  z-index:300;
-  background:rgba(0,0,0,.45);
-  backdrop-filter:blur(9px);
-  display:none;
-  align-items:flex-end;
-  justify-content:center;
-  padding:12px;
+.modal-backdrop{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.52);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    display:none;
+    align-items:flex-end;
+    justify-content:center;
+    z-index:1000;
+    padding:15px;
 }
 
-.modal-layer.open{
-  display:flex;
+.modal-backdrop.open{
+    display:flex;
 }
 
 .modal{
-  width:min(600px,100%);
-  max-height:90vh;
-  overflow:auto;
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:29px;
-  box-shadow:0 30px 90px rgba(0,0,0,.3);
-  padding:23px;
-  animation:modalUp .3s cubic-bezier(.2,.8,.2,1);
+    width:min(620px,100%);
+    max-height:min(90vh,850px);
+    overflow:auto;
+    background:var(--surface);
+    border-radius:28px;
+    padding:23px;
+    box-shadow:0 30px 100px rgba(0,0,0,.3);
+    animation:modalIn .25s ease;
 }
 
-@keyframes modalUp{
-  from{
-    opacity:0;
-    transform:translateY(40px) scale(.98);
-  }
-  to{
-    opacity:1;
-    transform:none;
-  }
+@keyframes modalIn{
+    from{
+        transform:translateY(30px);
+        opacity:0;
+    }
+    to{
+        transform:none;
+        opacity:1;
+    }
 }
 
-.modal-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:21px;
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    margin-bottom:20px;
 }
 
-.modal-title{
-  font-size:21px;
-  font-weight:900;
+.modal-header h2{
+    margin:0;
 }
 
-.modal-close{
-  width:37px;
-  height:37px;
-  border-radius:12px;
-  background:var(--card2);
+.form{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
 }
 
-.form-grid{
-  display:grid;
-  gap:15px;
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
 }
 
-.field label{
-  display:block;
-  margin:0 0 7px;
-  font-size:11px;
-  color:var(--muted);
-  font-weight:800;
+.form-group label{
+    font-size:12px;
+    color:var(--muted);
+    font-weight:750;
 }
 
-.type-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:8px;
+.form input,
+.form textarea,
+.form select{
+    width:100%;
+    min-height:46px;
+    padding:0 14px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    outline:none;
+    background:var(--surface2);
+    color:var(--text);
 }
 
-.type-option{
-  padding:13px;
-  border-radius:14px;
-  background:var(--card2);
-  border:2px solid transparent;
-  text-align:left;
-  font-size:12px;
-  font-weight:750;
+.form textarea{
+    padding:12px 14px;
+    resize:vertical;
 }
 
-.type-option.active{
-  border-color:var(--accent);
-  background:var(--accentSoft);
+.form input:focus,
+.form textarea:focus,
+.form select:focus{
+    border-color:var(--accent);
 }
 
-.form-actions{
-  display:flex;
-  gap:9px;
-  margin-top:5px;
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
 
-.btn{
-  flex:1;
-  padding:14px;
-  border-radius:15px;
-  font-weight:850;
-}
-
-.btn-primary{
-  background:var(--accent);
-  color:white;
-}
-
-.btn-secondary{
-  background:var(--card2);
+.modal-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:9px;
+    margin-top:7px;
 }
 
 /* =========================================================
-   TOAST
+   BOTTOM NAV
    ========================================================= */
 
-.toast{
-  position:fixed;
-  left:50%;
-  bottom:calc(var(--navH) + 17px);
-  transform:translate(-50%,20px);
-  z-index:500;
-  padding:12px 17px;
-  border-radius:14px;
-  background:var(--text);
-  color:var(--bg);
-  font-size:12px;
-  font-weight:750;
-  opacity:0;
-  pointer-events:none;
-  transition:.3s;
-  box-shadow:0 15px 40px rgba(0,0,0,.2);
+.bottom-nav{
+    position:fixed;
+    z-index:900;
+    left:50%;
+    bottom:max(12px,env(safe-area-inset-bottom));
+    transform:translateX(-50%);
+    width:min(960px,calc(100% - 20px));
+    min-height:70px;
+    padding:8px;
+    display:flex;
+    align-items:center;
+    gap:5px;
+    border-radius:25px;
+    background:color-mix(in srgb,var(--surface) 78%,transparent);
+    border:1px solid var(--border);
+    box-shadow:
+        0 18px 50px rgba(0,0,0,.14),
+        inset 0 1px rgba(255,255,255,.35);
+    backdrop-filter:blur(24px) saturate(160%);
+    -webkit-backdrop-filter:blur(24px) saturate(160%);
 }
 
-.toast.show{
-  opacity:1;
-  transform:translate(-50%,0);
+.nav-item{
+    position:relative;
+    flex:1;
+    min-width:0;
+    height:54px;
+    border-radius:18px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:3px;
+    color:var(--muted);
+    background:transparent;
+    transition:.25s ease;
+}
+
+.nav-item span{
+    font-size:10px;
+    font-weight:750;
+    white-space:nowrap;
+}
+
+.nav-icon{
+    font-size:19px;
+    line-height:1;
+}
+
+.nav-item.active{
+    color:var(--text);
+}
+
+.nav-item.active::before{
+    content:"";
+    position:absolute;
+    inset:3px;
+    border-radius:17px;
+    background:var(--accent-soft);
+    z-index:-1;
+    animation:navPop .25s ease;
+}
+
+.nav-item.active::after{
+    content:"";
+    position:absolute;
+    width:5px;
+    height:5px;
+    bottom:3px;
+    border-radius:50%;
+    background:var(--accent);
+}
+
+@keyframes navPop{
+    from{
+        transform:scale(.85);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
 }
 
 /* =========================================================
-   PREMIUM BACKGROUNDS
+   FAB / ADD
+   ========================================================= */
+
+.fab{
+    position:fixed;
+    right:20px;
+    bottom:calc(var(--nav-height) + 30px + env(safe-area-inset-bottom));
+    width:57px;
+    height:57px;
+    border-radius:19px;
+    background:var(--accent);
+    color:#fff;
+    font-size:27px;
+    z-index:850;
+    box-shadow:0 14px 35px color-mix(in srgb,var(--accent) 35%,transparent);
+    transition:.2s ease;
+}
+
+.fab:hover{
+    transform:translateY(-3px) rotate(2deg);
+}
+
+.calendar-add{
+    width:100%;
+    min-height:50px;
+    margin-top:15px;
+    border-radius:17px;
+    background:var(--accent);
+    color:#fff;
+    font-weight:800;
+}
+
+/* =========================================================
+   PREMIUM BACKGROUND SYSTEM
    ========================================================= */
 
 .premium-bg{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  overflow:hidden;
-  opacity:0;
-  transition:opacity .5s;
+    position:fixed;
+    inset:0;
+    z-index:-5;
+    pointer-events:none;
+    overflow:hidden;
+    opacity:0;
+    transition:opacity .5s ease;
 }
 
-body[data-theme^="premium-"] .premium-bg{
-  opacity:1;
+body[data-premium="true"] .premium-bg{
+    opacity:1;
 }
 
-.orb{
-  position:absolute;
-  border-radius:50%;
-  filter:blur(60px);
-  animation:orbFloat 12s ease-in-out infinite alternate;
+.premium-bg::before,
+.premium-bg::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
 }
 
-@keyframes orbFloat{
-  from{
-    transform:translate(-5%,-3%) scale(1);
-  }
-  to{
-    transform:translate(7%,8%) scale(1.15);
-  }
-}
-
-.particle{
-  position:absolute;
-  width:3px;
-  height:3px;
-  border-radius:50%;
-  background:white;
-  opacity:.4;
-  animation:particleFloat linear infinite;
-}
-
-@keyframes particleFloat{
-  from{
-    transform:translateY(105vh);
-  }
-  to{
-    transform:translateY(-10vh);
-  }
-}
-
-/* Aurora */
-body[data-theme="premium-aurora"]{
-  --bg:#06100f;
-  --bg2:#0a1815;
-  --card:rgba(10,27,23,.78);
-  --card2:rgba(17,39,33,.8);
-  --text:#ecfff8;
-  --muted:#8ba99e;
-  --line:rgba(160,255,220,.1);
-  --accent:#57e0b0;
-  --accent2:#9affdc;
-}
-
-.aurora-wave{
-  position:absolute;
-  width:70vw;
-  height:35vh;
-  left:15%;
-  top:-10%;
-  background:linear-gradient(90deg,#39e0a0,#60d7ff,#7d70ff,#39e0a0);
-  filter:blur(75px);
-  opacity:.24;
-  transform:rotate(-9deg);
-  animation:auroraMove 10s ease-in-out infinite alternate;
-}
-
-@keyframes auroraMove{
-  to{
-    transform:rotate(9deg) translateY(90px) scale(1.2);
-  }
-}
-
-/* Crimson */
-body[data-theme="premium-crimson"]{
-  --bg:#100507;
-  --bg2:#18080b;
-  --card:rgba(31,9,13,.78);
-  --card2:rgba(47,13,18,.82);
-  --text:#fff1f2;
-  --muted:#bd8b91;
-  --line:rgba(255,110,125,.12);
-  --accent:#ff455f;
-  --accent2:#ff8b72;
-}
-
-.crimson-glow{
-  position:absolute;
-  width:55vw;
-  height:55vw;
-  right:-15%;
-  top:-15%;
-  border-radius:50%;
-  background:radial-gradient(circle,#ff183f,transparent 65%);
-  filter:blur(30px);
-  opacity:.25;
-  animation:crimsonPulse 5s ease-in-out infinite alternate;
-}
-
-@keyframes crimsonPulse{
-  to{
-    transform:scale(1.35);
-    opacity:.4;
-  }
-}
-
-/* Nebula */
+/* NEBULA */
 body[data-theme="premium-nebula"]{
-  --bg:#080611;
-  --bg2:#0f0b1d;
-  --card:rgba(18,12,34,.78);
-  --card2:rgba(31,20,52,.82);
-  --text:#f5efff;
-  --muted:#9d91b8;
-  --line:rgba(210,170,255,.1);
-  --accent:#a67cff;
-  --accent2:#e29aff;
+    --bg:#070812;
+    --surface:rgba(18,20,39,.76);
+    --surface2:rgba(35,37,62,.72);
+    --text:#f5f4ff;
+    --muted:#a7a6bd;
+    --border:rgba(255,255,255,.09);
+    --accent:#a477ff;
+    --accent2:#cfb7ff;
+    --accent-soft:rgba(164,119,255,.15);
 }
 
-.nebula-cloud{
-  position:absolute;
-  width:75vw;
-  height:55vw;
-  left:10%;
-  top:0;
-  background:
-    radial-gradient(circle at 30% 40%,#8b39ff,transparent 35%),
-    radial-gradient(circle at 70% 30%,#ff49c8,transparent 30%),
-    radial-gradient(circle at 50% 70%,#3d75ff,transparent 35%);
-  filter:blur(70px);
-  opacity:.22;
-  animation:nebula 16s ease-in-out infinite alternate;
+body[data-theme="premium-nebula"] .premium-bg{
+    background:
+        radial-gradient(circle at 20% 20%,rgba(115,65,255,.42),transparent 28%),
+        radial-gradient(circle at 80% 35%,rgba(20,130,255,.22),transparent 28%),
+        radial-gradient(circle at 55% 85%,rgba(220,65,220,.2),transparent 30%),
+        #050610;
 }
 
-@keyframes nebula{
-  to{
-    transform:translate(5%,10%) scale(1.2) rotate(8deg);
-  }
+body[data-theme="premium-nebula"] .premium-bg::before{
+    background-image:
+        radial-gradient(circle,rgba(255,255,255,.85) 1px,transparent 1.5px);
+    background-size:83px 83px;
+    animation:stars 25s linear infinite;
 }
 
-/* Cyber */
+@keyframes stars{
+    from{transform:translateY(0)}
+    to{transform:translateY(83px)}
+}
+
+/* AURORA */
+body[data-theme="premium-aurora"]{
+    --bg:#06100e;
+    --surface:rgba(10,28,25,.78);
+    --surface2:rgba(23,48,44,.72);
+    --text:#ecfff8;
+    --muted:#9ebbb2;
+    --border:rgba(255,255,255,.08);
+    --accent:#58d8a5;
+    --accent2:#9bffe0;
+    --accent-soft:rgba(88,216,165,.15);
+}
+
+body[data-theme="premium-aurora"] .premium-bg{
+    background:#04100d;
+}
+
+body[data-theme="premium-aurora"] .premium-bg::before{
+    inset:-20%;
+    background:
+        conic-gradient(
+            from 90deg,
+            transparent,
+            rgba(42,220,153,.25),
+            rgba(89,130,255,.25),
+            transparent 35%
+        );
+    filter:blur(35px);
+    animation:aurora 12s ease-in-out infinite alternate;
+}
+
+body[data-theme="premium-aurora"] .premium-bg::after{
+    background:
+        radial-gradient(ellipse at 50% 100%,rgba(46,220,157,.2),transparent 45%);
+}
+
+@keyframes aurora{
+    0%{transform:translate(-10%,-4%) rotate(-8deg) scale(1)}
+    50%{transform:translate(8%,8%) rotate(7deg) scale(1.1)}
+    100%{transform:translate(-2%,15%) rotate(-4deg) scale(1.05)}
+}
+
+/* CRIMSON */
+body[data-theme="premium-crimson"]{
+    --bg:#100304;
+    --surface:rgba(34,9,11,.78);
+    --surface2:rgba(54,15,18,.72);
+    --text:#fff2f2;
+    --muted:#c39b9e;
+    --border:rgba(255,255,255,.08);
+    --accent:#ff4d57;
+    --accent2:#ff8b91;
+    --accent-soft:rgba(255,77,87,.15);
+}
+
+body[data-theme="premium-crimson"] .premium-bg{
+    background:
+        radial-gradient(circle at 10% 80%,rgba(255,31,45,.32),transparent 27%),
+        radial-gradient(circle at 90% 20%,rgba(160,0,20,.3),transparent 32%),
+        #0b0203;
+}
+
+body[data-theme="premium-crimson"] .premium-bg::before{
+    background:
+        repeating-radial-gradient(
+            ellipse at 20% 40%,
+            transparent 0 20px,
+            rgba(255,65,75,.07) 21px 23px
+        );
+    transform:rotate(-18deg) scale(1.5);
+    animation:flowRed 16s linear infinite;
+}
+
+@keyframes flowRed{
+    from{transform:rotate(-18deg) scale(1.5) translateX(-5%)}
+    to{transform:rotate(-18deg) scale(1.5) translateX(5%)}
+}
+
+/* TOKYO */
+body[data-theme="premium-tokyo"]{
+    --bg:#07070c;
+    --surface:rgba(18,17,27,.8);
+    --surface2:rgba(35,32,48,.76);
+    --text:#faf7ff;
+    --muted:#a9a4b8;
+    --border:rgba(255,255,255,.08);
+    --accent:#ff3f9f;
+    --accent2:#55eaff;
+    --accent-soft:rgba(255,63,159,.14);
+}
+
+body[data-theme="premium-tokyo"] .premium-bg{
+    background:
+        linear-gradient(180deg,#080814 0%,#101020 58%,#05050a 100%);
+}
+
+body[data-theme="premium-tokyo"] .premium-bg::before{
+    background:
+        linear-gradient(
+            105deg,
+            transparent 0 13%,
+            rgba(255,48,148,.14) 13.3%,
+            transparent 14% 28%,
+            rgba(72,229,255,.1) 28.3%,
+            transparent 29%
+        ),
+        repeating-linear-gradient(
+            90deg,
+            transparent 0 32px,
+            rgba(255,255,255,.025) 33px 34px
+        );
+    transform:perspective(500px) rotateX(58deg) scale(2);
+    transform-origin:center bottom;
+}
+
+body[data-theme="premium-tokyo"] .premium-bg::after{
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent 0 80px,
+            rgba(255,255,255,.04) 82px 84px
+        );
+    animation:rain 2s linear infinite;
+}
+
+@keyframes rain{
+    from{transform:translateY(-20px)}
+    to{transform:translateY(50px)}
+}
+
+/* MYSTIC FOREST */
+body[data-theme="premium-forest"]{
+    --bg:#050b08;
+    --surface:rgba(11,25,18,.8);
+    --surface2:rgba(22,43,31,.74);
+    --text:#effff2;
+    --muted:#9db4a2;
+    --border:rgba(255,255,255,.07);
+    --accent:#72c985;
+    --accent2:#a9eab3;
+    --accent-soft:rgba(114,201,133,.14);
+}
+
+body[data-theme="premium-forest"] .premium-bg{
+    background:
+        radial-gradient(ellipse at 50% 100%,rgba(42,119,61,.3),transparent 50%),
+        linear-gradient(180deg,#06100a,#020604);
+}
+
+body[data-theme="premium-forest"] .premium-bg::before{
+    background:
+        radial-gradient(ellipse at 10% 90%,#071b0d 0 15%,transparent 16%),
+        radial-gradient(ellipse at 35% 95%,#092510 0 20%,transparent 21%),
+        radial-gradient(ellipse at 70% 100%,#071d0c 0 18%,transparent 19%),
+        radial-gradient(ellipse at 95% 90%,#0a2410 0 17%,transparent 18%);
+    filter:blur(8px);
+}
+
+body[data-theme="premium-forest"] .premium-bg::after{
+    background:
+        radial-gradient(circle at 50% 20%,rgba(200,255,218,.15),transparent 8%);
+    filter:blur(20px);
+    animation:mist 9s ease-in-out infinite alternate;
+}
+
+@keyframes mist{
+    from{transform:translateX(-8%)}
+    to{transform:translateX(8%)}
+}
+
+/* SAKURA */
+body[data-theme="premium-sakura"]{
+    --bg:#12070e;
+    --surface:rgba(34,15,26,.78);
+    --surface2:rgba(56,25,42,.74);
+    --text:#fff3fa;
+    --muted:#c9a6b7;
+    --border:rgba(255,255,255,.08);
+    --accent:#ff8ec8;
+    --accent2:#ffc1e2;
+    --accent-soft:rgba(255,142,200,.14);
+}
+
+body[data-theme="premium-sakura"] .premium-bg{
+    background:
+        radial-gradient(circle at 70% 25%,rgba(255,177,215,.12),transparent 10%),
+        linear-gradient(150deg,#160813,#080409);
+}
+
+body[data-theme="premium-sakura"] .premium-bg::before{
+    content:"✿  ❀   ✿     ❀   ✿     ❀";
+    color:rgba(255,160,207,.28);
+    font-size:44px;
+    line-height:2;
+    letter-spacing:35px;
+    white-space:pre-wrap;
+    padding:20px;
+    transform:rotate(-13deg) scale(1.3);
+    animation:petals 18s linear infinite;
+}
+
+body[data-theme="premium-sakura"] .premium-bg::after{
+    width:160px;
+    height:160px;
+    left:auto;
+    right:12%;
+    top:9%;
+    inset:auto 12% auto auto;
+    border-radius:50%;
+    background:#ffe0ee;
+    box-shadow:0 0 70px rgba(255,196,222,.3);
+}
+
+@keyframes petals{
+    from{transform:rotate(-13deg) translateY(-20px) scale(1.3)}
+    to{transform:rotate(-13deg) translateY(120px) scale(1.3)}
+}
+
+/* SOLARIS */
+body[data-theme="premium-solaris"]{
+    --bg:#130b03;
+    --surface:rgba(38,23,10,.8);
+    --surface2:rgba(61,37,14,.72);
+    --text:#fff8e9;
+    --muted:#c7ae86;
+    --border:rgba(255,255,255,.08);
+    --accent:#ffbd45;
+    --accent2:#ffe1a0;
+    --accent-soft:rgba(255,189,69,.14);
+}
+
+body[data-theme="premium-solaris"] .premium-bg{
+    background:
+        radial-gradient(circle at 78% 15%,rgba(255,192,70,.28),transparent 15%),
+        linear-gradient(180deg,#201004,#0c0602);
+}
+
+body[data-theme="premium-solaris"] .premium-bg::before{
+    background:
+        repeating-conic-gradient(
+            from 0deg at 78% 15%,
+            rgba(255,195,75,.13) 0deg 5deg,
+            transparent 5deg 12deg
+        );
+    animation:sunSpin 30s linear infinite;
+}
+
+@keyframes sunSpin{
+    to{transform:rotate(360deg)}
+}
+
+/* ARCTIC */
+body[data-theme="premium-arctic"]{
+    --bg:#061019;
+    --surface:rgba(13,31,43,.78);
+    --surface2:rgba(24,48,64,.72);
+    --text:#effbff;
+    --muted:#9db7c5;
+    --border:rgba(255,255,255,.08);
+    --accent:#68d7ff;
+    --accent2:#b7f0ff;
+    --accent-soft:rgba(104,215,255,.14);
+}
+
+body[data-theme="premium-arctic"] .premium-bg{
+    background:
+        linear-gradient(145deg,#07131e,#0b2635 45%,#03090e);
+}
+
+body[data-theme="premium-arctic"] .premium-bg::before{
+    background:
+        linear-gradient(135deg,transparent 40%,rgba(190,244,255,.1) 40.5% 41%,transparent 41.5%),
+        linear-gradient(25deg,transparent 55%,rgba(107,207,255,.08) 55.5% 56%,transparent 56.5%);
+    background-size:300px 300px;
+    animation:iceMove 15s linear infinite;
+}
+
+body[data-theme="premium-arctic"] .premium-bg::after{
+    background:
+        radial-gradient(circle at 20% 20%,rgba(130,230,255,.25),transparent 8%),
+        radial-gradient(circle at 80% 80%,rgba(120,190,255,.16),transparent 10%);
+    filter:blur(18px);
+}
+
+@keyframes iceMove{
+    from{background-position:0 0}
+    to{background-position:300px 300px}
+}
+
+/* VOLT */
+body[data-theme="premium-volt"]{
+    --bg:#050608;
+    --surface:rgba(14,17,20,.82);
+    --surface2:rgba(28,32,36,.75);
+    --text:#f5fff5;
+    --muted:#a4aaa7;
+    --border:rgba(255,255,255,.08);
+    --accent:#b7ff27;
+    --accent2:#e0ff9c;
+    --accent-soft:rgba(183,255,39,.13);
+}
+
+body[data-theme="premium-volt"] .premium-bg{
+    background:#050705;
+}
+
+body[data-theme="premium-volt"] .premium-bg::before{
+    background:
+        linear-gradient(130deg,transparent 0 35%,rgba(185,255,38,.75) 35.2% 35.5%,transparent 35.8%),
+        linear-gradient(310deg,transparent 0 63%,rgba(185,255,38,.5) 63.2% 63.5%,transparent 63.8%);
+    filter:blur(.3px);
+    animation:electric 2.8s steps(5) infinite;
+}
+
+@keyframes electric{
+    0%,100%{opacity:.4}
+    12%{opacity:1}
+    16%{opacity:.2}
+    34%{opacity:.8}
+    38%{opacity:.25}
+    70%{opacity:.95}
+}
+
+/* ORBIT */
+body[data-theme="premium-orbit"]{
+    --bg:#05060b;
+    --surface:rgba(15,17,29,.8);
+    --surface2:rgba(27,30,47,.73);
+    --text:#f3f5ff;
+    --muted:#a3a9bd;
+    --border:rgba(255,255,255,.08);
+    --accent:#7e9cff;
+    --accent2:#b7c5ff;
+    --accent-soft:rgba(126,156,255,.14);
+}
+
+body[data-theme="premium-orbit"] .premium-bg{
+    background:
+        radial-gradient(circle at 50% 50%,rgba(105,127,255,.17),transparent 8%),
+        #04050a;
+}
+
+body[data-theme="premium-orbit"] .premium-bg::before{
+    border:1px solid rgba(130,151,255,.2);
+    border-radius:50%;
+    inset:20% 8%;
+    box-shadow:
+        0 0 0 35px rgba(100,120,255,.04),
+        0 0 0 75px rgba(100,120,255,.03);
+    transform:rotate(-25deg);
+    animation:orbit 18s linear infinite;
+}
+
+body[data-theme="premium-orbit"] .premium-bg::after{
+    width:8px;
+    height:8px;
+    inset:42% auto auto 22%;
+    border-radius:50%;
+    background:#d7e0ff;
+    box-shadow:0 0 20px #9eb2ff;
+    animation:planet 8s linear infinite;
+}
+
+@keyframes orbit{
+    to{transform:rotate(335deg)}
+}
+
+@keyframes planet{
+    from{transform:rotate(0deg) translateX(190px) rotate(0deg)}
+    to{transform:rotate(360deg) translateX(190px) rotate(-360deg)}
+}
+
+/* SUNSET */
+body[data-theme="premium-sunset"]{
+    --bg:#13070b;
+    --surface:rgba(36,17,22,.8);
+    --surface2:rgba(58,27,31,.74);
+    --text:#fff3ed;
+    --muted:#c6a59d;
+    --border:rgba(255,255,255,.08);
+    --accent:#ff8a65;
+    --accent2:#ffc0a6;
+    --accent-soft:rgba(255,138,101,.14);
+}
+
+body[data-theme="premium-sunset"] .premium-bg{
+    background:
+        radial-gradient(circle at 50% 75%,#ff7043 0 3%,rgba(255,112,67,.25) 4%,transparent 17%),
+        linear-gradient(180deg,#2a0b31 0%,#a53045 50%,#ee6d45 78%,#16070a 100%);
+}
+
+body[data-theme="premium-sunset"] .premium-bg::before{
+    background:
+        linear-gradient(160deg,transparent 70%,rgba(8,8,13,.8) 70.5%),
+        linear-gradient(20deg,transparent 74%,rgba(8,8,13,.7) 74.5%);
+}
+
+/* VELVET */
+body[data-theme="premium-velvet"]{
+    --bg:#09070b;
+    --surface:rgba(25,18,28,.8);
+    --surface2:rgba(42,29,47,.73);
+    --text:#fff9ff;
+    --muted:#b7aabb;
+    --border:rgba(255,255,255,.08);
+    --accent:#c18cff;
+    --accent2:#e0c1ff;
+    --accent-soft:rgba(193,140,255,.14);
+}
+
+body[data-theme="premium-velvet"] .premium-bg{
+    background:
+        repeating-linear-gradient(
+            105deg,
+            rgba(255,255,255,.018) 0 2px,
+            transparent 2px 12px
+        ),
+        radial-gradient(ellipse at 20% 10%,rgba(135,58,190,.3),transparent 35%),
+        radial-gradient(ellipse at 80% 90%,rgba(90,38,120,.25),transparent 35%),
+        #08060a;
+}
+
+body[data-theme="premium-velvet"] .premium-bg::after{
+    background:
+        linear-gradient(
+            115deg,
+            transparent 35%,
+            rgba(255,255,255,.05) 50%,
+            transparent 65%
+        );
+    animation:velvet 12s ease-in-out infinite alternate;
+}
+
+@keyframes velvet{
+    from{transform:translateX(-30%)}
+    to{transform:translateX(30%)}
+}
+
+/* BLOOD MOON */
+body[data-theme="premium-blood"]{
+    --bg:#080304;
+    --surface:rgba(27,10,12,.8);
+    --surface2:rgba(47,18,21,.74);
+    --text:#fff2f1;
+    --muted:#c29a9b;
+    --border:rgba(255,255,255,.08);
+    --accent:#e94545;
+    --accent2:#ff9c9c;
+    --accent-soft:rgba(233,69,69,.14);
+}
+
+body[data-theme="premium-blood"] .premium-bg{
+    background:
+        radial-gradient(circle at 70% 25%,#b3262c 0 7%,rgba(179,38,44,.35) 8%,transparent 20%),
+        linear-gradient(180deg,#0e0405,#020101);
+}
+
+body[data-theme="premium-blood"] .premium-bg::before{
+    background:
+        radial-gradient(ellipse at 20% 90%,rgba(100,100,100,.09),transparent 30%),
+        radial-gradient(ellipse at 80% 85%,rgba(120,120,120,.08),transparent 35%);
+    filter:blur(15px);
+    animation:fog 13s ease-in-out infinite alternate;
+}
+
+@keyframes fog{
+    from{transform:translateX(-8%)}
+    to{transform:translateX(8%)}
+}
+
+/* PRISM */
+body[data-theme="premium-prism"]{
+    --bg:#080a10;
+    --surface:rgba(17,20,31,.8);
+    --surface2:rgba(29,33,47,.74);
+    --text:#f8f9ff;
+    --muted:#a7acbd;
+    --border:rgba(255,255,255,.08);
+    --accent:#9b8cff;
+    --accent2:#c9c1ff;
+    --accent-soft:rgba(155,140,255,.14);
+}
+
+body[data-theme="premium-prism"] .premium-bg{
+    background:
+        linear-gradient(115deg,#070b12,#16112a 45%,#07151b);
+}
+
+body[data-theme="premium-prism"] .premium-bg::before{
+    background:
+        linear-gradient(
+            115deg,
+            transparent 15%,
+            rgba(255,0,140,.12) 25%,
+            rgba(0,220,255,.12) 35%,
+            rgba(255,230,0,.1) 45%,
+            transparent 55%
+        );
+    transform:skewX(-20deg) scale(1.4);
+    animation:prism 9s ease-in-out infinite alternate;
+    filter:blur(10px);
+}
+
+@keyframes prism{
+    from{transform:skewX(-20deg) translateX(-20%) scale(1.4)}
+    to{transform:skewX(-20deg) translateX(20%) scale(1.4)}
+}
+
+/* LIQUID GLASS */
+body[data-theme="premium-liquid"]{
+    --bg:#080b11;
+    --surface:rgba(255,255,255,.08);
+    --surface2:rgba(255,255,255,.11);
+    --text:#f6f9ff;
+    --muted:#aeb7c7;
+    --border:rgba(255,255,255,.13);
+    --accent:#9bd4ff;
+    --accent2:#d4edff;
+    --accent-soft:rgba(155,212,255,.14);
+}
+
+body[data-theme="premium-liquid"] .premium-bg{
+    background:
+        radial-gradient(circle at 10% 20%,rgba(75,150,255,.3),transparent 25%),
+        radial-gradient(circle at 90% 70%,rgba(180,80,255,.25),transparent 28%),
+        radial-gradient(circle at 50% 100%,rgba(40,230,210,.17),transparent 28%),
+        #06080d;
+}
+
+body[data-theme="premium-liquid"] .premium-bg::before{
+    inset:-15%;
+    border-radius:45%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.08),
+        transparent 60%
+    );
+    filter:blur(20px);
+    animation:liquid 13s ease-in-out infinite alternate;
+}
+
+@keyframes liquid{
+    from{transform:translate(-10%,-5%) rotate(-8deg) scale(1)}
+    to{transform:translate(10%,8%) rotate(8deg) scale(1.15)}
+}
+
+/* CYBER */
 body[data-theme="premium-cyber"]{
-  --bg:#03090b;
-  --bg2:#061316;
-  --card:rgba(5,22,25,.82);
-  --card2:rgba(8,31,35,.85);
-  --text:#e8ffff;
-  --muted:#78a2a6;
-  --line:rgba(60,255,235,.12);
-  --accent:#24e6d0;
-  --accent2:#4df7ff;
+    --bg:#030508;
+    --surface:rgba(10,15,22,.84);
+    --surface2:rgba(18,25,34,.76);
+    --text:#f1ffff;
+    --muted:#8fa4aa;
+    --border:rgba(80,240,255,.12);
+    --accent:#4df6ff;
+    --accent2:#a3fcff;
+    --accent-soft:rgba(77,246,255,.13);
 }
 
-.cyber-grid{
-  position:absolute;
-  inset:-50%;
-  background-image:
-    linear-gradient(rgba(50,255,235,.08) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(50,255,235,.08) 1px,transparent 1px);
-  background-size:50px 50px;
-  transform:perspective(400px) rotateX(55deg);
-  animation:gridMove 8s linear infinite;
-  opacity:.35;
+body[data-theme="premium-cyber"] .premium-bg{
+    background:#030609;
+}
+
+body[data-theme="premium-cyber"] .premium-bg::before{
+    background:
+        linear-gradient(rgba(65,220,255,.08) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(65,220,255,.08) 1px,transparent 1px);
+    background-size:44px 44px;
+    transform:perspective(450px) rotateX(58deg) scale(1.8);
+    transform-origin:center bottom;
+    animation:gridMove 7s linear infinite;
+}
+
+body[data-theme="premium-cyber"] .premium-bg::after{
+    background:
+        linear-gradient(90deg,transparent,rgba(0,255,255,.15),transparent);
+    width:30%;
+    animation:scan 4s linear infinite;
 }
 
 @keyframes gridMove{
-  to{
-    background-position:0 50px;
-  }
+    from{background-position:0 0}
+    to{background-position:0 44px}
 }
 
-/* Sakura */
-body[data-theme="premium-sakura"]{
-  --bg:#10090d;
-  --bg2:#1a0e14;
-  --card:rgba(32,16,24,.8);
-  --card2:rgba(50,23,36,.82);
-  --text:#fff3f8;
-  --muted:#b89aa8;
-  --line:rgba(255,180,210,.11);
-  --accent:#ff83ae;
-  --accent2:#ffc1d7;
-}
-
-.sakura-moon{
-  position:absolute;
-  width:220px;
-  height:220px;
-  border-radius:50%;
-  right:8%;
-  top:5%;
-  background:radial-gradient(circle,#ffeaf2,#ff9abd 45%,transparent 70%);
-  filter:blur(10px);
-  opacity:.23;
-}
-
-.petal{
-  position:absolute;
-  width:11px;
-  height:7px;
-  border-radius:100% 0 100% 0;
-  background:#ff9fbe;
-  opacity:.5;
-  animation:fallPetal linear infinite;
-}
-
-@keyframes fallPetal{
-  from{
-    transform:translate3d(0,-10vh,0) rotate(0);
-  }
-  to{
-    transform:translate3d(120px,110vh,0) rotate(480deg);
-  }
-}
-
-/* Solar */
-body[data-theme="premium-solar"]{
-  --bg:#120d04;
-  --bg2:#1b1306;
-  --card:rgba(33,24,9,.8);
-  --card2:rgba(50,36,12,.83);
-  --text:#fff8e5;
-  --muted:#bda879;
-  --line:rgba(255,206,100,.12);
-  --accent:#ffbd3f;
-  --accent2:#ffe18a;
-}
-
-.solar-core{
-  position:absolute;
-  width:360px;
-  height:360px;
-  border-radius:50%;
-  right:-100px;
-  top:-120px;
-  background:radial-gradient(circle,#fff0a3,#ff9d20 30%,transparent 70%);
-  filter:blur(20px);
-  opacity:.3;
-  animation:solar 7s ease-in-out infinite alternate;
-}
-
-@keyframes solar{
-  to{
-    transform:scale(1.25);
-    opacity:.43;
-  }
+@keyframes scan{
+    from{left:-30%}
+    to{left:130%}
 }
 
 /* =========================================================
-   DARK / LIGHT THEME PREVIEWS
+   CLASSIC THEMES
    ========================================================= */
 
 body[data-theme="light-minimal"]{
-  --bg:#f7f8f9;
-  --card:#fff;
-  --card2:#eef0f2;
-  --text:#1b1d20;
-  --muted:#7b8188;
-  --accent:#5f6975;
-  --accent2:#9ca7b2;
+    --bg:#f6f7f8;
+    --surface:#fff;
+    --surface2:#eef0f2;
+    --text:#17191d;
+    --muted:#737983;
+    --accent:#566b5d;
+    --accent-soft:rgba(86,107,93,.11);
 }
 
-body[data-theme="white-sage"]{
-  --bg:#f2f7f3;
-  --card:#fff;
-  --card2:#e8f0ea;
-  --text:#18231c;
-  --muted:#718077;
-  --accent:#6f9d7b;
-  --accent2:#a8c6ae;
+body[data-theme="light-paper"]{
+    --bg:#f3eee4;
+    --surface:#fffaf0;
+    --surface2:#ebe2d3;
+    --text:#332d25;
+    --muted:#82766a;
+    --accent:#9b6f43;
+    --accent-soft:rgba(155,111,67,.12);
 }
 
-body[data-theme="white-sky"]{
-  --bg:#f1f6fa;
-  --card:#fff;
-  --card2:#e7eff5;
-  --text:#17222b;
-  --muted:#73818c;
-  --accent:#679bc2;
-  --accent2:#a9cee7;
+body[data-theme="light-sage"]{
+    --bg:#edf4ef;
+    --surface:#fbfffc;
+    --surface2:#e1ece4;
+    --text:#183024;
+    --muted:#6c8175;
+    --accent:#4f8063;
+    --accent-soft:rgba(79,128,99,.13);
 }
 
-body[data-theme="white-lavender"]{
-  --bg:#f6f3fa;
-  --card:#fff;
-  --card2:#eee9f5;
-  --text:#211b29;
-  --muted:#81758c;
-  --accent:#9275b4;
-  --accent2:#c6b1d8;
+body[data-theme="light-sky"]{
+    --bg:#edf5fb;
+    --surface:#fff;
+    --surface2:#dfedf7;
+    --text:#162b3a;
+    --muted:#718593;
+    --accent:#4284aa;
+    --accent-soft:rgba(66,132,170,.12);
 }
 
-body[data-theme="white-sand"]{
-  --bg:#f8f4ec;
-  --card:#fffdf9;
-  --card2:#f0e9dc;
-  --text:#29231b;
-  --muted:#877c6d;
-  --accent:#ad8b5b;
-  --accent2:#d1b88c;
+body[data-theme="light-lavender"]{
+    --bg:#f4f0fa;
+    --surface:#fff;
+    --surface2:#e9e1f4;
+    --text:#282033;
+    --muted:#81748e;
+    --accent:#8063a8;
+    --accent-soft:rgba(128,99,168,.12);
 }
 
-body[data-theme="black-midnight"]{
-  --bg:#07090d;
-  --card:#10131a;
-  --card2:#181c25;
-  --text:#f0f3fa;
-  --muted:#87909e;
-  --accent:#7e91ff;
-  --accent2:#aab7ff;
+body[data-theme="dark-midnight"]{
+    --bg:#090b10;
+    --surface:#12151c;
+    --surface2:#1c2029;
+    --text:#f4f6fb;
+    --muted:#9299a8;
+    --accent:#829cff;
+    --accent-soft:rgba(130,156,255,.13);
 }
 
-body[data-theme="black-forest"]{
-  --bg:#060d09;
-  --card:#0d1711;
-  --card2:#142219;
-  --text:#edf8f0;
-  --muted:#82988a;
-  --accent:#66b77d;
-  --accent2:#9bd6aa;
+body[data-theme="dark-forest"]{
+    --bg:#070c09;
+    --surface:#101913;
+    --surface2:#19251d;
+    --text:#f0fff4;
+    --muted:#94a79a;
+    --accent:#6bb87c;
+    --accent-soft:rgba(107,184,124,.13);
 }
 
-body[data-theme="black-ocean"]{
-  --bg:#050b10;
-  --card:#0c151c;
-  --card2:#12212b;
-  --text:#eaf8ff;
-  --muted:#7893a2;
-  --accent:#52bde9;
-  --accent2:#94dcf7;
+body[data-theme="dark-ocean"]{
+    --bg:#061015;
+    --surface:#0e1b22;
+    --surface2:#162a34;
+    --text:#effaff;
+    --muted:#91aab3;
+    --accent:#5bc4e6;
+    --accent-soft:rgba(91,196,230,.13);
 }
 
-body[data-theme="black-purple"]{
-  --bg:#0a0710;
-  --card:#130d1c;
-  --card2:#1d1429;
-  --text:#f7efff;
-  --muted:#9785a7;
-  --accent:#a779e8;
-  --accent2:#d0a9ff;
+body[data-theme="dark-purple"]{
+    --bg:#0c0812;
+    --surface:#171020;
+    --surface2:#251832;
+    --text:#fcf5ff;
+    --muted:#a99bb2;
+    --accent:#ad7aff;
+    --accent-soft:rgba(173,122,255,.14);
 }
 
-body[data-theme="black-red"]{
-  --bg:#0e0506;
-  --card:#19090b;
-  --card2:#261013;
-  --text:#fff0f1;
-  --muted:#a78387;
-  --accent:#ed5361;
-  --accent2:#ff9199;
+body[data-theme="dark-red"]{
+    --bg:#0e0607;
+    --surface:#1b0d0f;
+    --surface2:#2a1518;
+    --text:#fff4f4;
+    --muted:#b3989a;
+    --accent:#e64b57;
+    --accent-soft:rgba(230,75,87,.14);
+}
+
+/* =========================================================
+   THEME PREVIEWS
+   ========================================================= */
+
+.preview-minimal{background:linear-gradient(135deg,#f6f7f8,#fff)}
+.preview-paper{background:linear-gradient(135deg,#d9c5a6,#fff7e8)}
+.preview-sage{background:linear-gradient(135deg,#b7d2bf,#f8fff9)}
+.preview-sky{background:linear-gradient(135deg,#a7d5ee,#f5fbff)}
+.preview-lavender{background:linear-gradient(135deg,#c9b4df,#faf7ff)}
+
+.preview-midnight{background:linear-gradient(135deg,#070a10,#202b42)}
+.preview-forest{background:linear-gradient(135deg,#061009,#284b31)}
+.preview-ocean{background:linear-gradient(135deg,#041015,#1f647c)}
+.preview-purple{background:linear-gradient(135deg,#0d0714,#56307b)}
+.preview-red{background:linear-gradient(135deg,#0e0304,#741a25)}
+
+.preview-nebula{background:radial-gradient(circle at 25% 30%,#8b5cff,#080814 45%,#2e0b45)}
+.preview-aurora{background:linear-gradient(135deg,#03130e,#1a8663,#07122d)}
+.preview-crimson{background:linear-gradient(135deg,#110102,#9c101b,#200204)}
+.preview-tokyo{background:linear-gradient(135deg,#080813,#ff2d92,#32dfff)}
+.preview-forest-premium{background:linear-gradient(135deg,#030805,#194e26,#6cb878)}
+.preview-sakura{background:linear-gradient(135deg,#10050c,#7e294e,#ff9dcb)}
+.preview-solaris{background:linear-gradient(135deg,#120700,#ff7a1a,#ffd166)}
+.preview-arctic{background:linear-gradient(135deg,#041018,#4fc8e8,#d5f8ff)}
+.preview-volt{background:linear-gradient(135deg,#020403,#6aff00,#c9ff7b)}
+.preview-orbit{background:radial-gradient(circle at 55% 50%,#7b90ff 0 5%,#11152b 6%,#05060b 45%)}
+.preview-sunset{background:linear-gradient(180deg,#2d0a39,#d54750,#ff9a4d)}
+.preview-velvet{background:linear-gradient(135deg,#09060b,#66328a,#1a0d20)}
+.preview-blood{background:radial-gradient(circle at 70% 25%,#c12d35 0 9%,#160507 10%,#030102 50%)}
+.preview-prism{background:linear-gradient(115deg,#12172a,#d33ca4,#34e8ff,#f4d84d,#111827)}
+.preview-liquid{background:radial-gradient(circle at 25% 30%,#3f8dff,#11172a 35%,#9d48e8)}
+.preview-cyber{background:linear-gradient(135deg,#020609,#00d9e7,#03171b)}
+
+/* =========================================================
+   EMPTY
+   ========================================================= */
+
+.empty{
+    padding:30px 18px;
+    text-align:center;
+    color:var(--muted);
+}
+
+.empty-icon{
+    font-size:32px;
+    margin-bottom:10px;
 }
 
 /* =========================================================
@@ -1559,147 +1996,163 @@ body[data-theme="black-red"]{
    ========================================================= */
 
 @media(max-width:850px){
-  .stats-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
+    .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
 
-  .help-grid{
-    grid-template-columns:1fr;
-  }
+    .help-grid{
+        grid-template-columns:1fr;
+    }
 
-  .theme-grid{
-    grid-template-columns:repeat(3,1fr);
-  }
+    .subject-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .theme-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
 }
 
-@media(max-width:600px){
-  :root{
-    --navH:73px;
-  }
+@media(max-width:650px){
+    main{
+        padding-left:13px;
+        padding-right:13px;
+    }
 
-  .page{
-    padding:22px 14px calc(var(--navH) + 35px);
-  }
+    .calendar-shell{
+        padding:14px;
+    }
 
-  .page-title{
-    font-size:31px;
-  }
+    .calendar-day{
+        min-height:63px;
+    }
 
-  .page-header{
-    margin-bottom:20px;
-  }
+    .day-number{
+        width:34px;
+        height:34px;
+    }
 
-  .stats-grid{
-    gap:8px;
-  }
+    .tech-grid{
+        grid-template-columns:1fr;
+    }
 
-  .stat{
-    padding:15px;
-  }
+    .form-row{
+        grid-template-columns:1fr;
+    }
 
-  .stat-value{
-    font-size:23px;
-  }
+    .theme-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
 
-  .day{
-    min-height:62px;
-    padding:5px;
-  }
+    .bottom-nav{
+        width:calc(100% - 12px);
+        bottom:max(6px,env(safe-area-inset-bottom));
+        border-radius:22px;
+    }
 
-  .day-number{
-    width:25px;
-    height:25px;
-  }
+    .nav-item{
+        height:52px;
+    }
 
-  .bottom-nav{
-    height:var(--navH);
-    border-radius:23px;
-  }
+    .nav-item span{
+        font-size:8px;
+    }
 
-  .nav-label{
-    font-size:8px;
-  }
+    .nav-icon{
+        font-size:17px;
+    }
 
-  .nav-icon{
-    width:29px;
-    height:29px;
-    font-size:15px;
-  }
-
-  .fab{
-    right:15px;
-    width:53px;
-    height:53px;
-  }
-
-  .subject-grid{
-    grid-template-columns:1fr;
-  }
-
-  .theme-grid{
-    grid-template-columns:repeat(2,1fr);
-  }
+    .fab{
+        right:14px;
+        bottom:calc(92px + env(safe-area-inset-bottom));
+    }
 }
 
-@media(max-width:390px){
-  .nav-label{
-    display:none;
-  }
+@media(max-width:430px){
+    .stats-grid{
+        gap:8px;
+    }
 
-  .nav-icon{
-    width:37px;
-    height:37px;
-  }
+    .stat-card{
+        padding:14px;
+    }
+
+    .stat-value{
+        font-size:24px;
+    }
+
+    .calendar-day{
+        min-height:59px;
+        border-radius:15px;
+    }
+
+    .weekday{
+        font-size:9px;
+    }
+
+    .day-number{
+        width:31px;
+        height:31px;
+        font-size:12px;
+    }
+
+    .calendar-shell{
+        padding:10px;
+    }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+    *,
+    *::before,
+    *::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        scroll-behavior:auto !important;
+    }
 }
 </style>
 </head>
 
-<body data-theme="white-sage">
+<body data-theme="light-minimal">
+
+<div class="premium-bg"></div>
 
 <div class="app">
 
-<!-- ======================================================
-     PREMIUM BACKGROUND
-     ====================================================== -->
-
-<div class="background-effects" id="backgroundEffects"></div>
+<main>
 
 <!-- ======================================================
      TODAY
      ====================================================== -->
 
-<section class="page active" id="page-today">
+<section id="page-today" class="page active">
 
-  <div class="page-header">
-    <div>
-      <h1 class="page-title">Aujourd'hui</h1>
-      <p class="page-subtitle" id="todayDate"></p>
-    </div>
-  </div>
-
-  <div class="card today-progress">
-    <div class="progress-top">
-      <div>
-        <div class="progress-number" id="todayProgress">0%</div>
-        <div class="progress-label">Progression du jour</div>
-      </div>
-      <div style="font-size:30px">✦</div>
+    <div class="app-header">
+        <div>
+            <div class="logo">HABITS.</div>
+            <div class="header-date" id="todayHeaderDate"></div>
+        </div>
     </div>
 
-    <div class="progress-track">
-      <div class="progress-fill" id="todayProgressBar"></div>
+    <div id="todayProgress"></div>
+
+    <div class="section-title">
+        <h2>Tâches du jour</h2>
+        <span class="badge" id="todayTaskCount">0</span>
     </div>
-  </div>
 
-  <h2 class="section-title">Habitudes du jour</h2>
+    <div id="todayTasks"></div>
 
-  <div class="habit-list" id="todayHabits"></div>
+    <div class="section-title">
+        <h2>Mes habitudes</h2>
+        <span class="badge" id="todayHabitCount">0</span>
+    </div>
 
-  <div class="empty card" id="todayEmpty" style="display:none">
-    <div class="empty-icon">✓</div>
-    <strong>Tout est calme ici</strong>
-    <p>Ajoute une habitude pour commencer ton suivi.</p>
-  </div>
+    <div id="todayHabits"></div>
 
 </section>
 
@@ -1707,42 +2160,61 @@ body[data-theme="black-red"]{
      CALENDAR
      ====================================================== -->
 
-<section class="page" id="page-calendar">
+<section id="page-calendar" class="page">
 
-  <div class="page-header">
-    <div>
-      <h1 class="page-title">Calendrier</h1>
-      <p class="page-subtitle">Visualise tes habitudes et tes événements.</p>
-    </div>
-  </div>
-
-  <div class="card calendar-card">
-
-    <div class="calendar-head">
-      <button class="icon-btn" onclick="changeMonth(-1)">‹</button>
-
-      <div class="month-title" id="calendarMonth"></div>
-
-      <button class="icon-btn" onclick="changeMonth(1)">›</button>
+    <div class="app-header">
+        <div>
+            <div class="logo">CALENDRIER</div>
+            <div class="header-date">Planifie tes journées</div>
+        </div>
     </div>
 
-    <div class="weekdays">
-      <div class="weekday">Lun</div>
-      <div class="weekday">Mar</div>
-      <div class="weekday">Mer</div>
-      <div class="weekday">Jeu</div>
-      <div class="weekday">Ven</div>
-      <div class="weekday">Sam</div>
-      <div class="weekday">Dim</div>
+    <div class="card calendar-shell">
+
+        <div class="calendar-header">
+
+            <button class="icon-btn" onclick="changeMonth(-1)">‹</button>
+
+            <div class="calendar-month">
+                <strong id="calendarMonth"></strong>
+                <span id="calendarYear"></span>
+            </div>
+
+            <div class="calendar-actions">
+                <button class="btn small-btn" onclick="goTodayCalendar()">Aujourd'hui</button>
+                <button class="icon-btn" onclick="changeMonth(1)">›</button>
+            </div>
+
+        </div>
+
+        <div class="month-days" id="calendarWeekdays">
+            <div class="weekday">Lun</div>
+            <div class="weekday">Mar</div>
+            <div class="weekday">Mer</div>
+            <div class="weekday">Jeu</div>
+            <div class="weekday">Ven</div>
+            <div class="weekday">Sam</div>
+            <div class="weekday">Dim</div>
+        </div>
+
+        <div class="month-days" id="calendarDays"></div>
+
+        <div class="selected-day-panel">
+
+            <div class="selected-day-head">
+                <strong id="selectedDayTitle"></strong>
+                <span class="badge" id="selectedDayCount">0 tâche</span>
+            </div>
+
+            <div id="selectedDayTasks"></div>
+
+            <button class="calendar-add" onclick="openTaskModal(selectedDate)">
+                ＋ Ajouter une tâche à ce jour
+            </button>
+
+        </div>
+
     </div>
-
-    <div class="calendar-grid" id="calendarGrid"></div>
-
-  </div>
-
-  <h2 class="section-title">Événements</h2>
-
-  <div class="event-list" id="eventList"></div>
 
 </section>
 
@@ -1750,16 +2222,18 @@ body[data-theme="black-red"]{
      HABITS
      ====================================================== -->
 
-<section class="page" id="page-habits">
+<section id="page-habits" class="page">
 
-  <div class="page-header">
-    <div>
-      <h1 class="page-title">Habitudes</h1>
-      <p class="page-subtitle">Construis progressivement tes routines.</p>
+    <div class="app-header">
+        <div>
+            <div class="logo">HABITUDES</div>
+            <div class="header-date">Construis tes routines</div>
+        </div>
+
+        <button class="btn primary" onclick="openHabitModal()">＋ Nouvelle</button>
     </div>
-  </div>
 
-  <div class="habit-management" id="habitManagement"></div>
+    <div id="allHabits"></div>
 
 </section>
 
@@ -1767,50 +2241,16 @@ body[data-theme="black-red"]{
      STATS
      ====================================================== -->
 
-<section class="page" id="page-stats">
+<section id="page-stats" class="page">
 
-  <div class="page-header">
-    <div>
-      <h1 class="page-title">Statistiques</h1>
-      <p class="page-subtitle">Comprends ta progression.</p>
-    </div>
-  </div>
-
-  <div class="stats-grid">
-
-    <div class="card stat">
-      <div class="stat-value" id="statHabits">0</div>
-      <div class="stat-label">Habitudes</div>
+    <div class="app-header">
+        <div>
+            <div class="logo">STATISTIQUES</div>
+            <div class="header-date">Observe ta progression</div>
+        </div>
     </div>
 
-    <div class="card stat">
-      <div class="stat-value" id="statCompletions">0</div>
-      <div class="stat-label">Validations</div>
-    </div>
-
-    <div class="card stat">
-      <div class="stat-value" id="statStreak">0</div>
-      <div class="stat-label">Jours consécutifs</div>
-    </div>
-
-    <div class="card stat">
-      <div class="stat-value" id="statRate">0%</div>
-      <div class="stat-label">Cette semaine</div>
-    </div>
-
-  </div>
-
-  <h2 class="section-title">7 derniers jours</h2>
-
-  <div class="card chart-card">
-    <div class="chart" id="weeklyChart"></div>
-  </div>
-
-  <h2 class="section-title">Catégories</h2>
-
-  <div class="card card-pad">
-    <div class="category-list" id="categoryStats"></div>
-  </div>
+    <div id="statsContent"></div>
 
 </section>
 
@@ -1818,39 +2258,36 @@ body[data-theme="black-red"]{
      HELP
      ====================================================== -->
 
-<section class="page" id="page-help">
+<section id="page-help" class="page">
 
-  <div class="page-header">
-    <div>
-      <h1 class="page-title">Help</h1>
-      <p class="page-subtitle">Des conseils simples pour mieux gérer ton quotidien.</p>
-    </div>
-  </div>
-
-  <div class="help-grid">
-
-    <div class="card help-card" onclick="openHelp('stress')">
-      <div class="help-card-icon">🧠</div>
-      <h3>Stress</h3>
-      <p>Techniques simples pour retrouver ton calme et diminuer la pression.</p>
-      <div class="help-arrow">→</div>
+    <div class="app-header">
+        <div>
+            <div class="logo">HELP</div>
+            <div class="header-date">Des outils pour mieux avancer</div>
+        </div>
     </div>
 
-    <div class="card help-card" onclick="openHelp('sleep')">
-      <div class="help-card-icon">🌙</div>
-      <h3>Sommeil</h3>
-      <p>Améliore ton sommeil avec des habitudes faciles à mettre en place.</p>
-      <div class="help-arrow">→</div>
-    </div>
+    <div class="help-grid">
 
-    <div class="card help-card" onclick="openHelp('study')">
-      <div class="help-card-icon">📚</div>
-      <h3>Études</h3>
-      <p>Choisis une matière et découvre des méthodes adaptées.</p>
-      <div class="help-arrow">→</div>
-    </div>
+        <div class="card help-card" onclick="openHelpTopic('stress')">
+            <div class="help-icon">◌</div>
+            <h3>Stress</h3>
+            <p>Respiration, retour au calme, organisation et gestion de la pression.</p>
+        </div>
 
-  </div>
+        <div class="card help-card" onclick="openHelpTopic('sleep')">
+            <div class="help-icon">☾</div>
+            <h3>Sommeil</h3>
+            <p>Conseils simples pour améliorer ta routine et ta récupération.</p>
+        </div>
+
+        <div class="card help-card" onclick="openSubjects()">
+            <div class="help-icon">⌁</div>
+            <h3>Études</h3>
+            <p>Techniques de mémorisation et méthodes adaptées à chaque matière.</p>
+        </div>
+
+    </div>
 
 </section>
 
@@ -1858,18 +2295,13 @@ body[data-theme="black-red"]{
      HELP TOPIC
      ====================================================== -->
 
-<section class="page" id="page-help-topic">
+<section id="page-help-topic" class="page">
 
-  <div class="topic-header">
-    <button class="back-btn" onclick="showPage('help')">←</button>
-
-    <div>
-      <h1 class="page-title" id="helpTopicTitle" style="font-size:29px"></h1>
-      <p class="page-subtitle" id="helpTopicSubtitle"></p>
+    <div class="app-header">
+        <button class="btn" onclick="showPage('help')">← Retour</button>
     </div>
-  </div>
 
-  <div class="help-content" id="helpTopicContent"></div>
+    <div class="card card-pad" id="helpTopicContent"></div>
 
 </section>
 
@@ -1877,18 +2309,42 @@ body[data-theme="black-red"]{
      SUBJECTS
      ====================================================== -->
 
-<section class="page" id="page-subjects">
+<section id="page-subjects" class="page">
 
-  <div class="topic-header">
-    <button class="back-btn" onclick="showPage('help')">←</button>
+    <div class="app-header">
+        <button class="btn" onclick="showPage('help')">← Help</button>
 
-    <div>
-      <h1 class="page-title" style="font-size:29px">Études</h1>
-      <p class="page-subtitle">Choisis une matière.</p>
+        <div style="text-align:right">
+            <div class="logo">ÉTUDES</div>
+            <div class="header-date">Méthodes + matières</div>
+        </div>
     </div>
-  </div>
 
-  <div class="subject-grid" id="subjectGrid"></div>
+    <div class="section-title">
+        <h2>Techniques de travail</h2>
+    </div>
+
+    <div class="tech-grid" id="techniquesGrid"></div>
+
+    <div class="section-title">
+        <h2>Matières</h2>
+    </div>
+
+    <div class="subject-grid" id="subjectsGrid"></div>
+
+</section>
+
+<!-- ======================================================
+     TECHNIQUE PAGE
+     ====================================================== -->
+
+<section id="page-study-technique" class="page">
+
+    <div class="app-header">
+        <button class="btn" onclick="openSubjects()">← Études</button>
+    </div>
+
+    <div class="tech-page" id="techniqueContent"></div>
 
 </section>
 
@@ -1896,18 +2352,13 @@ body[data-theme="black-red"]{
      SUBJECT PAGE
      ====================================================== -->
 
-<section class="page" id="page-subject">
+<section id="page-subject" class="page">
 
-  <div class="topic-header">
-    <button class="back-btn" onclick="showPage('subjects')">←</button>
-
-    <div>
-      <h1 class="page-title" id="subjectTitle" style="font-size:29px"></h1>
-      <p class="page-subtitle" id="subjectSubtitle"></p>
+    <div class="app-header">
+        <button class="btn" onclick="openSubjects()">← Matières</button>
     </div>
-  </div>
 
-  <div class="help-content" id="subjectContent"></div>
+    <div class="tech-page" id="subjectContent"></div>
 
 </section>
 
@@ -1915,335 +2366,228 @@ body[data-theme="black-red"]{
      SETTINGS
      ====================================================== -->
 
-<section class="page" id="page-settings">
+<section id="page-settings" class="page">
 
-  <div class="page-header">
-    <div>
-      <h1 class="page-title">Réglages</h1>
-      <p class="page-subtitle">Personnalise ton expérience.</p>
+    <div class="app-header">
+        <div>
+            <div class="logo">RÉGLAGES</div>
+            <div class="header-date">Personnalise HABITS.</div>
+        </div>
     </div>
-  </div>
 
-  <div class="settings-section">
-
-    <div class="theme-section-title">Thèmes clairs</div>
-
-    <div class="theme-grid" id="lightThemes"></div>
-
-    <div class="theme-section-title">Thèmes foncés</div>
-
-    <div class="theme-grid" id="darkThemes"></div>
-
-    <div class="theme-section-title">Premium · expériences animées</div>
-
-    <div class="theme-grid" id="premiumThemes"></div>
-
-  </div>
-
-  <div class="settings-section">
-
-    <div class="theme-section-title">Données</div>
+    <div class="section-title">
+        <h2>Application</h2>
+    </div>
 
     <div class="settings-list">
 
-      <button class="settings-button" onclick="exportData()">
-        <span class="settings-icon">↓</span>
-        <strong>Exporter mes données</strong>
-        <span>›</span>
-      </button>
+        <div class="card setting-row">
+            <div class="setting-info">
+                <strong>Thème</strong>
+                <span>Choisis l'ambiance de HABITS.</span>
+            </div>
+            <span class="badge" id="currentThemeName">Minimal</span>
+        </div>
 
-      <button class="settings-button" onclick="openConfirmReset()">
-        <span class="settings-icon">↻</span>
-        <strong>Réinitialiser HABITS.</strong>
-        <span>›</span>
-      </button>
+        <div class="card setting-row">
+            <div class="setting-info">
+                <strong>Réinitialiser les données</strong>
+                <span>Supprime habitudes et tâches locales.</span>
+            </div>
+            <button class="btn danger" onclick="resetData()">Réinitialiser</button>
+        </div>
 
     </div>
 
-  </div>
+    <div class="section-title">
+        <h2>Thèmes clairs</h2>
+    </div>
+
+    <div class="theme-grid" id="lightThemes"></div>
+
+    <div class="section-title">
+        <h2>Thèmes sombres</h2>
+    </div>
+
+    <div class="theme-grid" id="darkThemes"></div>
+
+    <div class="section-title">
+        <h2>Premium</h2>
+        <span class="badge">14 ambiances</span>
+    </div>
+
+    <p class="muted small">
+        Chaque thème Premium possède sa propre direction artistique, ses animations et son atmosphère.
+    </p>
+
+    <div class="theme-grid" id="premiumThemes"></div>
 
 </section>
 
-<!-- ======================================================
-     FAB
-     ====================================================== -->
-
-<button class="fab" onclick="openHabitModal()" aria-label="Ajouter">+</button>
+</main>
 
 <!-- ======================================================
      BOTTOM NAV
      ====================================================== -->
 
-<div class="bottom-nav-wrap">
-
-  <nav class="bottom-nav">
+<nav class="bottom-nav">
 
     <button class="nav-item active" data-page="today" onclick="showPage('today')">
-      <span class="nav-icon">⌂</span>
-      <span class="nav-label">Aujourd'hui</span>
+        <div class="nav-icon">⌂</div>
+        <span>Aujourd'hui</span>
     </button>
 
     <button class="nav-item" data-page="calendar" onclick="showPage('calendar')">
-      <span class="nav-icon">▦</span>
-      <span class="nav-label">Calendrier</span>
+        <div class="nav-icon">▦</div>
+        <span>Calendrier</span>
     </button>
 
     <button class="nav-item" data-page="habits" onclick="showPage('habits')">
-      <span class="nav-icon">✓</span>
-      <span class="nav-label">Habitudes</span>
+        <div class="nav-icon">✓</div>
+        <span>Habitudes</span>
     </button>
 
     <button class="nav-item" data-page="stats" onclick="showPage('stats')">
-      <span class="nav-icon">◒</span>
-      <span class="nav-label">Stats</span>
+        <div class="nav-icon">◒</div>
+        <span>Stats</span>
     </button>
 
     <button class="nav-item" data-page="help" onclick="showPage('help')">
-      <span class="nav-icon">?</span>
-      <span class="nav-label">Help</span>
+        <div class="nav-icon">?</div>
+        <span>Help</span>
     </button>
 
     <button class="nav-item" data-page="settings" onclick="showPage('settings')">
-      <span class="nav-icon">⚙</span>
-      <span class="nav-label">Réglages</span>
+        <div class="nav-icon">⚙</div>
+        <span>Réglages</span>
     </button>
 
-  </nav>
+</nav>
 
-</div>
+<button class="fab" onclick="openHabitModal()" aria-label="Ajouter une habitude">＋</button>
 
 <!-- ======================================================
      HABIT MODAL
      ====================================================== -->
 
-<div class="modal-layer" id="habitModal">
+<div class="modal-backdrop" id="habitModal">
 
-  <div class="modal">
+    <div class="modal">
 
-    <div class="modal-head">
-      <div class="modal-title" id="habitModalTitle">Nouvelle habitude</div>
-      <button class="modal-close" onclick="closeModal('habitModal')">×</button>
-    </div>
-
-    <form class="form-grid" onsubmit="submitHabit(event)">
-
-      <input type="hidden" id="editHabitId">
-
-      <div class="field">
-        <label>Nom de l'habitude</label>
-        <input
-          id="habitName"
-          required
-          maxlength="80"
-          placeholder="Ex. Faire du sport"
-        >
-      </div>
-
-      <div class="field">
-        <label>Catégorie</label>
-
-        <select id="habitCategory">
-          <option value="Santé">Santé</option>
-          <option value="Sport">Sport</option>
-          <option value="Études">Études</option>
-          <option value="Productivité">Productivité</option>
-          <option value="Mental">Mental</option>
-          <option value="Autre">Autre</option>
-        </select>
-
-      </div>
-
-      <div class="field">
-
-        <label>Fréquence</label>
-
-        <div class="type-grid">
-
-          <button
-            type="button"
-            class="type-option"
-            data-type="daily"
-            onclick="selectFrequency('daily')">
-            Tous les jours
-          </button>
-
-          <button
-            type="button"
-            class="type-option"
-            data-type="weekly"
-            onclick="selectFrequency('weekly')">
-            Toutes les semaines
-          </button>
-
-          <button
-            type="button"
-            class="type-option"
-            data-type="weekly-counter"
-            onclick="selectFrequency('weekly-counter')">
-            X fois / semaine
-          </button>
-
-          <button
-            type="button"
-            class="type-option"
-            data-type="monthly"
-            onclick="selectFrequency('monthly')">
-            X fois / mois
-          </button>
-
+        <div class="modal-header">
+            <h2 id="habitModalTitle">Nouvelle habitude</h2>
+            <button class="icon-btn" onclick="closeModal('habitModal')">×</button>
         </div>
 
-        <input type="hidden" id="habitFrequencyType" value="daily">
+        <form class="form" onsubmit="saveHabit(event)">
 
-      </div>
+            <input type="hidden" id="habitId">
 
-      <div class="field" id="frequencyValueField" style="display:none">
+            <div class="form-group">
+                <label>Nom</label>
+                <input id="habitName" required placeholder="Ex. Faire du sport">
+            </div>
 
-        <label id="frequencyValueLabel">Nombre de fois</label>
+            <div class="form-row">
 
-        <input
-          id="habitFrequencyValue"
-          type="number"
-          min="1"
-          max="31"
-          value="3"
-        >
+                <div class="form-group">
+                    <label>Catégorie</label>
+                    <select id="habitCategory">
+                        <option>Sport</option>
+                        <option>Études</option>
+                        <option>Santé</option>
+                        <option>Sommeil</option>
+                        <option>Productivité</option>
+                        <option>Personnel</option>
+                        <option>Autre</option>
+                    </select>
+                </div>
 
-      </div>
+                <div class="form-group">
+                    <label>Type</label>
+                    <select id="habitType" onchange="updateHabitFrequencyUI()">
+                        <option value="daily">Tous les jours</option>
+                        <option value="weekly">Toutes les semaines</option>
+                        <option value="weekly-count">X fois par semaine</option>
+                        <option value="monthly-count">X fois par mois</option>
+                        <option value="specific">Jours précis</option>
+                    </select>
+                </div>
 
-      <div class="field">
+            </div>
 
-        <label>Note — facultatif</label>
+            <div id="frequencyOptions"></div>
 
-        <textarea
-          id="habitNote"
-          maxlength="500"
-          placeholder="Ajoute une précision..."
-        ></textarea>
+            <div class="form-group">
+                <label>Note</label>
+                <textarea id="habitNote" rows="3" placeholder="Une note ou une précision..."></textarea>
+            </div>
 
-      </div>
+            <div class="modal-actions">
+                <button type="button" class="btn" onclick="closeModal('habitModal')">Annuler</button>
+                <button class="btn primary">Enregistrer</button>
+            </div>
 
-      <div class="form-actions">
+        </form>
 
-        <button
-          type="button"
-          class="btn btn-secondary"
-          onclick="closeModal('habitModal')">
-          Annuler
-        </button>
-
-        <button class="btn btn-primary">
-          Enregistrer
-        </button>
-
-      </div>
-
-    </form>
-
-  </div>
+    </div>
 
 </div>
 
 <!-- ======================================================
-     EVENT MODAL
+     TASK MODAL
      ====================================================== -->
 
-<div class="modal-layer" id="eventModal">
+<div class="modal-backdrop" id="taskModal">
 
-  <div class="modal">
+    <div class="modal">
 
-    <div class="modal-head">
-      <div class="modal-title">Nouvelle tâche</div>
-      <button class="modal-close" onclick="closeModal('eventModal')">×</button>
+        <div class="modal-header">
+            <h2>Ajouter une tâche</h2>
+            <button class="icon-btn" onclick="closeModal('taskModal')">×</button>
+        </div>
+
+        <form class="form" onsubmit="saveTask(event)">
+
+            <input type="hidden" id="taskId">
+
+            <div class="form-group">
+                <label>Tâche</label>
+                <input id="taskTitle" required placeholder="Ex. Réviser les maths">
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group">
+                    <label>Date</label>
+                    <input type="date" id="taskDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Heure</label>
+                    <input type="time" id="taskTime">
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label>Répétition</label>
+                <select id="taskRepeat">
+                    <option value="none">Aucune</option>
+                    <option value="yearly">Chaque année</option>
+                </select>
+            </div>
+
+            <div class="form-actions modal-actions">
+                <button type="button" class="btn" onclick="closeModal('taskModal')">Annuler</button>
+                <button class="btn primary">Ajouter la tâche</button>
+            </div>
+
+        </form>
+
     </div>
-
-    <form class="form-grid" onsubmit="submitEvent(event)">
-
-      <div class="field">
-        <label>Tâche</label>
-        <input id="eventTitle" required placeholder="Ex. Réviser les maths">
-      </div>
-
-      <div class="field">
-        <label>Date</label>
-        <input id="eventDate" type="date" required>
-      </div>
-
-      <div class="field">
-        <label>Heure — facultatif</label>
-        <input id="eventTime" type="time">
-      </div>
-
-      <div class="field">
-        <label>Répétition</label>
-
-        <select id="eventRepeat">
-          <option value="none">Aucune</option>
-          <option value="yearly">Chaque année</option>
-        </select>
-
-      </div>
-
-      <div class="form-actions">
-
-        <button
-          type="button"
-          class="btn btn-secondary"
-          onclick="closeModal('eventModal')">
-          Annuler
-        </button>
-
-        <button class="btn btn-primary">
-          Ajouter
-        </button>
-
-      </div>
-
-    </form>
-
-  </div>
 
 </div>
-
-<!-- ======================================================
-     CONFIRM
-     ====================================================== -->
-
-<div class="modal-layer" id="confirmModal">
-
-  <div class="modal" style="max-width:430px">
-
-    <div class="modal-head">
-      <div class="modal-title">Confirmation</div>
-    </div>
-
-    <p style="color:var(--muted);line-height:1.6;font-size:13px">
-      Cette action supprimera toutes tes habitudes et tous tes événements.
-      Cette opération ne peut pas être annulée.
-    </p>
-
-    <div class="form-actions">
-
-      <button
-        class="btn btn-secondary"
-        onclick="closeModal('confirmModal')">
-        Annuler
-      </button>
-
-      <button
-        class="btn"
-        style="background:var(--danger);color:white"
-        onclick="resetEverything()">
-        Réinitialiser
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-<div class="toast" id="toast"></div>
 
 </div>
 
@@ -2252,2021 +2596,68 @@ body[data-theme="black-red"]{
    STORAGE
    ========================================================= */
 
-const HABITS_KEY = "habitsV10Habits";
-const EVENTS_KEY = "habitsV10Events";
-const THEME_KEY = "habitsV10Theme";
+const HABITS_KEY = "habitsV11Habits";
+const EVENTS_KEY = "habitsV11Events";
+const THEME_KEY = "habitsV11Theme";
 
-let habits = loadHabits();
-let events = loadEvents();
+let habits = JSON.parse(localStorage.getItem(HABITS_KEY) || "[]");
+let events = JSON.parse(localStorage.getItem(EVENTS_KEY) || "[]");
+let currentTheme = localStorage.getItem(THEME_KEY) || "light-minimal";
 
-let currentPage = "today";
+let selectedDate = dateString(new Date());
 let calendarDate = new Date();
-let selectedDate = formatDate(new Date());
-
-let editingHabitId = null;
-let currentHelpTopic = null;
 
 /* =========================================================
-   THEMES
+   UTILITIES
    ========================================================= */
 
-const themes = [
-
-  /* LIGHT */
-
-  {
-    id:"light-minimal",
-    name:"Minimal",
-    group:"light",
-    bg:"#f7f8f9",
-    accent:"#68727e"
-  },
-
-  {
-    id:"white-sage",
-    name:"Sauge",
-    group:"light",
-    bg:"#f2f7f3",
-    accent:"#6f9d7b"
-  },
-
-  {
-    id:"white-sky",
-    name:"Sky",
-    group:"light",
-    bg:"#f1f6fa",
-    accent:"#679bc2"
-  },
-
-  {
-    id:"white-lavender",
-    name:"Lavender",
-    group:"light",
-    bg:"#f6f3fa",
-    accent:"#9275b4"
-  },
-
-  {
-    id:"white-sand",
-    name:"Sand",
-    group:"light",
-    bg:"#f8f4ec",
-    accent:"#ad8b5b"
-  },
-
-  /* DARK */
-
-  {
-    id:"black-midnight",
-    name:"Midnight",
-    group:"dark",
-    bg:"#07090d",
-    accent:"#7e91ff"
-  },
-
-  {
-    id:"black-forest",
-    name:"Forest",
-    group:"dark",
-    bg:"#060d09",
-    accent:"#66b77d"
-  },
-
-  {
-    id:"black-ocean",
-    name:"Ocean",
-    group:"dark",
-    bg:"#050b10",
-    accent:"#52bde9"
-  },
-
-  {
-    id:"black-purple",
-    name:"Purple",
-    group:"dark",
-    bg:"#0a0710",
-    accent:"#a779e8"
-  },
-
-  {
-    id:"black-red",
-    name:"Crimson",
-    group:"dark",
-    bg:"#0e0506",
-    accent:"#ed5361"
-  },
-
-  /* PREMIUM */
-
-  {
-    id:"premium-aurora",
-    name:"Aurora",
-    group:"premium",
-    bg:"#06100f",
-    accent:"#57e0b0"
-  },
-
-  {
-    id:"premium-crimson",
-    name:"Crimson Flow",
-    group:"premium",
-    bg:"#100507",
-    accent:"#ff455f"
-  },
-
-  {
-    id:"premium-nebula",
-    name:"Nebula",
-    group:"premium",
-    bg:"#080611",
-    accent:"#a67cff"
-  },
-
-  {
-    id:"premium-cyber",
-    name:"Cyber",
-    group:"premium",
-    bg:"#03090b",
-    accent:"#24e6d0"
-  },
-
-  {
-    id:"premium-sakura",
-    name:"Sakura",
-    group:"premium",
-    bg:"#10090d",
-    accent:"#ff83ae"
-  },
-
-  {
-    id:"premium-solar",
-    name:"Solar",
-    group:"premium",
-    bg:"#120d04",
-    accent:"#ffbd3f"
-  }
-
-];
-
-/* =========================================================
-   HELP / SUBJECTS
-   ========================================================= */
-
-const subjects = [
-
-  {
-    id:"maths",
-    name:"Mathématiques",
-    icon:"∑",
-    desc:"Méthodes, exercices et raisonnement.",
-    content:[
-      ["Travaille par exercices","En maths, lire la théorie ne suffit généralement pas. Fais des exercices puis corrige précisément tes erreurs."],
-      ["Comprends tes erreurs","Ne te contente pas de regarder la réponse. Identifie l'étape exacte où ton raisonnement a dévié."],
-      ["Fais une fiche de méthodes","Regroupe les formules et surtout les méthodes : quand utiliser telle formule, comment reconnaître un type d'exercice."],
-      ["Entraîne-toi sans regarder","Après avoir compris un exercice, refais-le quelques heures ou jours plus tard sans consulter la correction."]
-    ]
-  },
-
-  {
-    id:"french",
-    name:"Français",
-    icon:"A",
-    desc:"Compréhension, rédaction et analyse.",
-    content:[
-      ["Lis activement","Note les idées importantes, les personnages, les arguments et les éléments qui peuvent servir dans une analyse."],
-      ["Structure tes rédactions","Introduction, développement organisé et conclusion. Avant d'écrire, prépare rapidement ton plan."],
-      ["Travaille le vocabulaire","Lorsque tu rencontres un mot intéressant, note sa définition et utilise-le dans une phrase."],
-      ["Relis-toi","Garde quelques minutes pour rechercher les fautes, les répétitions et les phrases peu claires."]
-    ]
-  },
-
-  {
-    id:"dutch",
-    name:"Néerlandais",
-    icon:"NL",
-    desc:"Vocabulaire, grammaire et compréhension.",
-    content:[
-      ["Apprends par petites sessions","10 à 15 minutes régulièrement sont souvent plus faciles à maintenir qu'une énorme session occasionnelle."],
-      ["Utilise le vocabulaire","Écris tes propres phrases avec les nouveaux mots au lieu de seulement les mémoriser."],
-      ["Travaille les verbes","Concentre-toi sur les verbes fréquents et leurs formes dans différents temps."],
-      ["Écoute du néerlandais","Podcasts, vidéos ou conversations permettent d'habituer progressivement ton oreille."]
-    ]
-  },
-
-  {
-    id:"english",
-    name:"Anglais",
-    icon:"EN",
-    desc:"Vocabulary, grammar and communication.",
-    content:[
-      ["Think in English","Essaie progressivement de construire directement des phrases en anglais au lieu de traduire chaque mot."],
-      ["Apprends les expressions","Les expressions complètes sont souvent plus utiles que des listes de mots isolés."],
-      ["Regarde du contenu","Une vidéo ou une série en anglais peut travailler compréhension et vocabulaire simultanément."],
-      ["Parle régulièrement","Même quelques minutes de conversation ou de répétition à voix haute peuvent aider."]
-    ]
-  },
-
-  {
-    id:"history",
-    name:"Histoire",
-    icon:"⌛",
-    desc:"Dates, événements et compréhension.",
-    content:[
-      ["Comprends avant de mémoriser","Cherche d'abord les causes, les événements et les conséquences."],
-      ["Construis des frises","Une chronologie visuelle permet de replacer les événements les uns par rapport aux autres."],
-      ["Utilise le rappel actif","Ferme ton cours et essaye de reconstruire les événements de mémoire."],
-      ["Relie les événements","Demande-toi constamment : pourquoi cela arrive-t-il et qu'est-ce que cela provoque ?"]
-    ]
-  },
-
-  {
-    id:"geography",
-    name:"Géographie",
-    icon:"🌍",
-    desc:"Cartes, territoires et phénomènes.",
-    content:[
-      ["Travaille avec des cartes","Localise les lieux au lieu de seulement mémoriser leurs noms."],
-      ["Comprends les phénomènes","Essaie d'expliquer les relations entre population, climat, économie et territoire."],
-      ["Fais des schémas","Un bon schéma peut résumer beaucoup d'informations rapidement."],
-      ["Teste-toi","Cache les légendes et essaye de replacer les éléments de mémoire."]
-    ]
-  },
-
-  {
-    id:"science",
-    name:"Sciences",
-    icon:"⚗",
-    desc:"Compréhension, raisonnement et formules.",
-    content:[
-      ["Comprends les concepts","Une formule est plus facile à retenir lorsque tu sais ce qu'elle représente."],
-      ["Fais des exercices","Utilise les données de l'énoncé pour retrouver toi-même la méthode."],
-      ["Explique à voix haute","Explique le concept comme si tu devais l'enseigner à quelqu'un."],
-      ["Fais des liens","Relie les différents chapitres pour comprendre le système dans son ensemble."]
-    ]
-  },
-
-  {
-    id:"computer",
-    name:"Informatique",
-    icon:"</>",
-    desc:"Code, logique et résolution de problèmes.",
-    content:[
-      ["Code toi-même","Lire du code est utile, mais écrire le tien permet de réellement progresser."],
-      ["Découpe les problèmes","Transforme un gros problème en plusieurs petits problèmes indépendants."],
-      ["Lis les erreurs","Un message d'erreur donne souvent une indication précise sur ce qui ne fonctionne pas."],
-      ["Construis des projets","Un petit projet concret permet de réutiliser beaucoup de notions différentes."]
-    ]
-  }
-
-];
-
-/* =========================================================
-   STORAGE
-   ========================================================= */
-
-function loadHabits(){
-
-  try{
-
-    const data =
-      JSON.parse(localStorage.getItem(HABITS_KEY)) ||
-      JSON.parse(localStorage.getItem("habitsV9Habits")) ||
-      JSON.parse(localStorage.getItem("habitsV8Habits")) ||
-      [];
-
-    return Array.isArray(data)
-      ? data.map(normalizeHabit)
-      : [];
-
-  }catch{
-    return [];
-  }
-
+function saveData(){
+    localStorage.setItem(HABITS_KEY,JSON.stringify(habits));
+    localStorage.setItem(EVENTS_KEY,JSON.stringify(events));
 }
 
-function normalizeHabit(h){
-
-  return {
-    id:h.id || crypto.randomUUID(),
-    name:h.name || "Habitude",
-    category:h.category || "Autre",
-    frequencyType:h.frequencyType || "daily",
-    frequencyValue:Number(h.frequencyValue) || 1,
-    note:h.note || "",
-    completions:Array.isArray(h.completions)
-      ? h.completions
-      : [],
-    weeklyCounters:h.weeklyCounters || {},
-    monthlyCounters:h.monthlyCounters || {}
-  };
-
-}
-
-function loadEvents(){
-
-  try{
-
-    const data =
-      JSON.parse(localStorage.getItem(EVENTS_KEY)) ||
-      JSON.parse(localStorage.getItem("habitsV9Events")) ||
-      [];
-
-    return Array.isArray(data) ? data : [];
-
-  }catch{
-    return [];
-  }
-
-}
-
-function save(){
-
-  localStorage.setItem(
-    HABITS_KEY,
-    JSON.stringify(habits)
-  );
-
-  localStorage.setItem(
-    EVENTS_KEY,
-    JSON.stringify(events)
-  );
-
-}
-
-/* =========================================================
-   DATE
-   ========================================================= */
-
-function formatDate(date){
-
-  const y=date.getFullYear();
-  const m=String(date.getMonth()+1).padStart(2,"0");
-  const d=String(date.getDate()).padStart(2,"0");
-
-  return `${y}-${m}-${d}`;
-
+function dateString(date){
+    const d = new Date(date);
+    const y = d.getFullYear();
+    const m = String(d.getMonth()+1).padStart(2,"0");
+    const day = String(d.getDate()).padStart(2,"0");
+    return `${y}-${m}-${day}`;
 }
 
 function parseDate(str){
-
-  const [y,m,d]=str.split("-").map(Number);
-
-  return new Date(y,m-1,d);
-
+    const [y,m,d] = str.split("-").map(Number);
+    return new Date(y,m-1,d);
 }
 
 function getToday(){
-
-  return formatDate(new Date());
-
+    return dateString(new Date());
 }
 
-function getWeekStart(date){
-
-  const d=new Date(date);
-  const day=d.getDay() || 7;
-
-  d.setDate(d.getDate()-day+1);
-  d.setHours(0,0,0,0);
-
-  return formatDate(d);
-
-}
-
-function getMonthKey(date){
-
-  const d=parseDate(formatDate(date));
-
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}`;
-
-}
-
-function daysInMonth(year,month){
-
-  return new Date(year,month+1,0).getDate();
-
-}
-
-/* =========================================================
-   HABIT FREQUENCY
-   ========================================================= */
-
-function getFrequencyText(habit){
-
-  switch(habit.frequencyType){
-
-    case "daily":
-      return "Tous les jours";
-
-    case "weekly":
-      return "Toutes les semaines";
-
-    case "weekly-counter":
-      return `${habit.frequencyValue} fois / semaine`;
-
-    case "monthly":
-      return `${habit.frequencyValue} fois / mois`;
-
-    default:
-      return "Tous les jours";
-
-  }
-
-}
-
-/*
-  Pour les compteurs :
-  - la progression est indépendante des cases quotidiennes
-  - on garde une valeur par semaine/mois
-*/
-
-function getCounter(habit,date){
-
-  if(habit.frequencyType==="weekly-counter"){
-
-    const key=getWeekStart(parseDate(date));
-
-    return Number(habit.weeklyCounters?.[key] || 0);
-
-  }
-
-  if(habit.frequencyType==="monthly"){
-
-    const key=getMonthKey(parseDate(date));
-
-    return Number(habit.monthlyCounters?.[key] || 0);
-
-  }
-
-  return 0;
-
-}
-
-function setCounter(habit,date,value){
-
-  value=Math.max(0,value);
-
-  if(habit.frequencyType==="weekly-counter"){
-
-    const key=getWeekStart(parseDate(date));
-
-    if(!habit.weeklyCounters)
-      habit.weeklyCounters={};
-
-    habit.weeklyCounters[key]=Math.min(
-      value,
-      habit.frequencyValue
-    );
-
-  }
-
-  if(habit.frequencyType==="monthly"){
-
-    const key=getMonthKey(parseDate(date));
-
-    if(!habit.monthlyCounters)
-      habit.monthlyCounters={};
-
-    habit.monthlyCounters[key]=Math.min(
-      value,
-      habit.frequencyValue
-    );
-
-  }
-
-}
-
-/* =========================================================
-   DUE HABITS
-   ========================================================= */
-
-function getDueHabits(date){
-
-  return habits.filter(habit=>{
-
-    if(
-      habit.frequencyType==="weekly-counter" ||
-      habit.frequencyType==="monthly"
-    ){
-      return true;
-    }
-
-    return true;
-
-  });
-
-}
-
-/* =========================================================
-   COMPLETION
-   ========================================================= */
-
-function isCompleted(habit,date){
-
-  return habit.completions.includes(date);
-
-}
-
-function toggleHabit(id,date=getToday()){
-
-  const habit=habits.find(h=>h.id===id);
-
-  if(!habit) return;
-
-  if(
-    habit.frequencyType==="weekly-counter" ||
-    habit.frequencyType==="monthly"
-  ){
-
-    incrementCounter(id,date);
-
-    return;
-
-  }
-
-  const index=habit.completions.indexOf(date);
-
-  if(index>=0)
-    habit.completions.splice(index,1);
-  else
-    habit.completions.push(date);
-
-  save();
-  renderAll();
-
-}
-
-function incrementCounter(id,date=getToday()){
-
-  const habit=habits.find(h=>h.id===id);
-
-  if(!habit) return;
-
-  const current=getCounter(habit,date);
-
-  if(current<habit.frequencyValue){
-
-    setCounter(habit,date,current+1);
-
-    save();
-    renderAll();
-
-  }
-
-}
-
-function decrementCounter(id,date=getToday()){
-
-  const habit=habits.find(h=>h.id===id);
-
-  if(!habit) return;
-
-  const current=getCounter(habit,date);
-
-  if(current>0){
-
-    setCounter(habit,date,current-1);
-
-    save();
-    renderAll();
-
-  }
-
-}
-
-/* =========================================================
-   TODAY
-   ========================================================= */
-
-function renderToday(){
-
-  const today=getToday();
-
-  const dateObj=new Date();
-
-  document.getElementById("todayDate").textContent =
-    dateObj.toLocaleDateString(
-      "fr-BE",
-      {
+function formatLongDate(str){
+    const d = parseDate(str);
+    return d.toLocaleDateString("fr-FR",{
         weekday:"long",
         day:"numeric",
-        month:"long"
-      }
-    );
-
-  const list=document.getElementById("todayHabits");
-  const empty=document.getElementById("todayEmpty");
-
-  const due=getDueHabits(today);
-
-  list.innerHTML="";
-
-  if(!due.length){
-
-    empty.style.display="block";
-
-  }else{
-
-    empty.style.display="none";
-
-    due.forEach(habit=>{
-      list.appendChild(createHabitTodayCard(habit,today));
-    });
-
-  }
-
-  updateTodayProgress(today);
-
-}
-
-function createHabitTodayCard(habit,date){
-
-  const card=document.createElement("div");
-
-  card.className="card habit-card";
-
-  const icons={
-    "Santé":"♡",
-    "Sport":"⌁",
-    "Études":"⌁",
-    "Productivité":"✓",
-    "Mental":"✦",
-    "Autre":"•"
-  };
-
-  const icon=icons[habit.category] || "•";
-
-  let action="";
-
-  if(
-    habit.frequencyType==="weekly-counter" ||
-    habit.frequencyType==="monthly"
-  ){
-
-    const current=getCounter(habit,date);
-    const target=habit.frequencyValue;
-
-    action=`
-      <div class="counter">
-        <button onclick="event.stopPropagation();decrementCounter('${habit.id}','${date}')">−</button>
-        <div class="counter-value">${current}/${target}</div>
-        <button onclick="event.stopPropagation();incrementCounter('${habit.id}','${date}')">+</button>
-      </div>
-    `;
-
-  }else{
-
-    const done=isCompleted(habit,date);
-
-    action=`
-      <button
-        class="check-btn ${done?"done":""}"
-        onclick="toggleHabit('${habit.id}','${date}')">
-        <span class="check">${done?"✓":""}</span>
-      </button>
-    `;
-
-  }
-
-  card.innerHTML=`
-
-    <div class="habit-icon">${icon}</div>
-
-    <div class="habit-info">
-
-      <div class="habit-name">
-        ${escapeHTML(habit.name)}
-      </div>
-
-      <div class="habit-meta">
-
-        <span class="badge">
-          ${escapeHTML(habit.category)}
-        </span>
-
-        <span class="badge">
-          ${escapeHTML(getFrequencyText(habit))}
-        </span>
-
-      </div>
-
-    </div>
-
-    ${action}
-
-  `;
-
-  return card;
-
-}
-
-function updateTodayProgress(date){
-
-  let total=0;
-  let done=0;
-
-  getDueHabits(date).forEach(habit=>{
-
-    total++;
-
-    if(
-      habit.frequencyType==="weekly-counter" ||
-      habit.frequencyType==="monthly"
-    ){
-
-      if(
-        getCounter(habit,date)>=habit.frequencyValue
-      ){
-        done++;
-      }
-
-    }else{
-
-      if(isCompleted(habit,date))
-        done++;
-
-    }
-
-  });
-
-  const percent=
-    total
-      ? Math.round((done/total)*100)
-      : 0;
-
-  document.getElementById("todayProgress").textContent =
-    `${percent}%`;
-
-  document.getElementById("todayProgressBar").style.width =
-    `${percent}%`;
-
-}
-
-/* =========================================================
-   HABITS MANAGEMENT
-   ========================================================= */
-
-function renderHabits(){
-
-  const container=
-    document.getElementById("habitManagement");
-
-  container.innerHTML="";
-
-  if(!habits.length){
-
-    container.innerHTML=`
-
-      <div class="card empty">
-        <div class="empty-icon">+</div>
-        <strong>Aucune habitude</strong>
-        <p>Utilise le bouton + pour en créer une.</p>
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-  habits.forEach(habit=>{
-
-    const card=document.createElement("div");
-
-    card.className="card management-card";
-
-    card.innerHTML=`
-
-      <div class="habit-icon">✦</div>
-
-      <div class="habit-info">
-
-        <div class="habit-name">
-          ${escapeHTML(habit.name)}
-        </div>
-
-        <div class="habit-meta">
-
-          <span class="badge">
-            ${escapeHTML(habit.category)}
-          </span>
-
-          <span class="badge">
-            ${escapeHTML(getFrequencyText(habit))}
-          </span>
-
-        </div>
-
-      </div>
-
-      <div class="management-actions">
-
-        <button
-          class="small-btn"
-          onclick="editHabit('${habit.id}')">
-          ✎
-        </button>
-
-        <button
-          class="small-btn delete"
-          onclick="deleteHabit('${habit.id}')">
-          ×
-        </button>
-
-      </div>
-
-    `;
-
-    container.appendChild(card);
-
-  });
-
-}
-
-/* =========================================================
-   HABIT MODAL
-   ========================================================= */
-
-function openHabitModal(id=null){
-
-  editingHabitId=id;
-
-  document.getElementById("habitModalTitle").textContent =
-    id ? "Modifier l'habitude" : "Nouvelle habitude";
-
-  if(id){
-
-    const habit=habits.find(h=>h.id===id);
-
-    if(!habit) return;
-
-    document.getElementById("habitName").value=habit.name;
-    document.getElementById("habitCategory").value=habit.category;
-    document.getElementById("habitNote").value=habit.note || "";
-
-    selectFrequency(habit.frequencyType,false);
-
-    document.getElementById("habitFrequencyValue").value =
-      habit.frequencyValue;
-
-  }else{
-
-    document.getElementById("habitName").value="";
-    document.getElementById("habitCategory").value="Santé";
-    document.getElementById("habitNote").value="";
-    document.getElementById("habitFrequencyValue").value=3;
-
-    selectFrequency("daily",false);
-
-  }
-
-  document.getElementById("habitModal").classList.add("open");
-
-}
-
-function selectFrequency(type,render=true){
-
-  document.getElementById("habitFrequencyType").value=type;
-
-  document
-    .querySelectorAll(".type-option")
-    .forEach(btn=>{
-      btn.classList.toggle(
-        "active",
-        btn.dataset.type===type
-      );
-    });
-
-  const field=
-    document.getElementById("frequencyValueField");
-
-  const label=
-    document.getElementById("frequencyValueLabel");
-
-  if(
-    type==="weekly-counter" ||
-    type==="monthly"
-  ){
-
-    field.style.display="block";
-
-    label.textContent =
-      type==="weekly-counter"
-        ? "Combien de fois par semaine ?"
-        : "Combien de fois par mois ?";
-
-  }else{
-
-    field.style.display="none";
-
-  }
-
-}
-
-function submitHabit(event){
-
-  event.preventDefault();
-
-  const name=
-    document.getElementById("habitName").value.trim();
-
-  if(!name) return;
-
-  const type=
-    document.getElementById("habitFrequencyType").value;
-
-  const value=
-    Math.max(
-      1,
-      Number(
-        document.getElementById("habitFrequencyValue").value
-      ) || 1
-    );
-
-  const data={
-
-    name,
-
-    category:
-      document.getElementById("habitCategory").value,
-
-    frequencyType:type,
-
-    frequencyValue:
-      type==="weekly-counter" || type==="monthly"
-        ? value
-        : 1,
-
-    note:
-      document.getElementById("habitNote").value.trim()
-
-  };
-
-  if(editingHabitId){
-
-    const habit=
-      habits.find(h=>h.id===editingHabitId);
-
-    if(habit){
-
-      habit.name=data.name;
-      habit.category=data.category;
-      habit.frequencyType=data.frequencyType;
-      habit.frequencyValue=data.frequencyValue;
-      habit.note=data.note;
-
-    }
-
-    showToast("Habitude modifiée");
-
-  }else{
-
-    habits.push({
-
-      id:crypto.randomUUID(),
-
-      ...data,
-
-      completions:[],
-      weeklyCounters:{},
-      monthlyCounters:{}
-
-    });
-
-    showToast("Habitude créée");
-
-  }
-
-  save();
-
-  closeModal("habitModal");
-
-  renderAll();
-
-}
-
-function editHabit(id){
-
-  openHabitModal(id);
-
-}
-
-function deleteHabit(id){
-
-  const habit=habits.find(h=>h.id===id);
-
-  if(!habit) return;
-
-  if(!confirm(`Supprimer « ${habit.name} » ?`))
-    return;
-
-  habits=habits.filter(h=>h.id!==id);
-
-  save();
-  renderAll();
-
-  showToast("Habitude supprimée");
-
-}
-
-/* =========================================================
-   CALENDAR
-   ========================================================= */
-
-function renderCalendar(){
-
-  const year=calendarDate.getFullYear();
-  const month=calendarDate.getMonth();
-
-  document.getElementById("calendarMonth").textContent =
-    calendarDate.toLocaleDateString(
-      "fr-BE",
-      {
         month:"long",
         year:"numeric"
-      }
-    );
-
-  const grid=
-    document.getElementById("calendarGrid");
-
-  grid.innerHTML="";
-
-  const firstDay=
-    new Date(year,month,1);
-
-  let startDay=
-    firstDay.getDay();
-
-  startDay =
-    startDay===0
-      ? 6
-      : startDay-1;
-
-  const total=
-    daysInMonth(year,month);
-
-  const prevTotal=
-    daysInMonth(year,month-1);
-
-  for(let i=0;i<42;i++){
-
-    const dayNumber=
-      i-startDay+1;
-
-    let dayDate;
-    let other=false;
-    let displayNumber;
-
-    if(dayNumber<1){
-
-      displayNumber=
-        prevTotal+dayNumber;
-
-      dayDate=
-        new Date(year,month-1,displayNumber);
-
-      other=true;
-
-    }else if(dayNumber>total){
-
-      displayNumber=
-        dayNumber-total;
-
-      dayDate=
-        new Date(year,month+1,displayNumber);
-
-      other=true;
-
-    }else{
-
-      displayNumber=dayNumber;
-
-      dayDate=
-        new Date(year,month,displayNumber);
-
-    }
-
-    const date=
-      formatDate(dayDate);
-
-    const div=
-      document.createElement("div");
-
-    div.className=
-      `day ${other?"other":""}
-       ${date===getToday()?"today":""}
-       ${date===selectedDate?"selected":""}`;
-
-    const dots=[];
-
-    habits.forEach(habit=>{
-
-      if(
-        habit.frequencyType==="weekly-counter" ||
-        habit.frequencyType==="monthly"
-      ){
-
-        if(
-          date===getToday() &&
-          getCounter(habit,date)>0
-        ){
-          dots.push(1);
-        }
-
-      }else if(isCompleted(habit,date)){
-
-        dots.push(1);
-
-      }
-
     });
-
-    events.forEach(event=>{
-
-      if(event.date===date)
-        dots.push(1);
-
-    });
-
-    div.innerHTML=`
-
-      <div class="day-number">
-        ${displayNumber}
-      </div>
-
-      <div class="day-dots">
-        ${dots.slice(0,6).map(
-          ()=>`<span class="day-dot"></span>`
-        ).join("")}
-      </div>
-
-    `;
-
-    div.onclick=()=>{
-
-      selectedDate=date;
-
-      renderCalendar();
-
-      if(!other){
-
-        showPage("today");
-
-      }
-
-    };
-
-    div.ondblclick=()=>{
-
-      openEventModal(date);
-
-    };
-
-    grid.appendChild(div);
-
-  }
-
-  renderEventList();
-
 }
 
-function changeMonth(amount){
-
-  calendarDate.setMonth(
-    calendarDate.getMonth()+amount
-  );
-
-  renderCalendar();
-
+function capitalize(str){
+    return str.charAt(0).toUpperCase()+str.slice(1);
 }
 
-/* =========================================================
-   EVENTS
-   ========================================================= */
-
-function openEventModal(date=selectedDate){
-
-  document.getElementById("eventTitle").value="";
-  document.getElementById("eventDate").value=date;
-  document.getElementById("eventTime").value="";
-  document.getElementById("eventRepeat").value="none";
-
-  document.getElementById("eventModal").classList.add("open");
-
+function uid(){
+    return Date.now().toString(36)+Math.random().toString(36).slice(2);
 }
 
-function submitEvent(event){
-
-  event.preventDefault();
-
-  events.push({
-
-    id:crypto.randomUUID(),
-
-    title:
-      document.getElementById("eventTitle").value.trim(),
-
-    date:
-      document.getElementById("eventDate").value,
-
-    time:
-      document.getElementById("eventTime").value,
-
-    repeat:
-      document.getElementById("eventRepeat").value
-
-  });
-
-  save();
-
-  closeModal("eventModal");
-
-  renderAll();
-
-  showToast("Tâche ajoutée au calendrier");
-
-}
-
-function renderEventList(){
-
-  const list=
-    document.getElementById("eventList");
-
-  list.innerHTML="";
-
-  const sorted=[...events].sort(
-    (a,b)=>a.date.localeCompare(b.date)
-  );
-
-  if(!sorted.length){
-
-    list.innerHTML=`
-
-      <div class="card empty">
-        <div class="empty-icon">⌁</div>
-        <strong>Aucune tâche</strong>
-        <p>Double-clique sur un jour du calendrier pour en ajouter une.</p>
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-  sorted.forEach(event=>{
-
-    const card=document.createElement("div");
-
-    card.className="card event";
-
-    card.innerHTML=`
-
-      <div class="event-time">
-        ${event.time || "—"}
-      </div>
-
-      <div class="event-info">
-
-        <div class="event-name">
-          ${escapeHTML(event.title)}
-        </div>
-
-        <div class="event-date">
-          ${formatReadableDate(event.date)}
-          ${event.repeat==="yearly"?" · annuel":""}
-        </div>
-
-      </div>
-
-      <button
-        class="small-btn delete"
-        onclick="deleteEvent('${event.id}')">
-        ×
-      </button>
-
-    `;
-
-    list.appendChild(card);
-
-  });
-
-}
-
-function deleteEvent(id){
-
-  events=events.filter(e=>e.id!==id);
-
-  save();
-  renderAll();
-
-  showToast("Tâche supprimée");
-
-}
-
-/* =========================================================
-   STATS
-   ========================================================= */
-
-function getAllCompletionDates(){
-
-  const dates=new Set();
-
-  habits.forEach(habit=>{
-
-    habit.completions.forEach(
-      date=>dates.add(date)
-    );
-
-    Object.entries(
-      habit.weeklyCounters || {}
-    ).forEach(([week,count])=>{
-
-      if(count>0)
-        dates.add(week);
-
-    });
-
-    Object.entries(
-      habit.monthlyCounters || {}
-    ).forEach(([month,count])=>{
-
-      if(count>0)
-        dates.add(`${month}-01`);
-
-    });
-
-  });
-
-  return [...dates].sort();
-
-}
-
-function calculateStreak(){
-
-  const completed=
-    new Set(getAllCompletionDates());
-
-  let streak=0;
-
-  const d=new Date();
-
-  while(true){
-
-    const date=formatDate(d);
-
-    if(completed.has(date)){
-
-      streak++;
-
-      d.setDate(d.getDate()-1);
-
-    }else{
-
-      break;
-
-    }
-
-  }
-
-  return streak;
-
-}
-
-function getWeeklyCount(date){
-
-  let count=0;
-
-  habits.forEach(habit=>{
-
-    if(
-      habit.frequencyType==="weekly-counter"
-    ){
-
-      count+=
-        getCounter(habit,date);
-
-    }else if(
-      habit.frequencyType==="monthly"
-    ){
-
-      count+=
-        date===getToday()
-          ? getCounter(habit,date)
-          : 0;
-
-    }else{
-
-      if(isCompleted(habit,date))
-        count++;
-
-    }
-
-  });
-
-  return count;
-
-}
-
-function renderStats(){
-
-  let completions=0;
-
-  habits.forEach(habit=>{
-
-    completions+=habit.completions.length;
-
-    Object.values(
-      habit.weeklyCounters || {}
-    ).forEach(v=>{
-      completions+=Number(v)||0;
-    });
-
-    Object.values(
-      habit.monthlyCounters || {}
-    ).forEach(v=>{
-      completions+=Number(v)||0;
-    });
-
-  });
-
-  document.getElementById("statHabits").textContent=
-    habits.length;
-
-  document.getElementById("statCompletions").textContent=
-    completions;
-
-  document.getElementById("statStreak").textContent=
-    calculateStreak();
-
-  const days=[];
-
-  for(let i=6;i>=0;i--){
-
-    const d=new Date();
-
-    d.setDate(d.getDate()-i);
-
-    days.push(d);
-
-  }
-
-  const values=
-    days.map(d=>getWeeklyCount(formatDate(d)));
-
-  const max=
-    Math.max(...values,1);
-
-  const total=
-    values.reduce((a,b)=>a+b,0);
-
-  const possible=
-    Math.max(habits.length*7,1);
-
-  const rate=
-    Math.min(
-      100,
-      Math.round((total/possible)*100)
-    );
-
-  document.getElementById("statRate").textContent=
-    `${rate}%`;
-
-  const chart=
-    document.getElementById("weeklyChart");
-
-  chart.innerHTML="";
-
-  days.forEach((date,i)=>{
-
-    const value=values[i];
-
-    const col=document.createElement("div");
-
-    col.className="chart-column";
-
-    const bar=document.createElement("div");
-
-    bar.className="chart-bar";
-
-    bar.style.height=
-      `${Math.max(4,(value/max)*145)}px`;
-
-    const label=document.createElement("div");
-
-    label.className="chart-day";
-
-    label.textContent=
-      date.toLocaleDateString(
-        "fr-BE",
-        {weekday:"short"}
-      ).slice(0,2);
-
-    col.appendChild(bar);
-    col.appendChild(label);
-
-    chart.appendChild(col);
-
-  });
-
-  renderCategoryStats();
-
-}
-
-function renderCategoryStats(){
-
-  const categories=[
-    "Santé",
-    "Sport",
-    "Études",
-    "Productivité",
-    "Mental",
-    "Autre"
-  ];
-
-  const values={};
-
-  categories.forEach(c=>values[c]=0);
-
-  habits.forEach(habit=>{
-
-    let count=
-      habit.completions.length;
-
-    count+=
-      Object.values(
-        habit.weeklyCounters || {}
-      ).reduce((a,b)=>a+Number(b),0);
-
-    count+=
-      Object.values(
-        habit.monthlyCounters || {}
-      ).reduce((a,b)=>a+Number(b),0);
-
-    values[habit.category]+=count;
-
-  });
-
-  const max=
-    Math.max(...Object.values(values),1);
-
-  document.getElementById("categoryStats").innerHTML=
-    categories.map(category=>`
-
-      <div class="category-row">
-
-        <div class="category-name">
-          ${category}
-        </div>
-
-        <div class="category-track">
-          <div
-            class="category-fill"
-            style="width:${(values[category]/max)*100}%">
-          </div>
-        </div>
-
-        <div class="category-value">
-          ${values[category]}
-        </div>
-
-      </div>
-
-    `).join("");
-
-}
-
-/* =========================================================
-   HELP
-   ========================================================= */
-
-function openHelp(topic){
-
-  if(topic==="study"){
-
-    showPage("subjects");
-
-    return;
-
-  }
-
-  currentHelpTopic=topic;
-
-  const title=
-    document.getElementById("helpTopicTitle");
-
-  const subtitle=
-    document.getElementById("helpTopicSubtitle");
-
-  const content=
-    document.getElementById("helpTopicContent");
-
-  const data={
-
-    stress:{
-      title:"Stress",
-      subtitle:"Quelques outils simples pour redescendre en pression.",
-      cards:[
-        [
-          "Respiration 4–6",
-          "Inspire doucement pendant 4 secondes puis expire pendant 6 secondes. Répète pendant quelques minutes."
-        ],
-        [
-          "5–4–3–2–1",
-          "Identifie 5 choses que tu vois, 4 que tu peux toucher, 3 que tu entends, 2 que tu sens et 1 que tu peux goûter."
-        ],
-        [
-          "Bouge",
-          "Quelques minutes de marche ou une activité physique légère peuvent aider à faire une coupure mentale."
-        ],
-        [
-          "Découpe le problème",
-          "Si quelque chose semble énorme, écris les différentes petites actions que tu peux réellement effectuer."
-        ]
-      ]
-    },
-
-    sleep:{
-      title:"Sommeil",
-      subtitle:"Prépare progressivement ton cerveau au repos.",
-      cards:[
-        [
-          "Garde des horaires réguliers",
-          "Essaie de conserver une heure de coucher et de réveil relativement stable, y compris pendant les week-ends."
-        ],
-        [
-          "Crée une transition",
-          "Les 30 à 60 dernières minutes avant de dormir peuvent être plus calmes : lumière plus faible, activité tranquille et moins de stimulation."
-        ],
-        [
-          "Évite la caféine tardive",
-          "La caféine peut rester active plusieurs heures. Évite surtout les boissons énergisantes en fin de journée."
-        ],
-        [
-          "Chambre adaptée",
-          "Une chambre sombre, calme et plutôt fraîche favorise généralement de bonnes conditions de sommeil."
-        ]
-      ]
-    }
-
-  };
-
-  const info=data[topic];
-
-  title.textContent=info.title;
-  subtitle.textContent=info.subtitle;
-
-  content.innerHTML=
-    info.cards.map(card=>`
-
-      <div class="card advice-card">
-
-        <h3>${card[0]}</h3>
-
-        <p>${card[1]}</p>
-
-      </div>
-
-    `).join("");
-
-  showPage("help-topic");
-
-}
-
-function renderSubjects(){
-
-  const grid=
-    document.getElementById("subjectGrid");
-
-  grid.innerHTML="";
-
-  subjects.forEach(subject=>{
-
-    const card=document.createElement("div");
-
-    card.className="card subject-card";
-
-    card.onclick=()=>openSubject(subject.id);
-
-    card.innerHTML=`
-
-      <div class="subject-icon">
-        ${subject.icon}
-      </div>
-
-      <div>
-        <div class="subject-name">
-          ${subject.name}
-        </div>
-
-        <div class="subject-description">
-          ${subject.desc}
-        </div>
-      </div>
-
-      <div style="margin-left:auto;color:var(--muted)">
-        →
-      </div>
-
-    `;
-
-    grid.appendChild(card);
-
-  });
-
-}
-
-function openSubject(id){
-
-  const subject=
-    subjects.find(s=>s.id===id);
-
-  if(!subject) return;
-
-  document.getElementById("subjectTitle").textContent=
-    subject.name;
-
-  document.getElementById("subjectSubtitle").textContent=
-    subject.desc;
-
-  document.getElementById("subjectContent").innerHTML=
-    subject.content.map(card=>`
-
-      <div class="card advice-card">
-
-        <h3>${card[0]}</h3>
-
-        <p>${card[1]}</p>
-
-      </div>
-
-    `).join("");
-
-  showPage("subject");
-
-}
-
-/* =========================================================
-   THEMES
-   ========================================================= */
-
-function renderThemes(){
-
-  const light=
-    document.getElementById("lightThemes");
-
-  const dark=
-    document.getElementById("darkThemes");
-
-  const premium=
-    document.getElementById("premiumThemes");
-
-  light.innerHTML="";
-  dark.innerHTML="";
-  premium.innerHTML="";
-
-  themes.forEach(theme=>{
-
-    const button=document.createElement("button");
-
-    button.className=
-      `theme ${theme.group==="premium"?"premium-theme":""}`;
-
-    button.dataset.theme=theme.id;
-
-    if(
-      document.body.dataset.theme===theme.id
-    ){
-      button.classList.add("active");
-    }
-
-    button.onclick=()=>{
-      applyTheme(theme.id);
-    };
-
-    let preview="";
-
-    if(theme.group==="premium"){
-
-      preview=`
-
-        <div
-          class="theme-preview"
-          style="
-            background:${theme.bg};
-            --preview-accent:${theme.accent};
-          ">
-
-          <span class="premium-badge">
-            PREMIUM
-          </span>
-
-          ${
-            theme.id==="premium-crimson"
-              ? `<div style="position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,#ff274d55,transparent 50%)"></div>`
-              : ""
-          }
-
-          ${
-            theme.id==="premium-nebula"
-              ? `<div style="position:absolute;inset:0;background:radial-gradient(circle at 40% 50%,#a74cff66,transparent 55%)"></div>`
-              : ""
-          }
-
-          ${
-            theme.id==="premium-aurora"
-              ? `<div style="position:absolute;inset:0;background:linear-gradient(130deg,#25d99c44,#5e8cff44,#25d99c44)"></div>`
-              : ""
-          }
-
-          ${
-            theme.id==="premium-cyber"
-              ? `<div style="position:absolute;inset:0;background-image:linear-gradient(#29e6d01c 1px,transparent 1px),linear-gradient(90deg,#29e6d01c 1px,transparent 1px);background-size:15px 15px"></div>`
-              : ""
-          }
-
-          ${
-            theme.id==="premium-sakura"
-              ? `<div style="position:absolute;inset:0;background:radial-gradient(circle at 75% 25%,#ff9fbe55,transparent 45%)"></div>`
-              : ""
-          }
-
-          ${
-            theme.id==="premium-solar"
-              ? `<div style="position:absolute;width:55px;height:55px;border-radius:50%;right:8px;top:5px;background:#ffd45c99;filter:blur(6px)"></div>`
-              : ""
-          }
-
-        </div>
-
-      `;
-
-    }else{
-
-      preview=`
-
-        <div
-          class="theme-preview"
-          style="
-            background:${theme.bg};
-            --preview-accent:${theme.accent};
-          ">
-        </div>
-
-      `;
-
-    }
-
-    button.innerHTML=
-      preview+
-      `<div class="theme-name">${theme.name}</div>`;
-
-    if(theme.group==="light")
-      light.appendChild(button);
-
-    if(theme.group==="dark")
-      dark.appendChild(button);
-
-    if(theme.group==="premium")
-      premium.appendChild(button);
-
-  });
-
-}
-
-function applyTheme(themeId){
-
-  document.body.dataset.theme=themeId;
-
-  localStorage.setItem(
-    THEME_KEY,
-    themeId
-  );
-
-  updatePremiumBackground();
-
-  renderThemes();
-
-}
-
-function updatePremiumBackground(){
-
-  const container=
-    document.getElementById("backgroundEffects");
-
-  container.innerHTML="";
-
-  const theme=
-    document.body.dataset.theme;
-
-  if(theme==="premium-aurora"){
-
-    container.innerHTML=`
-      <div class="premium-bg">
-        <div class="aurora-wave"></div>
-      </div>
-    `;
-
-  }
-
-  if(theme==="premium-crimson"){
-
-    container.innerHTML=`
-      <div class="premium-bg">
-        <div class="crimson-glow"></div>
-      </div>
-    `;
-
-  }
-
-  if(theme==="premium-nebula"){
-
-    container.innerHTML=`
-      <div class="premium-bg">
-        <div class="nebula-cloud"></div>
-      </div>
-    `;
-
-  }
-
-  if(theme==="premium-cyber"){
-
-    container.innerHTML=`
-      <div class="premium-bg">
-        <div class="cyber-grid"></div>
-      </div>
-    `;
-
-  }
-
-  if(theme==="premium-sakura"){
-
-    container.innerHTML=`
-      <div class="premium-bg">
-        <div class="sakura-moon"></div>
-        ${Array.from({length:25},(_,i)=>`
-          <div
-            class="petal"
-            style="
-              left:${Math.random()*100}%;
-              animation-duration:${7+Math.random()*9}s;
-              animation-delay:${-Math.random()*10}s;
-              transform:rotate(${Math.random()*360}deg);
-            ">
-          </div>
-        `).join("")}
-      </div>
-    `;
-
-  }
-
-  if(theme==="premium-solar"){
-
-    container.innerHTML=`
-      <div class="premium-bg">
-        <div class="solar-core"></div>
-      </div>
-    `;
-
-  }
-
-  if(
-    theme==="premium-aurora" ||
-    theme==="premium-crimson" ||
-    theme==="premium-nebula" ||
-    theme==="premium-cyber" ||
-    theme==="premium-solar"
-  ){
-
-    const bg=
-      container.querySelector(".premium-bg");
-
-    for(let i=0;i<35;i++){
-
-      const particle=
-        document.createElement("div");
-
-      particle.className="particle";
-
-      particle.style.left=
-        `${Math.random()*100}%`;
-
-      particle.style.animationDuration=
-        `${8+Math.random()*15}s`;
-
-      particle.style.animationDelay=
-        `${-Math.random()*15}s`;
-
-      particle.style.opacity=
-        `${.15+Math.random()*.45}`;
-
-      bg.appendChild(particle);
-
-    }
-
-  }
-
+function escapeHTML(str=""){
+    return String(str)
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
 }
 
 /* =========================================================
@@ -4275,38 +2666,1922 @@ function updatePremiumBackground(){
 
 function showPage(page){
 
-  currentPage=page;
-
-  document
-    .querySelectorAll(".page")
-    .forEach(section=>{
-      section.classList.remove("active");
+    document.querySelectorAll(".page").forEach(el=>{
+        el.classList.remove("active");
     });
 
-  const target=
-    document.getElementById(`page-${page}`);
+    const target = document.getElementById("page-"+page);
 
-  if(target)
-    target.classList.add("active");
+    if(target){
+        target.classList.add("active");
+    }
 
-  document
-    .querySelectorAll(".nav-item")
-    .forEach(item=>{
+    document.querySelectorAll(".nav-item").forEach(btn=>{
+        btn.classList.toggle(
+            "active",
+            btn.dataset.page === page
+        );
+    });
 
-      item.classList.toggle(
-        "active",
-        item.dataset.page===page
-      );
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+    if(page==="today") renderToday();
+    if(page==="calendar") renderCalendar();
+    if(page==="habits") renderAllHabits();
+    if(page==="stats") renderStats();
+    if(page==="settings") renderThemes();
+}
+
+/* =========================================================
+   THEME SYSTEM
+   ========================================================= */
+
+const themeGroups = {
+
+    light:[
+        ["light-minimal","Minimal","preview-minimal"],
+        ["light-paper","Paper","preview-paper"],
+        ["light-sage","Sauge","preview-sage"],
+        ["light-sky","Sky","preview-sky"],
+        ["light-lavender","Lavande","preview-lavender"]
+    ],
+
+    dark:[
+        ["dark-midnight","Midnight","preview-midnight"],
+        ["dark-forest","Forest","preview-forest"],
+        ["dark-ocean","Ocean","preview-ocean"],
+        ["dark-purple","Purple","preview-purple"],
+        ["dark-red","Crimson","preview-red"]
+    ],
+
+    premium:[
+        ["premium-nebula","Nebula","preview-nebula"],
+        ["premium-aurora","Aurora","preview-aurora"],
+        ["premium-crimson","Crimson Flow","preview-crimson"],
+        ["premium-tokyo","Tokyo Night","preview-tokyo"],
+        ["premium-forest","Mystic Forest","preview-forest-premium"],
+        ["premium-sakura","Sakura Night","preview-sakura"],
+        ["premium-solaris","Solaris","preview-solaris"],
+        ["premium-arctic","Arctic","preview-arctic"],
+        ["premium-volt","Volt","preview-volt"],
+        ["premium-orbit","Orbit","preview-orbit"],
+        ["premium-sunset","Sunset","preview-sunset"],
+        ["premium-velvet","Velvet","preview-velvet"],
+        ["premium-blood","Blood Moon","preview-blood"],
+        ["premium-prism","Prism","preview-prism"],
+        ["premium-liquid","Liquid Glass","preview-liquid"],
+        ["premium-cyber","Cyber","preview-cyber"]
+    ]
+
+};
+
+function applyTheme(theme){
+
+    currentTheme = theme;
+
+    document.body.dataset.theme = theme;
+
+    const premium = theme.startsWith("premium-");
+
+    document.body.dataset.premium = premium ? "true" : "false";
+
+    localStorage.setItem(THEME_KEY,theme);
+
+    const allThemes = [
+        ...themeGroups.light,
+        ...themeGroups.dark,
+        ...themeGroups.premium
+    ];
+
+    const found = allThemes.find(t=>t[0]===theme);
+
+    document.getElementById("currentThemeName").textContent =
+        found ? found[1] : theme;
+
+    document.documentElement.style.setProperty(
+        "--theme-color",
+        getComputedStyle(document.body).getPropertyValue("--accent")
+    );
+
+    renderThemes();
+}
+
+function renderThemeGroup(id,group){
+
+    const container = document.getElementById(id);
+
+    container.innerHTML = group.map(theme=>`
+
+        <div
+            class="theme-card ${theme[0]===currentTheme?"active":""}"
+            onclick="applyTheme('${theme[0]}')"
+        >
+
+            <div class="theme-preview ${theme[2]}"></div>
+
+            <div class="theme-label">
+                ${theme[1]}
+            </div>
+
+        </div>
+
+    `).join("");
+}
+
+function renderThemes(){
+
+    renderThemeGroup("lightThemes",themeGroups.light);
+    renderThemeGroup("darkThemes",themeGroups.dark);
+    renderThemeGroup("premiumThemes",themeGroups.premium);
+
+    const all=[
+        ...themeGroups.light,
+        ...themeGroups.dark,
+        ...themeGroups.premium
+    ];
+
+    const found=all.find(x=>x[0]===currentTheme);
+
+    document.getElementById("currentThemeName").textContent =
+        found ? found[1] : currentTheme;
+}
+
+/* =========================================================
+   HABIT FREQUENCY
+   ========================================================= */
+
+function updateHabitFrequencyUI(){
+
+    const type=document.getElementById("habitType").value;
+    const box=document.getElementById("frequencyOptions");
+
+    if(type==="daily"){
+        box.innerHTML=`
+            <div class="badge">✓ Objectif : chaque jour</div>
+        `;
+    }
+
+    else if(type==="weekly"){
+        box.innerHTML=`
+            <div class="badge">✓ Objectif : une fois par semaine</div>
+        `;
+    }
+
+    else if(type==="weekly-count"){
+        box.innerHTML=`
+            <div class="form-group">
+                <label>Combien de fois par semaine ?</label>
+                <input id="frequencyCount" type="number" min="1" max="14" value="3">
+            </div>
+            <div class="badge">
+                Le suivi affichera par exemple 0/3, 1/3, 2/3...
+            </div>
+        `;
+    }
+
+    else if(type==="monthly-count"){
+        box.innerHTML=`
+            <div class="form-group">
+                <label>Combien de fois par mois ?</label>
+                <input id="frequencyCount" type="number" min="1" max="31" value="3">
+            </div>
+            <div class="badge">
+                Le suivi affichera par exemple 0/3 ce mois
+            </div>
+        `;
+    }
+
+    else if(type==="specific"){
+        box.innerHTML=`
+            <div class="form-group">
+                <label>Jours</label>
+
+                <div style="
+                    display:grid;
+                    grid-template-columns:repeat(7,1fr);
+                    gap:6px;
+                ">
+
+                    ${[
+                        ["1","Lun"],
+                        ["2","Mar"],
+                        ["3","Mer"],
+                        ["4","Jeu"],
+                        ["5","Ven"],
+                        ["6","Sam"],
+                        ["0","Dim"]
+                    ].map(x=>`
+                        <label style="
+                            display:flex;
+                            flex-direction:column;
+                            align-items:center;
+                            gap:4px;
+                            padding:9px 3px;
+                            border-radius:12px;
+                            background:var(--surface2);
+                            font-size:10px;
+                        ">
+                            <input
+                                type="checkbox"
+                                class="specific-day"
+                                value="${x[0]}"
+                            >
+                            ${x[1]}
+                        </label>
+                    `).join("")}
+
+                </div>
+            </div>
+        `;
+    }
+}
+
+/* =========================================================
+   HABITS
+   ========================================================= */
+
+function openHabitModal(habit=null){
+
+    document.getElementById("habitId").value=habit?.id || "";
+    document.getElementById("habitName").value=habit?.name || "";
+    document.getElementById("habitCategory").value=habit?.category || "Personnel";
+    document.getElementById("habitType").value=habit?.type || "daily";
+    document.getElementById("habitNote").value=habit?.note || "";
+
+    document.getElementById("habitModalTitle").textContent =
+        habit ? "Modifier l'habitude" : "Nouvelle habitude";
+
+    updateHabitFrequencyUI();
+
+    if(habit){
+
+        setTimeout(()=>{
+
+            const count=document.getElementById("frequencyCount");
+
+            if(count){
+                count.value=habit.target || 3;
+            }
+
+            if(habit.type==="specific"){
+                document.querySelectorAll(".specific-day").forEach(cb=>{
+                    cb.checked=(habit.days || []).includes(Number(cb.value));
+                });
+            }
+
+        },0);
+    }
+
+    document.getElementById("habitModal").classList.add("open");
+}
+
+function saveHabit(e){
+
+    e.preventDefault();
+
+    const id=document.getElementById("habitId").value;
+    const type=document.getElementById("habitType").value;
+
+    const frequencyCount=
+        document.getElementById("frequencyCount")?.value || 1;
+
+    const days=[
+        ...document.querySelectorAll(".specific-day:checked")
+    ].map(x=>Number(x.value));
+
+    const data={
+        id:id || uid(),
+        name:document.getElementById("habitName").value.trim(),
+        category:document.getElementById("habitCategory").value,
+        type,
+        target:Number(frequencyCount),
+        days,
+        note:document.getElementById("habitNote").value.trim(),
+        createdAt:new Date().toISOString(),
+        completions:id
+            ? (habits.find(h=>h.id===id)?.completions || [])
+            : [],
+        counters:id
+            ? (habits.find(h=>h.id===id)?.counters || {})
+            : {}
+    };
+
+    if(!data.name) return;
+
+    const existing=habits.findIndex(h=>h.id===data.id);
+
+    if(existing>=0){
+        habits[existing]=data;
+    }else{
+        habits.push(data);
+    }
+
+    saveData();
+    closeModal("habitModal");
+
+    renderToday();
+    renderAllHabits();
+    renderStats();
+}
+
+function deleteHabit(id){
+
+    if(!confirm("Supprimer cette habitude ?")) return;
+
+    habits=habits.filter(h=>h.id!==id);
+
+    saveData();
+
+    renderToday();
+    renderAllHabits();
+    renderStats();
+}
+
+function isHabitDue(habit,dateStr){
+
+    const d=parseDate(dateStr);
+    const day=d.getDay();
+
+    if(habit.type==="daily") return true;
+
+    if(habit.type==="weekly") return day===1;
+
+    if(habit.type==="specific"){
+        return (habit.days || []).includes(day);
+    }
+
+    if(habit.type==="weekly-count") return true;
+
+    if(habit.type==="monthly-count"){
+        return true;
+    }
+
+    return true;
+}
+
+function getWeekKey(dateStr){
+
+    const d=parseDate(dateStr);
+
+    const day=d.getDay() || 7;
+
+    d.setDate(d.getDate()-day+1);
+
+    return dateString(d);
+}
+
+function getMonthKey(dateStr){
+    return dateStr.slice(0,7);
+}
+
+function getCounter(habit,dateStr){
+
+    if(!habit.counters) habit.counters={};
+
+    if(habit.type==="weekly-count"){
+        return habit.counters[getWeekKey(dateStr)] || 0;
+    }
+
+    if(habit.type==="monthly-count"){
+        return habit.counters[getMonthKey(dateStr)] || 0;
+    }
+
+    return 0;
+}
+
+function setCounter(habit,dateStr,value){
+
+    if(!habit.counters) habit.counters={};
+
+    const key =
+        habit.type==="weekly-count"
+        ? getWeekKey(dateStr)
+        : getMonthKey(dateStr);
+
+    habit.counters[key]=Math.max(0,value);
+
+    saveData();
+}
+
+function incrementCounter(id,dateStr=getToday()){
+
+    const habit=habits.find(h=>h.id===id);
+
+    if(!habit) return;
+
+    const value=getCounter(habit,dateStr);
+
+    const next=Math.min(
+        value+1,
+        habit.target || 999
+    );
+
+    setCounter(habit,dateStr,next);
+
+    renderToday();
+    renderAllHabits();
+    renderStats();
+}
+
+function decrementCounter(id,dateStr=getToday()){
+
+    const habit=habits.find(h=>h.id===id);
+
+    if(!habit) return;
+
+    setCounter(
+        habit,
+        dateStr,
+        getCounter(habit,dateStr)-1
+    );
+
+    renderToday();
+    renderAllHabits();
+    renderStats();
+}
+
+function toggleHabit(id,dateStr=getToday()){
+
+    const habit=habits.find(h=>h.id===id);
+
+    if(!habit) return;
+
+    if(habit.type==="weekly-count" ||
+       habit.type==="monthly-count"){
+        incrementCounter(id,dateStr);
+        return;
+    }
+
+    if(!habit.completions){
+        habit.completions=[];
+    }
+
+    const index=habit.completions.indexOf(dateStr);
+
+    if(index>=0){
+        habit.completions.splice(index,1);
+    }else{
+        habit.completions.push(dateStr);
+    }
+
+    saveData();
+
+    renderToday();
+    renderAllHabits();
+    renderStats();
+}
+
+function isHabitComplete(habit,dateStr){
+
+    if(
+        habit.type==="weekly-count" ||
+        habit.type==="monthly-count"
+    ){
+        return getCounter(habit,dateStr)>=habit.target;
+    }
+
+    return (habit.completions || []).includes(dateStr);
+}
+
+function renderHabitCard(habit,dateStr=getToday()){
+
+    const due=isHabitDue(habit,dateStr);
+
+    if(!due) return "";
+
+    const counterHabit=
+        habit.type==="weekly-count" ||
+        habit.type==="monthly-count";
+
+    if(counterHabit){
+
+        const value=getCounter(habit,dateStr);
+
+        const suffix=
+            habit.type==="weekly-count"
+            ? `/${habit.target}`
+            : `/${habit.target} ce mois`;
+
+        return `
+
+        <div class="card habit-card">
+
+            <div class="habit-main">
+
+                <div class="habit-name">
+                    ${escapeHTML(habit.name)}
+                </div>
+
+                ${
+                    habit.note
+                    ? `<div class="habit-note">${escapeHTML(habit.note)}</div>`
+                    : ""
+                }
+
+                <div class="habit-category">
+                    ${escapeHTML(habit.category)}
+                </div>
+
+            </div>
+
+            <div class="counter">
+
+                <button onclick="decrementCounter('${habit.id}','${dateStr}')">
+                    −
+                </button>
+
+                <div class="counter-value">
+                    ${value}${suffix}
+                </div>
+
+                <button onclick="incrementCounter('${habit.id}','${dateStr}')">
+                    +
+                </button>
+
+            </div>
+
+        </div>
+
+        `;
+    }
+
+    const done=isHabitComplete(habit,dateStr);
+
+    return `
+
+    <div class="card habit-card">
+
+        <div class="habit-main">
+
+            <div class="habit-name">
+                ${escapeHTML(habit.name)}
+            </div>
+
+            ${
+                habit.note
+                ? `<div class="habit-note">${escapeHTML(habit.note)}</div>`
+                : ""
+            }
+
+            <div class="habit-category">
+                ${escapeHTML(habit.category)}
+            </div>
+
+        </div>
+
+        <button
+            class="habit-check ${done?"done":""}"
+            onclick="toggleHabit('${habit.id}','${dateStr}')"
+        >
+            ${done?"✓":""}
+        </button>
+
+    </div>
+
+    `;
+}
+
+/* =========================================================
+   TODAY
+   ========================================================= */
+
+function renderToday(){
+
+    const today=getToday();
+
+    document.getElementById("todayHeaderDate").textContent =
+        capitalize(formatLongDate(today));
+
+    const dueHabits=habits.filter(h=>isHabitDue(h,today));
+
+    const completed=dueHabits.filter(
+        h=>isHabitComplete(h,today)
+    ).length;
+
+    const progress=dueHabits.length
+        ? Math.round((completed/dueHabits.length)*100)
+        : 0;
+
+    document.getElementById("todayProgress").innerHTML=`
+
+        <div class="card progress-card">
+
+            <div class="progress-top">
+
+                <div>
+                    <div class="muted small">Progression du jour</div>
+                    <div class="progress-number">${progress}%</div>
+                    <div class="muted small">
+                        ${completed} sur ${dueHabits.length} habitudes terminées
+                    </div>
+                </div>
+
+                <div
+                    class="progress-ring"
+                    style="--progress:${progress}"
+                >
+                    <span>${progress}%</span>
+                </div>
+
+            </div>
+
+            <div class="progress-bar">
+                <div style="width:${progress}%"></div>
+            </div>
+
+        </div>
+
+    `;
+
+    /* TASKS */
+
+    const todayEvents=getEventsForDate(today);
+
+    document.getElementById("todayTaskCount").textContent=
+        todayEvents.length;
+
+    if(!todayEvents.length){
+
+        document.getElementById("todayTasks").innerHTML=`
+
+            <div class="card empty">
+                <div class="empty-icon">✓</div>
+                Aucune tâche prévue aujourd'hui.
+            </div>
+
+        `;
+
+    }else{
+
+        document.getElementById("todayTasks").innerHTML=`
+
+            <div class="task-list">
+
+                ${todayEvents.map(
+                    e=>renderTaskRow(e,today)
+                ).join("")}
+
+            </div>
+
+        `;
+    }
+
+    /* HABITS */
+
+    document.getElementById("todayHabitCount").textContent=
+        dueHabits.length;
+
+    if(!dueHabits.length){
+
+        document.getElementById("todayHabits").innerHTML=`
+
+            <div class="card empty">
+                Aucune habitude prévue aujourd'hui.
+            </div>
+
+        `;
+
+    }else{
+
+        document.getElementById("todayHabits").innerHTML=`
+
+            <div class="habit-list">
+
+                ${dueHabits.map(
+                    h=>renderHabitCard(h,today)
+                ).join("")}
+
+            </div>
+
+        `;
+    }
+}
+
+/* =========================================================
+   TASKS
+   ========================================================= */
+
+function getEventsForDate(dateStr){
+
+    return events
+        .filter(event=>{
+
+            if(event.date===dateStr){
+                return true;
+            }
+
+            if(event.repeat==="yearly"){
+                const original=parseDate(event.date);
+                const current=parseDate(dateStr);
+
+                return (
+                    original.getMonth()===current.getMonth() &&
+                    original.getDate()===current.getDate()
+                );
+            }
+
+            return false;
+
+        })
+        .sort((a,b)=>{
+
+            if(!a.time && !b.time) return 0;
+            if(!a.time) return 1;
+            if(!b.time) return -1;
+
+            return a.time.localeCompare(b.time);
+        });
+}
+
+function isTaskCompleted(event,dateStr){
+
+    return (event.completedDates || []).includes(dateStr);
+}
+
+function toggleTask(id,dateStr){
+
+    const event=events.find(e=>e.id===id);
+
+    if(!event) return;
+
+    if(!event.completedDates){
+        event.completedDates=[];
+    }
+
+    const index=event.completedDates.indexOf(dateStr);
+
+    if(index>=0){
+        event.completedDates.splice(index,1);
+    }else{
+        event.completedDates.push(dateStr);
+    }
+
+    saveData();
+
+    renderToday();
+    renderCalendar();
+}
+
+function deleteTask(id){
+
+    if(!confirm("Supprimer cette tâche ?")) return;
+
+    events=events.filter(e=>e.id!==id);
+
+    saveData();
+
+    renderToday();
+    renderCalendar();
+}
+
+function renderTaskRow(event,dateStr){
+
+    const done=isTaskCompleted(event,dateStr);
+
+    return `
+
+        <div class="task-row ${done?"done":""}">
+
+            <button
+                class="task-check ${done?"done":""}"
+                onclick="toggleTask('${event.id}','${dateStr}')"
+            >
+                ${done?"✓":""}
+            </button>
+
+            <div class="task-content">
+
+                <div class="task-title">
+                    ${escapeHTML(event.title)}
+                </div>
+
+                <div class="task-meta">
+
+                    ${
+                        event.time
+                        ? `<span>◷ ${escapeHTML(event.time)}</span>`
+                        : ""
+                    }
+
+                    ${
+                        event.repeat==="yearly"
+                        ? `<span>↻ Annuel</span>`
+                        : ""
+                    }
+
+                </div>
+
+            </div>
+
+            <button
+                class="icon-btn task-delete"
+                onclick="deleteTask('${event.id}')"
+            >
+                ×
+            </button>
+
+        </div>
+
+    `;
+}
+
+function openTaskModal(date=selectedDate){
+
+    document.getElementById("taskId").value="";
+    document.getElementById("taskTitle").value="";
+    document.getElementById("taskDate").value=date || getToday();
+    document.getElementById("taskTime").value="";
+    document.getElementById("taskRepeat").value="none";
+
+    document.getElementById("taskModal").classList.add("open");
+}
+
+function saveTask(e){
+
+    e.preventDefault();
+
+    const id=document.getElementById("taskId").value;
+
+    const data={
+        id:id || uid(),
+        title:document.getElementById("taskTitle").value.trim(),
+        date:document.getElementById("taskDate").value,
+        time:document.getElementById("taskTime").value,
+        repeat:document.getElementById("taskRepeat").value,
+        completedDates:id
+            ? (events.find(x=>x.id===id)?.completedDates || [])
+            : []
+    };
+
+    if(!data.title || !data.date) return;
+
+    const existing=events.findIndex(e=>e.id===data.id);
+
+    if(existing>=0){
+        events[existing]=data;
+    }else{
+        events.push(data);
+    }
+
+    saveData();
+    closeModal("taskModal");
+
+    selectedDate=data.date;
+    calendarDate=parseDate(data.date);
+
+    renderToday();
+    renderCalendar();
+}
+
+/* =========================================================
+   CALENDAR
+   ========================================================= */
+
+function changeMonth(direction){
+
+    calendarDate.setMonth(
+        calendarDate.getMonth()+direction
+    );
+
+    renderCalendar();
+}
+
+function goTodayCalendar(){
+
+    calendarDate=new Date();
+    selectedDate=getToday();
+
+    renderCalendar();
+}
+
+function selectCalendarDate(date){
+
+    selectedDate=date;
+
+    renderCalendar();
+}
+
+function renderCalendar(){
+
+    const year=calendarDate.getFullYear();
+    const month=calendarDate.getMonth();
+
+    const monthName=calendarDate.toLocaleDateString(
+        "fr-FR",
+        {month:"long"}
+    );
+
+    document.getElementById("calendarMonth").textContent=
+        capitalize(monthName);
+
+    document.getElementById("calendarYear").textContent=
+        year;
+
+    const first=new Date(year,month,1);
+
+    let startDay=first.getDay();
+
+    /* Monday = 0 */
+    startDay=(startDay+6)%7;
+
+    const daysInMonth=
+        new Date(year,month+1,0).getDate();
+
+    let html="";
+
+    for(let i=0;i<startDay;i++){
+
+        html+=`
+            <div class="calendar-day empty"></div>
+        `;
+    }
+
+    for(let day=1;day<=daysInMonth;day++){
+
+        const date=
+            `${year}-${String(month+1).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
+
+        const isToday=date===getToday();
+        const isSelected=date===selectedDate;
+
+        const dayEvents=getEventsForDate(date);
+
+        const dayHabits=
+            habits.filter(h=>isHabitDue(h,date));
+
+        const eventDots=dayEvents.slice(0,3).map(()=>`
+            <span class="day-dot task"></span>
+        `).join("");
+
+        const habitDots=
+            dayHabits.slice(0,3).map(()=>`
+                <span class="day-dot"></span>
+            `).join("");
+
+        const total=dayEvents.length+dayHabits.length;
+
+        html+=`
+
+            <button
+                class="calendar-day
+                    ${isToday?"today":""}
+                    ${isSelected?"selected":""}"
+                onclick="selectCalendarDate('${date}')"
+            >
+
+                <span class="day-number">
+                    ${day}
+                </span>
+
+                <span class="day-dots">
+                    ${eventDots}
+                    ${habitDots}
+                </span>
+
+                ${
+                    total
+                    ? `<span class="day-count">${total}</span>`
+                    : ""
+                }
+
+            </button>
+
+        `;
+    }
+
+    document.getElementById("calendarDays").innerHTML=html;
+
+    renderSelectedDay();
+}
+
+function renderSelectedDay(){
+
+    const date=selectedDate;
+
+    document.getElementById("selectedDayTitle").textContent=
+        capitalize(formatLongDate(date));
+
+    const dayEvents=getEventsForDate(date);
+
+    document.getElementById("selectedDayCount").textContent=
+        `${dayEvents.length} tâche${dayEvents.length>1?"s":""}`;
+
+    if(!dayEvents.length){
+
+        document.getElementById("selectedDayTasks").innerHTML=`
+
+            <div class="calendar-task-empty">
+                Aucune tâche pour cette journée.
+            </div>
+
+        `;
+
+    }else{
+
+        document.getElementById("selectedDayTasks").innerHTML=`
+
+            <div class="task-list">
+                ${dayEvents.map(
+                    e=>renderTaskRow(e,date)
+                ).join("")}
+            </div>
+
+        `;
+    }
+}
+
+/* =========================================================
+   ALL HABITS
+   ========================================================= */
+
+function renderAllHabits(){
+
+    const container=document.getElementById("allHabits");
+
+    if(!habits.length){
+
+        container.innerHTML=`
+
+            <div class="card empty">
+                <div class="empty-icon">＋</div>
+                <h3>Aucune habitude</h3>
+                <p>Crée ta première habitude pour commencer.</p>
+                <button class="btn primary" onclick="openHabitModal()">
+                    Créer une habitude
+                </button>
+            </div>
+
+        `;
+
+        return;
+    }
+
+    container.innerHTML=`
+
+        <div class="habit-list">
+
+            ${habits.map(h=>`
+
+                <div class="card habit-card">
+
+                    <div class="habit-main">
+
+                        <div class="habit-name">
+                            ${escapeHTML(h.name)}
+                        </div>
+
+                        <div class="habit-note">
+                            ${getHabitDescription(h)}
+                        </div>
+
+                        <div class="habit-category">
+                            ${escapeHTML(h.category)}
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="icon-btn"
+                        onclick='openHabitModal(${JSON.stringify(h).replace(/'/g,"&#039;")})'
+                    >
+                        ✎
+                    </button>
+
+                    <button
+                        class="icon-btn"
+                        onclick="deleteHabit('${h.id}')"
+                    >
+                        ×
+                    </button>
+
+                </div>
+
+            `).join("")}
+
+        </div>
+
+    `;
+}
+
+function getHabitDescription(h){
+
+    if(h.type==="daily")
+        return "Tous les jours";
+
+    if(h.type==="weekly")
+        return "Une fois par semaine";
+
+    if(h.type==="weekly-count")
+        return `${h.target} fois par semaine`;
+
+    if(h.type==="monthly-count")
+        return `${h.target} fois par mois`;
+
+    if(h.type==="specific"){
+        const names=["Dim","Lun","Mar","Mer","Jeu","Ven","Sam"];
+        return (h.days || []).map(d=>names[d]).join(" · ");
+    }
+
+    return "";
+}
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
+function getAllCompletionCount(){
+
+    let total=0;
+
+    habits.forEach(h=>{
+
+        if(h.type==="weekly-count" ||
+           h.type==="monthly-count"){
+
+            Object.values(h.counters || {}).forEach(v=>{
+                total+=Number(v)||0;
+            });
+
+        }else{
+
+            total+=(h.completions || []).length;
+
+        }
 
     });
 
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
+    return total;
+}
 
-  renderAll();
+function getCompletedToday(){
 
+    const today=getToday();
+
+    return habits.filter(
+        h=>isHabitDue(h,today) && isHabitComplete(h,today)
+    ).length;
+}
+
+function getCurrentStreak(){
+
+    let streak=0;
+    const d=new Date();
+
+    while(true){
+
+        const date=dateString(d);
+
+        const due=habits.filter(h=>isHabitDue(h,date));
+
+        if(!due.length) break;
+
+        const complete=due.every(
+            h=>isHabitComplete(h,date)
+        );
+
+        if(!complete) break;
+
+        streak++;
+
+        d.setDate(d.getDate()-1);
+
+        if(streak>3650) break;
+    }
+
+    return streak;
+}
+
+function renderStats(){
+
+    const total=getAllCompletionCount();
+    const today=getCompletedToday();
+    const streak=getCurrentStreak();
+
+    const weeklyData=[];
+
+    for(let i=6;i>=0;i--){
+
+        const d=new Date();
+
+        d.setDate(d.getDate()-i);
+
+        const date=dateString(d);
+
+        const count=habits.filter(
+            h=>isHabitDue(h,date) &&
+               isHabitComplete(h,date)
+        ).length;
+
+        weeklyData.push({
+            label:d.toLocaleDateString("fr-FR",{weekday:"short"}),
+            count
+        });
+    }
+
+    const max=Math.max(
+        1,
+        ...weeklyData.map(x=>x.count)
+    );
+
+    const categories={};
+
+    habits.forEach(h=>{
+
+        const cat=h.category || "Autre";
+
+        if(!categories[cat]){
+            categories[cat]=0;
+        }
+
+        if(h.type==="weekly-count" ||
+           h.type==="monthly-count"){
+
+            categories[cat]+=Object.values(
+                h.counters || {}
+            ).reduce((a,b)=>a+Number(b),0);
+
+        }else{
+
+            categories[cat]+=(h.completions || []).length;
+
+        }
+    });
+
+    const maxCat=Math.max(
+        1,
+        ...Object.values(categories)
+    );
+
+    document.getElementById("statsContent").innerHTML=`
+
+        <div class="stats-grid">
+
+            <div class="card stat-card">
+                <div class="stat-value">${total}</div>
+                <div class="stat-label">Actions réalisées</div>
+            </div>
+
+            <div class="card stat-card">
+                <div class="stat-value">${today}</div>
+                <div class="stat-label">Aujourd'hui</div>
+            </div>
+
+            <div class="card stat-card">
+                <div class="stat-value">${streak}</div>
+                <div class="stat-label">Jours de série</div>
+            </div>
+
+            <div class="card stat-card">
+                <div class="stat-value">${habits.length}</div>
+                <div class="stat-label">Habitudes</div>
+            </div>
+
+        </div>
+
+        <div class="section-title">
+            <h2>7 derniers jours</h2>
+        </div>
+
+        <div class="card chart">
+
+            <div class="bar-chart">
+
+                ${weeklyData.map(x=>`
+
+                    <div class="bar">
+
+                        <div
+                            class="bar-fill"
+                            style="height:${Math.max(4,(x.count/max)*150)}px"
+                        ></div>
+
+                        <div class="bar-label">
+                            ${x.label}
+                        </div>
+
+                    </div>
+
+                `).join("")}
+
+            </div>
+
+        </div>
+
+        <div class="section-title">
+            <h2>Catégories</h2>
+        </div>
+
+        <div class="card card-pad">
+
+            ${
+                Object.keys(categories).length
+                ?
+                `
+                <div class="category-list">
+
+                    ${Object.entries(categories).map(([name,value])=>`
+
+                        <div class="category-row">
+
+                            <div class="category-name">
+                                ${escapeHTML(name)}
+                            </div>
+
+                            <div class="category-progress">
+                                <div style="width:${(value/maxCat)*100}%"></div>
+                            </div>
+
+                            <div class="category-number">
+                                ${value}
+                            </div>
+
+                        </div>
+
+                    `).join("")}
+
+                </div>
+                `
+                :
+                `
+                <div class="empty">
+                    Pas encore assez de données.
+                </div>
+                `
+            }
+
+        </div>
+
+    `;
+}
+
+/* =========================================================
+   HELP
+   ========================================================= */
+
+const helpTopics={
+
+    stress:{
+        title:"Gérer le stress",
+        icon:"◌",
+        intro:"L'objectif n'est pas de supprimer tout stress, mais de faire redescendre son intensité et de reprendre du contrôle.",
+        sections:[
+            {
+                title:"Respiration 4–6",
+                text:"Inspire doucement pendant environ 4 secondes puis expire pendant environ 6 secondes. Répète pendant 2 à 5 minutes."
+            },
+            {
+                title:"Technique 5–4–3–2–1",
+                text:"Identifie 5 choses que tu vois, 4 que tu peux toucher, 3 que tu entends, 2 que tu sens et 1 que tu peux goûter."
+            },
+            {
+                title:"Réduire le problème",
+                text:"Écris ce qui te stresse. Sépare ensuite ce que tu peux contrôler de ce que tu ne peux pas contrôler."
+            },
+            {
+                title:"Bouger",
+                text:"Quelques minutes de marche ou d'activité physique peuvent aider à sortir d'une boucle mentale."
+            }
+        ]
+    },
+
+    sleep:{
+        title:"Améliorer son sommeil",
+        icon:"☾",
+        intro:"Le sommeil dépend surtout de la régularité, de l'environnement et de la routine précédant le coucher.",
+        sections:[
+            {
+                title:"Horaire régulier",
+                text:"Essaie de garder des heures de coucher et de réveil relativement constantes."
+            },
+            {
+                title:"Routine de transition",
+                text:"Pendant les 30 à 60 minutes précédant le sommeil, diminue progressivement les activités stimulantes."
+            },
+            {
+                title:"Caféine",
+                text:"Évite la caféine tard dans la journée si elle perturbe ton endormissement."
+            },
+            {
+                title:"Chambre",
+                text:"Une chambre sombre, calme et plutôt fraîche favorise généralement le sommeil."
+            }
+        ]
+    }
+
+};
+
+function openHelpTopic(topic){
+
+    const data=helpTopics[topic];
+
+    if(!data) return;
+
+    document.getElementById("helpTopicContent").innerHTML=`
+
+        <div style="font-size:35px;margin-bottom:12px">
+            ${data.icon}
+        </div>
+
+        <h1>${data.title}</h1>
+
+        <p class="muted">
+            ${data.intro}
+        </p>
+
+        <div class="tech-steps">
+
+            ${data.sections.map((s,i)=>`
+
+                <div class="tech-step">
+
+                    <div class="step-number">
+                        ${i+1}
+                    </div>
+
+                    <div>
+                        <strong>${s.title}</strong>
+                        <p class="muted" style="margin:5px 0 0">
+                            ${s.text}
+                        </p>
+                    </div>
+
+                </div>
+
+            `).join("")}
+
+        </div>
+
+    `;
+
+    showPage("help-topic");
+}
+
+/* =========================================================
+   STUDY TECHNIQUES
+   ========================================================= */
+
+const techniques=[
+
+    {
+        id:"active-recall",
+        icon:"↻",
+        title:"Active Recall",
+        short:"Se tester au lieu de simplement relire.",
+        intro:"Active Recall consiste à essayer de retrouver activement une information sans regarder le cours.",
+        steps:[
+            "Lis une petite partie du cours pour comprendre l'idée.",
+            "Ferme le cours.",
+            "Écris ou explique tout ce dont tu te souviens.",
+            "Rouvre le cours et compare.",
+            "Travaille surtout les informations que tu as oubliées."
+        ],
+        use:"Très efficace pour les définitions, dates, formules, vocabulaire et notions."
+    },
+
+    {
+        id:"feynman",
+        icon:"ƒ",
+        title:"Méthode Feynman",
+        short:"Expliquer simplement pour vérifier sa compréhension.",
+        intro:"La méthode Feynman consiste à expliquer une notion avec des mots simples, comme si tu l'enseignais à quelqu'un.",
+        steps:[
+            "Choisis une notion précise.",
+            "Explique-la sans regarder ton cours.",
+            "Utilise des mots simples et des exemples.",
+            "Repère les endroits où ton explication devient floue.",
+            "Retourne au cours puis recommence l'explication."
+        ],
+        use:"Particulièrement utile quand tu comprends vaguement une notion mais que tu n'arrives pas à l'expliquer."
+    },
+
+    {
+        id:"blurting",
+        icon:"B",
+        title:"Blurting",
+        short:"Vider tout ce que tu sais sur une feuille.",
+        intro:"Le Blurting est une forme très directe d'Active Recall.",
+        steps:[
+            "Apprends une section du cours.",
+            "Ferme complètement tes documents.",
+            "Écris rapidement tout ce dont tu te souviens.",
+            "Compare avec le cours.",
+            "Ajoute les éléments manquants avec une autre notation."
+        ],
+        use:"Excellent avant un contrôle pour détecter rapidement les trous dans tes connaissances."
+    },
+
+    {
+        id:"spaced",
+        icon:"◷",
+        title:"Spaced Repetition",
+        short:"Réviser plusieurs fois avec des intervalles croissants.",
+        intro:"La répétition espacée consiste à revoir une information juste avant qu'elle ne soit oubliée.",
+        steps:[
+            "Première révision après l'apprentissage.",
+            "Nouvelle révision le lendemain.",
+            "Puis quelques jours plus tard.",
+            "Puis environ une semaine après.",
+            "Espace progressivement les révisions si tu maîtrises."
+        ],
+        use:"Idéal pour le vocabulaire, les dates, les définitions et les notions à mémoriser sur plusieurs semaines."
+    },
+
+    {
+        id:"leitner",
+        icon:"▤",
+        title:"Leitner",
+        short:"Des cartes classées selon ton niveau de maîtrise.",
+        intro:"Le système Leitner utilise plusieurs boîtes de cartes mémoire.",
+        steps:[
+            "Mets toutes tes cartes dans la boîte 1.",
+            "Si tu réponds correctement, avance la carte d'une boîte.",
+            "Si tu te trompes, retourne-la à la boîte 1.",
+            "Révise les boîtes avancées moins souvent.",
+            "Travaille particulièrement les cartes qui reviennent souvent."
+        ],
+        use:"Très pratique avec des flashcards."
+    },
+
+    {
+        id:"pomodoro",
+        icon:"25",
+        title:"Pomodoro",
+        short:"Travailler par périodes courtes et concentrées.",
+        intro:"Pomodoro structure une session en périodes de concentration séparées par de courtes pauses.",
+        steps:[
+            "Choisis une tâche précise.",
+            "Travaille pendant 25 minutes sans distraction.",
+            "Prends 5 minutes de pause.",
+            "Répète 3 ou 4 fois.",
+            "Prends ensuite une pause plus longue."
+        ],
+        use:"Utile lorsque tu procrastines ou que tu as du mal à commencer."
+    },
+
+    {
+        id:"sq3r",
+        icon:"3R",
+        title:"SQ3R",
+        short:"Une méthode structurée pour comprendre un texte.",
+        intro:"SQ3R signifie Survey, Question, Read, Recite, Review.",
+        steps:[
+            "Survey : parcours rapidement le chapitre.",
+            "Question : transforme les titres en questions.",
+            "Read : lis pour répondre à ces questions.",
+            "Recite : explique les réponses sans regarder.",
+            "Review : revois l'ensemble plus tard."
+        ],
+        use:"Très efficace pour les chapitres longs et les cours théoriques."
+    },
+
+    {
+        id:"interleaving",
+        icon:"⇄",
+        title:"Interleaving",
+        short:"Alterner plusieurs types d'exercices.",
+        intro:"Au lieu de faire 20 exercices identiques, l'Interleaving mélange plusieurs types de problèmes.",
+        steps:[
+            "Choisis plusieurs notions proches.",
+            "Mélange les exercices.",
+            "Avant chaque exercice, identifie quelle méthode utiliser.",
+            "Analyse tes erreurs.",
+            "Recommence avec un mélange différent."
+        ],
+        use:"Très intéressant en mathématiques, sciences et informatique."
+    },
+
+    {
+        id:"cornell",
+        icon:"▥",
+        title:"Méthode Cornell",
+        short:"Organiser ses notes pour faciliter les révisions.",
+        intro:"La méthode Cornell divise la page en plusieurs zones : notes, questions et résumé.",
+        steps:[
+            "Prends tes notes dans la grande zone.",
+            "Ajoute des questions ou mots-clés dans la colonne latérale.",
+            "En bas, écris un résumé très court.",
+            "Cache les notes et réponds aux questions.",
+            "Utilise ensuite la feuille comme support d'Active Recall."
+        ],
+        use:"Très utile pendant les cours et pour transformer des notes en fiches révisables."
+    },
+
+    {
+        id:"questions",
+        icon:"?",
+        title:"Méthode des questions",
+        short:"Transformer le cours en questions.",
+        intro:"Au lieu de simplement surligner, transforme les informations importantes en questions.",
+        steps:[
+            "Prends un paragraphe ou une section.",
+            "Transforme chaque idée importante en question.",
+            "Ferme le cours.",
+            "Réponds oralement ou par écrit.",
+            "Reviens uniquement sur les réponses faibles."
+        ],
+        use:"Simple et efficace pour préparer une interrogation."
+    }
+
+];
+
+function openSubjects(){
+
+    renderTechniques();
+    renderSubjects();
+
+    showPage("subjects");
+}
+
+function renderTechniques(){
+
+    document.getElementById("techniquesGrid").innerHTML=
+        techniques.map(t=>`
+
+            <div
+                class="card tech-card"
+                onclick="openTechnique('${t.id}')"
+            >
+
+                <div class="tech-top">
+
+                    <div class="tech-icon">
+                        ${t.icon}
+                    </div>
+
+                    <div>
+                        <h3>${t.title}</h3>
+                        <p>${t.short}</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        `).join("");
+}
+
+function openTechnique(id){
+
+    const t=techniques.find(x=>x.id===id);
+
+    if(!t) return;
+
+    document.getElementById("techniqueContent").innerHTML=`
+
+        <div class="card card-pad">
+
+            <div class="tech-icon">
+                ${t.icon}
+            </div>
+
+            <h1 style="margin-top:18px">
+                ${t.title}
+            </h1>
+
+            <p class="muted">
+                ${t.intro}
+            </p>
+
+            <div class="section-title">
+                <h2>Comment l'utiliser</h2>
+            </div>
+
+            <div class="tech-steps">
+
+                ${t.steps.map((step,i)=>`
+
+                    <div class="tech-step">
+
+                        <div class="step-number">
+                            ${i+1}
+                        </div>
+
+                        <div>
+                            ${step}
+                        </div>
+
+                    </div>
+
+                `).join("")}
+
+            </div>
+
+            <div class="section-title">
+                <h2>Quand l'utiliser ?</h2>
+            </div>
+
+            <div class="card" style="
+                padding:17px;
+                background:var(--accent-soft);
+                box-shadow:none;
+                border:0;
+            ">
+                ${t.use}
+            </div>
+
+        </div>
+
+    `;
+
+    showPage("study-technique");
+}
+
+/* =========================================================
+   SUBJECTS
+   ========================================================= */
+
+const subjects=[
+
+    {
+        id:"math",
+        icon:"∑",
+        name:"Mathématiques",
+        subtitle:"Problèmes, formules, raisonnement",
+        tips:[
+            "Essaie de résoudre un exercice avant de regarder la correction.",
+            "Quand tu fais une erreur, note précisément l'étape qui a posé problème.",
+            "Mélange plusieurs types d'exercices avec l'Interleaving.",
+            "Refais les exercices ratés quelques jours plus tard.",
+            "Explique une formule avec la méthode Feynman."
+        ]
+    },
+
+    {
+        id:"fr",
+        icon:"Aa",
+        name:"Français",
+        subtitle:"Analyse, rédaction, littérature",
+        tips:[
+            "Transforme les notions littéraires en questions d'Active Recall.",
+            "Fais régulièrement des plans de rédaction sans forcément écrire tout le devoir.",
+            "Pour un texte, identifie thème, thèse, procédés et effet produit.",
+            "Utilise Cornell pour organiser tes notes de littérature.",
+            "Pour le vocabulaire, utilise la répétition espacée."
+        ]
+    },
+
+    {
+        id:"nl",
+        icon:"NL",
+        name:"Néerlandais",
+        subtitle:"Vocabulaire, grammaire, compréhension",
+        tips:[
+            "Apprends le vocabulaire avec des cartes mémoire.",
+            "Utilise Spaced Repetition pour les mots difficiles.",
+            "Fais de l'Active Recall au lieu de relire tes listes.",
+            "Écris des phrases avec les nouveaux mots.",
+            "Lis régulièrement de courts textes en néerlandais."
+        ]
+    },
+
+    {
+        id:"en",
+        icon:"EN",
+        name:"Anglais",
+        subtitle:"Vocabulary, grammar, comprehension",
+        tips:[
+            "Apprends les mots dans des phrases plutôt qu'isolément.",
+            "Utilise des flashcards et la répétition espacée.",
+            "Résume un texte anglais sans le regarder.",
+            "Écoute de l'anglais régulièrement.",
+            "Explique une règle de grammaire avec Feynman."
+        ]
+    },
+
+    {
+        id:"history",
+        icon:"⌛",
+        name:"Histoire",
+        subtitle:"Dates, événements, causalité",
+        tips:[
+            "Construis des questions sur chaque événement.",
+            "Utilise des frises chronologiques.",
+            "Explique les causes et conséquences sans regarder le cours.",
+            "Utilise Blurting pour vérifier ce que tu connais réellement.",
+            "Révise les dates avec Spaced Repetition."
+        ]
+    },
+
+    {
+        id:"geo",
+        icon:"◎",
+        name:"Géographie",
+        subtitle:"Espaces, cartes, phénomènes",
+        tips:[
+            "Travaille les cartes de mémoire.",
+            "Explique chaque phénomène avec la méthode Feynman.",
+            "Utilise des schémas plutôt que des paragraphes interminables.",
+            "Transforme les données importantes en questions.",
+            "Fais des exercices où tu dois retrouver les informations sans le cours."
+        ]
+    },
+
+    {
+        id:"science",
+        icon:"⚗",
+        name:"Sciences",
+        subtitle:"Concepts, phénomènes, expériences",
+        tips:[
+            "Explique les phénomènes étape par étape.",
+            "Dessine les mécanismes sans regarder le cours.",
+            "Utilise Interleaving pour mélanger plusieurs types d'exercices.",
+            "Apprends les définitions avec Active Recall.",
+            "Refais les exercices plusieurs jours après."
+        ]
+    },
+
+    {
+        id:"computer",
+        icon:"</>",
+        name:"Informatique",
+        subtitle:"Code, logique, concepts",
+        tips:[
+            "Écris du code avant de regarder la solution.",
+            "Quand un programme ne fonctionne pas, identifie précisément l'erreur.",
+            "Explique le fonctionnement d'une fonction sans regarder ton code.",
+            "Refais les exercices depuis zéro quelques jours plus tard.",
+            "Utilise Interleaving pour mélanger plusieurs notions."
+        ]
+    }
+
+];
+
+function renderSubjects(){
+
+    document.getElementById("subjectsGrid").innerHTML=
+        subjects.map(s=>`
+
+            <div
+                class="card subject-card"
+                onclick="openSubject('${s.id}')"
+            >
+
+                <div class="subject-icon">
+                    ${s.icon}
+                </div>
+
+                <strong>${s.name}</strong>
+                <span>${s.subtitle}</span>
+
+            </div>
+
+        `).join("");
+}
+
+function openSubject(id){
+
+    const s=subjects.find(x=>x.id===id);
+
+    if(!s) return;
+
+    document.getElementById("subjectContent").innerHTML=`
+
+        <div class="card card-pad">
+
+            <div class="subject-icon" style="font-size:38px">
+                ${s.icon}
+            </div>
+
+            <h1 style="margin-top:12px">
+                ${s.name}
+            </h1>
+
+            <p class="muted">
+                ${s.subtitle}
+            </p>
+
+            <div class="section-title">
+                <h2>Conseils de travail</h2>
+            </div>
+
+            <div class="tech-steps">
+
+                ${s.tips.map((tip,i)=>`
+
+                    <div class="tech-step">
+
+                        <div class="step-number">
+                            ${i+1}
+                        </div>
+
+                        <div>
+                            ${tip}
+                        </div>
+
+                    </div>
+
+                `).join("")}
+
+            </div>
+
+        </div>
+
+    `;
+
+    showPage("subject");
 }
 
 /* =========================================================
@@ -4315,168 +4590,56 @@ function showPage(page){
 
 function closeModal(id){
 
-  document
-    .getElementById(id)
-    .classList.remove("open");
-
+    document.getElementById(id).classList.remove("open");
 }
 
-function openConfirmReset(){
+document.querySelectorAll(".modal-backdrop").forEach(backdrop=>{
 
-  document
-    .getElementById("confirmModal")
-    .classList.add("open");
+    backdrop.addEventListener("click",e=>{
 
-}
-
-function resetEverything(){
-
-  habits=[];
-  events=[];
-
-  save();
-
-  closeModal("confirmModal");
-
-  renderAll();
-
-  showToast("Données réinitialisées");
-
-}
-
-/* =========================================================
-   EXPORT
-   ========================================================= */
-
-function exportData(){
-
-  const data={
-    exportedAt:new Date().toISOString(),
-    habits,
-    events
-  };
-
-  const blob=
-    new Blob(
-      [JSON.stringify(data,null,2)],
-      {type:"application/json"}
-    );
-
-  const url=
-    URL.createObjectURL(blob);
-
-  const a=
-    document.createElement("a");
-
-  a.href=url;
-  a.download="habits-backup.json";
-  a.click();
-
-  URL.revokeObjectURL(url);
-
-  showToast("Données exportées");
-
-}
-
-/* =========================================================
-   TOAST
-   ========================================================= */
-
-let toastTimer;
-
-function showToast(message){
-
-  const toast=
-    document.getElementById("toast");
-
-  toast.textContent=message;
-
-  toast.classList.add("show");
-
-  clearTimeout(toastTimer);
-
-  toastTimer=
-    setTimeout(()=>{
-      toast.classList.remove("show");
-    },2200);
-
-}
-
-/* =========================================================
-   HELPERS
-   ========================================================= */
-
-function escapeHTML(value){
-
-  return String(value)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
-
-}
-
-function formatReadableDate(date){
-
-  return parseDate(date).toLocaleDateString(
-    "fr-BE",
-    {
-      weekday:"short",
-      day:"numeric",
-      month:"short"
-    }
-  );
-
-}
-
-/* =========================================================
-   RENDER ALL
-   ========================================================= */
-
-function renderAll(){
-
-  renderToday();
-  renderCalendar();
-  renderHabits();
-  renderStats();
-  renderSubjects();
-  renderThemes();
-
-}
-
-/* =========================================================
-   CLOSE MODAL OUTSIDE
-   ========================================================= */
-
-document
-  .querySelectorAll(".modal-layer")
-  .forEach(layer=>{
-
-    layer.addEventListener("click",event=>{
-
-      if(event.target===layer)
-        layer.classList.remove("open");
+        if(e.target===backdrop){
+            backdrop.classList.remove("open");
+        }
 
     });
 
-  });
+});
 
 /* =========================================================
-   KEYBOARD ESC
+   RESET
    ========================================================= */
 
-document.addEventListener("keydown",event=>{
+function resetData(){
 
-  if(event.key==="Escape"){
+    const ok=confirm(
+        "Cette action supprimera toutes tes habitudes et tes tâches. Continuer ?"
+    );
 
-    document
-      .querySelectorAll(".modal-layer.open")
-      .forEach(modal=>{
-        modal.classList.remove("open");
-      });
+    if(!ok) return;
 
-  }
+    habits=[];
+    events=[];
+
+    saveData();
+
+    renderToday();
+    renderCalendar();
+    renderAllHabits();
+    renderStats();
+}
+
+/* =========================================================
+   KEYBOARD
+   ========================================================= */
+
+document.addEventListener("keydown",e=>{
+
+    if(e.key==="Escape"){
+
+        document.querySelectorAll(".modal-backdrop.open")
+            .forEach(m=>m.classList.remove("open"));
+
+    }
 
 });
 
@@ -4484,26 +4647,16 @@ document.addEventListener("keydown",event=>{
    INIT
    ========================================================= */
 
-(function init(){
+applyTheme(currentTheme);
 
-  const savedTheme=
-    localStorage.getItem(THEME_KEY);
+renderToday();
+renderCalendar();
+renderAllHabits();
+renderStats();
+renderThemes();
+renderTechniques();
+renderSubjects();
 
-  if(
-    savedTheme &&
-    themes.some(t=>t.id===savedTheme)
-  ){
-
-    document.body.dataset.theme=
-      savedTheme;
-
-  }
-
-  updatePremiumBackground();
-
-  renderAll();
-
-})();
 </script>
 
 </body>
