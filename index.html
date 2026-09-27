@@ -15,1454 +15,211 @@
 
 <style>
 
-/* =========================================================
-   HABITS. — PREMIUM UI
-========================================================= */
-
-:root{
-  --bg:#f3f7f2;
-  --surface:rgba(255,255,255,.78);
-  --surface-solid:#ffffff;
-  --surface2:rgba(255,255,255,.54);
-  --text:#18201c;
-  --muted:#78827d;
-
-  --accent:#789b83;
-  --accent2:#b9d1bd;
-  --accent-soft:rgba(120,155,131,.14);
-
-  --border:rgba(30,45,35,.09);
-  --shadow:0 18px 55px rgba(30,45,35,.09);
-
-  --danger:#d66d6d;
-  --radius:24px;
-  --nav:rgba(255,255,255,.78);
-
-  --glow:rgba(120,155,131,.18);
-  --special-opacity:.0;
-}
+/* ====================================
+   BASE & RESET
+==================================== */
 
 *{
+  margin:0;
+  padding:0;
   box-sizing:border-box;
   -webkit-tap-highlight-color:transparent;
 }
 
-html{
-  scroll-behavior:smooth;
+:root{
+  --bg:#f3f7f2;
+  --card:#ffffff;
+  --text:#1a1a1a;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+  --accent:#789b83;
+  --accent-2:#55a47d;
+  --danger:#ef4444;
+  --shadow:0 4px 20px rgba(0,0,0,0.06);
+  --radius:16px;
+  --nav-height:70px;
+  --safe-bottom:env(safe-area-inset-bottom);
+}
+
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#0f0f12;
+    --card:#1a1a24;
+    --text:#e8e8ed;
+    --muted:#9aa0a6;
+    --border:#2a2a36;
+    --accent:#788cff;
+    --accent-2:#5566ff;
+    --shadow:0 4px 20px rgba(0,0,0,0.4);
+  }
+}
+
+body[data-theme="midnight"]{
+  --bg:#080b12;
+  --card:#1a1a24;
+  --text:#e8e8ed;
+  --muted:#9aa0a6;
+  --border:#2a2a36;
+  --accent:#788cff;
+  --accent-2:#5566ff;
+}
+
+body[data-theme="forest-dark"]{
+  --bg:#09110d;
+  --card:#1a241f;
+  --text:#e8e8ed;
+  --muted:#9aa0a6;
+  --border:#2a362f;
+  --accent:#62a873;
+  --accent-2:#4a8f5e;
+}
+
+body[data-theme="sage"]{
+  --bg:#f3f7f2;
+  --card:#ffffff;
+  --text:#1a1a1a;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+  --accent:#789b83;
+  --accent-2:#55a47d;
+}
+
+body[data-theme="cream"]{
+  --bg:#faf6ed;
+  --card:#ffffff;
+  --text:#1a1a1a;
+  --muted:#6b7280;
+  --border:#e5e7eb;
+  --accent:#b28c5a;
+  --accent-2:#96784a;
+}
+
+body[data-theme="aurora"]::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse at 20% 20%,#4effc255 0%,transparent 38%),
+    radial-gradient(ellipse at 80% 30%,#756dff55 0%,transparent 40%),
+    radial-gradient(ellipse at 50% 100%,#d96dff55 0%,transparent 45%),
+    linear-gradient(135deg,#061015,#102329);
+  z-index:-2;
+  pointer-events:none;
 }
 
 body{
-  margin:0;
-  min-height:100vh;
-
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "SF Pro Display",
-    "SF Pro Text",
-    "Segoe UI",
-    sans-serif;
-
-  background:
-    radial-gradient(
-      circle at 8% -5%,
-      var(--accent-soft),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 100% 25%,
-      var(--glow),
-      transparent 30%
-    ),
-    var(--bg);
-
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  background:var(--bg);
   color:var(--text);
-
-  transition:
-    background .55s ease,
-    color .3s ease;
+  padding-bottom:calc(var(--nav-height) + var(--safe-bottom) + 20px);
+  transition:background .4s ease;
+  overflow-x:hidden;
 }
 
-body::before{
-  content:"";
+#specialBg{position:fixed;inset:0;z-index:-1;pointer-events:none;}
+
+/* ====================================
+   NAVIGATION
+==================================== */
+
+.nav{
   position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:-3;
-  opacity:.45;
-
-  background:
-    radial-gradient(
-      circle at 50% 100%,
-      var(--accent-soft),
-      transparent 35%
-    );
-}
-
-button,
-input,
-select,
-textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-button,
-a{
-  -webkit-user-select:none;
-  user-select:none;
-}
-
-.app{
-  min-height:100vh;
-  padding-bottom:120px;
-}
-
-.container{
-  width:min(1180px,calc(100% - 34px));
-  margin:auto;
-}
-
-/* =========================================================
-   PREMIUM AMBIENT BACKGROUNDS
-========================================================= */
-
-.special-bg{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  overflow:hidden;
-  z-index:-2;
-}
-
-/* =========================================================
-   AURORA
-========================================================= */
-
-.aurora-layer{
-  position:absolute;
-  inset:-25%;
-  overflow:hidden;
-
-  background:
-    radial-gradient(
-      ellipse at 50% 0%,
-      rgba(45,255,190,.08),
-      transparent 42%
-    );
-
-  filter:saturate(135%);
-}
-
-.aurora-one,
-.aurora-two,
-.aurora-three,
-.aurora-four{
-  position:absolute;
-
-  width:58vw;
-  height:58vw;
-
-  border-radius:50%;
-
-  filter:blur(75px);
-
-  opacity:.30;
-
-  animation:
-    auroraFloat
-    13s
-    ease-in-out
-    infinite
-    alternate;
-}
-
-.aurora-one{
-  background:
-    radial-gradient(
-      circle,
-      #42f5bd,
-      #18cda2 40%,
-      transparent 70%
-    );
-
-  left:-13%;
-  top:-13%;
-}
-
-.aurora-two{
-  background:
-    radial-gradient(
-      circle,
-      #756dff,
-      #4e52e8 42%,
-      transparent 70%
-    );
-
-  right:-15%;
-  top:3%;
-
-  animation-delay:-4s;
-  animation-duration:16s;
-}
-
-.aurora-three{
-  background:
-    radial-gradient(
-      circle,
-      #dc70ff,
-      #873eff 42%,
-      transparent 70%
-    );
-
-  left:23%;
-  bottom:-28%;
-
-  animation-delay:-7s;
-  animation-duration:18s;
-}
-
-.aurora-four{
-  background:
-    radial-gradient(
-      circle,
-      #35e9ff,
-      transparent 68%
-    );
-
-  left:48%;
-  top:32%;
-
-  opacity:.18;
-
-  animation-delay:-10s;
-  animation-duration:20s;
-}
-
-.aurora-ribbon{
-  position:absolute;
-
-  width:115%;
-  height:32%;
-
-  left:-8%;
-  top:14%;
-
-  border-radius:50%;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(69,255,198,.18),
-      rgba(97,246,255,.22),
-      rgba(157,99,255,.16),
-      transparent
-    );
-
-  filter:blur(25px);
-
-  transform:
-    rotate(-8deg)
-    skewX(-15deg);
-
-  animation:
-    auroraRibbon 10s
-    ease-in-out
-    infinite
-    alternate;
-}
-
-@keyframes auroraFloat{
-  0%{
-    transform:
-      translate3d(0,0,0)
-      scale(1)
-      rotate(0deg);
-  }
-
-  50%{
-    transform:
-      translate3d(70px,-45px,0)
-      scale(1.18)
-      rotate(9deg);
-  }
-
-  100%{
-    transform:
-      translate3d(-55px,60px,0)
-      scale(1.36)
-      rotate(-9deg);
-  }
-}
-
-@keyframes auroraRibbon{
-  0%{
-    transform:
-      rotate(-8deg)
-      translateX(-4%)
-      scaleY(.9);
-    opacity:.35;
-  }
-
-  100%{
-    transform:
-      rotate(-3deg)
-      translateX(8%)
-      scaleY(1.15);
-    opacity:.8;
-  }
-}
-
-/* =========================================================
-   MIDNIGHT
-========================================================= */
-
-.stars{
-  position:absolute;
-  inset:0;
-
-  background-image:
-    radial-gradient(circle,#fff 1px,transparent 1.7px),
-    radial-gradient(circle,#b9c9ff 1px,transparent 1.5px),
-    radial-gradient(circle,#fff 1.2px,transparent 1.8px);
-
-  background-size:
-    90px 90px,
-    150px 150px,
-    230px 230px;
-
-  background-position:
-    10px 20px,
-    50px 80px,
-    90px 140px;
-
-  opacity:.42;
-
-  animation:
-    starsMove 20s linear infinite;
-}
-
-.stars::before{
-  content:"";
-
-  position:absolute;
-
-  width:180px;
-  height:180px;
-
-  border-radius:50%;
-
-  right:8%;
-  top:8%;
-
-  background:
-    radial-gradient(
-      circle at 35% 35%,
-      #ffffff,
-      #c7d3ff 25%,
-      rgba(125,145,255,.25) 48%,
-      transparent 70%
-    );
-
-  box-shadow:
-    0 0 70px rgba(125,145,255,.18),
-    0 0 140px rgba(100,120,255,.10);
-
-  opacity:.65;
-}
-
-.stars::after{
-  content:"";
-
-  position:absolute;
-  inset:0;
-
-  background:
-    radial-gradient(
-      ellipse at center,
-      transparent 20%,
-      rgba(80,100,180,.10) 65%,
-      rgba(0,0,0,.28)
-    );
-
-  animation:
-    starsPulse 5s ease-in-out infinite alternate;
-}
-
-@keyframes starsMove{
-  from{
-    background-position:
-      10px 20px,
-      50px 80px,
-      90px 140px;
-  }
-
-  to{
-    background-position:
-      120px 140px,
-      210px 220px,
-      260px 300px;
-  }
-}
-
-@keyframes starsPulse{
-  from{opacity:.35}
-  to{opacity:.9}
-}
-
-/* =========================================================
-   SAKURA
-========================================================= */
-
-.sakura-glow{
-  position:absolute;
-  width:70vw;
-  height:70vw;
-
-  left:-15%;
-  top:-15%;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,132,178,.22),
-      rgba(255,176,205,.09) 35%,
-      transparent 70%
-    );
-
-  filter:blur(25px);
-
-  animation:
-    sakuraGlow 9s
-    ease-in-out
-    infinite
-    alternate;
-}
-
-.sakura-glow-two{
-  position:absolute;
-  width:55vw;
-  height:55vw;
-
-  right:-15%;
-  bottom:-15%;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,211,226,.20),
-      transparent 70%
-    );
-
-  filter:blur(30px);
-
-  animation:
-    sakuraGlow 12s
-    ease-in-out
-    infinite
-    alternate-reverse;
-}
-
-.petals{
-  position:absolute;
-  inset:0;
-  overflow:hidden;
-}
-
-.petal{
-  position:absolute;
-  top:-50px;
-
-  width:14px;
-  height:9px;
-
-  border-radius:
-    100% 0 100% 0;
-
-  background:
-    linear-gradient(
-      135deg,
-      #ffe4ef,
-      #f49abb 45%,
-      #df6898
-    );
-
-  box-shadow:
-    0 2px 12px rgba(217,90,135,.25),
-    0 0 7px rgba(255,150,194,.15);
-
-  opacity:.82;
-
-  animation:
-    sakuraFall
-    linear
-    infinite;
-}
-
-@keyframes sakuraGlow{
-  0%{
-    transform:scale(.85) translate3d(0,0,0);
-    opacity:.55;
-  }
-
-  100%{
-    transform:scale(1.18) translate3d(5%,4%,0);
-    opacity:1;
-  }
-}
-
-@keyframes sakuraFall{
-  0%{
-    transform:
-      translate3d(0,-50px,0)
-      rotate(0deg);
-  }
-
-  25%{
-    transform:
-      translate3d(35px,27vh,0)
-      rotate(180deg);
-  }
-
-  55%{
-    transform:
-      translate3d(-30px,58vh,0)
-      rotate(390deg);
-  }
-
-  100%{
-    transform:
-      translate3d(120px,115vh,0)
-      rotate(720deg);
-  }
-}
-
-/* =========================================================
-   CYBER
-========================================================= */
-
-.cyber-grid{
-  position:absolute;
-  inset:-50%;
-
-  background:
-    linear-gradient(
-      rgba(120,70,255,.11) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      90deg,
-      rgba(70,220,255,.11) 1px,
-      transparent 1px
-    );
-
-  background-size:
-    55px 55px;
-
-  transform:
-    perspective(700px)
-    rotateX(62deg)
-    translateY(15%);
-
-  animation:
-    cyberMove 12s
-    linear
-    infinite;
-
-  mask-image:
-    linear-gradient(
-      to bottom,
-      transparent,
-      black 25%,
-      black 75%,
-      transparent
-    );
-}
-
-.cyber-glow{
-  position:absolute;
-  width:55vw;
-  height:55vw;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(179,90,255,.28),
-      rgba(80,220,255,.10) 40%,
-      transparent 68%
-    );
-
-  filter:blur(20px);
-
-  left:50%;
-  top:15%;
-
-  transform:translateX(-50%);
-
-  animation:
-    cyberPulse
-    4s ease-in-out infinite
-    alternate;
-}
-
-.cyber-beam{
-  position:absolute;
-
-  width:120%;
-  height:2px;
-
-  left:-10%;
-  top:43%;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #55e8ff,
-      #b66cff,
-      transparent
-    );
-
-  box-shadow:
-    0 0 18px #55e8ff,
-    0 0 35px rgba(182,108,255,.7);
-
-  animation:
-    cyberBeam 5s
-    ease-in-out
-    infinite alternate;
-}
-
-@keyframes cyberMove{
-  from{
-    background-position:0 0;
-  }
-
-  to{
-    background-position:0 55px;
-  }
-}
-
-@keyframes cyberPulse{
-  from{
-    opacity:.5;
-    transform:translateX(-50%) scale(.9);
-  }
-
-  to{
-    opacity:1;
-    transform:translateX(-50%) scale(1.15);
-  }
-}
-
-@keyframes cyberBeam{
-  from{
-    transform:translateY(-120px) rotate(-2deg);
-    opacity:.15;
-  }
-
-  to{
-    transform:translateY(120px) rotate(2deg);
-    opacity:.85;
-  }
-}
-
-/* =========================================================
-   NEBULA
-========================================================= */
-
-.nebula-layer{
-  position:absolute;
-  inset:-20%;
-
-  background:
-    radial-gradient(
-      ellipse at 20% 20%,
-      rgba(255,69,180,.24),
-      transparent 30%
-    ),
-    radial-gradient(
-      ellipse at 75% 25%,
-      rgba(92,87,255,.25),
-      transparent 34%
-    ),
-    radial-gradient(
-      ellipse at 45% 80%,
-      rgba(0,224,255,.16),
-      transparent 32%
-    );
-
-  filter:blur(12px);
-
-  animation:
-    nebulaMove 18s
-    ease-in-out
-    infinite
-    alternate;
-}
-
-.nebula-cloud{
-  position:absolute;
-
-  width:55vw;
-  height:28vw;
-
-  border-radius:50%;
-
-  filter:blur(45px);
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(255,77,180,.15),
-      rgba(116,83,255,.25),
-      rgba(69,220,255,.12)
-    );
-
-  left:20%;
-  top:35%;
-
-  transform:rotate(-18deg);
-
-  animation:
-    cloudFloat 11s
-    ease-in-out
-    infinite
-    alternate;
-}
-
-.space-dust{
-  position:absolute;
-  inset:0;
-
-  background-image:
-    radial-gradient(circle,rgba(255,255,255,.7) 1px,transparent 1.5px),
-    radial-gradient(circle,rgba(133,211,255,.6) 1px,transparent 1.5px);
-
-  background-size:
-    130px 130px,
-    220px 220px;
-
-  opacity:.28;
-
-  animation:
-    dustMove 35s
-    linear
-    infinite;
-}
-
-@keyframes nebulaMove{
-  0%{
-    transform:scale(1) rotate(0deg);
-  }
-
-  100%{
-    transform:scale(1.12) rotate(4deg);
-  }
-}
-
-@keyframes cloudFloat{
-  from{
-    transform:rotate(-18deg) translate(-30px,0) scale(.9);
-  }
-
-  to{
-    transform:rotate(-8deg) translate(40px,-25px) scale(1.1);
-  }
-}
-
-@keyframes dustMove{
-  from{
-    background-position:0 0,0 0;
-  }
-
-  to{
-    background-position:130px 90px,-100px 180px;
-  }
-}
-
-/* =========================================================
-   COSMOS
-========================================================= */
-
-.cosmos-layer{
-  position:absolute;
-  inset:0;
-
-  background:
-    radial-gradient(
-      circle at 50% 50%,
-      rgba(90,106,255,.13),
-      transparent 35%
-    );
-}
-
-.cosmos-star{
-  position:absolute;
-
-  width:3px;
-  height:3px;
-
-  border-radius:50%;
-
-  background:white;
-
-  box-shadow:
-    0 0 8px rgba(255,255,255,.8);
-
-  animation:
-    cosmosTwinkle
-    2s ease-in-out
-    infinite alternate;
-}
-
-.cosmos-orbit{
-  position:absolute;
-
-  width:470px;
-  height:180px;
-
-  border:
-    1px solid
-    rgba(130,150,255,.18);
-
-  border-radius:50%;
-
-  left:50%;
-  top:43%;
-
-  transform:
-    translate(-50%,-50%)
-    rotate(-18deg);
-
-  box-shadow:
-    0 0 30px rgba(93,112,255,.08);
-
-  animation:
-    orbitRotate
-    15s
-    linear
-    infinite;
-}
-
-.cosmos-planet{
-  position:absolute;
-
-  width:74px;
-  height:74px;
-
-  border-radius:50%;
-
-  left:calc(50% - 37px);
-  top:calc(43% - 37px);
-
-  background:
-    radial-gradient(
-      circle at 32% 28%,
-      #c9d0ff,
-      #6c72df 42%,
-      #302b80 75%,
-      #151331
-    );
-
-  box-shadow:
-    0 0 35px rgba(112,118,255,.35),
-    inset -12px -10px 25px rgba(0,0,0,.35);
-}
-
-@keyframes cosmosTwinkle{
-  from{
-    opacity:.2;
-    transform:scale(.7);
-  }
-
-  to{
-    opacity:1;
-    transform:scale(1.4);
-  }
-}
-
-@keyframes orbitRotate{
-  from{
-    transform:
-      translate(-50%,-50%)
-      rotate(-18deg)
-      scale(.95);
-  }
-
-  to{
-    transform:
-      translate(-50%,-50%)
-      rotate(342deg)
-      scale(1.05);
-  }
-}
-
-/* =========================================================
-   FROST
-========================================================= */
-
-.frost-layer{
-  position:absolute;
-  inset:0;
-
-  background:
-    radial-gradient(
-      circle at 15% 10%,
-      rgba(145,231,255,.22),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 85% 80%,
-      rgba(111,163,255,.18),
-      transparent 35%
-    );
-}
-
-.frost-crystal{
-  position:absolute;
-
-  width:180px;
-  height:180px;
-
-  border:
-    1px solid
-    rgba(194,244,255,.24);
-
-  clip-path:
-    polygon(
-      50% 0%,
-      62% 34%,
-      100% 50%,
-      62% 66%,
-      50% 100%,
-      38% 66%,
-      0% 50%,
-      38% 34%
-    );
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(160,235,255,.12),
-      transparent 70%
-    );
-
-  filter:
-    drop-shadow(
-      0 0 22px
-      rgba(100,220,255,.12)
-    );
-
-  animation:
-    frostFloat
-    9s ease-in-out
-    infinite
-    alternate;
-}
-
-.frost-one{
-  left:8%;
-  top:12%;
-}
-
-.frost-two{
-  right:8%;
-  bottom:8%;
-  width:240px;
-  height:240px;
-  animation-delay:-4s;
-}
-
-@keyframes frostFloat{
-  from{
-    transform:rotate(0deg) scale(.85);
-    opacity:.35;
-  }
-
-  to{
-    transform:rotate(28deg) scale(1.1);
-    opacity:.75;
-  }
-}
-
-/* =========================================================
-   CRYSTAL
-========================================================= */
-
-.crystal-layer{
-  position:absolute;
-  inset:0;
-
-  background:
-    radial-gradient(
-      circle at 25% 20%,
-      rgba(255,255,255,.22),
-      transparent 22%
-    ),
-    radial-gradient(
-      circle at 80% 70%,
-      rgba(116,223,255,.12),
-      transparent 28%
-    );
-}
-
-.crystal-shard{
-  position:absolute;
-
-  width:260px;
-  height:360px;
-
-  background:
-    linear-gradient(
-      135deg,
-      rgba(255,255,255,.16),
-      rgba(120,200,255,.05),
-      rgba(170,110,255,.12)
-    );
-
-  clip-path:
-    polygon(
-      45% 0,
-      100% 28%,
-      78% 100%,
-      20% 72%,
-      0 20%
-    );
-
-  border:
-    1px solid
-    rgba(255,255,255,.12);
-
-  filter:
-    drop-shadow(
-      0 0 35px
-      rgba(130,200,255,.10)
-    );
-
-  transform:rotate(18deg);
-
-  animation:
-    crystalFloat
-    12s ease-in-out
-    infinite alternate;
-}
-
-.crystal-one{
-  left:-4%;
-  top:-8%;
-}
-
-.crystal-two{
-  right:-5%;
-  bottom:-15%;
-  transform:rotate(-20deg);
-  animation-delay:-5s;
-}
-
-@keyframes crystalFloat{
-  from{
-    transform:rotate(18deg) translateY(0);
-  }
-
-  to{
-    transform:rotate(25deg) translateY(-35px);
-  }
-}
-
-/* =========================================================
-   ENCHANTED FOREST
-========================================================= */
-
-.forest-layer{
-  position:absolute;
-  inset:0;
-
-  background:
-    radial-gradient(
-      circle at 30% 20%,
-      rgba(91,255,151,.15),
-      transparent 28%
-    ),
-    radial-gradient(
-      circle at 80% 70%,
-      rgba(47,177,104,.12),
-      transparent 32%
-    );
-}
-
-.firefly{
-  position:absolute;
-
-  width:5px;
-  height:5px;
-
-  border-radius:50%;
-
-  background:#aaffc4;
-
-  box-shadow:
-    0 0 8px #aaffc4,
-    0 0 20px rgba(120,255,174,.75);
-
-  animation:
-    fireflyMove
-    6s ease-in-out
-    infinite alternate;
-}
-
-@keyframes fireflyMove{
-  0%{
-    transform:
-      translate3d(0,0,0)
-      scale(.5);
-    opacity:.15;
-  }
-
-  50%{
-    opacity:1;
-  }
-
-  100%{
-    transform:
-      translate3d(60px,-45px,0)
-      scale(1.2);
-    opacity:.2;
-  }
-}
-
-/* =========================================================
-   NOCTURNE
-========================================================= */
-
-.nocturne-layer{
-  position:absolute;
-  inset:0;
-
-  background:
-    radial-gradient(
-      ellipse at 20% 20%,
-      rgba(255,172,100,.12),
-      transparent 25%
-    ),
-    radial-gradient(
-      ellipse at 80% 80%,
-      rgba(180,92,255,.12),
-      transparent 30%
-    );
-}
-
-.nocturne-lamp{
-  position:absolute;
-
-  width:280px;
-  height:280px;
-
-  right:-80px;
-  top:-90px;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,210,142,.26),
-      rgba(255,170,90,.08) 35%,
-      transparent 68%
-    );
-
-  filter:blur(15px);
-
-  animation:
-    lampPulse
-    5s ease-in-out
-    infinite alternate;
-}
-
-@keyframes lampPulse{
-  from{
-    opacity:.5;
-    transform:scale(.9);
-  }
-
-  to{
-    opacity:1;
-    transform:scale(1.1);
-  }
-}
-
-/* =========================================================
-   HEADER
-========================================================= */
-
-header{
-  padding:30px 0 20px;
-}
-
-.topbar{
+  bottom:0;
+  left:0;
+  right:0;
+  height:calc(var(--nav-height) + var(--safe-bottom));
+  background:var(--card);
+  border-top:1px solid var(--border);
   display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:20px;
+  justify-content:space-around;
+  align-items:flex-start;
+  padding-top:8px;
+  z-index:100;
+  box-shadow:0 -4px 20px rgba(0,0,0,0.06);
 }
 
-.brand{
+.nav-item{
+  flex:1;
   display:flex;
+  flex-direction:column;
   align-items:center;
-  gap:13px;
-}
-
-.logo{
-  width:45px;
-  height:45px;
-
-  border-radius:15px;
-
-  display:grid;
-  place-items:center;
-
-  background:
-    linear-gradient(
-      145deg,
-      var(--accent),
-      var(--accent2)
-    );
-
-  color:white;
-
-  font-size:20px;
-  font-weight:900;
-
-  box-shadow:
-    0 8px 25px
-    var(--glow);
-
-  transition:
-    transform .3s ease,
-    box-shadow .3s ease;
-}
-
-.logo:hover{
-  transform:rotate(-4deg) scale(1.04);
-}
-
-.brand-name{
-  font-size:24px;
-  font-weight:850;
-  letter-spacing:-1px;
-}
-
-.brand-sub{
-  font-size:12px;
+  gap:4px;
+  padding:8px 0;
   color:var(--muted);
-  margin-top:2px;
+  font-size:11px;
+  cursor:pointer;
+  transition:color .2s;
+  text-decoration:none;
+  background:none;
+  border:none;
+  font-family:inherit;
 }
 
-/* =========================================================
-   PAGE SYSTEM
-========================================================= */
+.nav-item.active{
+  color:var(--accent);
+}
+
+.nav-icon{
+  font-size:22px;
+  margin-bottom:2px;
+}
+
+/* ====================================
+   PAGES
+==================================== */
 
 .page{
   display:none;
-  animation:pageIn .32s ease;
+  padding:20px 16px;
+  max-width:700px;
+  margin:0 auto;
+  animation:fadeIn .25s ease;
 }
 
 .page.active{
   display:block;
 }
 
-@keyframes pageIn{
-  from{
-    opacity:0;
-    transform:translateY(10px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(8px);}
+  to{opacity:1;transform:translateY(0);}
 }
 
-/* =========================================================
-   CARDS
-========================================================= */
-
-.card{
-  background:var(--surface);
-
-  border:
-    1px solid
-    var(--border);
-
-  border-radius:var(--radius);
-
-  box-shadow:var(--shadow);
-
-  backdrop-filter:blur(24px);
-  -webkit-backdrop-filter:blur(24px);
-
-  transition:
-    background .4s ease,
-    border-color .4s ease,
-    box-shadow .4s ease;
-}
-
-.hero{
-  padding:30px;
-  margin:12px 0 20px;
-
-  position:relative;
-  overflow:hidden;
-}
-
-.hero::after{
-  content:"";
-
-  position:absolute;
-
-  width:230px;
-  height:230px;
-
-  right:-90px;
-  top:-110px;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      var(--accent-soft),
-      transparent 70%
-    );
-
-  pointer-events:none;
-}
-
-.hero h1{
-  position:relative;
-  z-index:1;
-
-  margin:0;
-
-  font-size:
-    clamp(30px,5vw,46px);
-
-  letter-spacing:-2px;
-}
-
-.hero p{
-  position:relative;
-  z-index:1;
-
-  margin:9px 0 0;
-
-  color:var(--muted);
-}
-
-.section-title{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-
-  margin:30px 0 13px;
-}
-
-.section-title h2{
-  margin:0;
-
-  font-size:20px;
-
+.page-title{
+  font-size:28px;
+  font-weight:800;
+  margin-bottom:6px;
   letter-spacing:-.5px;
 }
 
-.section-title span{
+.page-subtitle{
   color:var(--muted);
-  font-size:13px;
+  font-size:15px;
+  margin-bottom:24px;
 }
 
-/* =========================================================
-   HABITS
-========================================================= */
+/* ====================================
+   CARDS
+==================================== */
 
-.habit-list{
-  display:grid;
-  gap:12px;
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:18px;
+  margin-bottom:12px;
+  box-shadow:var(--shadow);
 }
+
+/* ====================================
+   HABIT CARDS
+==================================== */
 
 .habit-card{
-  padding:18px;
-
   display:flex;
   align-items:center;
-  gap:15px;
-
-  transition:
-    transform .22s ease,
-    box-shadow .22s ease,
-    border-color .22s ease;
-}
-
-.habit-card:hover{
-  transform:translateY(-2px);
-
-  box-shadow:
-    0 18px 45px
-    var(--glow);
-}
-
-.round-check{
-  width:28px;
-  height:28px;
-
-  min-width:28px;
-
-  border-radius:50%;
-
-  border:
-    2px solid
-    var(--accent);
-
-  background:transparent;
-
-  display:grid;
-  place-items:center;
-
-  padding:0;
-
-  transition:
-    .2s ease;
-}
-
-.round-check:hover{
-  transform:scale(1.08);
-}
-
-.round-check.done{
-  background:var(--accent);
-  border-color:var(--accent);
-
-  box-shadow:
-    0 4px 14px
-    var(--glow);
-}
-
-.round-check.done::after{
-  content:"✓";
-
-  color:white;
-
-  font-size:15px;
-  font-weight:800;
+  gap:14px;
+  padding:16px;
 }
 
 .habit-info{
@@ -1471,3279 +228,1228 @@ header{
 }
 
 .habit-name{
-  font-weight:700;
+  font-weight:600;
   font-size:16px;
+  margin-bottom:6px;
+  word-break:break-word;
 }
 
 .habit-meta{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
-  margin-top:5px;
 }
 
 .badge{
-  padding:5px 9px;
+  background:var(--bg);
+  color:var(--muted);
+  font-size:12px;
+  padding:4px 10px;
+  border-radius:999px;
+  font-weight:500;
+}
 
-  border-radius:100px;
+.habit-note{
+  color:var(--muted);
+  font-size:13px;
+  margin-top:8px;
+  padding-top:8px;
+  border-top:1px solid var(--border);
+}
 
-  background:var(--accent-soft);
+.round-check{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  border:2px solid var(--border);
+  background:transparent;
+  cursor:pointer;
+  flex-shrink:0;
+  transition:all .2s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:16px;
+}
 
-  color:var(--accent);
+.round-check.done{
+  background:var(--accent);
+  border-color:var(--accent);
+  color:#fff;
+}
 
-  font-size:11px;
-  font-weight:700;
+.round-check::before{
+  content:"✓";
+  opacity:0;
+  transform:scale(.5);
+  transition:all .2s;
+}
+
+.round-check.done::before{
+  opacity:1;
+  transform:scale(1);
+}
+
+.edit-btn,
+.delete-btn{
+  background:transparent;
+  border:none;
+  font-size:20px;
+  cursor:pointer;
+  padding:4px 8px;
+  opacity:.6;
+  transition:opacity .2s;
+  color:var(--muted);
+}
+
+.edit-btn:hover,
+.delete-btn:hover{
+  opacity:1;
 }
 
 .delete-btn{
-  border:0;
-
-  background:transparent;
-
-  color:var(--muted);
-
-  font-size:17px;
-
-  padding:8px;
-
-  transition:.2s;
-}
-
-.delete-btn:hover{
   color:var(--danger);
-  transform:scale(1.1);
 }
 
-.primary-btn{
-  border:0;
+/* ====================================
+   WEEKLY COUNTER CONTROLS
+==================================== */
 
-  border-radius:15px;
-
-  padding:13px 17px;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--accent),
-      var(--accent2)
-    );
-
-  color:white;
-
-  font-weight:750;
-
-  box-shadow:
-    0 8px 22px
-    var(--glow);
+.weekly-counter-controls{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:var(--bg);
+  padding:8px 12px;
+  border-radius:999px;
+  flex-shrink:0;
 }
 
-.secondary-btn{
-  border:
-    1px solid
-    var(--border);
-
-  background:var(--surface);
-
-  color:var(--text);
-
-  border-radius:15px;
-
-  padding:12px 16px;
-
-  font-weight:650;
-
-  transition:.2s;
-}
-
-.secondary-btn:hover{
-  border-color:var(--accent);
-  transform:translateY(-1px);
-}
-
-.create-habit{
-  margin-top:15px;
-
-  width:100%;
-
-  padding:17px;
-
-  border:
-    1.5px dashed
-    var(--accent);
-
-  border-radius:18px;
-
-  background:var(--accent-soft);
-
-  color:var(--accent);
-
-  font-weight:800;
-
-  transition:.25s;
-}
-
-.create-habit:hover{
+.counter-btn{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  border:none;
   background:var(--accent);
-  color:white;
-  transform:translateY(-2px);
+  color:#fff;
+  font-size:20px;
+  font-weight:700;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:transform .15s, opacity .2s;
+  flex-shrink:0;
 }
 
-/* =========================================================
+.counter-btn:active{
+  transform:scale(.92);
+}
+
+.counter-btn:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+}
+
+.counter-btn.decrement{
+  background:var(--muted);
+}
+
+.counter-display{
+  font-weight:700;
+  font-size:15px;
+  min-width:40px;
+  text-align:center;
+  color:var(--text);
+}
+
+/* ====================================
    CALENDAR
-========================================================= */
+==================================== */
 
-.calendar-card{
-  padding:22px;
-}
-
-.calendar-head{
+.calendar-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-
-  margin-bottom:18px;
+  margin-bottom:16px;
 }
 
-.month-title{
-  font-weight:800;
-  font-size:18px;
-}
-
-.month-actions{
-  display:flex;
-  gap:7px;
-}
-
-.icon-btn{
-  width:38px;
-  height:38px;
-
-  border:
-    1px solid
-    var(--border);
-
+.calendar-nav{
+  background:var(--card);
+  border:1px solid var(--border);
   border-radius:12px;
-
-  background:var(--surface);
-
+  padding:10px 16px;
+  font-size:24px;
+  cursor:pointer;
   color:var(--text);
-
-  transition:.2s;
+  transition:background .2s;
 }
 
-.icon-btn:hover{
-  background:var(--accent-soft);
-  color:var(--accent);
-  transform:translateY(-1px);
+.calendar-nav:hover{
+  background:var(--bg);
 }
 
-.weekdays,
+#monthTitle{
+  font-size:18px;
+  font-weight:700;
+  text-transform:capitalize;
+}
+
 .calendar-grid{
   display:grid;
-
-  grid-template-columns:
-    repeat(7,1fr);
-
-  gap:5px;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
 }
 
-.weekdays div{
+.calendar-day-header{
   text-align:center;
-
-  font-size:11px;
-
+  font-size:12px;
   color:var(--muted);
-
-  font-weight:700;
-
-  padding-bottom:6px;
+  font-weight:600;
+  padding:8px 0;
 }
 
 .day{
-  min-height:52px;
-
-  border:0;
-
-  border-radius:14px;
-
-  background:transparent;
-
-  color:var(--text);
-
+  aspect-ratio:1;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:var(--card);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding:6px 4px 4px;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all .2s;
   position:relative;
-
-  font-weight:650;
-
-  transition:.2s;
+  color:var(--text);
 }
 
 .day:hover{
-  background:var(--accent-soft);
+  border-color:var(--accent);
+}
+
+.day.today{
+  background:var(--accent);
+  color:#fff;
+  border-color:var(--accent);
+}
+
+.day.selected{
+  border-color:var(--accent);
+  border-width:2px;
 }
 
 .day.muted{
   opacity:.3;
-}
-
-.day.today{
-  background:var(--accent-soft);
-  color:var(--accent);
-}
-
-.day.selected{
-  background:var(--accent);
-  color:white;
-
-  box-shadow:
-    0 7px 18px
-    var(--glow);
+  pointer-events:none;
 }
 
 .day-dot{
-  position:absolute;
-
-  bottom:7px;
-  left:50%;
-
-  transform:translateX(-50%);
-
-  width:5px;
-  height:5px;
-
+  width:6px;
+  height:6px;
   border-radius:50%;
-
   background:var(--accent);
+  margin-top:4px;
+  flex-shrink:0;
 }
 
-.day.selected .day-dot{
-  background:white;
+/* ====================================
+   MODAL
+==================================== */
+
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:200;
+  backdrop-filter:blur(4px);
 }
 
-/* =========================================================
+.modal-overlay.open{
+  display:flex;
+  animation:fadeIn .2s ease;
+}
+
+.modal{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:24px;
+  width:90%;
+  max-width:420px;
+  max-height:90vh;
+  overflow-y:auto;
+  animation:scaleIn .25s ease;
+}
+
+@keyframes scaleIn{
+  from{opacity:0;transform:scale(.95);}
+  to{opacity:1;transform:scale(1);}
+}
+
+.modal-title{
+  font-size:20px;
+  font-weight:700;
+  margin-bottom:20px;
+}
+
+.form-group{
+  margin-bottom:18px;
+}
+
+.form-label{
+  display:block;
+  font-size:13px;
+  color:var(--muted);
+  margin-bottom:8px;
+  font-weight:500;
+}
+
+.form-input,
+.form-select,
+.form-textarea{
+  width:100%;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:var(--bg);
+  color:var(--text);
+  font-size:15px;
+  font-family:inherit;
+  transition:border-color .2s;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus{
+  outline:none;
+  border-color:var(--accent);
+}
+
+.form-textarea{
+  resize:vertical;
+  min-height:80px;
+}
+
+.form-row{
+  display:flex;
+  gap:12px;
+}
+
+.form-row .form-group{
+  flex:1;
+}
+
+.modal-actions{
+  display:flex;
+  gap:10px;
+  margin-top:24px;
+}
+
+.btn{
+  flex:1;
+  padding:12px 18px;
+  border-radius:12px;
+  border:none;
+  font-size:15px;
+  font-weight:600;
+  cursor:pointer;
+  font-family:inherit;
+  transition:transform .15s, opacity .2s;
+}
+
+.btn:active{
+  transform:scale(.97);
+}
+
+.btn-primary{
+  background:var(--accent);
+  color:#fff;
+}
+
+.btn-secondary{
+  background:var(--bg);
+  color:var(--text);
+  border:1px solid var(--border);
+}
+
+.btn-danger{
+  background:var(--danger);
+  color:#fff;
+}
+
+/* ====================================
+   FLOATING ACTION BUTTON
+==================================== */
+
+.fab{
+  position:fixed;
+  right:20px;
+  bottom:calc(var(--nav-height) + var(--safe-bottom) + 20px);
+  width:56px;
+  height:56px;
+  border-radius:50%;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  font-size:28px;
+  cursor:pointer;
+  box-shadow:0 6px 24px rgba(0,0,0,0.2);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:transform .2s, box-shadow .2s;
+  z-index:90;
+}
+
+.fab:active{
+  transform:scale(.92);
+}
+
+/* ====================================
    STATS
-========================================================= */
+==================================== */
 
-.stats-grid{
+.stat-grid{
   display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:14px;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-bottom:24px;
 }
 
 .stat-card{
-  padding:22px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:18px;
+  text-align:center;
+}
+
+.stat-value{
+  font-size:32px;
+  font-weight:800;
+  color:var(--accent);
+  margin-bottom:6px;
 }
 
 .stat-label{
-  color:var(--muted);
   font-size:13px;
+  color:var(--muted);
+  font-weight:500;
 }
 
-.stat-number{
-  font-size:34px;
-  font-weight:850;
-
-  margin-top:7px;
-
-  letter-spacing:-1px;
-}
-
-.progress{
-  height:8px;
-
-  background:var(--accent-soft);
-
-  border-radius:100px;
-
+.progress-bar{
+  height:10px;
+  background:var(--bg);
+  border-radius:999px;
   overflow:hidden;
-
-  margin-top:13px;
+  margin-top:10px;
 }
 
-.progress div{
+.progress-fill{
   height:100%;
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--accent),
-      var(--accent2)
-    );
-
-  border-radius:100px;
-
-  transition:
-    width .6s cubic-bezier(.2,.8,.2,1);
+  background:var(--accent);
+  border-radius:999px;
+  transition:width .4s ease;
 }
 
 .chart{
-  height:190px;
-
   display:flex;
   align-items:flex-end;
-
-  gap:10px;
-
-  padding:
-    25px
-    15px
-    20px;
+  justify-content:space-between;
+  gap:8px;
+  height:160px;
+  padding:16px 8px;
 }
 
 .bar-wrap{
   flex:1;
-  height:100%;
-
   display:flex;
-
-  align-items:flex-end;
-
   flex-direction:column;
-
-  justify-content:flex-end;
-
-  gap:6px;
+  align-items:center;
+  gap:8px;
 }
 
 .bar{
+  flex:1;
   width:100%;
-
+  max-width:40px;
+  background:var(--accent);
+  border-radius:8px 8px 0 0;
   min-height:4px;
-
-  border-radius:
-    8px 8px 4px 4px;
-
-  background:
-    linear-gradient(
-      to top,
-      var(--accent),
-      var(--accent2)
-    );
+  transition:height .4s ease;
 }
 
 .bar-label{
-  font-size:10px;
+  font-size:11px;
   color:var(--muted);
+  font-weight:600;
+  text-transform:uppercase;
 }
 
-/* =========================================================
-   HELP CENTER
-========================================================= */
-
-.help-hero{
-  padding:32px;
-
-  margin-bottom:18px;
-
-  overflow:hidden;
-
-  position:relative;
-}
-
-.help-hero::after{
-  content:"";
-
-  position:absolute;
-
-  width:250px;
-  height:250px;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      var(--accent-soft),
-      transparent 68%
-    );
-
-  right:-80px;
-  top:-90px;
-}
-
-.help-hero h1{
-  position:relative;
-  z-index:1;
-
-  font-size:38px;
-
-  margin:0;
-
-  letter-spacing:-1.5px;
-}
-
-.help-hero p{
-  position:relative;
-  z-index:1;
-
-  color:var(--muted);
-
-  max-width:650px;
-
-  line-height:1.6;
-}
+/* ====================================
+   HELP & STUDY
+==================================== */
 
 .help-grid{
   display:grid;
-
-  grid-template-columns:
-    repeat(3,1fr);
-
-  gap:15px;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:12px;
+  margin-bottom:24px;
 }
 
-.help-topic{
-  padding:24px;
-
-  min-height:190px;
-
-  transition:
-    transform .25s ease,
-    box-shadow .25s ease,
-    border-color .25s ease;
-
-  cursor:pointer;
-
-  position:relative;
-  overflow:hidden;
-}
-
-.help-topic::after{
-  content:"→";
-
-  position:absolute;
-
-  right:20px;
-  bottom:18px;
-
-  color:var(--accent);
-
-  font-size:20px;
-
-  opacity:.6;
-
-  transition:.25s;
-}
-
-.help-topic:hover{
-  transform:translateY(-5px);
-
-  box-shadow:
-    0 22px 55px
-    var(--glow);
-
-  border-color:
-    color-mix(
-      in srgb,
-      var(--accent) 40%,
-      transparent
-    );
-}
-
-.help-topic:hover::after{
-  transform:translateX(5px);
-  opacity:1;
-}
-
-.topic-icon{
-  width:48px;
-  height:48px;
-
+.help-card{
+  background:var(--card);
+  border:1px solid var(--border);
   border-radius:16px;
-
-  background:var(--accent-soft);
-
-  display:grid;
-  place-items:center;
-
-  font-size:23px;
-
-  margin-bottom:18px;
+  padding:20px 16px;
+  text-align:center;
+  cursor:pointer;
+  transition:transform .2s, border-color .2s;
 }
 
-.help-topic h3{
-  margin:0 0 7px;
-}
-
-.help-topic p{
-  margin:0;
-
-  color:var(--muted);
-
-  line-height:1.5;
-
-  font-size:13px;
-}
-
-/* =========================================================
-   HELP DETAIL
-========================================================= */
-
-.help-detail{
-  animation:
-    detailIn
-    .35s
-    ease;
-}
-
-@keyframes detailIn{
-  from{
-    opacity:0;
-    transform:translateX(12px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateX(0);
-  }
-}
-
-.help-back{
-  display:inline-flex;
-
-  align-items:center;
-  gap:8px;
-
-  border:
-    1px solid
-    var(--border);
-
-  background:var(--surface);
-
-  color:var(--text);
-
-  padding:11px 15px;
-
-  border-radius:14px;
-
-  font-weight:700;
-
-  margin-bottom:15px;
-
-  transition:.2s;
-}
-
-.help-back:hover{
-  color:var(--accent);
+.help-card:hover{
+  transform:translateY(-3px);
   border-color:var(--accent);
-  transform:translateX(-2px);
 }
 
-.detail-hero{
-  padding:34px;
-
-  position:relative;
-
-  overflow:hidden;
-
-  margin-bottom:18px;
+.help-icon{
+  font-size:36px;
+  margin-bottom:10px;
 }
 
-.detail-hero::after{
-  content:"";
-
-  position:absolute;
-
-  width:260px;
-  height:260px;
-
-  border-radius:50%;
-
-  right:-90px;
-  top:-100px;
-
-  background:
-    radial-gradient(
-      circle,
-      var(--accent-soft),
-      transparent 68%
-    );
+.help-title{
+  font-weight:700;
+  font-size:15px;
+  margin-bottom:4px;
 }
 
-.detail-icon{
-  width:68px;
-  height:68px;
-
-  border-radius:22px;
-
-  background:var(--accent-soft);
-
-  display:grid;
-  place-items:center;
-
-  font-size:32px;
-
-  margin-bottom:18px;
-
-  position:relative;
-  z-index:1;
-}
-
-.detail-hero h1{
-  margin:0;
-
-  font-size:
-    clamp(32px,5vw,48px);
-
-  letter-spacing:-2px;
-
-  position:relative;
-  z-index:1;
-}
-
-.detail-hero p{
-  margin:10px 0 0;
-
-  max-width:700px;
-
+.help-desc{
+  font-size:12px;
   color:var(--muted);
-
-  line-height:1.65;
-
-  position:relative;
-  z-index:1;
 }
 
-.guide{
-  margin-top:18px;
-
-  padding:26px;
+.guide-card{
+  margin-bottom:16px;
 }
 
 .guide-header{
   display:flex;
-
   align-items:center;
-
-  gap:14px;
-
-  margin-bottom:22px;
+  gap:12px;
+  margin-bottom:14px;
 }
 
 .guide-icon{
-  width:55px;
-  height:55px;
-
-  border-radius:18px;
-
-  display:grid;
-  place-items:center;
-
-  background:var(--accent-soft);
-
-  font-size:26px;
+  font-size:28px;
 }
 
-.guide-header h2{
-  margin:0;
-
-  font-size:25px;
+.guide-title{
+  font-size:17px;
+  font-weight:700;
 }
 
-.guide-header p{
-  margin:4px 0 0;
-
+.guide-subtitle{
+  font-size:13px;
   color:var(--muted);
 }
 
 .tip-grid{
   display:grid;
-
-  grid-template-columns:
-    repeat(2,1fr);
-
-  gap:13px;
+  grid-template-columns:1fr;
+  gap:10px;
 }
 
 .tip{
-  border:
-    1px solid
-    var(--border);
-
-  border-radius:18px;
-
-  padding:19px;
-
-  background:var(--surface2);
-
-  transition:
-    transform .2s,
-    border-color .2s,
-    box-shadow .2s;
-}
-
-.tip:hover{
-  transform:translateY(-2px);
-
-  border-color:
-    color-mix(
-      in srgb,
-      var(--accent) 35%,
-      transparent
-    );
-
-  box-shadow:
-    0 12px 35px
-    var(--glow);
+  background:var(--bg);
+  border-radius:12px;
+  padding:14px;
 }
 
 .tip-number{
-  width:28px;
-  height:28px;
-
-  display:grid;
-  place-items:center;
-
-  border-radius:10px;
-
-  background:var(--accent);
-
-  color:white;
-
-  font-weight:800;
-
-  font-size:12px;
-
-  margin-bottom:12px;
-}
-
-.tip h3{
-  margin:0 0 7px;
-
-  font-size:16px;
-}
-
-.tip p{
-  margin:0;
-
-  color:var(--muted);
-
-  line-height:1.55;
-
-  font-size:13px;
-}
-
-/* =========================================================
-   SUBJECT PAGES
-========================================================= */
-
-.subject-grid{
-  display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:10px;
-}
-
-.subject{
-  padding:16px;
-
-  border:
-    1px solid
-    var(--border);
-
-  border-radius:17px;
-
-  background:var(--surface2);
-
-  text-align:left;
-
-  color:var(--text);
-
-  transition:.2s;
-
-  cursor:pointer;
-}
-
-.subject:hover{
-  transform:translateY(-2px);
-
-  border-color:var(--accent);
-
-  box-shadow:
-    0 10px 25px
-    var(--glow);
-}
-
-.subject strong{
-  display:block;
-  margin-bottom:5px;
-}
-
-.subject span{
-  font-size:11px;
-  color:var(--muted);
-}
-
-.subject-hero{
-  padding:34px;
-
-  position:relative;
-
-  overflow:hidden;
-
-  margin-bottom:18px;
-}
-
-.subject-hero::before{
-  content:"";
-
-  position:absolute;
-
-  width:300px;
-  height:300px;
-
-  right:-100px;
-  top:-120px;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      var(--accent-soft),
-      transparent 70%
-    );
-
-  animation:
-    subjectGlow 6s
-    ease-in-out
-    infinite
-    alternate;
-}
-
-.subject-hero-content{
-  position:relative;
-  z-index:1;
-}
-
-.subject-emoji{
-  width:70px;
-  height:70px;
-
-  border-radius:22px;
-
-  display:grid;
-  place-items:center;
-
-  background:var(--accent-soft);
-
-  font-size:34px;
-
-  margin-bottom:18px;
-}
-
-.subject-hero h1{
-  margin:0;
-
-  font-size:
-    clamp(34px,5vw,50px);
-
-  letter-spacing:-2px;
-}
-
-.subject-hero p{
-  max-width:720px;
-
-  color:var(--muted);
-
-  line-height:1.65;
-
-  margin:10px 0 0;
-}
-
-.subject-pill{
   display:inline-flex;
-
-  margin-top:16px;
-
-  padding:7px 11px;
-
-  border-radius:100px;
-
-  background:var(--accent-soft);
-
-  color:var(--accent);
-
-  font-size:11px;
-
-  font-weight:800;
-}
-
-@keyframes subjectGlow{
-  from{
-    transform:scale(.85);
-    opacity:.5;
-  }
-
-  to{
-    transform:scale(1.12);
-    opacity:1;
-  }
-}
-
-/* =========================================================
-   SETTINGS
-========================================================= */
-
-.settings-grid{
-  display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap:16px;
-}
-
-.settings-card{
-  padding:25px;
-}
-
-.settings-card h3{
-  margin:0 0 5px;
-}
-
-.settings-card p{
-  margin:0 0 20px;
-
-  color:var(--muted);
-
-  font-size:13px;
-}
-
-.theme-section{
-  margin-top:24px;
-}
-
-.theme-section:first-child{
-  margin-top:0;
-}
-
-.theme-section-head{
-  display:flex;
-
-  align-items:center;
-  justify-content:space-between;
-
-  gap:12px;
-
-  margin-bottom:11px;
-}
-
-.theme-section-title{
-  font-size:14px;
-
-  font-weight:850;
-
-  letter-spacing:-.2px;
-}
-
-.theme-section-description{
-  color:var(--muted);
-
-  font-size:11px;
-}
-
-.theme-section-title::before{
-  content:"";
-
-  display:inline-block;
-
-  width:7px;
-  height:7px;
-
+  width:24px;
+  height:24px;
   border-radius:50%;
-
   background:var(--accent);
-
-  margin-right:7px;
-
-  box-shadow:
-    0 0 10px
-    var(--glow);
+  color:#fff;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:700;
+  margin-bottom:8px;
 }
+
+.tip-title{
+  font-weight:600;
+  font-size:14px;
+  margin-bottom:4px;
+}
+
+.tip-desc{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.5;
+}
+
+/* ====================================
+   SETTINGS
+==================================== */
 
 .theme-grid{
   display:grid;
-
-  grid-template-columns:
-    repeat(4,1fr);
-
-  gap:10px;
+  grid-template-columns:repeat(auto-fill,minmax(100px,1fr));
+  gap:12px;
 }
 
 .theme-btn{
-  position:relative;
-
-  border:
-    2px solid
-    transparent;
-
-  border-radius:19px;
-
-  padding:8px;
-
-  background:var(--surface2);
-
-  text-align:left;
-
-  color:var(--text);
-
-  transition:
-    transform .25s ease,
-    border-color .25s ease,
-    box-shadow .25s ease;
+  background:var(--card);
+  border:2px solid var(--border);
+  border-radius:14px;
+  padding:12px;
+  cursor:pointer;
+  transition:border-color .2s, transform .15s;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
 }
 
-.theme-btn:hover{
-  transform:translateY(-3px);
+.theme-btn:active{
+  transform:scale(.96);
 }
 
 .theme-btn.active{
   border-color:var(--accent);
-
-  box-shadow:
-    0 8px 28px
-    var(--glow);
 }
 
 .theme-preview{
-  height:67px;
-
-  border-radius:13px;
-
-  margin-bottom:8px;
-
-  position:relative;
-
-  overflow:hidden;
-
-  isolation:isolate;
-}
-
-.theme-preview::before{
-  content:"";
-
-  position:absolute;
-  inset:0;
-
-  background:
-    linear-gradient(
-      125deg,
-      transparent 15%,
-      rgba(255,255,255,.24),
-      transparent 55%
-    );
-
-  transform:
-    translateX(-120%)
-    skewX(-15deg);
-
-  transition:
-    transform .8s ease;
-}
-
-.theme-btn:hover .theme-preview::before{
-  transform:
-    translateX(120%)
-    skewX(-15deg);
-}
-
-.theme-preview::after{
-  content:"";
-
-  position:absolute;
-
-  width:28px;
-  height:28px;
-
-  right:8px;
-  top:8px;
-
-  border-radius:50%;
-
-  background:
-    rgba(255,255,255,.25);
-
-  filter:blur(5px);
-
-  box-shadow:
-    0 0 14px
-    rgba(255,255,255,.22);
-}
-
-.theme-preview .preview-dot{
-  position:absolute;
-
-  width:7px;
-  height:7px;
-
-  border-radius:50%;
-
-  background:rgba(255,255,255,.72);
-
-  box-shadow:
-    0 0 8px
-    rgba(255,255,255,.8);
-}
-
-.theme-preview .preview-dot:nth-child(1){
-  left:12px;
-  bottom:11px;
-}
-
-.theme-preview .preview-dot:nth-child(2){
-  left:27px;
-  bottom:18px;
-
-  width:4px;
-  height:4px;
-}
-
-.theme-preview .preview-line{
-  position:absolute;
-
-  left:10px;
-  right:10px;
-  bottom:8px;
-
-  height:4px;
-
+  height:60px;
   border-radius:10px;
+  position:relative;
+  overflow:hidden;
+}
 
-  background:
-    rgba(255,255,255,.28);
+.preview-dot{
+  position:absolute;
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#fff;
+  border:2px solid rgba(0,0,0,0.2);
+}
+
+.preview-dot:nth-child(1){
+  top:10px;
+  left:12px;
+}
+
+.preview-dot:nth-child(2){
+  bottom:10px;
+  right:12px;
+}
+
+.preview-line{
+  position:absolute;
+  bottom:16px;
+  left:12px;
+  right:12px;
+  height:2px;
+  background:rgba(255,255,255,0.5);
 }
 
 .theme-name{
-  font-size:11px;
-  font-weight:800;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:space-between;
-
-  gap:5px;
+  font-size:12px;
+  font-weight:600;
+  text-align:center;
+  color:var(--text);
 }
 
 .theme-premium-mark{
-  font-size:9px;
-
-  padding:3px 6px;
-
-  border-radius:100px;
-
-  background:
-    linear-gradient(
-      90deg,
-      rgba(255,255,255,.10),
-      var(--accent-soft)
-    );
-
-  color:var(--accent);
-
-  font-weight:900;
+  display:inline-block;
+  font-size:10px;
+  background:linear-gradient(135deg,#ffd700,#ffed4e);
+  color:#1a1a1a;
+  padding:2px 6px;
+  border-radius:999px;
+  font-weight:800;
+  margin-left:4px;
 }
 
-/* =========================================================
-   MODAL
-========================================================= */
+/* ====================================
+   TOAST
+==================================== */
 
-.modal{
+#toastContainer{
   position:fixed;
+  top:20px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:300;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  pointer-events:none;
+}
 
-  inset:0;
+.toast{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:12px 18px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  box-shadow:0 6px 24px rgba(0,0,0,0.15);
+  animation:toastIn .25s ease;
+  pointer-events:auto;
+}
 
-  background:
-    rgba(10,15,12,.42);
+@keyframes toastIn{
+  from{opacity:0;transform:translateY(-12px);}
+  to{opacity:1;transform:translateY(0);}
+}
 
-  backdrop-filter:blur(12px);
+@keyframes toastOut{
+  from{opacity:1;transform:translateY(0);}
+  to{opacity:0;transform:translateY(-12px);}
+}
 
-  display:none;
-
+.toast-icon{
+  width:22px;
+  height:22px;
+  border-radius:50%;
+  background:var(--accent);
+  color:#fff;
+  display:flex;
   align-items:center;
   justify-content:center;
-
-  padding:20px;
-
-  z-index:100;
-}
-
-.modal.open{
-  display:flex;
-}
-
-.modal-box{
-  width:min(500px,100%);
-
-  background:var(--surface-solid);
-
-  border-radius:27px;
-
-  padding:25px;
-
-  box-shadow:
-    0 30px 80px
-    rgba(0,0,0,.25);
-
-  animation:
-    modalIn .25s ease;
-}
-
-@keyframes modalIn{
-  from{
-    opacity:0;
-    transform:scale(.96) translateY(10px);
-  }
-
-  to{
-    opacity:1;
-    transform:scale(1) translateY(0);
-  }
-}
-
-.modal-head{
-  display:flex;
-
-  justify-content:space-between;
-  align-items:center;
-
-  margin-bottom:22px;
-}
-
-.modal-head h2{
-  margin:0;
-}
-
-.close{
-  border:0;
-
-  background:var(--accent-soft);
-
-  color:var(--text);
-
-  width:36px;
-  height:36px;
-
-  border-radius:12px;
-
-  transition:.2s;
-}
-
-.close:hover{
-  background:var(--accent);
-  color:white;
-}
-
-.form-group{
-  margin-bottom:16px;
-}
-
-.form-group label{
-  display:block;
-
-  margin-bottom:7px;
-
   font-size:13px;
-
   font-weight:700;
+  flex-shrink:0;
 }
 
-.form-group input,
-.form-group select{
-  width:100%;
-
-  border:
-    1px solid
-    var(--border);
-
-  background:var(--surface2);
-
-  color:var(--text);
-
-  padding:13px 14px;
-
-  border-radius:14px;
-
-  outline:none;
+.toast.success .toast-icon{
+  background:var(--accent);
 }
 
-.form-group input:focus,
-.form-group select:focus{
-  border-color:var(--accent);
-
-  box-shadow:
-    0 0 0 3px
-    var(--accent-soft);
+.toast.warning .toast-icon{
+  background:#f59e0b;
 }
 
-.modal-actions{
-  display:flex;
-  gap:9px;
-  margin-top:20px;
+.toast.info .toast-icon{
+  background:#3b82f6;
 }
 
-.modal-actions button{
-  flex:1;
-}
+/* ====================================
+   CONFIRM DIALOG
+==================================== */
 
-/* =========================================================
-   BOTTOM NAV
-========================================================= */
-
-.bottom-nav{
+#confirmOverlay{
   position:fixed;
-
-  z-index:90;
-
-  bottom:18px;
-  left:50%;
-
-  transform:translateX(-50%);
-
-  width:min(
-    720px,
-    calc(100% - 24px)
-  );
-
-  padding:8px;
-
-  border:
-    1px solid
-    var(--border);
-
-  background:var(--nav);
-
-  box-shadow:
-    0 20px 55px
-    rgba(0,0,0,.14);
-
-  backdrop-filter:
-    blur(25px)
-    saturate(150%);
-
-  -webkit-backdrop-filter:
-    blur(25px)
-    saturate(150%);
-
-  border-radius:25px;
-
-  display:flex;
-
-  gap:4px;
-}
-
-.nav-item{
-  flex:1;
-
-  min-width:0;
-
-  border:0;
-
-  background:transparent;
-
-  color:var(--muted);
-
-  border-radius:18px;
-
-  padding:9px 6px;
-
-  display:flex;
-
-  flex-direction:column;
-
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  display:none;
   align-items:center;
+  justify-content:center;
+  z-index:250;
+  backdrop-filter:blur(4px);
+}
 
-  gap:5px;
+#confirmOverlay.open{
+  display:flex;
+  animation:fadeIn .2s ease;
+}
 
-  font-size:10px;
+#confirmDialog{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:24px;
+  width:90%;
+  max-width:380px;
+  animation:scaleIn .25s ease;
+}
 
+#confirmTitle{
+  font-size:18px;
   font-weight:700;
-
-  transition:.25s;
+  margin-bottom:10px;
 }
 
-.nav-item svg{
-  width:21px;
-  height:21px;
-
-  stroke:currentColor;
-  fill:none;
-  stroke-width:1.8;
+#confirmMessage{
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:20px;
+  line-height:1.5;
 }
 
-.nav-item.active{
-  color:var(--accent);
-
-  background:var(--accent-soft);
-
-  transform:translateY(-2px);
-
-  box-shadow:
-    inset 0 0 0 1px
-    rgba(255,255,255,.08);
+#confirmActions{
+  display:flex;
+  gap:10px;
 }
 
-.nav-item:hover{
-  color:var(--accent);
+#confirmCancel{
+  flex:1;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:var(--bg);
+  color:var(--text);
+  font-weight:600;
+  cursor:pointer;
+  font-family:inherit;
 }
 
-/* =========================================================
-   CLASSIC LIGHT THEMES
-========================================================= */
-
-body[data-theme="sage"]{
-  --bg:#f3f7f2;
-  --surface:rgba(255,255,255,.80);
-  --surface-solid:#fff;
-  --text:#18201c;
-  --muted:#78827d;
-  --accent:#789b83;
-  --accent2:#b9d1bd;
-  --accent-soft:rgba(120,155,131,.14);
-  --glow:rgba(120,155,131,.20);
+#confirmOk{
+  flex:1;
+  padding:12px;
+  border-radius:12px;
+  border:none;
+  background:var(--danger);
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  font-family:inherit;
 }
 
-body[data-theme="cream"]{
-  --bg:#faf6ed;
-  --surface:rgba(255,252,244,.84);
-  --surface-solid:#fffaf0;
-  --text:#302b22;
-  --muted:#8b8375;
-  --accent:#b28c5a;
-  --accent2:#d8bf98;
-  --accent-soft:rgba(178,140,90,.14);
-  --glow:rgba(178,140,90,.18);
+/* ====================================
+   EMPTY STATES
+==================================== */
+
+.empty-state{
+  text-align:center;
+  padding:40px 20px;
 }
 
-body[data-theme="sky"]{
-  --bg:#eef7fb;
-  --surface:rgba(255,255,255,.82);
-  --surface-solid:#fff;
-  --text:#17252d;
-  --muted:#73858e;
-  --accent:#5b9bb5;
-  --accent2:#a9d4e5;
-  --accent-soft:rgba(91,155,181,.14);
-  --glow:rgba(91,155,181,.18);
+.empty-icon{
+  font-size:48px;
+  margin-bottom:16px;
+  opacity:.5;
 }
 
-body[data-theme="lavender"]{
-  --bg:#f6f2fb;
-  --surface:rgba(255,255,255,.82);
-  --surface-solid:#fff;
-  --text:#292332;
-  --muted:#81788d;
-  --accent:#927bb8;
-  --accent2:#c9b9df;
-  --accent-soft:rgba(146,123,184,.14);
-  --glow:rgba(146,123,184,.20);
+.empty-title{
+  font-weight:700;
+  font-size:17px;
+  margin-bottom:6px;
 }
 
-body[data-theme="peach"]{
-  --bg:#fff4ef;
-  --surface:rgba(255,255,255,.82);
-  --surface-solid:#fff;
-  --text:#332420;
-  --muted:#927b73;
-  --accent:#d98f72;
-  --accent2:#efc1ad;
-  --accent-soft:rgba(217,143,114,.14);
-  --glow:rgba(217,143,114,.20);
+.empty-desc{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.5;
 }
 
-body[data-theme="mint"]{
-  --bg:#eff9f4;
-  --surface:rgba(255,255,255,.82);
-  --surface-solid:#fff;
-  --text:#172820;
-  --muted:#708279;
-  --accent:#55a47d;
-  --accent2:#a8d6be;
-  --accent-soft:rgba(85,164,125,.14);
-  --glow:rgba(85,164,125,.20);
+/* ====================================
+   VISUAL BACKGROUNDS
+==================================== */
+
+.sakura-glow,
+.sakura-glow-two{
+  position:fixed;
+  border-radius:50%;
+  filter:blur(60px);
+  opacity:.5;
+  z-index:-1;
+  animation:floatGlow 18s ease-in-out infinite;
 }
 
-body[data-theme="lemon"]{
-  --bg:#fbfae9;
-  --surface:rgba(255,255,255,.82);
-  --surface-solid:#fffef2;
-  --text:#2b2b20;
-  --muted:#87876d;
-  --accent:#a6a53f;
-  --accent2:#d7d68b;
-  --accent-soft:rgba(166,165,63,.15);
-  --glow:rgba(166,165,63,.20);
+.sakura-glow{
+  width:280px;
+  height:280px;
+  background:#ffbfd7;
+  top:10%;
+  left:15%;
 }
 
-body[data-theme="sakura"]{
-  --bg:#fff2f6;
-  --surface:rgba(255,255,255,.79);
-  --surface-solid:#fff8fa;
-  --text:#34212a;
-  --muted:#927680;
-  --accent:#d9799c;
-  --accent2:#f1b6ca;
-  --accent-soft:rgba(217,121,156,.15);
-  --glow:rgba(217,121,156,.22);
+.sakura-glow-two{
+  width:320px;
+  height:320px;
+  background:#ef86b0;
+  bottom:15%;
+  right:10%;
+  animation-delay:-8s;
 }
 
-body[data-theme="ocean"]{
-  --bg:#edf7f8;
-  --surface:rgba(255,255,255,.80);
-  --surface-solid:#faffff;
-  --text:#14282c;
-  --muted:#71868a;
-  --accent:#3e9ba5;
-  --accent2:#91d1d3;
-  --accent-soft:rgba(62,155,165,.14);
-  --glow:rgba(62,155,165,.20);
+@keyframes floatGlow{
+  0%,100%{transform:translate(0,0);}
+  50%{transform:translate(30px,-20px);}
 }
 
-body[data-theme="sunset"]{
-  --bg:#fff2e8;
-  --surface:rgba(255,255,255,.80);
-  --surface-solid:#fffaf5;
-  --text:#30221c;
-  --muted:#927d71;
-  --accent:#d47d55;
-  --accent2:#efb48e;
-  --accent-soft:rgba(212,125,85,.14);
-  --glow:rgba(212,125,85,.20);
+.petal{
+  position:fixed;
+  background:#ffbfd7;
+  border-radius:50%;
+  opacity:.7;
+  z-index:-1;
+  animation:fall linear infinite;
 }
 
-body[data-theme="rosewood"]{
-  --bg:#f8eef0;
-  --surface:rgba(255,255,255,.82);
-  --surface-solid:#fff9fa;
-  --surface2:rgba(255,255,255,.58);
-  --text:#321d23;
-  --muted:#90747c;
-  --accent:#a95f70;
-  --accent2:#d9a0ad;
-  --accent-soft:rgba(169,95,112,.14);
-  --glow:rgba(169,95,112,.20);
+@keyframes fall{
+  to{
+    transform:translateY(100vh) rotate(360deg);
+  }
 }
 
-body[data-theme="sand"]{
-  --bg:#f5f0e6;
-  --surface:rgba(255,255,255,.80);
-  --surface-solid:#fffdf7;
-  --surface2:rgba(255,255,255,.55);
-  --text:#2e2a22;
-  --muted:#89806e;
-  --accent:#9b8760;
-  --accent2:#cdbd99;
-  --accent-soft:rgba(155,135,96,.14);
-  --glow:rgba(155,135,96,.20);
+.midnight-stars{
+  position:fixed;
+  inset:0;
+  z-index:-1;
 }
 
-/* =========================================================
-   CLASSIC DARK THEMES
-========================================================= */
-
-body[data-theme="midnight"]{
-  --bg:#080b12;
-  --surface:rgba(17,22,34,.76);
-  --surface-solid:#111622;
-  --surface2:rgba(25,31,45,.70);
-  --text:#eef2ff;
-  --muted:#8e98ad;
-  --accent:#788cff;
-  --accent2:#a7b2ff;
-  --accent-soft:rgba(120,140,255,.15);
-  --border:rgba(255,255,255,.08);
-  --nav:rgba(14,18,29,.82);
-  --glow:rgba(120,140,255,.22);
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:#fff;
+  border-radius:50%;
+  animation:twinkle 2.5s ease-in-out infinite;
 }
 
-body[data-theme="forest-dark"]{
-  --bg:#09110d;
-  --surface:rgba(17,28,21,.78);
-  --surface-solid:#121d16;
-  --surface2:rgba(25,40,30,.72);
-  --text:#edf8ef;
-  --muted:#8a9c8e;
-  --accent:#62a873;
-  --accent2:#9ed2a7;
-  --accent-soft:rgba(98,168,115,.15);
-  --border:rgba(255,255,255,.07);
-  --nav:rgba(12,20,15,.82);
-  --glow:rgba(98,168,115,.20);
+@keyframes twinkle{
+  0%,100%{opacity:.3;}
+  50%{opacity:1;}
 }
 
-body[data-theme="ocean-dark"]{
-  --bg:#061116;
-  --surface:rgba(11,28,35,.78);
-  --surface-solid:#0d2229;
-  --surface2:rgba(17,38,47,.72);
-  --text:#e9f8fb;
-  --muted:#7f9ba1;
-  --accent:#45b9c5;
-  --accent2:#8ee2e5;
-  --accent-soft:rgba(69,185,197,.15);
-  --border:rgba(255,255,255,.07);
-  --nav:rgba(7,19,24,.82);
-  --glow:rgba(69,185,197,.22);
-}
-
-body[data-theme="purple-dark"]{
-  --bg:#100a18;
-  --surface:rgba(29,18,39,.78);
-  --surface-solid:#20132b;
-  --surface2:rgba(40,25,53,.72);
-  --text:#f7edff;
-  --muted:#9e8baa;
-  --accent:#a66cff;
-  --accent2:#d0aaff;
-  --accent-soft:rgba(166,108,255,.15);
-  --border:rgba(255,255,255,.08);
-  --nav:rgba(19,11,27,.82);
-  --glow:rgba(166,108,255,.22);
-}
-
-body[data-theme="coffee"]{
-  --bg:#120d0a;
-  --surface:rgba(34,25,20,.80);
-  --surface-solid:#241a15;
-  --surface2:rgba(46,34,27,.72);
-  --text:#f8eee5;
-  --muted:#a79385;
-  --accent:#c28b62;
-  --accent2:#e0b38d;
-  --accent-soft:rgba(194,139,98,.15);
-  --border:rgba(255,255,255,.08);
-  --nav:rgba(22,15,12,.82);
-  --glow:rgba(194,139,98,.20);
-}
-
-body[data-theme="ruby"]{
-  --bg:#12080b;
-  --surface:rgba(31,14,19,.80);
-  --surface-solid:#241116;
-  --surface2:rgba(45,20,28,.72);
-  --text:#fff0f2;
-  --muted:#a88b91;
-  --accent:#e65d79;
-  --accent2:#ff9daf;
-  --accent-soft:rgba(230,93,121,.15);
-  --border:rgba(255,255,255,.08);
-  --nav:rgba(20,9,13,.84);
-  --glow:rgba(230,93,121,.22);
-}
-
-body[data-theme="slate"]{
-  --bg:#090d12;
-  --surface:rgba(20,27,35,.80);
-  --surface-solid:#151c24;
-  --surface2:rgba(28,37,48,.74);
-  --text:#eef3f7;
-  --muted:#8e9aa5;
-  --accent:#7899b2;
-  --accent2:#a8c6d8;
-  --accent-soft:rgba(120,153,178,.15);
-  --border:rgba(255,255,255,.08);
-  --nav:rgba(12,16,22,.84);
-  --glow:rgba(120,153,178,.20);
-}
-
-body[data-theme="graphite"]{
-  --bg:#0b0b0c;
-  --surface:rgba(24,24,26,.82);
-  --surface-solid:#1a1a1c;
-  --surface2:rgba(33,33,36,.74);
-  --text:#f5f5f5;
-  --muted:#96969b;
-  --accent:#d0d0d5;
-  --accent2:#888890;
-  --accent-soft:rgba(208,208,213,.13);
-  --border:rgba(255,255,255,.09);
-  --nav:rgba(15,15,17,.86);
-  --glow:rgba(208,208,213,.15);
-}
-
-body[data-theme="deep-violet"]{
-  --bg:#0c0713;
-  --surface:rgba(25,17,35,.80);
-  --surface-solid:#1b1026;
-  --surface2:rgba(37,24,50,.72);
-  --text:#f8efff;
-  --muted:#a28eaf;
-  --accent:#c078ff;
-  --accent2:#efb3ff;
-  --accent-soft:rgba(192,120,255,.15);
-  --border:rgba(255,255,255,.08);
-  --nav:rgba(14,8,21,.84);
-  --glow:rgba(192,120,255,.24);
-}
-
-body[data-theme="ember"]{
-  --bg:#120a08;
-  --surface:rgba(31,18,15,.80);
-  --surface-solid:#261411;
-  --surface2:rgba(47,25,21,.72);
-  --text:#fff1ea;
-  --muted:#a98c82;
-  --accent:#f07851;
-  --accent2:#ffb08f;
-  --accent-soft:rgba(240,120,81,.15);
-  --border:rgba(255,255,255,.08);
-  --nav:rgba(20,10,8,.84);
-  --glow:rgba(240,120,81,.24);
-}
-
-/* =========================================================
-   PREMIUM THEME VARIABLES
-========================================================= */
-
-body[data-theme="aurora"]{
-  --bg:#050b12;
-  --surface:rgba(10,21,29,.68);
-  --surface-solid:#0c1922;
-  --surface2:rgba(16,31,40,.68);
-  --text:#ecfffa;
-  --muted:#86a8a4;
-
-  --accent:#55f0bd;
-  --accent2:#76e9dc;
-
-  --accent-soft:rgba(67,240,184,.15);
-  --border:rgba(90,255,213,.13);
-  --nav:rgba(5,15,22,.76);
-
-  --glow:
-    rgba(48,255,190,.40);
-}
-
-body[data-theme="nebula"]{
-  --bg:#080713;
-  --surface:rgba(20,16,37,.70);
-  --surface-solid:#17122b;
-  --surface2:rgba(31,24,52,.70);
-  --text:#faf5ff;
-  --muted:#a99db7;
-  --accent:#e06cff;
-  --accent2:#65dfff;
-  --accent-soft:rgba(224,108,255,.15);
-  --border:rgba(224,108,255,.14);
-  --nav:rgba(11,8,21,.78);
-  --glow:rgba(224,108,255,.34);
-}
-
-body[data-theme="cosmos"]{
-  --bg:#050713;
-  --surface:rgba(12,17,36,.70);
-  --surface-solid:#10162d;
-  --surface2:rgba(19,27,50,.70);
-  --text:#f1f5ff;
-  --muted:#909bb5;
-  --accent:#7186ff;
-  --accent2:#b6c0ff;
-  --accent-soft:rgba(113,134,255,.15);
-  --border:rgba(130,150,255,.13);
-  --nav:rgba(7,10,23,.78);
-  --glow:rgba(113,134,255,.30);
-}
-
-body[data-theme="frost"]{
-  --bg:#061017;
-  --surface:rgba(14,31,40,.70);
-  --surface-solid:#102630;
-  --surface2:rgba(22,43,54,.70);
-  --text:#effcff;
-  --muted:#8fa9b2;
-  --accent:#7de5ff;
-  --accent2:#b5c9ff;
-  --accent-soft:rgba(125,229,255,.15);
-  --border:rgba(145,235,255,.15);
-  --nav:rgba(6,17,23,.78);
-  --glow:rgba(105,222,255,.30);
-}
-
-body[data-theme="crystal"]{
-  --bg:#080c15;
-  --surface:rgba(18,25,39,.70);
-  --surface-solid:#141c2d;
-  --surface2:rgba(26,37,55,.70);
-  --text:#f3f8ff;
-  --muted:#95a3b6;
-  --accent:#8ecfff;
-  --accent2:#c3a4ff;
-  --accent-soft:rgba(142,207,255,.15);
-  --border:rgba(180,220,255,.15);
-  --nav:rgba(9,13,22,.80);
-  --glow:rgba(142,207,255,.28);
-}
-
-body[data-theme="enchanted"]{
-  --bg:#06100c;
-  --surface:rgba(12,29,20,.70);
-  --surface-solid:#10251a;
-  --surface2:rgba(20,43,29,.70);
-  --text:#effff3;
-  --muted:#8fa99a;
-  --accent:#76ef9a;
-  --accent2:#b0ffc6;
-  --accent-soft:rgba(118,239,154,.15);
-  --border:rgba(118,239,154,.13);
-  --nav:rgba(6,17,11,.80);
-  --glow:rgba(118,239,154,.30);
-}
-
-body[data-theme="nocturne"]{
-  --bg:#0b0810;
-  --surface:rgba(28,21,31,.72);
-  --surface-solid:#211822;
-  --surface2:rgba(40,29,44,.72);
-  --text:#fff6ed;
-  --muted:#a99a96;
-  --accent:#e4a267;
-  --accent2:#d991cf;
-  --accent-soft:rgba(228,162,103,.15);
-  --border:rgba(255,205,153,.12);
-  --nav:rgba(15,10,16,.82);
-  --glow:rgba(228,162,103,.28);
-}
-
-/* =========================================================
+/* ====================================
    RESPONSIVE
-========================================================= */
+==================================== */
 
-@media(max-width:800px){
-
-  .container{
-    width:min(
-      100% - 22px,
-      650px
-    );
+@media(min-width:768px){
+  .page{
+    padding:32px 24px;
   }
 
-  header{
-    padding-top:20px;
-  }
-
-  .stats-grid{
-    grid-template-columns:1fr;
+  .stat-grid{
+    grid-template-columns:repeat(4,1fr);
   }
 
   .help-grid{
-    grid-template-columns:1fr;
-  }
-
-  .settings-grid{
-    grid-template-columns:1fr;
-  }
-
-  .subject-grid{
-    grid-template-columns:
-      repeat(2,1fr);
-  }
-
-  .theme-grid{
-    grid-template-columns:
-      repeat(3,1fr);
+    grid-template-columns:repeat(3,1fr);
   }
 
   .tip-grid{
-    grid-template-columns:1fr;
+    grid-template-columns:repeat(2,1fr);
   }
-
-  .hero{
-    padding:24px;
-  }
-
-  .help-hero{
-    padding:25px;
-  }
-
-  .help-hero h1{
-    font-size:31px;
-  }
-
-  .detail-hero,
-  .subject-hero{
-    padding:26px;
-  }
-}
-
-@media(max-width:520px){
-
-  .brand-name{
-    font-size:21px;
-  }
-
-  .logo{
-    width:40px;
-    height:40px;
-    border-radius:13px;
-  }
-
-  .calendar-card{
-    padding:14px;
-  }
-
-  .day{
-    min-height:45px;
-    font-size:12px;
-  }
-
-  .theme-grid{
-    grid-template-columns:
-      repeat(2,1fr);
-  }
-
-  .nav-item{
-    padding:8px 2px;
-    font-size:9px;
-  }
-
-  .nav-item svg{
-    width:19px;
-    height:19px;
-  }
-
-  .bottom-nav{
-    bottom:10px;
-    border-radius:22px;
-  }
-
-  .detail-icon{
-    width:58px;
-    height:58px;
-  }
-
-  .subject-hero h1{
-    font-size:35px;
-  }
-}
-
-@media(prefers-reduced-motion:reduce){
-
-  *,
-  *::before,
-  *::after{
-    animation-duration:.01ms !important;
-    animation-iteration-count:1 !important;
-    scroll-behavior:auto !important;
-    transition-duration:.01ms !important;
-  }
-
 }
 
 </style>
 </head>
-
-<body data-theme="sage">
-
-<div class="special-bg" id="specialBg"></div>
-
-<div class="app">
-
-<header>
-
-<div class="container">
-
-<div class="topbar">
-
-<div class="brand">
-
-<div class="logo">H</div>
-
-<div>
-
-<div class="brand-name">
-HABITS.
-</div>
-
-<div class="brand-sub">
-Construis ta routine.
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</header>
-
-
-<main class="container">
-
-<!-- =======================================================
-     TODAY
-======================================================= -->
-
-<section id="page-today" class="page active">
-
-<div class="hero card">
-
-<h1 id="todayTitle">
-Aujourd’hui
-</h1>
-
-<p id="todaySubtitle">
-Voici ce que tu peux accomplir aujourd’hui.
-</p>
-
-</div>
-
-<div class="section-title">
-
-<h2>
-Mes habitudes
-</h2>
-
-<span id="todayCount">
-0 aujourd’hui
-</span>
-
-</div>
-
-<div id="todayHabits" class="habit-list"></div>
-
-<div
-id="todayEmpty"
-class="card"
-style="padding:25px;text-align:center;display:none"
->
-
-<div style="font-size:30px;margin-bottom:10px">
-✦
-</div>
-
-<strong>
-Aucune habitude pour aujourd’hui
-</strong>
-
-<p style="color:var(--muted);font-size:13px">
-Crée ta première habitude depuis l’onglet Habitudes.
-</p>
-
-</div>
-
-</section>
-
-
-<!-- =======================================================
-     CALENDAR
-======================================================= -->
-
-<section id="page-calendar" class="page">
-
-<div class="hero card">
-
-<h1>
-Calendrier
-</h1>
-
-<p>
-Visualise ta régularité jour après jour.
-</p>
-
-</div>
-
-<div class="calendar-card card">
-
-<div class="calendar-head">
-
-<div class="month-title" id="monthTitle"></div>
-
-<div class="month-actions">
-
-<button class="icon-btn" onclick="changeMonth(-1)">
-‹
-</button>
-
-<button class="icon-btn" onclick="changeMonth(1)">
-›
-</button>
-
-</div>
-
-</div>
-
-<div class="weekdays">
-
-<div>L</div>
-<div>M</div>
-<div>M</div>
-<div>J</div>
-<div>V</div>
-<div>S</div>
-<div>D</div>
-
-</div>
-
-<div id="calendarGrid" class="calendar-grid"></div>
-
-</div>
-
-</section>
-
-
-<!-- =======================================================
-     HABITS
-======================================================= -->
-
-<section id="page-habits" class="page">
-
-<div class="hero card">
-
-<h1>
-Habitudes
-</h1>
-
-<p>
-Crée une routine qui correspond réellement à ton quotidien.
-</p>
-
-</div>
-
-<div id="allHabits" class="habit-list"></div>
-
-<button
-class="create-habit"
-onclick="openModal()"
->
-＋ Créer une nouvelle habitude
-</button>
-
-</section>
-
-
-<!-- =======================================================
-     STATS
-======================================================= -->
-
-<section id="page-stats" class="page">
-
-<div class="hero card">
-
-<h1>
-Statistiques
-</h1>
-
-<p>
-Observe ta progression et ta régularité.
-</p>
-
-</div>
-
-<div class="stats-grid">
-
-<div class="stat-card card">
-
-<div class="stat-label">
-Habitudes actives
-</div>
-
-<div class="stat-number" id="statHabits">
-0
-</div>
-
-</div>
-
-<div class="stat-card card">
-
-<div class="stat-label">
-Complétions
-</div>
-
-<div class="stat-number" id="statDone">
-0
-</div>
-
-</div>
-
-<div class="stat-card card">
-
-<div class="stat-label">
-Régularité
-</div>
-
-<div class="stat-number" id="statRate">
-0%
-</div>
-
-<div class="progress">
-<div id="rateBar" style="width:0%"></div>
-</div>
-
-</div>
-
-</div>
-
-<div class="section-title">
-<h2>7 derniers jours</h2>
-</div>
-
-<div class="card chart" id="chart"></div>
-
-<div class="section-title">
-<h2>Par catégorie</h2>
-</div>
-
-<div id="categoryStats" class="habit-list"></div>
-
-</section>
-
-
-<!-- =======================================================
-     HELP HOME
-======================================================= -->
-
-<section id="page-help" class="page">
-
-<div class="help-hero card">
-
-<h1>
-Centre d’aide
-</h1>
-
-<p>
-Des guides simples et détaillés pour mieux gérer ton stress,
-améliorer ton sommeil et apprendre plus efficacement.
-</p>
-
-</div>
-
-<div class="help-grid">
-
-<div
-class="help-topic card"
-onclick="openHelpPage('stress')"
->
-
-<div class="topic-icon">
-🧠
-</div>
-
-<h3>
-Stress
-</h3>
-
-<p>
-Respiration, recentrage, avant un contrôle et gestion de la pression.
-</p>
-
-</div>
-
-<div
-class="help-topic card"
-onclick="openHelpPage('sleep')"
->
-
-<div class="topic-icon">
-🌙
-</div>
-
-<h3>
-Sommeil
-</h3>
-
-<p>
-Construire une meilleure routine nocturne et récupérer efficacement.
-</p>
-
-</div>
-
-<div
-class="help-topic card"
-onclick="openHelpPage('study')"
->
-
-<div class="topic-icon">
-📚
-</div>
-
-<h3>
-Études
-</h3>
-
-<p>
-Méthodes de mémorisation, concentration et techniques par matière.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =======================================================
-     HELP — STRESS
-======================================================= -->
-
-<section id="page-help-stress" class="page help-detail">
-
-<button class="help-back" onclick="backToHelp()">
-← Retour à l’aide
-</button>
-
-<div class="detail-hero card">
-
-<div class="detail-icon">
-🧠
-</div>
-
-<h1>
-Gérer le stress
-</h1>
-
-<p>
-Ramener progressivement ton attention vers ce que tu peux contrôler,
-que ce soit avant un contrôle, pendant une période chargée ou
-simplement lorsque la pression monte.
-</p>
-
-</div>
-
-<div class="guide card">
-
-<div class="guide-header">
-
-<div class="guide-icon">🫁</div>
-
-<div>
-
-<h2>
-Techniques immédiates
-</h2>
-
-<p>
-Quelques méthodes simples à utiliser lorsque tu sens la pression monter.
-</p>
-
-</div>
-
-</div>
-
-<div class="tip-grid">
-
-<div class="tip">
-<div class="tip-number">1</div>
-<h3>Respiration 4–6</h3>
-<p>
-Inspire doucement pendant 4 secondes puis expire pendant 6 secondes.
-Répète pendant 2 à 5 minutes. L’objectif est surtout de ralentir
-progressivement ta respiration.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">2</div>
-<h3>Respiration carrée</h3>
-<p>
-Inspire 4 secondes, bloque 4 secondes, expire 4 secondes,
-puis reste 4 secondes sans inspirer. Répète plusieurs cycles
-si cela t’aide à retrouver ton calme.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">3</div>
-<h3>Technique 5–4–3–2–1</h3>
-<p>
-Identifie 5 choses que tu vois, 4 que tu peux toucher,
-3 que tu entends, 2 que tu sens et 1 que tu peux goûter.
-Cela aide à ramener l’attention au présent.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">4</div>
-<h3>Relâchement musculaire</h3>
-<p>
-Contracte doucement un groupe musculaire pendant quelques secondes,
-puis relâche-le complètement. Passe progressivement des jambes
-jusqu’au visage.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">5</div>
-<h3>Avant un contrôle</h3>
-<p>
-Évite de chercher à tout revoir dans les dernières minutes.
-Prépare ton matériel, respire lentement et commence par lire
-les consignes avant de résoudre les exercices.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">6</div>
-<h3>Quand la pression monte</h3>
-<p>
-Découpe la situation en une seule prochaine action :
-ouvrir le cours, lire la question, écrire la première étape,
-ou commencer un exercice.
-</p>
-</div>
-
-</div>
-
-</div>
-
-<div class="guide card">
-
-<div class="guide-header">
-
-<div class="guide-icon">⚡</div>
-
-<div>
-
-<h2>
-Avant un examen
-</h2>
-
-<p>
-Prépare ton environnement plutôt que d’essayer de tout contrôler.
-</p>
-
-</div>
-
-</div>
-
-<div class="tip-grid">
-
-<div class="tip">
-<div class="tip-number">1</div>
-<h3>Prépare tes affaires</h3>
-<p>
-Matériel, feuilles, eau, calculatrice si nécessaire :
-préparer ces éléments à l’avance évite une partie du stress de dernière minute.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">2</div>
-<h3>Commence par lire</h3>
-<p>
-Lis l’ensemble des consignes avant de te précipiter sur la première question.
-Identifie les exercices que tu comprends immédiatement.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">3</div>
-<h3>Découpe le problème</h3>
-<p>
-Si une question semble énorme, transforme-la en petites étapes.
-La prochaine action est souvent beaucoup plus simple que le problème entier.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">4</div>
-<h3>Accepte une part d’incertitude</h3>
-<p>
-Tu n’as pas besoin d’être certain de réussir chaque question avant
-de commencer. Avance avec les informations que tu as.
-</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =======================================================
-     HELP — SLEEP
-======================================================= -->
-
-<section id="page-help-sleep" class="page help-detail">
-
-<button class="help-back" onclick="backToHelp()">
-← Retour à l’aide
-</button>
-
-<div class="detail-hero card">
-
-<div class="detail-icon">🌙</div>
-
-<h1>
-Améliorer son sommeil
-</h1>
-
-<p>
-Le sommeil dépend notamment de la régularité, de l’environnement
-et de la transition entre la journée et la nuit.
-</p>
-
-</div>
-
-<div class="guide card">
-
-<div class="guide-header">
-
-<div class="guide-icon">🛏️</div>
-
-<div>
-
-<h2>
-Construire une bonne routine
-</h2>
-
-<p>
-Les petites habitudes répétées sont souvent plus importantes
-qu'une routine parfaite.
-</p>
-
-</div>
-
-</div>
-
-<div class="tip-grid">
-
-<div class="tip">
-<div class="tip-number">1</div>
-<h3>Garde des horaires réguliers</h3>
-<p>
-Essaie de garder une heure de lever relativement stable.
-La régularité aide ton organisme à anticiper les périodes
-de sommeil et d’éveil.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">2</div>
-<h3>Crée une transition</h3>
-<p>
-Les 30 à 60 dernières minutes peuvent être plus calmes :
-lumière moins forte, activité tranquille et moins de stimulation.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">3</div>
-<h3>Optimise la chambre</h3>
-<p>
-Une chambre sombre, calme et suffisamment fraîche peut faciliter
-l’endormissement. Évite autant que possible les sources lumineuses
-directement visibles depuis le lit.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">4</div>
-<h3>Attention aux stimulants</h3>
-<p>
-La caféine et certains stimulants peuvent rester actifs plusieurs
-heures. Si ton sommeil est perturbé, observe notamment leur horaire
-de consommation.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">5</div>
-<h3>Si tu ne t’endors pas</h3>
-<p>
-Évite de regarder constamment l’heure. Si tu restes éveillé longtemps,
-fais quelque chose de calme avec une lumière faible puis retourne
-au lit lorsque la somnolence revient.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">6</div>
-<h3>Le lendemain</h3>
-<p>
-Après une mauvaise nuit, évite de transformer toute ta journée
-en période de récupération. Reprends progressivement ton rythme
-habituel et privilégie la régularité.
-</p>
-</div>
-
-</div>
-
-</div>
-
-<div class="guide card">
-
-<div class="guide-header">
-
-<div class="guide-icon">📵</div>
-
-<div>
-
-<h2>
-La dernière heure
-</h2>
-
-<p>
-Une transition progressive peut rendre l’endormissement plus simple.
-</p>
-
-</div>
-
-</div>
-
-<div class="tip-grid">
-
-<div class="tip">
-<div class="tip-number">1</div>
-<h3>Diminue la stimulation</h3>
-<p>
-Passe progressivement d’activités très stimulantes à des activités
-plus calmes.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">2</div>
-<h3>Prépare demain</h3>
-<p>
-Prépare rapidement tes affaires et ton environnement afin de ne pas
-avoir à y penser une fois au lit.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">3</div>
-<h3>Garde une ambiance calme</h3>
-<p>
-Une lumière moins forte et une activité tranquille peuvent aider
-à créer une séparation claire entre journée et nuit.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">4</div>
-<h3>Ne cherche pas la perfection</h3>
-<p>
-Une soirée différente de temps en temps ne détruit pas une routine.
-L’objectif est surtout de retrouver régulièrement un rythme stable.
-</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =======================================================
-     HELP — STUDY
-======================================================= -->
-
-<section id="page-help-study" class="page help-detail">
-
-<button class="help-back" onclick="backToHelp()">
-← Retour à l’aide
-</button>
-
-<div class="detail-hero card">
-
-<div class="detail-icon">
-📚
-</div>
-
-<h1>
-Étudier efficacement
-</h1>
-
-<p>
-Comprendre, récupérer l'information de mémoire et espacer les révisions
-permettent de construire une méthode de travail plus active.
-</p>
-
-</div>
-
-<div class="guide card">
-
-<div class="guide-header">
-
-<div class="guide-icon">
-🧠
-</div>
-
-<div>
-
-<h2>
-Méthodes de mémorisation
-</h2>
-
-<p>
-Ne te contente pas de relire : force ton cerveau à récupérer l’information.
-</p>
-
-</div>
-
-</div>
-
-<div class="tip-grid">
-
-<div class="tip">
-<div class="tip-number">1</div>
-<h3>Active recall</h3>
-<p>
-Ferme ton cours et essaye de retrouver les informations de mémoire.
-C’est plus exigeant que relire, mais cela permet de vérifier ce que
-tu sais réellement.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">2</div>
-<h3>Blurting</h3>
-<p>
-Lis une partie du cours, ferme-le puis écris tout ce dont tu te
-souviens. Compare ensuite avec le cours et complète les éléments
-manquants.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">3</div>
-<h3>Méthode Feynman</h3>
-<p>
-Explique une notion avec des mots simples, comme si tu devais
-l'expliquer à quelqu'un qui ne connaît pas le sujet.
-Les zones où tu bloques indiquent ce qu'il faut retravailler.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">4</div>
-<h3>Répétition espacée</h3>
-<p>
-Revois une notion plusieurs fois à des moments différents plutôt
-que de concentrer toute la mémorisation dans une seule session.
-</p>
-</div>
-
-</div>
-
-</div>
-
-<div class="guide card">
-
-<div class="guide-header">
-
-<div class="guide-icon">🎯</div>
-
-<div>
-
-<h2>
-Par matière
-</h2>
-
-<p>
-Clique sur une matière pour ouvrir sa page dédiée.
-</p>
-
-</div>
-
-</div>
-
-<div class="subject-grid">
-
-<button class="subject" onclick="openSubjectPage('Mathématiques')">
-<strong>Mathématiques</strong>
-<span>Exercices & raisonnement</span>
-</button>
-
-<button class="subject" onclick="openSubjectPage('Physique')">
-<strong>Physique</strong>
-<span>Formules & applications</span>
-</button>
-
-<button class="subject" onclick="openSubjectPage('Sciences')">
-<strong>Sciences</strong>
-<span>Compréhension & schémas</span>
-</button>
-
-<button class="subject" onclick="openSubjectPage('Histoire')">
-<strong>Histoire</strong>
-<span>Chronologie & causes</span>
-</button>
-
-<button class="subject" onclick="openSubjectPage('Français')">
-<strong>Français</strong>
-<span>Analyse & rédaction</span>
-</button>
-
-<button class="subject" onclick="openSubjectPage('Néerlandais')">
-<strong>Néerlandais</strong>
-<span>Vocabulaire & pratique</span>
-</button>
-
-<button class="subject" onclick="openSubjectPage('Anglais')">
-<strong>Anglais</strong>
-<span>Vocabulaire & compréhension</span>
-</button>
-
-<button class="subject" onclick="openSubjectPage('Informatique')">
-<strong>Informatique</strong>
-<span>Code & résolution</span>
-</button>
-
-</div>
-
-</div>
-
-<div class="guide card">
-
-<div class="guide-header">
-
-<div class="guide-icon">
-⏱️
-</div>
-
-<div>
-
-<h2>
-Une session efficace
-</h2>
-
-<p>
-Organise ton travail autour d’actions concrètes.
-</p>
-
-</div>
-
-</div>
-
-<div class="tip-grid">
-
-<div class="tip">
-<div class="tip-number">1</div>
-<h3>Définis un objectif</h3>
-<p>
-Remplace « étudier les maths » par une action précise :
-« faire les exercices 4 à 8 » ou « apprendre les dérivées composées ».
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">2</div>
-<h3>Travaille activement</h3>
-<p>
-Pose-toi des questions, fais des exercices ou explique la matière
-au lieu de seulement surligner et relire.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">3</div>
-<h3>Corrige tes erreurs</h3>
-<p>
-Une erreur est utile si tu comprends pourquoi elle est arrivée.
-Note les erreurs récurrentes et reviens dessus plus tard.
-</p>
-</div>
-
-<div class="tip">
-<div class="tip-number">4</div>
-<h3>Termine par un rappel</h3>
-<p>
-À la fin de la session, ferme ton cours et résume ce que tu as appris
-sans regarder tes notes.
-</p>
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =======================================================
-     SUBJECT DETAIL PAGE
-======================================================= -->
-
-<section id="page-help-subject" class="page help-detail">
-
-<button
-class="help-back"
-onclick="backToStudy()"
->
-← Retour aux matières
-</button>
-
-<div class="subject-hero card">
-
-<div class="subject-hero-content">
-
-<div
-class="subject-emoji"
-id="subjectEmoji"
->
-📚
-</div>
-
-<h1 id="subjectTitle">
-Matière
-</h1>
-
-<p id="subjectIntro">
-Conseils personnalisés pour travailler cette matière.
-</p>
-
-<div
-class="subject-pill"
-id="subjectPill"
->
-Méthode de travail
-</div>
-
-</div>
-
-</div>
-
-<div
-id="subjectGuides"
->
-</div>
-
-</section>
-
-
-<!-- =======================================================
-     SETTINGS
-======================================================= -->
-
-<section id="page-settings" class="page">
-
-<div class="hero card">
-
-<h1>
-Réglages
-</h1>
-
-<p>
-Personnalise HABITS. comme tu le souhaites.
-</p>
-
-</div>
-
-<div class="settings-grid">
-
-<div class="settings-card card">
-
-<h3>
-Thème
-</h3>
-
-<p>
-Choisis l'ambiance visuelle de ton application.
-</p>
-
-<div class="theme-section">
-
-<div class="theme-section-head">
-
-<div class="theme-section-title">
-Classic
-</div>
-
-<div class="theme-section-description">
-Sobre & élégant
-</div>
-
-</div>
-
-<div
-class="theme-grid"
-id="classicThemeGrid"
-></div>
-
-</div>
-
-<div class="theme-section">
-
-<div class="theme-section-head">
-
-<div class="theme-section-title">
-Premium
-</div>
-
-<div class="theme-section-description">
-Animé & immersif
-</div>
-
-</div>
-
-<div
-class="theme-grid"
-id="premiumThemeGrid"
-></div>
-
-</div>
-
-</div>
-
-
-<div class="settings-card card">
-
-<h3>
-Données
-</h3>
-
-<p>
-Gère les données enregistrées localement sur cet appareil.
-</p>
-
-<button
-class="secondary-btn"
-style="width:100%;margin-bottom:9px"
-onclick="exportData()"
->
-Exporter mes habitudes
-</button>
-
-<button
-class="secondary-btn"
-style="width:100%"
-onclick="resetData()"
->
-Réinitialiser les données
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-</main>
-
-
-<!-- =======================================================
-     BOTTOM NAV
-======================================================= -->
-
-<nav class="bottom-nav">
-
-<button
-class="nav-item active"
-data-page="today"
-onclick="goToPage('today')"
->
-
-<svg viewBox="0 0 24 24">
-<path d="M4 12l8-7 8 7"/>
-<path d="M6 10v9h12v-9"/>
-<path d="M10 19v-5h4v5"/>
-</svg>
-
-<span>
-Aujourd’hui
-</span>
-
-</button>
-
-<button
-class="nav-item"
-data-page="calendar"
-onclick="goToPage('calendar')"
->
-
-<svg viewBox="0 0 24 24">
-<rect x="3" y="5" width="18" height="16" rx="3"/>
-<path d="M8 3v4M16 3v4M3 10h18"/>
-</svg>
-
-<span>
-Calendrier
-</span>
-
-</button>
-
-<button
-class="nav-item"
-data-page="habits"
-onclick="goToPage('habits')"
->
-
-<svg viewBox="0 0 24 24">
-<circle cx="12" cy="12" r="8"/>
-<path d="M8.5 12l2.3 2.3L16 9"/>
-</svg>
-
-<span>
-Habitudes
-</span>
-
-</button>
-
-<button
-class="nav-item"
-data-page="stats"
-onclick="goToPage('stats')"
->
-
-<svg viewBox="0 0 24 24">
-<path d="M5 19V10"/>
-<path d="M12 19V5"/>
-<path d="M19 19v-7"/>
-</svg>
-
-<span>
-Stats
-</span>
-
-</button>
-
-<button
-class="nav-item"
-data-page="help"
-onclick="goToPage('help')"
->
-
-<svg viewBox="0 0 24 24">
-<circle cx="12" cy="12" r="9"/>
-<path d="M9.5 9a2.5 2.5 0 115 0c0 2-2.5 2-2.5 3.5"/>
-<path d="M12 16h.01"/>
-</svg>
-
-<span>
-Aide
-</span>
-
-</button>
-
-<button
-class="nav-item"
-data-page="settings"
-onclick="goToPage('settings')"
->
-
-<svg viewBox="0 0 24 24">
-
-<circle
-cx="12"
-cy="12"
-r="3"
-/>
-
-<path
-d="M19.4 15a1.8 1.8 0 00.36 1.98l.06.06-1.4 1.4-.06-.06a1.8 1.8 0 00-1.98-.36 1.8 1.8 0 00-1.08 1.65V20h-2v-.33a1.8 1.8 0 00-1.08-1.65 1.8 1.8 0 00-1.98.36l-.06.06-1.4-1.4.06-.06A1.8 1.8 0 009.4 15a1.8 1.8 0 00-1.65-1.08H7v-2h.75A1.8 1.8 0 009.4 10a1.8 1.8 0 00-.36-1.98l-.06-.06 1.4-1.4.06.06A1.8 1.8 0 0012.98 8.6a1.8 1.8 0 001.08-1.65V5h2v.33a1.8 1.8 0 001.08 1.65 1.8 1.8 0 001.98-.36l.06-.06 1.4 1.4-.06.06A1.8 1.8 0 0019.4 10a1.8 1.8 0 001.65 1.08H21v2h-.33A1.8 1.8 0 0019.4 15z"
-/>
-
-</svg>
-
-<span>
-Réglages
-</span>
-
-</button>
-
-</nav>
-
-</div>
-
-
-<!-- =======================================================
-     HABIT MODAL
-======================================================= -->
-
-<div
-class="modal"
-id="habitModal"
->
-
-<div class="modal-box">
-
-<div class="modal-head">
-
-<h2>
-Nouvelle habitude
-</h2>
-
-<button
-class="close"
-onclick="closeModal()"
->
-×
-</button>
-
-</div>
-
-<div class="form-group">
-
-<label>
-Nom de l'habitude
-</label>
-
-<input
-id="habitName"
-type="text"
-placeholder="Ex. Faire du sport"
->
-
-</div>
-
-<div class="form-group">
-
-<label>
-Catégorie
-</label>
-
-<select id="habitCategory">
-
-<option>Sport</option>
-<option>Études</option>
-<option>Santé</option>
-<option>Sommeil</option>
-<option>Personnel</option>
-<option>Productivité</option>
-<option>Autre</option>
-
-</select>
-
-</div>
-
-<div class="form-group">
-
-<label>
-Combien de fois par semaine ?
-</label>
-
-<input
-id="habitFrequency"
-type="number"
-min="1"
-max="7"
-value="3"
->
-
-</div>
-
-<div class="modal-actions">
-
-<button
-class="secondary-btn"
-onclick="closeModal()"
->
-Annuler
-</button>
-
-<button
-class="primary-btn"
-onclick="createHabit()"
->
-Créer
-</button>
-
-</div>
-
-</div>
-
-</div>
-
+<body>
+
+<!-- PAGES -->
+
+<!-- TODAY -->
+<div id="page-today" class="page active">
+  <h1 class="page-title" id="todayTitle">Aujourd'hui</h1>
+  <p class="page-subtitle" id="todaySubtitle">Voici ce que tu peux accomplir aujourd'hui.</p>
+
+  <div class="card" style="margin-bottom:18px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <div>
+        <div style="font-size:13px;color:var(--muted);margin-bottom:4px">Mes habitudes</div>
+        <div style="font-size:24px;font-weight:800" id="todayCount">0 aujourd'hui</div>
+      </div>
+      <div style="font-size:32px;opacity:.3">✦</div>
+    </div>
+  </div>
+
+  <div id="todayHabits"></div>
+
+  <div id="todayEmpty" class="empty-state" style="display:none">
+    <div class="empty-icon">✓</div>
+    <div class="empty-title">Toutes les habitudes sont terminées !</div>
+    <div class="empty-desc" style="margin-top:8px">Profite de ta journée ou ajoute de nouvelles habitudes.</div>
+  </div>
+</div>
+
+<!-- CALENDAR -->
+<div id="page-calendar" class="page">
+  <h1 class="page-title">Calendrier</h1>
+  <p class="page-subtitle">Visualise ta régularité jour après jour.</p>
+
+  <div class="card">
+    <div class="calendar-header">
+      <button class="calendar-nav" id="prevMonthBtn">&lt;</button>
+      <div id="monthTitle"></div>
+      <button class="calendar-nav" id="nextMonthBtn">&gt;</button>
+    </div>
+    <div class="calendar-grid" id="calendarGrid"></div>
+  </div>
+
+  <div style="margin-top:20px">
+    <h2 style="font-size:18px;margin-bottom:12px">Événements</h2>
+    <div id="eventsList"></div>
+  </div>
+</div>
+
+<!-- HABITS -->
+<div id="page-habits" class="page">
+  <h1 class="page-title">Habitudes</h1>
+  <p class="page-subtitle">Crée une routine qui correspond réellement à ton quotidien.</p>
+
+  <div id="allHabits"></div>
+</div>
+
+<!-- STATS -->
+<div id="page-stats" class="page">
+  <h1 class="page-title">Statistiques</h1>
+  <p class="page-subtitle">Observe ta progression et ta régularité.</p>
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-value" id="statHabits">0</div>
+      <div class="stat-label">Habitudes</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="statDone">0</div>
+      <div class="stat-label">Complétions</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="statStreak">0</div>
+      <div class="stat-label">Série actuelle</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value" id="statBestStreak">0</div>
+      <div class="stat-label">Meilleure série</div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:18px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <strong>Objectif hebdomadaire</strong>
+      <span style="color:var(--muted);font-size:13px" id="statWeekly">0/0</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="weeklyBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:18px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+      <strong>Taux de réussite (7j)</strong>
+      <span style="color:var(--muted);font-size:13px" id="statRate">0%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="rateBar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <strong style="display:block;margin-bottom:14px">7 derniers jours</strong>
+    <div class="chart" id="chart"></div>
+  </div>
+
+  <div style="margin-top:20px">
+    <h2 style="font-size:18px;margin-bottom:12px">Par catégorie</h2>
+    <div id="categoryStats"></div>
+  </div>
+</div>
+
+<!-- HELP -->
+<div id="page-help" class="page">
+  <h1 class="page-title">Centre d'aide</h1>
+  <p class="page-subtitle">Des guides simples et détaillés pour mieux gérer ton stress, améliorer ton sommeil et apprendre plus efficacement.</p>
+
+  <div class="help-grid">
+    <div class="help-card" onclick="openHelpPage('stress')">
+      <div class="help-icon">🌬</div>
+      <div class="help-title">Stress</div>
+      <div class="help-desc">Respiration, recentrage, avant un contrôle et gestion de la pression.</div>
+    </div>
+    <div class="help-card" onclick="openHelpPage('sleep')">
+      <div class="help-icon">🌙</div>
+      <div class="help-title">Sommeil</div>
+      <div class="help-desc">Construire une meilleure routine nocturne et récupérer efficacement.</div>
+    </div>
+    <div class="help-card" onclick="openHelpPage('study')">
+      <div class="help-icon">📚</div>
+      <div class="help-title">Études</div>
+      <div class="help-desc">Méthodes de mémorisation, concentration et techniques par matière.</div>
+    </div>
+  </div>
+</div>
+
+<!-- HELP TOPIC -->
+<div id="page-help-topic" class="page">
+  <button class="btn btn-secondary" onclick="backToHelp()" style="margin-bottom:16px">← Retour</button>
+  <h1 class="page-title" id="helpTopicTitle">Sujet</h1>
+  <div id="helpTopicContent"></div>
+</div>
+
+<!-- SUBJECT -->
+<div id="page-help-subject" class="page">
+  <button class="btn btn-secondary" onclick="backToStudy()" style="margin-bottom:16px">← Retour</button>
+  <div style="text-align:center;margin-bottom:20px">
+    <div style="font-size:48px;margin-bottom:10px" id="subjectEmoji"></div>
+    <h1 class="page-title" id="subjectTitle">Matière</h1>
+    <p class="page-subtitle" id="subjectIntro"></p>
+    <span class="badge" id="subjectPill" style="font-size:13px;padding:6px 14px"></span>
+  </div>
+  <div id="subjectGuides"></div>
+</div>
+
+<!-- SETTINGS -->
+<div id="page-settings" class="page">
+  <h1 class="page-title">Réglages</h1>
+  <p class="page-subtitle">Personnalise HABITS. comme tu le souhaites.</p>
+
+  <div class="card" style="margin-bottom:18px">
+    <h2 style="font-size:17px;margin-bottom:14px">Thème</h2>
+    <div style="margin-bottom:16px">
+      <strong style="font-size:14px;display:block;margin-bottom:10px">Classique</strong>
+      <div class="theme-grid" id="classicThemeGrid"></div>
+    </div>
+    <div>
+      <strong style="font-size:14px;display:block;margin-bottom:10px">Premium</strong>
+      <div class="theme-grid" id="premiumThemeGrid"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 style="font-size:17px;margin-bottom:14px">Données</h2>
+    <button class="btn btn-secondary" onclick="exportData()" style="width:100%;margin-bottom:10px">Exporter mes données</button>
+    <button class="btn btn-danger" onclick="resetData()" style="width:100%">Réinitialiser</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <button class="nav-item active" data-page="today">
+    <div class="nav-icon">📅</div>
+    <div>Aujourd'hui</div>
+  </button>
+  <button class="nav-item" data-page="calendar">
+    <div class="nav-icon">📆</div>
+    <div>Calendrier</div>
+  </button>
+  <button class="nav-item" data-page="habits">
+    <div class="nav-icon">✦</div>
+    <div>Habitudes</div>
+  </button>
+  <button class="nav-item" data-page="stats">
+    <div class="nav-icon">📊</div>
+    <div>Stats</div>
+  </button>
+  <button class="nav-item" data-page="help">
+    <div class="nav-icon">❓</div>
+    <div>Aide</div>
+  </button>
+  <button class="nav-item" data-page="settings">
+    <div class="nav-icon">⚙</div>
+    <div>Réglages</div>
+  </button>
+</div>
+
+<!-- FAB -->
+<button class="fab" id="fabBtn">+</button>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="habitModal">
+  <div class="modal">
+    <h2 class="modal-title" id="modalTitle">Nouvelle habitude</h2>
+
+    <input type="hidden" id="habitEditId">
+
+    <div class="form-group">
+      <label class="form-label">Nom</label>
+      <input type="text" class="form-input" id="habitName" placeholder="Ex: Lire 10 minutes">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Catégorie</label>
+      <select class="form-select" id="habitCategory">
+        <option value="Santé">Santé</option>
+        <option value="Sport">Sport</option>
+        <option value="Études">Études</option>
+        <option value="Productivité">Productivité</option>
+        <option value="Mental">Mental</option>
+        <option value="Autre">Autre</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Type</label>
+      <select class="form-select" id="habitFreqType" onchange="updateFreqValueVisibility()">
+        <option value="daily">Tous les jours</option>
+        <option value="weekly">Toutes les semaines</option>
+        <option value="weekly-custom" selected>Compteur hebdo (+ / -)</option>
+        <option value="monthly">Tous les mois</option>
+      </select>
+    </div>
+
+    <div class="form-group" id="freqValueWrap" style="display:none">
+      <label class="form-label" id="freqValueLabel">Fois par semaine</label>
+      <input type="number" class="form-input" id="habitFrequency" min="1" max="7" value="3">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Note (optionnel)</label>
+      <textarea class="form-textarea" id="habitNote" placeholder="Détails, conseils..."></textarea>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">Annuler</button>
+      <button class="btn btn-primary" id="modalSubmit">Créer</button>
+    </div>
+  </div>
+</div>
+
+<!-- EVENT MODAL -->
+<div class="modal-overlay" id="eventModal">
+  <div class="modal">
+    <h2 class="modal-title">Ajouter un événement</h2>
+
+    <input type="hidden" id="eventEditId">
+    <input type="hidden" id="eventDate">
+
+    <div class="form-group">
+      <label class="form-label">Titre</label>
+      <input type="text" class="form-input" id="eventTitle" placeholder="Ex: Anniversaire, RDV...">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Heure (optionnel)</label>
+      <input type="time" class="form-input" id="eventTime">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Répétition</label>
+      <select class="form-select" id="eventRecurring">
+        <option value="none">Une fois</option>
+        <option value="yearly">Tous les ans (anniversaire)</option>
+      </select>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeEventModal()">Annuler</button>
+      <button class="btn btn-primary" onclick="submitEvent()">Ajouter</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM -->
+<div id="confirmOverlay">
+  <div id="confirmDialog">
+    <div id="confirmTitle"></div>
+    <div id="confirmMessage"></div>
+    <div id="confirmActions">
+      <button id="confirmCancel">Annuler</button>
+      <button id="confirmOk">Confirmer</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toastContainer"></div>
+
+<!-- SPECIAL BG -->
+<div id="specialBg"></div>
 
 <script>
 
@@ -4751,3423 +1457,1305 @@ Créer
    STORAGE + MIGRATION
 ========================================================= */
 
-const HABITS_KEY =
-  "habitsV9Habits";
+const HABITS_KEY = "habitsV9Habits";
+const THEME_KEY = "habitsV9Theme";
+const EVENTS_KEY = "habitsV9Events";
 
-const THEME_KEY =
-  "habitsV9Theme";
+let events = [];
 
-
-function loadHabits(){
-
-  let current =
-    localStorage.getItem(HABITS_KEY);
-
+function loadEvents(){
+  let current = safeGetItem(EVENTS_KEY);
   if(current){
-
     try{
-
-      const parsed =
-        JSON.parse(current);
-
+      const parsed = JSON.parse(current);
       if(Array.isArray(parsed)){
         return parsed;
       }
-
     }catch(e){}
-
   }
-
-  const oldKeys = [
-    "habitsV8Habits",
-    "habitsPremiumHabits",
-    "habitsV7Habits",
-    "habitsV6Habits"
-  ];
-
-  for(const key of oldKeys){
-
-    const old =
-      localStorage.getItem(key);
-
-    if(old){
-
-      try{
-
-        const parsed =
-          JSON.parse(old);
-
-        if(Array.isArray(parsed)){
-
-          localStorage.setItem(
-            HABITS_KEY,
-            JSON.stringify(parsed)
-          );
-
-          return parsed;
-        }
-
-      }catch(e){}
-
-    }
-
-  }
-
   return [];
-
 }
 
-
-let habits =
-  loadHabits();
-
-
-function saveHabits(){
-
-  localStorage.setItem(
-    HABITS_KEY,
-    JSON.stringify(habits)
-  );
-
+function saveEvents(){
+  safeSetItem(EVENTS_KEY, JSON.stringify(events));
 }
 
+events = loadEvents();
 
 /* =========================================================
-   DATE
+   WEEK MANAGEMENT FOR COUNTER HABITS
 ========================================================= */
 
-let selectedDate =
-  new Date();
+function getWeekStart(date = new Date()){
+  const d = new Date(date);
+  const day = d.getDay();
+  const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+  const monday = new Date(d.setDate(diff));
+  monday.setHours(0, 0, 0, 0);
+  return monday.toISOString();
+}
 
-let calendarDate =
-  new Date();
+function resetWeeklyCountersIfNeeded(){
+  const currentWeekStart = getWeekStart();
+  let changed = false;
+  
+  habits.forEach(habit => {
+    if(habit.frequencyType === 'weekly-counter'){
+      if(!habit.weeklyCounter){
+        habit.weeklyCounter = {
+          weekStart: currentWeekStart,
+          count: 0,
+          target: habit.frequencyValue
+        };
+        changed = true;
+      }else if(habit.weeklyCounter.weekStart !== currentWeekStart){
+        habit.weeklyCounter.weekStart = currentWeekStart;
+        habit.weeklyCounter.count = 0;
+        changed = true;
+      }
+    }
+  });
+  
+  if(changed){
+    saveHabits();
+  }
+}
 
+/* =========================================================
+   EVENT HELPERS
+========================================================= */
+
+function getEventsForDate(dateStr){
+  return events.filter(ev => {
+    if(ev.recurring === 'yearly'){
+      const evDate = new Date(ev.date + 'T00:00:00');
+      const targetDate = new Date(dateStr + 'T00:00:00');
+      return evDate.getDate() === targetDate.getDate() && 
+             evDate.getMonth() === targetDate.getMonth();
+    }
+    return ev.date === dateStr;
+  });
+}
+
+/* =========================================================
+   WEEKLY COUNTER OPERATIONS
+========================================================= */
+
+function incrementWeeklyCounter(habitId){
+  const habit = habits.find(h => h.id === habitId);
+  if(!habit || habit.frequencyType !== 'weekly-counter') return;
+  
+  resetWeeklyCountersIfNeeded();
+  
+  if(habit.weeklyCounter && habit.weeklyCounter.count < habit.weeklyCounter.target){
+    habit.weeklyCounter.count++;
+    saveHabits();
+    renderToday();
+    renderHabits();
+    renderStats();
+  }
+}
+
+function decrementWeeklyCounter(habitId){
+  const habit = habits.find(h => h.id === habitId);
+  if(!habit || habit.frequencyType !== 'weekly-counter') return;
+  
+  resetWeeklyCountersIfNeeded();
+  
+  if(habit.weeklyCounter && habit.weeklyCounter.count > 0){
+    habit.weeklyCounter.count--;
+    saveHabits();
+    renderToday();
+    renderHabits();
+    renderStats();
+  }
+}
+
+function getWeeklyCounterDisplay(habit){
+  if(habit.frequencyType !== 'weekly-counter' || !habit.weeklyCounter){
+    return '';
+  }
+  return habit.weeklyCounter.count + '/' + habit.weeklyCounter.target;
+}
+
+/* =========================================================
+   HELPER FUNCTIONS (from original file)
+========================================================= */
+
+function safeGetItem(key){
+  try{
+    return localStorage.getItem(key);
+  }catch(e){
+    return null;
+  }
+}
+
+function safeSetItem(key, value){
+  try{
+    localStorage.setItem(key, value);
+  }catch(e){}
+}
+
+function loadHabits(){
+  let current = safeGetItem(HABITS_KEY);
+  if(current){
+    try{
+      const parsed = JSON.parse(current);
+      if(Array.isArray(parsed)){
+        return parsed;
+      }
+    }catch(e){}
+  }
+  const oldKeys = ["habitsV8Habits","habitsPremiumHabits","habitsV7Habits","habitsV6Habits"];
+  for(const key of oldKeys){
+    const old = safeGetItem(key);
+    if(old){
+      try{
+        const parsed = JSON.parse(old);
+        if(Array.isArray(parsed)){
+          safeSetItem(HABITS_KEY, JSON.stringify(parsed));
+          return parsed;
+        }
+      }catch(e){}
+    }
+  }
+  return [];
+}
+
+let habits = loadHabits();
+
+function saveHabits(){
+  safeSetItem(HABITS_KEY, JSON.stringify(habits));
+}
 
 function dateKey(date){
-
-  const y =
-    date.getFullYear();
-
-  const m =
-    String(
-      date.getMonth()+1
-    ).padStart(2,"0");
-
-  const d =
-    String(
-      date.getDate()
-    ).padStart(2,"0");
-
-  return `${y}-${m}-${d}`;
-
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return y + '-' + m + '-' + d;
 }
-
 
 function todayKey(){
-
-  return dateKey(
-    new Date()
-  );
-
+  return dateKey(new Date());
 }
-
 
 function isToday(date){
-
-  return (
-    dateKey(date)
-    ===
-    todayKey()
-  );
-
+  return dateKey(date) === todayKey();
 }
-
 
 function formatLongDate(date){
-
-  return date.toLocaleDateString(
-    "fr-BE",
-    {
-      weekday:"long",
-      day:"numeric",
-      month:"long"
-    }
-  );
-
+  return date.toLocaleDateString('fr-BE', { 
+    weekday: 'long', 
+    day: 'numeric', 
+    month: 'long' 
+  });
 }
 
+function escapeHTML(value){
+  return String(value)
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&#039;');
+}
 
 /* =========================================================
    NAVIGATION
 ========================================================= */
 
 function goToPage(page){
-
-  document
-    .querySelectorAll(".page")
-    .forEach(p=>{
-      p.classList.remove("active");
-    });
-
-  const target =
-    document.getElementById(
-      "page-"+page
-    );
-
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById('page-' + page);
   if(target){
-    target.classList.add("active");
+    target.classList.add('active');
   }
 
-  document
-    .querySelectorAll(".nav-item")
-    .forEach(item=>{
-
-      item.classList.toggle(
-        "active",
-        item.dataset.page===page
-      );
-
-    });
-
-  if(page==="today"){
-    renderToday();
-  }
-
-  if(page==="calendar"){
-    renderCalendar();
-  }
-
-  if(page==="habits"){
-    renderHabits();
-  }
-
-  if(page==="stats"){
-    renderStats();
-  }
-
-  if(page==="settings"){
-    renderThemeButtons();
-  }
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
+  document.querySelectorAll('.nav-item').forEach(item => {
+    item.classList.toggle('active', item.dataset.page === page);
   });
 
+  if(page === 'today') renderToday();
+  if(page === 'calendar') renderCalendar();
+  if(page === 'habits') renderHabits();
+  if(page === 'stats') renderStats();
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-
-/* =========================================================
-   HELP NAVIGATION
-========================================================= */
-
-function openHelpPage(topic){
-
-  document
-    .querySelectorAll(".page")
-    .forEach(p=>{
-      p.classList.remove("active");
-    });
-
-  const target =
-    document.getElementById(
-      "page-help-"+topic
-    );
-
-  if(!target) return;
-
-  target.classList.add("active");
-
-  setHelpNavActive();
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
+document.querySelectorAll('.nav-item').forEach(item => {
+  item.addEventListener('click', () => {
+    goToPage(item.dataset.page);
   });
-
-}
-
-
-function setHelpNavActive(){
-
-  document
-    .querySelectorAll(".nav-item")
-    .forEach(item=>{
-
-      item.classList.toggle(
-        "active",
-        item.dataset.page==="help"
-      );
-
-    });
-
-}
-
-
-function backToHelp(){
-
-  goToPage("help");
-
-}
-
-
-function backToStudy(){
-
-  openHelpPage("study");
-
-}
-
+});
 
 /* =========================================================
-   SUBJECT DATA
+   TODAY PAGE
 ========================================================= */
 
-const subjectData = {
-
-  "Mathématiques":{
-
-    emoji:"📐",
-
-    intro:
-      "En mathématiques, le plus important est de transformer les connaissances en réflexes de résolution. Comprendre une méthode puis l’appliquer sur plusieurs exercices vaut mieux que relire passivement le cours.",
-
-    pill:
-      "Exercices • Raisonnement",
-
-    guides:[
-
-      {
-        icon:"🧩",
-        title:"Méthode de travail",
-        subtitle:"Construis ton raisonnement étape par étape.",
-
-        tips:[
-
-          [
-            "1",
-            "Comprends la méthode",
-            "Avant de faire beaucoup d’exercices, assure-toi de comprendre pourquoi la formule ou la méthode fonctionne. Reformule-la avec tes propres mots."
-          ],
-
-          [
-            "2",
-            "Commence sans regarder",
-            "Lis l’énoncé, identifie ce qui est demandé et essaye une première approche avant de regarder la correction."
-          ],
-
-          [
-            "3",
-            "Écris les étapes",
-            "Évite de passer directement au résultat. Écris les transformations importantes : formule, remplacement, calcul et conclusion."
-          ],
-
-          [
-            "4",
-            "Analyse tes erreurs",
-            "Après une erreur, identifie sa catégorie : calcul, formule, signe, compréhension ou raisonnement. Cela permet de cibler les révisions."
-          ]
-
-        ]
-      },
-
-      {
-        icon:"🎯",
-        title:"Techniques efficaces",
-        subtitle:"Pour préparer une interrogation ou un examen.",
-
-        tips:[
-
-          [
-            "1",
-            "Exercices mélangés",
-            "Une fois le chapitre compris, mélange les types d’exercices. Cela t’oblige à identifier toi-même la méthode à utiliser."
-          ],
-
-          [
-            "2",
-            "Feuille blanche",
-            "Sans regarder le cours, écris les formules, définitions et méthodes dont tu te souviens. Vérifie ensuite ce qui manque."
-          ],
-
-          [
-            "3",
-            "Refais les erreurs",
-            "Deux ou trois jours plus tard, refais les exercices où tu t’étais trompé sans regarder la correction."
-          ],
-
-          [
-            "4",
-            "Dernière révision",
-            "La veille, privilégie les méthodes, formules et erreurs fréquentes plutôt qu’un nouveau chapitre entier."
-          ]
-
-        ]
-      },
-
-      {
-        icon:"⚠️",
-        title:"À éviter",
-        subtitle:"Les pièges classiques en mathématiques.",
-
-        tips:[
-
-          [
-            "1",
-            "Relire uniquement",
-            "Lire le cours plusieurs fois peut donner une impression de maîtrise. Vérifie plutôt que tu peux retrouver et appliquer les informations."
-          ],
-
-          [
-            "2",
-            "Apprendre sans comprendre",
-            "Une formule isolée est difficile à utiliser si tu ne sais pas quand et pourquoi elle intervient."
-          ],
-
-          [
-            "3",
-            "Ignorer les unités",
-            "Dans les problèmes, vérifie toujours les unités et la cohérence du résultat obtenu."
-          ],
-
-          [
-            "4",
-            "Sauter les étapes",
-            "Même si le calcul semble évident, écrire les étapes importantes rend les erreurs beaucoup plus faciles à détecter."
-          ]
-
-        ]
-      }
-
-    ]
-
-  },
-
-
-  "Physique":{
-
-    emoji:"⚛️",
-
-    intro:
-      "En physique, commence par comprendre la situation avant de chercher une formule. Identifie les grandeurs, leurs unités et les relations entre elles.",
-
-    pill:
-      "Formules • Applications",
-
-    guides:[
-
-      {
-        icon:"🔬",
-        title:"Résoudre un problème",
-        subtitle:"Une méthode claire pour éviter les erreurs.",
-
-        tips:[
-
-          [
-            "1",
-            "Lis la situation",
-            "Avant de calculer, identifie ce que le problème décrit réellement : mouvement, force, énergie, électricité ou autre phénomène."
-          ],
-
-          [
-            "2",
-            "Liste les données",
-            "Écris les grandeurs connues avec leur symbole et leur unité. Fais la même chose pour la grandeur recherchée."
-          ],
-
-          [
-            "3",
-            "Choisis la relation",
-            "Écris la formule avant de remplacer les valeurs. Cela permet de vérifier que la relation correspond bien au problème."
-          ],
-
-          [
-            "4",
-            "Vérifie le résultat",
-            "Regarde l’unité finale, l’ordre de grandeur et le signe. Un résultat absurde peut révéler une erreur de conversion."
-          ]
-
-        ]
-      },
-
-      {
-        icon:"📏",
-        title:"Formules & unités",
-        subtitle:"La précision commence avant le calcul.",
-
-        tips:[
-
-          [
-            "1",
-            "Mémorise les relations",
-            "Apprends surtout à reconnaître dans quelles situations utiliser chaque relation."
-          ],
-
-          [
-            "2",
-            "Convertis avant",
-            "Mets les grandeurs dans les unités attendues par la formule avant de calculer."
-          ],
-
-          [
-            "3",
-            "Garde les symboles",
-            "Écris d’abord la relation avec les symboles puis remplace les valeurs. Tu limites ainsi les erreurs de structure."
-          ],
-
-          [
-            "4",
-            "Analyse les dimensions",
-            "Les unités peuvent servir de contrôle : si elles ne correspondent pas à la grandeur recherchée, reviens sur ton calcul."
-          ]
-
-        ]
-      },
-
-      {
-        icon:"🧠",
-        title:"Réviser la physique",
-        subtitle:"Comprendre plutôt que réciter.",
-
-        tips:[
-
-          [
-            "1",
-            "Explique le phénomène",
-            "Essaie d’expliquer avec tes mots ce qui se passe physiquement avant de mémoriser les équations."
-          ],
-
-          [
-            "2",
-            "Fais des schémas",
-            "Un schéma permet souvent de visualiser les forces, mouvements, circuits ou échanges d’énergie."
-          ],
-
-          [
-            "3",
-            "Refais les exercices",
-            "Après avoir étudié une correction, ferme-la et refais le problème entièrement."
-          ],
-
-          [
-            "4",
-            "Classe tes erreurs",
-            "Sépare les erreurs de compréhension, d’unité, de formule et de calcul."
-          ]
-
-        ]
-      }
-
-    ]
-
-  },
-
-
-  "Sciences":{
-
-    emoji:"🧬",
-
-    intro:
-      "Pour les sciences, cherche d’abord à comprendre les mécanismes et les relations entre les notions. Les schémas et explications personnelles sont particulièrement utiles.",
-
-    pill:
-      "Compréhension • Schémas",
-
-    guides:[
-
-      {
-        icon:"🧠",
-        title:"Comprendre un chapitre",
-        subtitle:"Transforme le cours en système logique.",
-
-        tips:[
-
-          [
-            "1",
-            "Repère les grandes idées",
-            "Commence par identifier les concepts principaux avant de mémoriser les détails."
-          ],
-
-          [
-            "2",
-            "Construis un schéma",
-            "Relie les notions avec des flèches, causes, conséquences et exemples."
-          ],
-
-          [
-            "3",
-            "Explique à voix haute",
-            "Ferme le cours et explique le mécanisme avec tes propres mots."
-          ],
-
-          [
-            "4",
-            "Teste les détails",
-            "Une fois la structure comprise, utilise des questions courtes pour vérifier les détails."
-          ]
-
-        ]
-      },
-
-      {
-        icon:"🧪",
-        title:"Apprendre les processus",
-        subtitle:"Pour les mécanismes et séquences.",
-
-        tips:[
-
-          [
-            "1",
-            "Ordre logique",
-            "Écris les étapes dans l’ordre sans regarder le cours."
-          ],
-
-          [
-            "2",
-            "Cause → effet",
-            "Pour chaque étape, demande-toi ce qui la provoque et ce qu’elle entraîne."
-          ],
-
-          [
-            "3",
-            "Dessine",
-            "Transforme les descriptions complexes en schémas simples."
-          ],
-
-          [
-            "4",
-            "Récupération active",
-            "Reproduis le schéma de mémoire puis compare-le à ton cours."
-          ]
-
-        ]
-      }
-
-    ]
-
-  },
-
-
-  "Histoire":{
-
-    emoji:"🏛️",
-
-    intro:
-      "En histoire, ne mémorise pas uniquement des dates. Construis une structure avec les périodes, les acteurs, les causes, les événements et les conséquences.",
-
-    pill:
-      "Chronologie • Causes • Conséquences",
-
-    guides:[
-
-      {
-        icon:"🗓️",
-        title:"Construire une chronologie",
-        subtitle:"Donne une structure temporelle au cours.",
-
-        tips:[
-
-          [
-            "1",
-            "Repère les périodes",
-            "Commence par diviser le chapitre en grandes périodes ou événements."
-          ],
-
-          [
-            "2",
-            "Place les dates clés",
-            "Apprends surtout les dates qui permettent de structurer la chronologie."
-          ],
-
-          [
-            "3",
-            "Associe les acteurs",
-            "Relie chaque événement aux personnes, États ou groupes concernés."
-          ],
-
-          [
-            "4",
-            "Raconte l’histoire",
-            "Ferme le cours et raconte la période dans l’ordre avec tes propres mots."
-          ]
-
-        ]
-      },
-
-      {
-        icon:"🔗",
-        title:"Causes & conséquences",
-        subtitle:"Comprendre les relations entre les événements.",
-
-        tips:[
-
-          [
-            "1",
-            "Pourquoi ?",
-            "Pour chaque événement important, demande-toi quelles sont ses causes."
-          ],
-
-          [
-            "2",
-            "Que se passe-t-il ?",
-            "Résume l’événement sans recopier le cours."
-          ],
-
-          [
-            "3",
-            "Et après ?",
-            "Identifie les conséquences à court et à long terme."
-          ],
-
-          [
-            "4",
-            "Relie les éléments",
-            "Crée des flèches entre causes, événements et conséquences."
-          ]
-
-        ]
-      },
-
-      {
-        icon:"🎯",
-        title:"Préparer une interrogation",
-        subtitle:"Tester ta mémoire plutôt que relire.",
-
-        tips:[
-
-          [
-            "1",
-            "Questions rapides",
-            "Transforme les titres du cours en questions."
-          ],
-
-          [
-            "2",
-            "Dates de mémoire",
-            "Écris les dates importantes sans regarder puis vérifie."
-          ],
-
-          [
-            "3",
-            "Mini-récit",
-            "Explique le chapitre en quelques minutes sans notes."
-          ],
-
-          [
-            "4",
-            "Corrige les trous",
-            "Révise uniquement les éléments que tu n’as pas réussi à retrouver."
-          ]
-
-        ]
-      }
-
-    ]
-
-  },
-
-
-  "Français":{
-
-    emoji:"✍️",
-
-    intro:
-      "En français, combine compréhension du texte, maîtrise des notions et entraînement à la rédaction. La qualité du raisonnement compte autant que les connaissances.",
-
-    pill:
-      "Analyse • Rédaction",
-
-    guides:[
-
-      {
-        icon:"📖",
-        title:"Analyse de texte",
-        subtitle:"Construis une réponse précise.",
-
-        tips:[
-
-          [
-            "1",
-            "Observe",
-            "Repère d’abord les éléments réellement présents dans le texte : mots, figures, structure ou registre."
-          ],
-
-          [
-            "2",
-            "Nomme la technique",
-            "Identifie précisément le procédé ou la notion utilisée."
-          ],
-
-          [
-            "3",
-            "Explique l’effet",
-            "Ne t’arrête pas au nom du procédé : explique ce qu’il produit dans le texte."
-          ],
-
-          [
-            "4",
-            "Cite intelligemment",
-            "Utilise une courte citation comme preuve puis analyse-la."
-          ]
-
-        ]
-      },
-
-      {
-        icon:"📝",
-        title:"Rédaction",
-        subtitle:"Construis avant d’écrire.",
-
-        tips:[
-
-          [
-            "1",
-            "Comprends le sujet",
-            "Identifie exactement ce qui est demandé et les contraintes."
-          ],
-
-          [
-            "2",
-            "Fais un plan",
-            "Organise tes idées avant de rédiger les paragraphes."
-          ],
-
-          [
-            "3",
-            "Développe",
-            "Une idée importante doit être expliquée, justifiée et illustrée."
-          ],
-
-          [
-            "4",
-            "Relis en plusieurs passes",
-            "Fais une passe pour le fond puis une autre pour les fautes, accords et conjugaisons."
-          ]
-
-        ]
-      }
-
-    ]
-
-  },
-
-
-  "Néerlandais":{
-
-    emoji:"🇳🇱",
-
-    intro:
-      "Pour progresser en néerlandais, transforme le vocabulaire en utilisation réelle. Les mots sont plus faciles à retenir lorsqu’ils sont associés à des phrases et à des situations.",
-
-    pill:
-      "Vocabulaire • Pratique",
-
-    guides:[
-
-      {
-        icon:"🗣️",
-        title:"Apprendre le vocabulaire",
-        subtitle:"Passe du mot isolé à la phrase.",
-
-        tips:[
-
-          [
-            "1",
-            "Apprends par contexte",
-            "Associe chaque mot à une phrase courte plutôt qu’à une traduction seule."
-          ],
-
-          [
-            "2",
-            "Récupère sans regarder",
-            "Cache la traduction et retrouve le mot dans l’autre langue."
-          ],
-
-          [
-            "3",
-            "Utilise le mot",
-            "Écris ou prononce plusieurs phrases avec le nouveau vocabulaire."
-          ],
-
-          [
-            "4",
-            "Espace les rappels",
-            "Reviens régulièrement sur les mots au lieu de tout apprendre en une seule fois."
-          ]
-
-        ]
-      },
-
-      {
-        icon:"🎧",
-        title:"Compréhension",
-        subtitle:"Habitue ton cerveau à la langue.",
-
-        tips:[
-
-          [
-            "1",
-            "Écoute régulièrement",
-            "Même quelques minutes d’exposition fréquente peuvent te familiariser avec les sons."
-          ],
-
-          [
-            "2",
-            "Cherche l’idée globale",
-            "Ne bloque pas sur chaque mot inconnu lorsque tu écoutes un texte."
-          ],
-
-          [
-            "3",
-            "Repère les mots connus",
-            "Utilise le contexte pour reconstruire le sens des phrases."
-          ],
-
-          [
-            "4",
-            "Reformule",
-            "Après une écoute, résume ce que tu as compris avec des phrases simples."
-          ]
-
-        ]
-      }
-
-    ]
-
-  },
-
-
-  "Anglais":{
-
-    emoji:"🇬🇧",
-
-    intro:
-      "Pour l’anglais, combine vocabulaire, compréhension et production. L’objectif est de pouvoir récupérer les mots et les structures lorsque tu en as besoin.",
-
-    pill:
-      "Vocabulary • Grammar • Practice",
-
-    guides:[
-
-      {
-        icon:"📚",
-        title:"Vocabulaire",
-        subtitle:"Mémorise pour pouvoir réutiliser.",
-
-        tips:[
-
-          [
-            "1",
-            "Apprends en contexte",
-            "Associe le mot à une phrase ou une situation."
-          ],
-
-          [
-            "2",
-            "Teste-toi dans les deux sens",
-            "Passe anglais → français puis français → anglais."
-          ],
-
-          [
-            "3",
-            "Crée tes propres phrases",
-            "Une phrase personnelle rend souvent le mot plus facile à retrouver."
-          ],
-
-          [
-            "4",
-            "Révise progressivement",
-            "Utilise des rappels espacés plutôt qu’une longue session unique."
-          ]
-
-        ]
-      },
-
-      {
-        icon:"🎙️",
-        title:"Production",
-        subtitle:"Force-toi à utiliser la langue.",
-
-        tips:[
-
-          [
-            "1",
-            "Parle à voix haute",
-            "Décris ce que tu fais ou explique un sujet avec des phrases simples."
-          ],
-
-          [
-            "2",
-            "Reformule",
-            "Prends une phrase et essaye de la dire autrement."
-          ],
-
-          [
-            "3",
-            "Travaille les erreurs",
-            "Note les erreurs grammaticales qui reviennent souvent."
-          ],
-
-          [
-            "4",
-            "Lis puis résume",
-            "Lis un court texte puis explique son contenu sans le regarder."
-          ]
-
-        ]
-      }
-
-    ]
-
-  },
-
-
-  "Informatique":{
-
-    emoji:"💻",
-
-    intro:
-      "En informatique, la compréhension vient énormément de la pratique. Écris du code, teste, observe les erreurs et apprends à isoler précisément un problème.",
-
-    pill:
-      "Code • Debug • Logique",
-
-    guides:[
-
-      {
-        icon:"⌨️",
-        title:"Apprendre à coder",
-        subtitle:"Construis plutôt que recopier.",
-
-        tips:[
-
-          [
-            "1",
-            "Écris toi-même",
-            "Évite de recopier directement une solution. Essaie d’abord de produire ton propre raisonnement."
-          ],
-
-          [
-            "2",
-            "Découpe le problème",
-            "Transforme une grosse fonctionnalité en petites fonctions ou étapes."
-          ],
-
-          [
-            "3",
-            "Teste souvent",
-            "Teste une petite partie du programme avant d’ajouter beaucoup de code."
-          ],
-
-          [
-            "4",
-            "Explique ton code",
-            "Si tu peux expliquer précisément ce que fait chaque partie, tu comprends probablement mieux le programme."
-          ]
-
-        ]
-      },
-
-      {
-        icon:"🐛",
-        title:"Debug efficacement",
-        subtitle:"Ne change pas tout au hasard.",
-
-        tips:[
-
-          [
-            "1",
-            "Lis l’erreur",
-            "Le message d’erreur donne souvent une indication sur l’endroit ou le type du problème."
-          ],
-
-          [
-            "2",
-            "Reproduis le bug",
-            "Identifie précisément l’action qui déclenche le problème."
-          ],
-
-          [
-            "3",
-            "Isole",
-            "Réduis le problème à la plus petite partie de code possible."
-          ],
-
-          [
-            "4",
-            "Teste une hypothèse",
-            "Modifie une seule chose à la fois afin de savoir ce qui a réellement corrigé le problème."
-          ]
-
-        ]
-      },
-
-      {
-        icon:"🚀",
-        title:"Progresser sur un projet",
-        subtitle:"Transforme le projet en entraînement.",
-
-        tips:[
-
-          [
-            "1",
-            "Découpe les fonctionnalités",
-            "Fais une liste claire des petites fonctionnalités à développer."
-          ],
-
-          [
-            "2",
-            "Commence simple",
-            "Fais fonctionner une première version avant de chercher à la rendre parfaite."
-          ],
-
-          [
-            "3",
-            "Refactorise ensuite",
-            "Quand la fonctionnalité marche, améliore la structure et la lisibilité."
-          ],
-
-          [
-            "4",
-            "Documente ce que tu apprends",
-            "Garde une petite liste des problèmes rencontrés et de leurs solutions."
-          ]
-
-        ]
-      }
-
-    ]
-
-  }
-
-};
-
-
-/* =========================================================
-   SUBJECT PAGE
-========================================================= */
-
-function openSubjectPage(subject){
-
-  const data =
-    subjectData[subject];
-
-  if(!data) return;
-
-  document
-    .querySelectorAll(".page")
-    .forEach(p=>{
-      p.classList.remove("active");
-    });
-
-  const page =
-    document.getElementById(
-      "page-help-subject"
-    );
-
-  page.classList.add("active");
-
-  document.getElementById(
-    "subjectEmoji"
-  ).textContent =
-    data.emoji;
-
-  document.getElementById(
-    "subjectTitle"
-  ).textContent =
-    subject;
-
-  document.getElementById(
-    "subjectIntro"
-  ).textContent =
-    data.intro;
-
-  document.getElementById(
-    "subjectPill"
-  ).textContent =
-    data.pill;
-
-  const container =
-    document.getElementById(
-      "subjectGuides"
-    );
-
-  container.innerHTML="";
-
-  data.guides.forEach(guide=>{
-
-    const section =
-      document.createElement("div");
-
-    section.className =
-      "guide card";
-
-    section.innerHTML=`
-
-      <div class="guide-header">
-
-        <div class="guide-icon">
-          ${guide.icon}
-        </div>
-
-        <div>
-
-          <h2>
-            ${escapeHTML(guide.title)}
-          </h2>
-
-          <p>
-            ${escapeHTML(guide.subtitle)}
-          </p>
-
-        </div>
-
-      </div>
-
-      <div class="tip-grid">
-
-        ${guide.tips.map(tip=>`
-
-          <div class="tip">
-
-            <div class="tip-number">
-              ${escapeHTML(tip[0])}
-            </div>
-
-            <h3>
-              ${escapeHTML(tip[1])}
-            </h3>
-
-            <p>
-              ${escapeHTML(tip[2])}
-            </p>
-
-          </div>
-
-        `).join("")}
-
-      </div>
-
-    `;
-
-    container.appendChild(section);
-
-  });
-
-  setHelpNavActive();
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
+let selectedDate = new Date();
+
+function isCompleted(habit, date){
+  if(!habit.completions) habit.completions = [];
+  return habit.completions.includes(dateKey(date));
 }
 
-
-/* =========================================================
-   TODAY
-========================================================= */
-
-function getCompletions(habit){
-
-  if(!habit.completions){
-    habit.completions=[];
-  }
-
-  return habit.completions;
-
-}
-
-
-function isCompleted(habit,date){
-
-  return getCompletions(habit)
-    .includes(
-      dateKey(date)
-    );
-
-}
-
-
-function toggleHabit(id,date){
-
-  const habit =
-    habits.find(
-      h=>h.id===id
-    );
-
+function toggleHabit(id, date){
+  const habit = habits.find(h => h.id === id);
   if(!habit) return;
-
-  const key =
-    dateKey(date);
-
-  if(!habit.completions){
-    habit.completions=[];
-  }
-
-  const index =
-    habit.completions.indexOf(key);
-
-  if(index>=0){
-
-    habit.completions.splice(
-      index,
-      1
-    );
-
+  
+  const key = dateKey(date);
+  if(!habit.completions) habit.completions = [];
+  
+  const index = habit.completions.indexOf(key);
+  if(index >= 0){
+    habit.completions.splice(index, 1);
   }else{
-
     habit.completions.push(key);
-
   }
-
+  
   saveHabits();
-
   renderToday();
   renderHabits();
   renderCalendar();
   renderStats();
-
 }
-
 
 function getDueHabits(date){
-
   return habits;
-
 }
-
 
 function renderToday(){
-
-  const title =
-    document.getElementById(
-      "todayTitle"
-    );
-
-  const subtitle =
-    document.getElementById(
-      "todaySubtitle"
-    );
+  resetWeeklyCountersIfNeeded();
+  
+  const title = document.getElementById("todayTitle");
+  const subtitle = document.getElementById("todaySubtitle");
 
   if(isToday(selectedDate)){
-
-    title.textContent =
-      "Aujourd’hui";
-
-    subtitle.textContent =
-      formatLongDate(
-        selectedDate
-      );
-
+    title.textContent = "Aujourd'hui";
+    subtitle.textContent = formatLongDate(selectedDate);
   }else{
-
-    title.textContent =
-      formatLongDate(
-        selectedDate
-      );
-
-    subtitle.textContent =
-      "Habitudes de cette journée.";
-
+    title.textContent = formatLongDate(selectedDate);
+    subtitle.textContent = "Habitudes de cette journée.";
   }
 
-  const container =
-    document.getElementById(
-      "todayHabits"
-    );
+  const container = document.getElementById("todayHabits");
+  container.innerHTML = "";
 
-  container.innerHTML="";
+  const list = getDueHabits(selectedDate);
+  
+  const completedCount = list.filter(h => {
+    if(h.frequencyType === 'weekly-counter'){
+      return h.weeklyCounter && h.weeklyCounter.count >= h.weeklyCounter.target;
+    }
+    return isCompleted(h, selectedDate);
+  }).length;
+  
+  document.getElementById("todayCount").textContent = 
+    `${completedCount}/${list.length} terminée${list.length > 1 ? 's' : ''}`;
 
-  const list =
-    getDueHabits(
-      selectedDate
-    );
+  document.getElementById("todayEmpty").style.display = 
+    list.length ? "none" : "block";
 
-  document
-    .getElementById(
-      "todayCount"
-    )
-    .textContent =
-      `${list.filter(h=>isCompleted(h,selectedDate)).length}/${list.length} terminée${list.length>1?"s":""}`;
+  list.forEach(habit => {
+    const el = document.createElement("div");
+    el.className = "habit-card card";
 
-  document
-    .getElementById(
-      "todayEmpty"
-    )
-    .style.display =
-      list.length
-        ? "none"
-        : "block";
+    const isWeeklyCounter = habit.frequencyType === "weekly-counter";
+    const counterDisplay = isWeeklyCounter ? getWeeklyCounterDisplay(habit) : "";
+    const isCounterComplete = isWeeklyCounter && 
+      habit.weeklyCounter && 
+      habit.weeklyCounter.count >= habit.weeklyCounter.target;
 
-  list.forEach(habit=>{
-
-    const done =
-      isCompleted(
-        habit,
-        selectedDate
-      );
-
-    const el =
-      document.createElement(
-        "div"
-      );
-
-    el.className =
-      "habit-card card";
-
-    el.innerHTML=`
-
+    el.innerHTML = `
+      ${!isWeeklyCounter ? `
       <button
-        class="round-check ${done?"done":""}"
+        class="round-check ${isCompleted(habit,selectedDate) ? 'done' : ''}"
         aria-label="Marquer comme terminée"
       ></button>
+      ` : ""}
+
+      ${isWeeklyCounter ? `
+      <div class="weekly-counter-controls">
+        <button
+          class="counter-btn decrement"
+          title="Diminuer"
+          ${habit.weeklyCounter.count <= 0 ? 'disabled' : ''}
+        >−</button>
+        <span class="counter-display">${counterDisplay}</span>
+        <button
+          class="counter-btn increment"
+          title="Augmenter"
+          ${isCounterComplete ? 'disabled' : ''}
+        >+</button>
+      </div>
+      ` : ""}
 
       <div class="habit-info">
-
-        <div class="habit-name">
-          ${escapeHTML(habit.name)}
-        </div>
-
+        <div class="habit-name">${escapeHTML(habit.name)}</div>
         <div class="habit-meta">
-
-          <span class="badge">
-            ${escapeHTML(habit.category||"Autre")}
-          </span>
-
-          <span class="badge">
-            ${habit.frequency||1}× / semaine
-          </span>
-
+          <span class="badge">${escapeHTML(habit.category || "Autre")}</span>
+          <span class="badge">${getFrequencyDisplay(habit)}</span>
         </div>
-
+        ${habit.note ? `<div class="habit-note">${escapeHTML(habit.note)}</div>` : ""}
       </div>
-
     `;
 
-    el
-      .querySelector(
-        ".round-check"
-      )
-      .onclick=()=>{
-
-        toggleHabit(
-          habit.id,
-          selectedDate
-        );
-
-      };
+    if(!isWeeklyCounter){
+      const checkBtn = el.querySelector(".round-check");
+      checkBtn.onclick = () => toggleHabit(habit.id, selectedDate);
+    }else{
+      const decBtn = el.querySelector(".counter-btn.decrement");
+      const incBtn = el.querySelector(".counter-btn.increment");
+      if(decBtn) decBtn.onclick = () => decrementWeeklyCounter(habit.id);
+      if(incBtn) incBtn.onclick = () => incrementWeeklyCounter(habit.id);
+    }
 
     container.appendChild(el);
-
   });
-
 }
 
-
 /* =========================================================
-   HABITS
+   HABITS PAGE
 ========================================================= */
 
+function getFrequencyDisplay(habit){
+  const ft = habit.frequencyType || "weekly-custom";
+  const fv = habit.frequencyValue || habit.frequency || 1;
+  
+  if(ft === "daily") return "Tous les jours";
+  if(ft === "weekly") return "Toutes les semaines";
+  if(ft === "weekly-counter") return fv + " fois/semaine";
+  if(ft === "monthly") return fv + " fois/mois";
+  return fv + " fois/semaine";
+}
+
 function renderHabits(){
-
-  const container =
-    document.getElementById(
-      "allHabits"
-    );
-
-  container.innerHTML="";
+  resetWeeklyCountersIfNeeded();
+  
+  const container = document.getElementById("allHabits");
+  container.innerHTML = "";
 
   if(!habits.length){
-
-    container.innerHTML=`
-
-      <div
-        class="card"
-        style="padding:30px;text-align:center"
-      >
-
-        <div
-          style="font-size:35px;margin-bottom:10px"
-        >
-          ✦
-        </div>
-
-        <strong>
-          Aucune habitude
-        </strong>
-
-        <p
-          style="color:var(--muted);font-size:13px"
-        >
+    container.innerHTML = `
+      <div class="card" style="padding:30px;text-align:center">
+        <div style="font-size:35px;margin-bottom:10px">✦</div>
+        <strong>Aucune habitude</strong>
+        <p style="color:var(--muted);font-size:13px;margin-top:8px">
           Commence par créer une habitude.
         </p>
-
       </div>
-
     `;
-
     return;
-
   }
 
-  habits.forEach(habit=>{
+  habits.forEach(habit => {
+    const el = document.createElement("div");
+    el.className = "habit-card card";
 
-    const el =
-      document.createElement(
-        "div"
-      );
+    const isWeeklyCounter = habit.frequencyType === "weekly-counter";
+    const counterDisplay = isWeeklyCounter ? getWeeklyCounterDisplay(habit) : "";
+    const isCounterComplete = isWeeklyCounter && 
+      habit.weeklyCounter && 
+      habit.weeklyCounter.count >= habit.weeklyCounter.target;
 
-    el.className =
-      "habit-card card";
-
-    el.innerHTML=`
-
+    el.innerHTML = `
+      ${!isWeeklyCounter ? `
       <button
-        class="round-check ${isCompleted(habit,selectedDate)?"done":""}"
+        class="round-check ${isCompleted(habit,selectedDate) ? 'done' : ''}"
       ></button>
+      ` : ""}
+
+      ${isWeeklyCounter ? `
+      <div class="weekly-counter-controls">
+        <button
+          class="counter-btn decrement"
+          title="Diminuer"
+          ${habit.weeklyCounter.count <= 0 ? 'disabled' : ''}
+        >−</button>
+        <span class="counter-display">${counterDisplay}</span>
+        <button
+          class="counter-btn increment"
+          title="Augmenter"
+          ${isCounterComplete ? 'disabled' : ''}
+        >+</button>
+      </div>
+      ` : ""}
 
       <div class="habit-info">
-
-        <div class="habit-name">
-          ${escapeHTML(habit.name)}
-        </div>
-
+        <div class="habit-name">${escapeHTML(habit.name)}</div>
         <div class="habit-meta">
-
-          <span class="badge">
-            ${escapeHTML(habit.category||"Autre")}
-          </span>
-
-          <span class="badge">
-            ${habit.frequency||1}× / semaine
-          </span>
-
+          <span class="badge">${escapeHTML(habit.category || "Autre")}</span>
+          <span class="badge">${getFrequencyDisplay(habit)}</span>
         </div>
-
+        ${habit.note ? `<div class="habit-note">${escapeHTML(habit.note)}</div>` : ""}
       </div>
 
-      <button
-        class="delete-btn"
-        title="Supprimer"
-      >
-        ×
-      </button>
-
+      <button class="edit-btn" title="Modifier">✎</button>
+      <button class="delete-btn" title="Supprimer">×</button>
     `;
 
-    el
-      .querySelector(
-        ".round-check"
-      )
-      .onclick=()=>{
+    if(!isWeeklyCounter){
+      const checkBtn = el.querySelector(".round-check");
+      checkBtn.onclick = () => toggleHabit(habit.id, selectedDate);
+    }else{
+      const decBtn = el.querySelector(".counter-btn.decrement");
+      const incBtn = el.querySelector(".counter-btn.increment");
+      if(decBtn) decBtn.onclick = () => decrementWeeklyCounter(habit.id);
+      if(incBtn) incBtn.onclick = () => incrementWeeklyCounter(habit.id);
+    }
 
-        toggleHabit(
-          habit.id,
-          selectedDate
-        );
-
-      };
-
-    el
-      .querySelector(
-        ".delete-btn"
-      )
-      .onclick=()=>{
-
-        if(
-          confirm(
-            `Supprimer « ${habit.name} » ?`
-          )
-        ){
-
-          habits =
-            habits.filter(
-              h=>h.id!==habit.id
-            );
-
+    el.querySelector(".edit-btn").onclick = () => openEditModal(habit.id);
+    el.querySelector(".delete-btn").onclick = () => {
+      showConfirm(
+        "Supprimer l'habitude",
+        "Supprimer " + habit.name + " et toutes ses données ?",
+        () => {
+          habits = habits.filter(h => h.id !== habit.id);
           saveHabits();
-
           renderHabits();
           renderToday();
           renderStats();
           renderCalendar();
-
+          showToast("Habitude supprimée.", "info");
         }
-
-      };
+      );
+    };
 
     container.appendChild(el);
-
   });
-
 }
-
 
 /* =========================================================
-   CREATE HABIT
+   CALENDAR PAGE
 ========================================================= */
 
-function openModal(){
+let calendarDate = new Date();
 
-  document.getElementById(
-    "habitName"
-  ).value="";
-
-  document.getElementById(
-    "habitFrequency"
-  ).value=3;
-
-  document
-    .getElementById(
-      "habitModal"
-    )
-    .classList.add("open");
-
-  setTimeout(()=>{
-
-    document
-      .getElementById(
-        "habitName"
-      )
-      .focus();
-
-  },100);
-
+function changeMonth(amount){
+  calendarDate.setMonth(calendarDate.getMonth() + amount);
+  renderCalendar();
 }
 
-
-function closeModal(){
-
-  document
-    .getElementById(
-      "habitModal"
-    )
-    .classList.remove(
-      "open"
-    );
-
+function hasCompletionOn(date){
+  const key = dateKey(date);
+  return habits.some(h => {
+    if(!h.completions) return false;
+    return h.completions.includes(key);
+  });
 }
 
+function renderCalendar(){
+  const grid = document.getElementById("calendarGrid");
+  grid.innerHTML = "";
 
-function createHabit(){
+  const year = calendarDate.getFullYear();
+  const month = calendarDate.getMonth();
 
-  const name =
-    document.getElementById(
-      "habitName"
-    ).value.trim();
+  document.getElementById("monthTitle").textContent = 
+    calendarDate.toLocaleDateString('fr-BE', { month: 'long', year: 'numeric' });
 
-  const category =
-    document.getElementById(
-      "habitCategory"
-    ).value;
-
-  const frequency =
-    Math.max(
-      1,
-      Math.min(
-        7,
-        Number(
-          document.getElementById(
-            "habitFrequency"
-          ).value
-        ) || 1
-      )
-    );
-
-  if(!name){
-
-    document
-      .getElementById(
-        "habitName"
-      )
-      .focus();
-
-    return;
-
-  }
-
-  habits.push({
-
-    id:
-      Date.now().toString(),
-
-    name:
-      name,
-
-    category:
-      category,
-
-    frequency:
-      frequency,
-
-    completions:
-      []
-
+  const dayHeaders = ['Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', 'Di'];
+  dayHeaders.forEach(day => {
+    const header = document.createElement("div");
+    header.className = "calendar-day-header";
+    header.textContent = day;
+    grid.appendChild(header);
   });
 
+  const first = new Date(year, month, 1);
+  let start = first.getDay();
+  start = start === 0 ? 6 : start - 1;
+
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const previousDays = new Date(year, month, 0).getDate();
+
+  for(let i = start - 1; i >= 0; i--){
+    const d = previousDays - i;
+    const btn = document.createElement("button");
+    btn.className = "day muted";
+    btn.textContent = d;
+    grid.appendChild(btn);
+  }
+
+  const todayStr = todayKey();
+
+  for(let d = 1; d <= daysInMonth; d++){
+    const date = new Date(year, month, d);
+    const key = dateKey(date);
+    const btn = document.createElement("button");
+    btn.className = "day";
+    
+    if(key === todayStr) btn.classList.add("today");
+    if(key === dateKey(selectedDate)) btn.classList.add("selected");
+
+    const dayNum = document.createElement("span");
+    dayNum.textContent = d;
+    btn.appendChild(dayNum);
+
+    if(hasCompletionOn(date)){
+      const dot = document.createElement("span");
+      dot.className = "day-dot";
+      btn.appendChild(dot);
+    }
+
+    const dayEvents = getEventsForDate(key);
+    dayEvents.forEach(ev => {
+      const evDot = document.createElement("span");
+      evDot.className = "day-dot";
+      evDot.style.background = ev.recurring === 'yearly' ? 'var(--danger)' : 'var(--accent)';
+      btn.appendChild(evDot);
+    });
+
+    btn.onclick = () => {
+      selectedDate = new Date(year, month, d);
+      goToPage('today');
+    };
+
+    btn.ondblclick = () => {
+      openEventModalForDate(key);
+    };
+
+    grid.appendChild(btn);
+  }
+
+  const totalCells = Math.ceil(grid.children.length / 7) * 7;
+  for(let d = 1; grid.children.length < totalCells; d++){
+    const btn = document.createElement("button");
+    btn.className = "day muted";
+    btn.textContent = d;
+    grid.appendChild(btn);
+  }
+
+  // Render events list
+  renderEventsList();
+}
+
+function renderEventsList(){
+  const container = document.getElementById("eventsList");
+  if(!container) return;
+  
+  container.innerHTML = "";
+  
+  if(!events.length){
+    container.innerHTML = `
+      <div class="card" style="padding:24px;text-align:center;color:var(--muted)">
+        Aucun événement. Double-clique sur un jour pour en ajouter.
+      </div>
+    `;
+    return;
+  }
+
+  const sorted = [...events].sort((a, b) => a.date.localeCompare(b.date));
+  
+  sorted.forEach(ev => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.style.display = "flex";
+    card.style.justifyContent = "space-between";
+    card.style.alignItems = "center";
+    card.style.gap = "12px";
+
+    const icon = ev.recurring === 'yearly' ? '🎂' : '📅';
+    const dateObj = new Date(ev.date + 'T00:00:00');
+    const dateStr = dateObj.toLocaleDateString('fr-BE', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
+    });
+
+    card.innerHTML = `
+      <div style="flex:1">
+        <div style="font-weight:600;margin-bottom:4px">${escapeHTML(ev.title)}</div>
+        <div style="font-size:13px;color:var(--muted)">
+          ${icon} ${dateStr}${ev.time ? ' à ' + ev.time : ''}${ev.recurring === 'yearly' ? ' (annuel)' : ''}
+        </div>
+      </div>
+      <button class="delete-btn" style="font-size:22px">×</button>
+    `;
+
+    card.querySelector(".delete-btn").onclick = () => {
+      showConfirm(
+        "Supprimer l'événement",
+        "Supprimer " + ev.title + " ?",
+        () => {
+          events = events.filter(e => e.id !== ev.id);
+          saveEvents();
+          renderCalendar();
+          showToast("Événement supprimé.", "info");
+        }
+      );
+    };
+
+    container.appendChild(card);
+  });
+}
+
+document.getElementById("prevMonthBtn").onclick = () => changeMonth(-1);
+document.getElementById("nextMonthBtn").onclick = () => changeMonth(1);
+
+/* =========================================================
+   EVENT MODAL
+========================================================= */
+
+function openEventModalForDate(dateStr){
+  document.getElementById("eventDate").value = dateStr;
+  document.getElementById("eventTitle").value = "";
+  document.getElementById("eventTime").value = "";
+  document.getElementById("eventRecurring").value = "none";
+  document.getElementById("eventModal").classList.add("open");
+}
+
+function closeEventModal(){
+  document.getElementById("eventModal").classList.remove("open");
+}
+
+function submitEvent(){
+  const title = document.getElementById("eventTitle").value.trim();
+  const date = document.getElementById("eventDate").value;
+  const time = document.getElementById("eventTime").value;
+  const recurring = document.getElementById("eventRecurring").value;
+
+  if(!title || !date){
+    showToast("Titre et date obligatoires.", "warning");
+    return;
+  }
+
+  events.push({
+    id: Date.now().toString(),
+    title,
+    date,
+    time: time || undefined,
+    recurring
+  });
+
+  saveEvents();
+  closeEventModal();
+  renderCalendar();
+  showToast("Événement ajouté.", "success");
+}
+
+/* =========================================================
+   STATS PAGE
+========================================================= */
+
+function calculateStreaks(){
+  const completedDates = new Set();
+  habits.forEach(h => {
+    if(!h.completions) return;
+    h.completions.forEach(d => completedDates.add(d));
+  });
+
+  if(completedDates.size === 0) return { current: 0, best: 0 };
+
+  const sorted = Array.from(completedDates).sort();
+  let best = 0;
+  let currentRun = 1;
+
+  for(let i = 1; i < sorted.length; i++){
+    const prev = new Date(sorted[i - 1]);
+    const curr = new Date(sorted[i]);
+    const diff = Math.round((curr - prev) / (1000 * 60 * 60 * 24));
+
+    if(diff === 1){
+      currentRun++;
+    }else{
+      best = Math.max(best, currentRun);
+      currentRun = 1;
+    }
+  }
+
+  best = Math.max(best, currentRun);
+
+  let current = 0;
+  const today = new Date();
+
+  for(let i = 0; i < 365; i++){
+    const d = new Date(today);
+    d.setDate(d.getDate() - i);
+    const key = dateKey(d);
+
+    if(completedDates.has(key)){
+      if(i === 0) current = 0;
+      current++;
+    }else if(i === 0){
+      break;
+    }else{
+      break;
+    }
+  }
+
+  if(current > 0){
+    const yesterday = new Date(today);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const yKey = dateKey(yesterday);
+    if(!completedDates.has(yKey)){
+      for(let i = 0; i < 365; i++){
+        const d = new Date(yesterday);
+        d.setDate(d.getDate() - i);
+        const key = dateKey(d);
+        if(completedDates.has(key)) current++;
+        else break;
+      }
+    }
+  }
+
+  return { current, best };
+}
+
+function renderStats(){
+  resetWeeklyCountersIfNeeded();
+  
+  document.getElementById("statHabits").textContent = habits.length;
+
+  let total = 0;
+  habits.forEach(h => {
+    if(!h.completions) return;
+    total += h.completions.length;
+  });
+  document.getElementById("statDone").textContent = total;
+
+  const streaks = calculateStreaks();
+  document.getElementById("statStreak").textContent = 
+    streaks.current + " jour" + (streaks.current > 1 ? 's' : '');
+  document.getElementById("statBestStreak").textContent = 
+    streaks.best + " jour" + (streaks.best > 1 ? 's' : '');
+
+  const weeklyGoal = habits.reduce((sum, h) => {
+    if(h.frequencyType === 'weekly-counter'){
+      return sum + (h.frequencyValue || 0);
+    }
+    return sum + 1;
+  }, 0);
+
+  let weeklyDone = 0;
+  for(let i = 0; i < 7; i++){
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const key = dateKey(d);
+    habits.forEach(h => {
+      if(h.completions && h.completions.includes(key)) weeklyDone++;
+    });
+  }
+
+  document.getElementById("statWeekly").textContent = weeklyDone + "/" + weeklyGoal;
+  document.getElementById("weeklyBar").style.width = 
+    weeklyGoal ? Math.min(100, Math.round(weeklyDone / weeklyGoal * 100)) + "%" : "0%";
+
+  const last7 = [];
+  for(let i = 6; i >= 0; i--){
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const key = dateKey(d);
+    const count = habits.filter(h => 
+      h.completions && h.completions.includes(key)
+    ).length;
+    last7.push({ date: d, count });
+  }
+
+  const expectedWeekly = habits.reduce((sum, h) => {
+    if(h.frequencyType === 'weekly-counter'){
+      return sum + (h.frequencyValue || 0);
+    }
+    return sum + 1;
+  }, 0);
+  const expected7 = Math.round(expectedWeekly);
+  const completed7 = last7.reduce((sum, x) => sum + x.count, 0);
+  const rate = expected7 ? Math.min(100, Math.round(completed7 / expected7 * 100)) : 0;
+
+  document.getElementById("statRate").textContent = rate + "%";
+  document.getElementById("rateBar").style.width = Math.min(100, rate) + "%";
+
+  const chart = document.getElementById("chart");
+  chart.innerHTML = "";
+
+  const max = Math.max(1, ...last7.map(x => x.count));
+  last7.forEach(item => {
+    const wrap = document.createElement("div");
+    wrap.className = "bar-wrap";
+    const height = Math.max(4, (item.count / max) * 100);
+    wrap.innerHTML = `
+      <div class="bar" style="height:${height}%"></div>
+      <div class="bar-label">${item.date.toLocaleDateString('fr-BE', { weekday: 'short' }).slice(0, 2)}</div>
+    `;
+    chart.appendChild(wrap);
+  });
+
+  const cat = {};
+  habits.forEach(h => {
+    const c = h.category || "Autre";
+    if(!cat[c]) cat[c] = 0;
+    if(h.completions) cat[c] += h.completions.length;
+  });
+
+  const categoryStats = document.getElementById("categoryStats");
+  categoryStats.innerHTML = "";
+
+  const entries = Object.entries(cat);
+  if(!entries.length){
+    categoryStats.innerHTML = `
+      <div class="card" style="padding:22px;color:var(--muted)">
+        Aucune donnée pour le moment.
+      </div>
+    `;
+    return;
+  }
+
+  const maxCat = Math.max(...entries.map(x => x[1]), 1);
+  entries.forEach(([category, count]) => {
+    const el = document.createElement("div");
+    el.className = "card";
+    el.style.padding = "18px";
+    el.innerHTML = `
+      <div style="display:flex;justify-content:space-between;gap:15px">
+        <strong>${escapeHTML(category)}</strong>
+        <span style="color:var(--muted);font-size:13px">${count}</span>
+      </div>
+      <div class="progress-bar" style="margin-top:10px">
+        <div class="progress-fill" style="width:${(count / maxCat) * 100}%"></div>
+      </div>
+    `;
+    categoryStats.appendChild(el);
+  });
+}
+
+/* =========================================================
+   MODAL OPERATIONS
+========================================================= */
+
+function updateFreqValueVisibility(){
+  const freqType = document.getElementById("habitFreqType").value;
+  const wrap = document.getElementById("freqValueWrap");
+  const label = document.getElementById("freqValueLabel");
+
+  if(freqType === "daily" || freqType === "weekly"){
+    wrap.style.display = "none";
+  }else{
+    wrap.style.display = "block";
+    if(freqType === "monthly"){
+      label.textContent = "Fois par mois";
+      document.getElementById("habitFrequency").max = "30";
+    }else{
+      label.textContent = "Fois par semaine";
+      document.getElementById("habitFrequency").max = "7";
+    }
+  }
+}
+
+function openModal(){
+  document.getElementById("habitEditId").value = "";
+  document.getElementById("modalTitle").textContent = "Nouvelle habitude";
+  document.getElementById("modalSubmit").textContent = "Créer";
+  document.getElementById("habitName").value = "";
+  document.getElementById("habitFreqType").value = "weekly-counter";
+  document.getElementById("habitFrequency").value = "3";
+  document.getElementById("habitNote").value = "";
+  updateFreqValueVisibility();
+  document.getElementById("habitModal").classList.add("open");
+  setTimeout(() => document.getElementById("habitName").focus(), 100);
+}
+
+function closeModal(){
+  document.getElementById("habitModal").classList.remove("open");
+}
+
+function submitHabit(){
+  const name = document.getElementById("habitName").value.trim();
+  const category = document.getElementById("habitCategory").value;
+  const freqType = document.getElementById("habitFreqType").value;
+  let freqValue = 1;
+
+  if(freqType === "weekly-counter" || freqType === "monthly"){
+    const maxVal = freqType === "monthly" ? 30 : 7;
+    freqValue = Math.max(1, Math.min(maxVal, Number(document.getElementById("habitFrequency").value) || 1));
+  }
+
+  const note = document.getElementById("habitNote").value.trim();
+
+  if(!name){
+    document.getElementById("habitName").focus();
+    showToast("Le nom ne peut pas être vide.", "warning");
+    return;
+  }
+
+  const editId = document.getElementById("habitEditId").value;
+
+  if(editId){
+    const habit = habits.find(h => h.id === editId);
+    if(habit){
+      habit.name = name;
+      habit.category = category;
+      habit.frequencyType = freqType;
+      habit.frequencyValue = freqValue;
+      habit.note = note;
+      showToast("Habitude modifiée.", "success");
+    }
+  }else{
+    habits.push({
+      id: Date.now().toString(),
+      name,
+      category,
+      frequencyType: freqType,
+      frequencyValue: freqValue,
+      note,
+      completions: [],
+      weeklyCounter: freqType === "weekly-counter" ? {
+        weekStart: getWeekStart(),
+        count: 0,
+        target: freqValue
+      } : undefined
+    });
+    showToast("Habitude créée.", "success");
+  }
+
   saveHabits();
-
   closeModal();
-
   renderHabits();
   renderToday();
   renderStats();
   renderCalendar();
-
 }
 
+function openEditModal(id){
+  const habit = habits.find(h => h.id === id);
+  if(!habit) return;
+
+  const ft = habit.frequencyType || "weekly-counter";
+  const fv = habit.frequencyValue || habit.frequency || 3;
+
+  document.getElementById("habitEditId").value = id;
+  document.getElementById("modalTitle").textContent = "Modifier l'habitude";
+  document.getElementById("habitName").value = habit.name;
+  document.getElementById("habitCategory").value = habit.category || "Autre";
+  document.getElementById("habitFreqType").value = ft;
+  document.getElementById("habitFrequency").value = fv;
+  document.getElementById("habitNote").value = habit.note || "";
+  updateFreqValueVisibility();
+  document.getElementById("modalSubmit").textContent = "Enregistrer";
+  document.getElementById("habitModal").classList.add("open");
+  setTimeout(() => document.getElementById("habitName").focus(), 100);
+}
+
+document.getElementById("modalSubmit").onclick = submitHabit;
+document.getElementById("fabBtn").onclick = openModal;
 
 /* =========================================================
-   CALENDAR
+   HELP PAGES
 ========================================================= */
 
-function changeMonth(amount){
-
-  calendarDate.setMonth(
-    calendarDate.getMonth()+amount
-  );
-
-  renderCalendar();
-
-}
-
-
-function hasCompletionOn(date){
-
-  const key =
-    dateKey(date);
-
-  return habits.some(
-    h=>
-      getCompletions(h)
-        .includes(key)
-  );
-
-}
-
-
-function renderCalendar(){
-
-  const grid =
-    document.getElementById(
-      "calendarGrid"
-    );
-
-  grid.innerHTML="";
-
-  const year =
-    calendarDate.getFullYear();
-
-  const month =
-    calendarDate.getMonth();
-
-  document.getElementById(
-    "monthTitle"
-  ).textContent =
-    calendarDate.toLocaleDateString(
-      "fr-BE",
-      {
-        month:"long",
-        year:"numeric"
-      }
-    );
-
-  const first =
-    new Date(
-      year,
-      month,
-      1
-    );
-
-  let start =
-    first.getDay();
-
-  start =
-    start===0
-      ? 6
-      : start-1;
-
-  const days =
-    new Date(
-      year,
-      month+1,
-      0
-    ).getDate();
-
-  const previousDays =
-    new Date(
-      year,
-      month,
-      0
-    ).getDate();
-
-  for(
-    let i=start-1;
-    i>=0;
-    i--
-  ){
-
-    const d =
-      previousDays-i;
-
-    const btn =
-      document.createElement(
-        "button"
-      );
-
-    btn.className =
-      "day muted";
-
-    btn.textContent =
-      d;
-
-    grid.appendChild(btn);
-
-  }
-
-  for(
-    let d=1;
-    d<=days;
-    d++
-  ){
-
-    const date =
-      new Date(
-        year,
-        month,
-        d
-      );
-
-    const btn =
-      document.createElement(
-        "button"
-      );
-
-    btn.className =
-      "day";
-
-    if(isToday(date)){
-
-      btn.classList.add(
-        "today"
-      );
-
-    }
-
-    if(
-      dateKey(date)
-      ===
-      dateKey(selectedDate)
-    ){
-
-      btn.classList.add(
-        "selected"
-      );
-
-    }
-
-    btn.innerHTML =
-      `${d}`;
-
-    if(hasCompletionOn(date)){
-
-      const dot =
-        document.createElement(
-          "span"
-        );
-
-      dot.className =
-        "day-dot";
-
-      btn.appendChild(dot);
-
-    }
-
-    btn.onclick=()=>{
-
-      selectedDate =
-        new Date(
-          year,
-          month,
-          d
-        );
-
-      goToPage(
-        "today"
-      );
-
-    };
-
-    grid.appendChild(btn);
-
-  }
-
-  const totalCells =
-    Math.ceil(
-      grid.children.length/7
-    )*7;
-
-  for(
-    let d=1;
-    grid.children.length<totalCells;
-    d++
-  ){
-
-    const btn =
-      document.createElement(
-        "button"
-      );
-
-    btn.className =
-      "day muted";
-
-    btn.textContent =
-      d;
-
-    grid.appendChild(btn);
-
-  }
-
-}
-
-
-/* =========================================================
-   STATS
-========================================================= */
-
-function renderStats(){
-
-  document.getElementById(
-    "statHabits"
-  ).textContent =
-    habits.length;
-
-  let total=0;
-
-  habits.forEach(h=>{
-
-    total +=
-      getCompletions(h).length;
-
-  });
-
-  document.getElementById(
-    "statDone"
-  ).textContent =
-    total;
-
-  const last7=[];
-
-  for(
-    let i=6;
-    i>=0;
-    i--
-  ){
-
-    const d =
-      new Date();
-
-    d.setDate(
-      d.getDate()-i
-    );
-
-    const key =
-      dateKey(d);
-
-    const count =
-      habits.filter(
-        h=>
-          getCompletions(h)
-            .includes(key)
-      ).length;
-
-    last7.push({
-      date:d,
-      count
-    });
-
-  }
-
-  const possible =
-    habits.length*7;
-
-  const completed =
-    last7.reduce(
-      (sum,x)=>
-        sum+x.count,
-      0
-    );
-
-  const rate =
-    possible
-      ? Math.round(
-          completed/
-          possible*
-          100
-        )
-      : 0;
-
-  document.getElementById(
-    "statRate"
-  ).textContent =
-    rate+"%";
-
-  document.getElementById(
-    "rateBar"
-  ).style.width =
-    Math.min(
-      100,
-      rate
-    )+"%";
-
-  const chart =
-    document.getElementById(
-      "chart"
-    );
-
-  chart.innerHTML="";
-
-  const max =
-    Math.max(
-      1,
-      ...last7.map(
-        x=>x.count
-      )
-    );
-
-  last7.forEach(item=>{
-
-    const wrap =
-      document.createElement(
-        "div"
-      );
-
-    wrap.className =
-      "bar-wrap";
-
-    const height =
-      (item.count/max)*100;
-
-    wrap.innerHTML=`
-
-      <div
-        class="bar"
-        style="height:${Math.max(4,height)}%"
-      ></div>
-
-      <div class="bar-label">
-        ${
-          item.date
-            .toLocaleDateString(
-              "fr-BE",
-              {weekday:"short"}
-            )
-            .slice(0,2)
-        }
-      </div>
-
-    `;
-
-    chart.appendChild(wrap);
-
-  });
-
-  const cat={};
-
-  habits.forEach(h=>{
-
-    const c =
-      h.category ||
-      "Autre";
-
-    if(!cat[c]){
-      cat[c]=0;
-    }
-
-    cat[c] +=
-      getCompletions(h)
-        .length;
-
-  });
-
-  const categoryStats =
-    document.getElementById(
-      "categoryStats"
-    );
-
-  categoryStats.innerHTML="";
-
-  const entries =
-    Object.entries(cat);
-
-  if(!entries.length){
-
-    categoryStats.innerHTML=`
-
-      <div
-        class="card"
-        style="padding:22px;color:var(--muted)"
-      >
-        Aucune donnée pour le moment.
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-  const maxCat =
-    Math.max(
-      ...entries.map(
-        x=>x[1]
-      ),
-      1
-    );
-
-  entries.forEach(
-    ([category,count])=>{
-
-      const el =
-        document.createElement(
-          "div"
-        );
-
-      el.className =
-        "card";
-
-      el.style.padding =
-        "18px";
-
-      el.innerHTML=`
-
-        <div
-          style="
-            display:flex;
-            justify-content:space-between;
-            gap:15px
-          "
-        >
-
-          <strong>
-            ${escapeHTML(category)}
-          </strong>
-
-          <span
-            style="
-              color:var(--muted);
-              font-size:13px
-            "
-          >
-            ${count}
-          </span>
-
+const helpContent = {
+  stress: {
+    title: "Gérer le stress",
+    content: `
+      <div class="card guide-card">
+        <div class="guide-header">
+          <div class="guide-icon">🌬</div>
+          <div>
+            <div class="guide-title">Techniques immédiates</div>
+            <div class="guide-subtitle">Quelques méthodes simples lorsque la pression monte.</div>
+          </div>
         </div>
-
-        <div class="progress">
-
-          <div
-            style="
-              width:${count/maxCat*100}%
-            "
-          ></div>
-
+        <div class="tip-grid">
+          <div class="tip">
+            <div class="tip-number">1</div>
+            <div class="tip-title">Respiration 4–6</div>
+            <div class="tip-desc">Inspire doucement pendant 4 secondes puis expire pendant 6 secondes. Répète pendant 2 à 5 minutes.</div>
+          </div>
+          <div class="tip">
+            <div class="tip-number">2</div>
+            <div class="tip-title">Respiration carrée</div>
+            <div class="tip-desc">Inspire 4 secondes, bloque 4 secondes, expire 4 secondes, puis reste 4 secondes sans inspirer.</div>
+          </div>
+          <div class="tip">
+            <div class="tip-number">3</div>
+            <div class="tip-title">Technique 5–4–3–2–1</div>
+            <div class="tip-desc">Identifie 5 choses que tu vois, 4 que tu peux toucher, 3 que tu entends, 2 que tu sens et 1 que tu peux goûter.</div>
+          </div>
         </div>
+      </div>
+    `
+  },
+  sleep: {
+    title: "Améliorer son sommeil",
+    content: `
+      <div class="card guide-card">
+        <div class="guide-header">
+          <div class="guide-icon">🌙</div>
+          <div>
+            <div class="guide-title">Construire une bonne routine</div>
+            <div class="guide-subtitle">Les petites habitudes répétées sont souvent plus importantes qu'une routine parfaite.</div>
+          </div>
+        </div>
+        <div class="tip-grid">
+          <div class="tip">
+            <div class="tip-number">1</div>
+            <div class="tip-title">Horaires réguliers</div>
+            <div class="tip-desc">Essaie de garder une heure de lever relativement stable pour aider ton organisme à anticiper les périodes de sommeil.</div>
+          </div>
+          <div class="tip">
+            <div class="tip-number">2</div>
+            <div class="tip-title">Crée une transition</div>
+            <div class="tip-desc">Les 30 à 60 dernières minutes avant le coucher peuvent être plus calmes : lumière moins forte, activité tranquille.</div>
+          </div>
+          <div class="tip">
+            <div class="tip-number">3</div>
+            <div class="tip-title">Optimise la chambre</div>
+            <div class="tip-desc">Une chambre sombre, calme et suffisamment fraîche peut faciliter l'endormissement.</div>
+          </div>
+        </div>
+      </div>
+    `
+  },
+  study: {
+    title: "Étudier efficacement",
+    content: `
+      <div class="card guide-card">
+        <div class="guide-header">
+          <div class="guide-icon">📚</div>
+          <div>
+            <div class="guide-title">Méthodes de mémorisation</div>
+            <div class="guide-subtitle">Ne te contente pas de relire : force ton cerveau à récupérer l'information.</div>
+          </div>
+        </div>
+        <div class="tip-grid">
+          <div class="tip">
+            <div class="tip-number">1</div>
+            <div class="tip-title">Active recall</div>
+            <div class="tip-desc">Ferme ton cours et essaye de retrouver les informations de mémoire. C'est plus exigeant mais plus efficace.</div>
+          </div>
+          <div class="tip">
+            <div class="tip-number">2</div>
+            <div class="tip-title">Blurting</div>
+            <div class="tip-desc">Lis une partie du cours, ferme-le puis écris tout ce dont tu te souviens. Compare ensuite avec le cours.</div>
+          </div>
+          <div class="tip">
+            <div class="tip-number">3</div>
+            <div class="tip-title">Méthode Feynman</div>
+            <div class="tip-desc">Explique une notion avec des mots simples, comme si tu devais l'expliquer à quelqu'un qui ne connaît pas le sujet.</div>
+          </div>
+          <div class="tip">
+            <div class="tip-number">4</div>
+            <div class="tip-title">Répétition espacée</div>
+            <div class="tip-desc">Revois une notion plusieurs fois à des moments différents plutôt que de concentrer toute la mémorisation en une session.</div>
+          </div>
+        </div>
+      </div>
+    `
+  }
+};
 
-      `;
+function openHelpPage(topic){
+  const data = helpContent[topic];
+  if(!data) return;
 
-      categoryStats.appendChild(
-        el
-      );
-
-    }
-  );
-
+  document.getElementById("helpTopicTitle").textContent = data.title;
+  document.getElementById("helpTopicContent").innerHTML = data.content;
+  goToPage("help-topic");
 }
 
+function backToHelp(){
+  goToPage("help");
+}
+
+function backToStudy(){
+  openHelpPage("study");
+}
 
 /* =========================================================
-   THEMES
+   SETTINGS
 ========================================================= */
 
-/*
-  CLASSIC :
-  - Dark en premier
-  - Light ensuite
-
-  PREMIUM :
-  - Animés
-  - Immersifs
-  - Effets spécifiques
-*/
-
-const themes=[
-
-  /* =========================
-     CLASSIC — DARK
-  ========================= */
-
-  {
-    id:"midnight",
-    name:"Midnight",
-    bg:"#080b12",
-    accent:"#788cff",
-    type:"classic",
-    kind:"dark"
-  },
-
-  {
-    id:"forest-dark",
-    name:"Forest",
-    bg:"#09110d",
-    accent:"#62a873",
-    type:"classic",
-    kind:"dark"
-  },
-
-  {
-    id:"ocean-dark",
-    name:"Deep Ocean",
-    bg:"#061116",
-    accent:"#45b9c5",
-    type:"classic",
-    kind:"dark"
-  },
-
-  {
-    id:"purple-dark",
-    name:"Purple Night",
-    bg:"#100a18",
-    accent:"#a66cff",
-    type:"classic",
-    kind:"dark"
-  },
-
-  {
-    id:"coffee",
-    name:"Coffee",
-    bg:"#120d0a",
-    accent:"#c28b62",
-    type:"classic",
-    kind:"dark"
-  },
-
-  {
-    id:"ruby",
-    name:"Ruby",
-    bg:"#12080b",
-    accent:"#e65d79",
-    type:"classic",
-    kind:"dark"
-  },
-
-  {
-    id:"slate",
-    name:"Slate",
-    bg:"#090d12",
-    accent:"#7899b2",
-    type:"classic",
-    kind:"dark"
-  },
-
-  {
-    id:"graphite",
-    name:"Graphite",
-    bg:"#0b0b0c",
-    accent:"#d0d0d5",
-    type:"classic",
-    kind:"dark"
-  },
-
-  {
-    id:"deep-violet",
-    name:"Deep Violet",
-    bg:"#0c0713",
-    accent:"#c078ff",
-    type:"classic",
-    kind:"dark"
-  },
-
-  {
-    id:"ember",
-    name:"Ember",
-    bg:"#120a08",
-    accent:"#f07851",
-    type:"classic",
-    kind:"dark"
-  },
-
-  /* =========================
-     CLASSIC — LIGHT
-  ========================= */
-
-  {
-    id:"sage",
-    name:"Sauge",
-    bg:"#f3f7f2",
-    accent:"#789b83",
-    type:"classic",
-    kind:"light"
-  },
-
-  {
-    id:"cream",
-    name:"Crème",
-    bg:"#faf6ed",
-    accent:"#b28c5a",
-    type:"classic",
-    kind:"light"
-  },
-
-  {
-    id:"sky",
-    name:"Ciel",
-    bg:"#eef7fb",
-    accent:"#5b9bb5",
-    type:"classic",
-    kind:"light"
-  },
-
-  {
-    id:"lavender",
-    name:"Lavande",
-    bg:"#f6f2fb",
-    accent:"#927bb8",
-    type:"classic",
-    kind:"light"
-  },
-
-  {
-    id:"peach",
-    name:"Pêche",
-    bg:"#fff4ef",
-    accent:"#d98f72",
-    type:"classic",
-    kind:"light"
-  },
-
-  {
-    id:"mint",
-    name:"Menthe",
-    bg:"#eff9f4",
-    accent:"#55a47d",
-    type:"classic",
-    kind:"light"
-  },
-
-  {
-    id:"lemon",
-    name:"Citron",
-    bg:"#fbfae9",
-    accent:"#a6a53f",
-    type:"classic",
-    kind:"light"
-  },
-
-  {
-    id:"ocean",
-    name:"Océan",
-    bg:"#edf7f8",
-    accent:"#3e9ba5",
-    type:"classic",
-    kind:"light"
-  },
-
-  {
-    id:"sunset",
-    name:"Sunset",
-    bg:"#fff2e8",
-    accent:"#d47d55",
-    type:"classic",
-    kind:"light"
-  },
-
-  {
-    id:"rosewood",
-    name:"Rosewood",
-    bg:"#f8eef0",
-    accent:"#a95f70",
-    type:"classic",
-    kind:"light"
-  },
-
-  {
-    id:"sand",
-    name:"Sand",
-    bg:"#f5f0e6",
-    accent:"#9b8760",
-    type:"classic",
-    kind:"light"
-  },
-
-  /* =========================
-     PREMIUM
-  ========================= */
-
-  {
-    id:"aurora",
-    name:"Aurora",
-    bg:"#050b12",
-    accent:"#55f0bd",
-    type:"premium",
-    effect:"aurora"
-  },
-
-  {
-    id:"sakura",
-    name:"Sakura",
-    bg:"#fff2f6",
-    accent:"#d9799c",
-    type:"premium",
-    effect:"sakura"
-  },
-
-  {
-    id:"cyber",
-    name:"Cyber",
-    bg:"#08070f",
-    accent:"#b66cff",
-    type:"premium",
-    effect:"cyber"
-  },
-
-  {
-    id:"midnight-premium",
-    name:"Midnight Stars",
-    bg:"#080b12",
-    accent:"#788cff",
-    type:"premium",
-    effect:"midnight"
-  },
-
-  {
-    id:"nebula",
-    name:"Nebula",
-    bg:"#080713",
-    accent:"#e06cff",
-    type:"premium",
-    effect:"nebula"
-  },
-
-  {
-    id:"cosmos",
-    name:"Cosmos",
-    bg:"#050713",
-    accent:"#7186ff",
-    type:"premium",
-    effect:"cosmos"
-  },
-
-  {
-    id:"frost",
-    name:"Frost",
-    bg:"#061017",
-    accent:"#7de5ff",
-    type:"premium",
-    effect:"frost"
-  },
-
-  {
-    id:"crystal",
-    name:"Crystal",
-    bg:"#080c15",
-    accent:"#8ecfff",
-    type:"premium",
-    effect:"crystal"
-  },
-
-  {
-    id:"enchanted",
-    name:"Enchanted Forest",
-    bg:"#06100c",
-    accent:"#76ef9a",
-    type:"premium",
-    effect:"enchanted"
-  },
-
-  {
-    id:"nocturne",
-    name:"Nocturne",
-    bg:"#0b0810",
-    accent:"#e4a267",
-    type:"premium",
-    effect:"nocturne"
-  }
-
+const themes = [
+  { id: "midnight", name: "Midnight", bg: "#080b12", accent: "#788cff", type: "classic" },
+  { id: "forest-dark", name: "Forest", bg: "#09110d", accent: "#62a873", type: "classic" },
+  { id: "sage", name: "Sauge", bg: "#f3f7f2", accent: "#789b83", type: "classic" },
+  { id: "cream", name: "Crème", bg: "#faf6ed", accent: "#b28c5a", type: "classic" },
+  { id: "aurora", name: "Aurora", bg: "#050b12", accent: "#55f0bd", type: "premium", effect: "aurora" }
 ];
 
-
-function applyTheme(theme){
-
-  /*
-    midnight-premium utilise la même palette que Midnight
-    mais avec l'effet Premium.
-  */
-
-  const actualTheme =
-    theme==="midnight-premium"
-      ? "midnight"
-      : theme;
-
-  document.body.dataset.theme =
-    actualTheme;
-
-  localStorage.setItem(
-    THEME_KEY,
-    theme
-  );
-
+function applyTheme(themeId){
+  document.body.dataset.theme = themeId;
+  safeSetItem(THEME_KEY, themeId);
   renderThemeButtons();
-
   updateSpecialBackground();
-
 }
-
-
-function createThemePreview(theme){
-
-  const preview =
-    document.createElement(
-      "div"
-    );
-
-  preview.className =
-    "theme-preview";
-
-  preview.style.background =
-    getThemePreviewBackground(
-      theme
-    );
-
-  const dot1 =
-    document.createElement(
-      "span"
-    );
-
-  dot1.className =
-    "preview-dot";
-
-  const dot2 =
-    document.createElement(
-      "span"
-    );
-
-  dot2.className =
-    "preview-dot";
-
-  const line =
-    document.createElement(
-      "span"
-    );
-
-  line.className =
-    "preview-line";
-
-  preview.appendChild(dot1);
-  preview.appendChild(dot2);
-  preview.appendChild(line);
-
-  return preview;
-
-}
-
-
-function getThemePreviewBackground(theme){
-
-  const bg =
-    theme.bg;
-
-  const accent =
-    theme.accent;
-
-  if(theme.effect==="aurora"){
-
-    return `
-      radial-gradient(
-        ellipse at 20% 20%,
-        #4effc2 0%,
-        transparent 38%
-      ),
-      radial-gradient(
-        ellipse at 80% 30%,
-        #756dff 0%,
-        transparent 40%
-      ),
-      radial-gradient(
-        ellipse at 50% 100%,
-        #d96dff 0%,
-        transparent 45%
-      ),
-      linear-gradient(
-        135deg,
-        #061015,
-        #102329
-      )
-    `;
-
-  }
-
-  if(theme.effect==="sakura"){
-
-    return `
-      radial-gradient(
-        circle at 25% 25%,
-        #ffbfd7 0 7%,
-        transparent 8%
-      ),
-      radial-gradient(
-        circle at 65% 65%,
-        #ef86b0 0 6%,
-        transparent 7%
-      ),
-      linear-gradient(
-        135deg,
-        #fff0f5,
-        #f3b4cb
-      )
-    `;
-
-  }
-
-  if(theme.effect==="cyber"){
-
-    return `
-      linear-gradient(
-        rgba(87,222,255,.18) 1px,
-        transparent 1px
-      ),
-      linear-gradient(
-        90deg,
-        rgba(183,94,255,.18) 1px,
-        transparent 1px
-      ),
-      radial-gradient(
-        circle at center,
-        #a65aff55,
-        transparent 58%
-      ),
-      #090711
-    `;
-
-  }
-
-  if(theme.effect==="midnight"){
-
-    return `
-      radial-gradient(
-        circle at 76% 20%,
-        #dbe2ff 0 4%,
-        #7685ff55 5%,
-        transparent 18%
-      ),
-      radial-gradient(
-        circle at 18% 30%,
-        #fff 0 1%,
-        transparent 2%
-      ),
-      radial-gradient(
-        circle at 45% 70%,
-        #b8c5ff 0 1%,
-        transparent 2%
-      ),
-      linear-gradient(
-        135deg,
-        #060912,
-        #10182c
-      )
-    `;
-
-  }
-
-  if(theme.effect==="nebula"){
-
-    return `
-      radial-gradient(
-        ellipse at 20% 30%,
-        #ff59c9aa,
-        transparent 38%
-      ),
-      radial-gradient(
-        ellipse at 75% 25%,
-        #6265ffbb,
-        transparent 40%
-      ),
-      radial-gradient(
-        ellipse at 55% 90%,
-        #55e8ffaa,
-        transparent 40%
-      ),
-      #090713
-    `;
-
-  }
-
-  if(theme.effect==="cosmos"){
-
-    return `
-      radial-gradient(
-        circle at 50% 50%,
-        #7b89ff55,
-        transparent 24%
-      ),
-      radial-gradient(
-        circle at 25% 30%,
-        white 0 1px,
-        transparent 2px
-      ),
-      radial-gradient(
-        circle at 75% 70%,
-        #9caeff 0 1px,
-        transparent 2px
-      ),
-      #050713
-    `;
-
-  }
-
-  if(theme.effect==="frost"){
-
-    return `
-      radial-gradient(
-        circle at 20% 20%,
-        #a9f0ff88,
-        transparent 30%
-      ),
-      radial-gradient(
-        circle at 80% 80%,
-        #7e9eff77,
-        transparent 32%
-      ),
-      linear-gradient(
-        135deg,
-        #07151d,
-        #12303b
-      )
-    `;
-
-  }
-
-  if(theme.effect==="crystal"){
-
-    return `
-      linear-gradient(
-        125deg,
-        #b5e7ff22 0 18%,
-        transparent 19% 45%,
-        #c59dff22 46% 65%,
-        transparent 66%
-      ),
-      linear-gradient(
-        135deg,
-        #0a0e18,
-        #172237
-      )
-    `;
-
-  }
-
-  if(theme.effect==="enchanted"){
-
-    return `
-      radial-gradient(
-        circle at 25% 30%,
-        #79ff9e66,
-        transparent 25%
-      ),
-      radial-gradient(
-        circle at 75% 70%,
-        #2fb66b55,
-        transparent 30%
-      ),
-      linear-gradient(
-        135deg,
-        #06100b,
-        #12321e
-      )
-    `;
-
-  }
-
-  if(theme.effect==="nocturne"){
-
-    return `
-      radial-gradient(
-        circle at 80% 20%,
-        #ffd59d66,
-        transparent 32%
-      ),
-      radial-gradient(
-        circle at 20% 80%,
-        #d47edc55,
-        transparent 35%
-      ),
-      linear-gradient(
-        135deg,
-        #0b0810,
-        #281a28
-      )
-    `;
-
-  }
-
-  return `
-    radial-gradient(
-      circle at 78% 22%,
-      ${accent},
-      transparent 20%
-    ),
-    linear-gradient(
-      135deg,
-      ${bg},
-      ${accent}22
-    )
-  `;
-
-}
-
 
 function renderThemeButtons(){
+  const classicGrid = document.getElementById("classicThemeGrid");
+  const premiumGrid = document.getElementById("premiumThemeGrid");
+  if(!classicGrid || !premiumGrid) return;
 
-  const classicGrid =
-    document.getElementById(
-      "classicThemeGrid"
-    );
+  classicGrid.innerHTML = "";
+  premiumGrid.innerHTML = "";
 
-  const premiumGrid =
-    document.getElementById(
-      "premiumThemeGrid"
-    );
+  const current = safeGetItem(THEME_KEY) || "sage";
 
-  if(!classicGrid || !premiumGrid){
-    return;
-  }
+  themes.forEach(theme => {
+    const button = document.createElement("button");
+    button.className = "theme-btn";
+    if(theme.id === current) button.classList.add("active");
 
-  classicGrid.innerHTML="";
-  premiumGrid.innerHTML="";
+    const preview = document.createElement("div");
+    preview.className = "theme-preview";
+    preview.style.background = `linear-gradient(135deg, ${theme.bg}, ${theme.accent}22)`;
 
-  const current =
-    localStorage.getItem(
-      THEME_KEY
-    )
-    ||
-    "sage";
+    const dot1 = document.createElement("span");
+    dot1.className = "preview-dot";
+    const dot2 = document.createElement("span");
+    dot2.className = "preview-dot";
+    const line = document.createElement("span");
+    line.className = "preview-line";
 
-  themes.forEach(theme=>{
+    preview.appendChild(dot1);
+    preview.appendChild(dot2);
+    preview.appendChild(line);
 
-    const button =
-      document.createElement(
-        "button"
-      );
+    const name = document.createElement("div");
+    name.className = "theme-name";
+    name.innerHTML = `<span>${theme.name}</span>${theme.type === 'premium' ? '<span class="theme-premium-mark">★</span>' : ''}`;
 
-    button.className =
-      "theme-btn";
-
-    if(theme.id===current){
-
-      button.classList.add(
-        "active"
-      );
-
-    }
-
-    const preview =
-      createThemePreview(theme);
-
-    button.appendChild(
-      preview
-    );
-
-    const name =
-      document.createElement(
-        "div"
-      );
-
-    name.className =
-      "theme-name";
-
-    name.innerHTML=`
-      <span>
-        ${escapeHTML(theme.name)}
-      </span>
-
-      ${
-        theme.type==="premium"
-          ? `<span class="theme-premium-mark">✦</span>`
-          : ""
-      }
-    `;
-
+    button.appendChild(preview);
     button.appendChild(name);
+    button.onclick = () => applyTheme(theme.id);
 
-    button.onclick=()=>{
-
-      applyTheme(
-        theme.id
-      );
-
-    };
-
-    if(theme.type==="premium"){
-
-      premiumGrid.appendChild(
-        button
-      );
-
+    if(theme.type === "premium"){
+      premiumGrid.appendChild(button);
     }else{
-
-      classicGrid.appendChild(
-        button
-      );
-
+      classicGrid.appendChild(button);
     }
-
   });
-
 }
 
-
-/* =========================================================
-   SPECIAL THEME BACKGROUNDS
-========================================================= */
-
 function updateSpecialBackground(){
+  const bg = document.getElementById("specialBg");
+  const storedTheme = safeGetItem(THEME_KEY) || "sage";
+  bg.innerHTML = "";
 
-  const bg =
-    document.getElementById(
-      "specialBg"
-    );
-
-  bg.innerHTML="";
-
-  const storedTheme =
-    localStorage.getItem(
-      THEME_KEY
-    )
-    ||
-    document.body.dataset.theme;
-
-  /* ---------- SAKURA ---------- */
-
-  if(storedTheme==="sakura"){
-
-    bg.innerHTML=`
-
-      <div class="sakura-glow"></div>
-
-      <div class="sakura-glow-two"></div>
-
-      <div class="petals"></div>
-
-    `;
-
-    const petals =
-      bg.querySelector(
-        ".petals"
-      );
-
-    for(
-      let i=0;
-      i<38;
-      i++
-    ){
-
-      const p =
-        document.createElement(
-          "div"
-        );
-
-      p.className =
-        "petal";
-
-      p.style.left =
-        Math.random()*100+
-        "%";
-
-      p.style.animationDuration =
-        (
-          7+
-          Math.random()*10
-        )+"s";
-
-      p.style.animationDelay =
-        (
-          -Math.random()*14
-        )+"s";
-
-      p.style.width =
-        (
-          9+
-          Math.random()*8
-        )+"px";
-
-      p.style.height =
-        (
-          6+
-          Math.random()*5
-        )+"px";
-
-      petals.appendChild(p);
-
-    }
-
-  }
-
-
-  /* ---------- AURORA ---------- */
-
-  if(storedTheme==="aurora"){
-
-    bg.innerHTML=`
-
+  if(storedTheme === "aurora"){
+    bg.innerHTML = `
       <div class="aurora-layer">
-
         <div class="aurora-one"></div>
         <div class="aurora-two"></div>
         <div class="aurora-three"></div>
         <div class="aurora-four"></div>
-
         <div class="aurora-ribbon"></div>
-
       </div>
-
     `;
-
   }
-
-
-  /* ---------- MIDNIGHT PREMIUM ---------- */
-
-  if(storedTheme==="midnight-premium"){
-
-    bg.innerHTML=`
-
-      <div class="stars"></div>
-
-    `;
-
-  }
-
-
-  /* ---------- CYBER ---------- */
-
-  if(storedTheme==="cyber"){
-
-    bg.innerHTML=`
-
-      <div class="cyber-glow"></div>
-
-      <div class="cyber-grid"></div>
-
-      <div class="cyber-beam"></div>
-
-    `;
-
-  }
-
-
-  /* ---------- NEBULA ---------- */
-
-  if(storedTheme==="nebula"){
-
-    bg.innerHTML=`
-
-      <div class="nebula-layer"></div>
-
-      <div class="nebula-cloud"></div>
-
-      <div class="space-dust"></div>
-
-    `;
-
-  }
-
-
-  /* ---------- COSMOS ---------- */
-
-  if(storedTheme==="cosmos"){
-
-    bg.innerHTML=`
-
-      <div class="cosmos-layer"></div>
-
-      <div class="cosmos-orbit"></div>
-
-      <div class="cosmos-planet"></div>
-
-    `;
-
-    const layer =
-      document.querySelector(
-        ".cosmos-layer"
-      );
-
-    for(
-      let i=0;
-      i<70;
-      i++
-    ){
-
-      const star =
-        document.createElement(
-          "span"
-        );
-
-      star.className =
-        "cosmos-star";
-
-      star.style.left =
-        Math.random()*100+"%";
-
-      star.style.top =
-        Math.random()*100+"%";
-
-      star.style.animationDelay =
-        -Math.random()*3+"s";
-
-      star.style.transform =
-        `scale(${.5+Math.random()*1.2})`;
-
-      layer.appendChild(star);
-
-    }
-
-  }
-
-
-  /* ---------- FROST ---------- */
-
-  if(storedTheme==="frost"){
-
-    bg.innerHTML=`
-
-      <div class="frost-layer">
-
-        <div class="frost-crystal frost-one"></div>
-        <div class="frost-crystal frost-two"></div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  /* ---------- CRYSTAL ---------- */
-
-  if(storedTheme==="crystal"){
-
-    bg.innerHTML=`
-
-      <div class="crystal-layer">
-
-        <div class="crystal-shard crystal-one"></div>
-        <div class="crystal-shard crystal-two"></div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  /* ---------- ENCHANTED ---------- */
-
-  if(storedTheme==="enchanted"){
-
-    bg.innerHTML=`
-
-      <div class="forest-layer"></div>
-
-    `;
-
-    const layer =
-      document.querySelector(
-        ".forest-layer"
-      );
-
-    for(
-      let i=0;
-      i<28;
-      i++
-    ){
-
-      const f =
-        document.createElement(
-          "span"
-        );
-
-      f.className =
-        "firefly";
-
-      f.style.left =
-        Math.random()*100+"%";
-
-      f.style.top =
-        Math.random()*100+"%";
-
-      f.style.animationDelay =
-        -Math.random()*6+"s";
-
-      f.style.animationDuration =
-        4+
-        Math.random()*5+
-        "s";
-
-      layer.appendChild(f);
-
-    }
-
-  }
-
-
-  /* ---------- NOCTURNE ---------- */
-
-  if(storedTheme==="nocturne"){
-
-    bg.innerHTML=`
-
-      <div class="nocturne-layer"></div>
-
-      <div class="nocturne-lamp"></div>
-
-    `;
-
-  }
-
 }
 
-
 /* =========================================================
-   DATA
+   DATA MANAGEMENT
 ========================================================= */
 
 function exportData(){
-
-  const data={
-
-    habits:
-      habits,
-
-    exportedAt:
-      new Date()
-        .toISOString()
-
+  const data = {
+    habits,
+    events,
+    exportedAt: new Date().toISOString()
   };
-
-  const blob =
-    new Blob(
-      [
-        JSON.stringify(
-          data,
-          null,
-          2
-        )
-      ],
-      {
-        type:
-          "application/json"
-      }
-    );
-
-  const url =
-    URL.createObjectURL(
-      blob
-    );
-
-  const a =
-    document.createElement(
-      "a"
-    );
-
-  a.href =
-    url;
-
-  a.download =
-    "habits-backup.json";
-
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "habits-backup.json";
   a.click();
-
-  URL.revokeObjectURL(
-    url
-  );
-
+  URL.revokeObjectURL(url);
+  showToast("Données exportées.", "success");
 }
-
 
 function resetData(){
-
-  if(
-    !confirm(
-      "Supprimer toutes tes habitudes et leurs statistiques ?"
-    )
-  ){
-
-    return;
-
-  }
-
-  habits=[];
-
-  saveHabits();
-
-  renderToday();
-  renderHabits();
-  renderStats();
-  renderCalendar();
-
+  showConfirm(
+    "Réinitialiser les données",
+    "Supprimer toutes tes habitudes et événements ?",
+    () => {
+      habits = [];
+      events = [];
+      saveHabits();
+      saveEvents();
+      renderToday();
+      renderHabits();
+      renderStats();
+      renderCalendar();
+      showToast("Données réinitialisées.", "info");
+    }
+  );
 }
-
 
 /* =========================================================
-   SECURITY
+   CONFIRM DIALOG
 ========================================================= */
 
-function escapeHTML(value){
+let confirmCallback = null;
 
-  return String(value)
-
-    .replaceAll(
-      "&",
-      "&amp;"
-    )
-
-    .replaceAll(
-      "<",
-      "&lt;"
-    )
-
-    .replaceAll(
-      ">",
-      "&gt;"
-    )
-
-    .replaceAll(
-      '"',
-      "&quot;"
-    )
-
-    .replaceAll(
-      "'",
-      "&#039;"
-    );
-
+function showConfirm(title, message, callback){
+  document.getElementById("confirmTitle").textContent = title;
+  document.getElementById("confirmMessage").textContent = message;
+  confirmCallback = callback;
+  document.getElementById("confirmOverlay").classList.add("open");
 }
 
+function closeConfirm(){
+  document.getElementById("confirmOverlay").classList.remove("open");
+  confirmCallback = null;
+}
+
+document.addEventListener("click", (e) => {
+  if(e.target.id === "confirmOverlay") closeConfirm();
+  if(e.target.id === "confirmOk" && confirmCallback){
+    confirmCallback();
+    closeConfirm();
+  }
+  if(e.target.id === "confirmCancel") closeConfirm();
+});
+
+/* =========================================================
+   TOAST NOTIFICATIONS
+========================================================= */
+
+function showToast(message, type = "success"){
+  const container = document.getElementById("toastContainer");
+  if(!container) return;
+
+  const toast = document.createElement("div");
+  toast.className = "toast " + type;
+
+  const icons = { success: "✓", warning: "!", info: "i" };
+  const icon = document.createElement("span");
+  icon.className = "toast-icon";
+  icon.textContent = icons[type] || icons.success;
+
+  const text = document.createElement("span");
+  text.textContent = message;
+
+  toast.appendChild(icon);
+  toast.appendChild(text);
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.style.animation = "toastOut .3s ease forwards";
+    setTimeout(() => toast.remove(), 300);
+  }, 2500);
+}
 
 /* =========================================================
    INIT
 ========================================================= */
 
-(function init(){
-
-  const savedTheme =
-    localStorage.getItem(
-      THEME_KEY
-    )
-    ||
-    "sage";
-
-  /*
-    midnight-premium possède sa propre valeur de stockage,
-    mais utilise la palette Midnight dans le CSS.
-  */
-
-  document.body.dataset.theme =
-    savedTheme==="midnight-premium"
-      ? "midnight"
-      : savedTheme;
-
+function init(){
+  const savedTheme = safeGetItem(THEME_KEY) || "sage";
+  document.body.dataset.theme = savedTheme;
+  resetWeeklyCountersIfNeeded();
   renderThemeButtons();
-
   updateSpecialBackground();
-
   renderToday();
-
   renderCalendar();
-
   renderHabits();
-
   renderStats();
-
-})();
-
-
-/* =========================================================
-   SERVICE WORKER
-========================================================= */
-
-if(
-  "serviceWorker"
-  in navigator
-){
-
-  window.addEventListener(
-    "load",
-    ()=>{
-
-      navigator.serviceWorker
-        .register("./sw.js")
-        .catch(
-          error=>{
-            console.log(
-              "Service Worker error:",
-              error
-            );
-          }
-        );
-
-    }
-  );
-
 }
 
-
-/* =========================================================
-   MODAL OUTSIDE CLICK
-========================================================= */
-
-document
-  .getElementById(
-    "habitModal"
-  )
-  .addEventListener(
-    "click",
-    e=>{
-
-      if(
-        e.target.id
-        ===
-        "habitModal"
-      ){
-
-        closeModal();
-
-      }
-
-    }
-  );
-
-
-/* =========================================================
-   ESC
-========================================================= */
-
-document.addEventListener(
-  "keydown",
-  e=>{
-
-    if(
-      e.key==="Escape"
-    ){
-
-      closeModal();
-
-    }
-
-  }
-);
+init();
 
 </script>
-
 </body>
 </html>
